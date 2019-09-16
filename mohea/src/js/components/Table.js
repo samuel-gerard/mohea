@@ -4,138 +4,139 @@ import Tbody from './Tbody'
 
 class Table extends React.Component {
     constructor(props) {
-        const defaultTab = [{
-            type: 'body',
-            0: 'test'
-        }]
+        const defaultTab = {
+            'head' : [],
+            'body': [],
+            'footer': []
+        }
         super(props)
         this.state = {
-            'nbRow': 1,
             'nbCol': 1,
             'tableau': defaultTab,
-            'defaultTab': defaultTab
+            'caption': ''
         }
 
 
         // Bind this class to function needed
-        this.handleAddHead = this.handleAddHead.bind(this)
-        this.handleAddBody = this.handleAddBody.bind(this)
-        this.handleAddFooter = this.handleAddFooter.bind(this)
         this.handleAddCol = this.handleAddCol.bind(this)
-        this.completeCol = this.completeCol.bind(this)
         this.handleReset = this.handleReset.bind(this)
+        this.handleDeleteCol = this.handleDeleteCol.bind(this)
+        this.handleAddRow = this.handleAddRow.bind(this)
+        this.handleCaption = this.handleCaption.bind(this)
     }
 
-
-    
     /* ===============================================
     * ADDING FUNCTIONS
     =============================================== */
 
-    // Adding Head to Thead
-    handleAddHead() {
-        const head = {
-            type: 'head',
-            ...this.completeCol()
-        }
-        this.addRow(head)
-    }
-
-    // Adding Body to Tbody
-    handleAddBody() {
-        const body = {
-            type: 'body',
-            ...this.completeCol()
-        }
-        this.addRow(body)
-    }
-    
-    // Adding Footer to Tfoot
-    handleAddFooter() {
-        const footer = {
-            type: 'footer',
-            ...this.completeCol()
-        }
-        this.addRow(footer)
-    }
-
-    // Add a new row about the placement in table
-    addRow(row) {
-        this.setState(state => ({
-            nbRow: state.nbRow + 1,
-            tableau: state.tableau.concat(row)
+    // Adding Row
+    handleAddRow(type) {
+        const row = this.completeCol(this.state.nbCol);
+        this.state.tableau[type].push(row)
+        
+        this.setState( state => ({
+            'tableau' : state.tableau
         }))
     }
 
     // Add a new column to all the table
     handleAddCol() {
-        const rows = this.state.tableau.map((row, i) =>
-            ({
-                ...row,
-                [this.state.nbCol]: 'test'
+        for (let [key, value] of Object.entries(this.state.tableau)) {
+            value.map( (row) => {
+                row[this.state.nbCol] = ''
+                return row
             })
-        )
+        }
+
         this.setState(state => ({
             nbCol: state.nbCol + 1,
-            tableau: rows
         }))
     }
 
     // Help top add new column for new row
-    completeCol() {
+    completeCol(nbCol) {
         const tab = {}
-        for(var i = 0; i < this.state.nbCol; i++) {
-            tab[i] = 'test'
+        for(var i = 0; i < nbCol; i++) {
+            tab[i] = ''
         }
         return tab
     }
-
-
 
     /* ===============================================
     * DELETE FUNCTIONS
     =============================================== */
 
     // Delete all the table
-    handleReset() {
+    handleReset() {        
         this.setState(state => ({
-            'tableau': state.defaultTab
+            'tableau': {
+                'head' : [],
+                'body': [],
+                'footer': []
+            }
+        }))
+
+        console.log(this.state.tableau)
+    }
+
+    // Add a new column to all the table
+    handleDeleteCol() {
+        if(this.state.nbCol <= 1)
+        {
+            return false
+        }
+        
+        for (let [key, value] of Object.entries(this.state.tableau)) {
+            value.map( (row) => {
+                delete row[this.state.nbCol - 1]
+                return row
+            })
+        }      
+
+        this.setState(state => ({
+            nbCol: state.nbCol - 1
         }))
     }
 
+    handleCaption(event) {
+        this.setState({
+            'caption' : event.target.value
+        })
+    }
 
+    /* ===============================================
+    * Get JSON about this table
+    =============================================== */
 
     /* ===============================================
     * DISPLAY COMPONENT
     =============================================== */
     render() {
-        const head = this.state.tableau.filter(word => word.type === 'head')
-        const body = this.state.tableau.filter(word => word.type === 'body')
-        const footer = this.state.tableau.filter(word => word.type === 'footer')
-
         return (
-        <div>
-           <h1>Tableaux</h1>
-           <input type="button" value="Reset" onClick={this.handleReset}/>
+            <div>
+            <h1>Tableaux</h1>
+            <input type="text" name="caption" onChange={this.handleCaption} />
+            <input type="button" value="Generate" onClick={this.handleGenerate}/>
+            <input type="button" value="Reset" onClick={this.handleReset}/>
+            <input type="button" value="Delete last col" onClick={this.handleDeleteCol}/>
+                <br/>
+                <br/>
+            <input type="button" value="Row Head +" onClick={() => this.handleAddRow('head') } />
+            <br/>
+            <input type="button" value="Row Body +" onClick={() => this.handleAddRow('body') } />
+            <br/>
+            <input type="button" value="Row Footer +" onClick={() => this.handleAddRow('footer') } />
             <br/>
             <br/>
-            <br/>
-           <input type="button" value="Row Head +" onClick={this.handleAddHead}/>
-           <br/>
-           <input type="button" value="Row Body +" onClick={this.handleAddBody}/>
-           <br/>
-           <input type="button" value="Row Footer +" onClick={this.handleAddFooter}/>
-           <br/>
-           <br/>
-           <input type="button" value="Col +" onClick={this.handleAddCol}/>
+            <input type="button" value="Col +" onClick={this.handleAddCol}/>
 
-           <table>
-                <Thead items={head} />
-                <Tbody items={body} />
-                <Tbody items={footer} />
-            </table>
-           
-        </div>)
+            <table>
+                    <Thead items={this.state.tableau.head}/>
+                    <Tbody items={this.state.tableau.body}/>
+                </table>
+            
+            </div>
+        )
     }
 }
 

@@ -6,7 +6,7 @@
 
 ## Installation
 Lancer la commande suivante pour installer le projet en local
-``` git clone git@bitbucket.org: USER /mohea.git ```
+``` git clone git@bitbucket.org:mohea/mohea.bach.mmi-unistra.fr.git ```
 ``` npm install ```
 
 ## Développement

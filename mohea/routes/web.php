@@ -13,9 +13,19 @@
 
 Route::get('/', function () {
     return view('home');
+})->name('home');
+
+Route::middleware(['auth'])->group(function() {
+
+    Route::get('/create', function() {
+        return view('pages.create');
+    })->name('create');
+    Route::get('/create/table', 'TableModuleController@create')->name('table.create');
+    Route::get('/create/form');
+    Route::get('/create/menu');
+
 });
 
-
-Auth::routes();
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+Auth::routes();
 

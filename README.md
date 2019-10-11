@@ -1,21 +1,23 @@
 # Projet licence pro
-## Application web générant des outils accessibles
-Hébergement : mohea.bach.mmi-unistra.fr  
+## Web application generating accessible tools
+Hosting : mohea.bach.mmi-unistra.fr  
 Collaboration : Samuel Gerard, Olivier Roessel, Coralie Bach
-
+  
 ## Installation
-Lancer la commande suivante pour installer le projet en local  
+Execute the following command to instal the project in your localhost  
 ``` git clone git@bitbucket.org:mohea/mohea.bach.mmi-unistra.fr.git ```  
-Copier les informations de connexion de données  
+Copy data connection information to your .env file  
 ``` cp .env.example .env ```  
-Installer les clés de l'application pour encrypter les utilisateurs    
+Set the key application to encrypte the data users  
 ``` php artisan key:generate ```  
-Installer les dépendances php  
+Install php dependencies   
 ``` composer install ```  
-Installer les dépendances js (dont react)  
+install javascript dependencies (inclued react)  
 ``` npm install ```  
-
-## Développement
-Chaque module utilise une branche différente à son nom.  
-Lancer la commande suivante pour compiler les différents fichiers css, js et react  
+Make migrations of the database (in case there is no database provided)  
+``` php artisan migrate ```  
+  
+## Development
+Each module use a different branch  
+Execute the following command to compile the different assests  
 ``` npm run dev ```

@@ -25,6 +25,8 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/create/form');
     Route::get('/create/menu');
 
+    Route::get('/user_edit');
+
 });
 
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');

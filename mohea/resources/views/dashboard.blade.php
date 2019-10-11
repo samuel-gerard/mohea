@@ -28,5 +28,6 @@
             </div>
         </div>
     </div>
+    @include('components.editUser')
 </div>
 @endsection

@@ -16,7 +16,8 @@ Route::get('/', function () {
 })->name('home');
 
 Route::middleware(['auth'])->group(function() {
-
+    Route::redirect('/', '/dashboard');
+    
     Route::get('/create', function() {
         return view('pages.create');
     })->name('create');

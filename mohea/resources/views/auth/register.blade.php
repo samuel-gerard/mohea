@@ -3,6 +3,10 @@
 @section('main-content')
 <div class="container">
     <div class="row justify-content-center">
+        <div class="col-md-8 offset-md-4">
+            <a href="{{ url('/auth/redirect/google') }}" class="btn btn-primary"><i class="fas fa-google"></i> Google</a>
+            <a href="{{ url('/auth/redirect/facebook') }}" class="btn btn-primary"><i class="fas fa-facebook"></i> Facebook</a>
+        </div>
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Register') }}</div>

@@ -30,4 +30,16 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    // KEYS FOR SOCIALITES
+    'facebook' => [
+        'client_id' => '2162970197340778',
+        'client_secret' => 'a0f3a40021fbc2f0c347c45818df5ee9',
+        'redirect' => 'http://mohea.com',
+    ],
+    'google' => [
+        'client_id' => 'mohea-255809',
+        'client_secret' => 'AIzaSyC488BxgR4U8W8TFJ3XnRAFKdeQ2VQI_3c',
+        'redirect' => 'http://mohea.com',
+    ], 
+
 ];

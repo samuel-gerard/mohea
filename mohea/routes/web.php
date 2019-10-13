@@ -32,3 +32,7 @@ Route::middleware(['auth'])->group(function() {
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 Auth::routes();
 
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
+Route::get('/callback/{provider}', 'SocialController@callback');

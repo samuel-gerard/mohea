@@ -1,4 +1,7 @@
 {
+    "name": "mohea",
+    "version": "1.0.0",
+    "main": "webpack.mix.js",
     "private": true,
     "scripts": {
         "dev": "npm run development",
@@ -23,12 +26,6 @@
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.20.1",
         "sass-loader": "7.*"
-    },
-    "name": "mohea",
-    "version": "1.0.0",
-    "main": "webpack.mix.js",
-    "directories": {
-        "test": "tests"
     },
     "dependencies": {
         "acorn": "^6.3.0",

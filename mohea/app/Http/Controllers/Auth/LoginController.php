@@ -7,7 +7,7 @@ use App\SocialIdentity;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
-use Laravel\Socialite\Two\User;
+use App\User;
 
 class LoginController extends Controller
 {

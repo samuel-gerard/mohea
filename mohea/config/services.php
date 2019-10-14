@@ -32,14 +32,14 @@ return [
 
     // KEYS FOR SOCIALITES
     'facebook' => [
-        'client_id' => '2162970197340778',
-        'client_secret' => 'a0f3a40021fbc2f0c347c45818df5ee9',
-        'redirect' => 'http://mohea.com',
+        'client_id' => env('FACEBOOK_CLIENT_ID'),
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
+        'redirect' => env('FACEBOOK_CALLBACK_URL'),
     ],
     'google' => [
-        'client_id' => 'mohea-255809',
-        'client_secret' => 'AIzaSyC488BxgR4U8W8TFJ3XnRAFKdeQ2VQI_3c',
-        'redirect' => 'http://mohea.com',
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect' => env('GOOGLE_REDIRECT'),
     ], 
 
 ];

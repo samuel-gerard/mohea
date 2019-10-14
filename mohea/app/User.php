@@ -36,4 +36,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Indicate that a user has many Social Identities
+     */
+    public function identities() {
+        return $this->hasMany('App\SocialIdentity');
+     }
 }

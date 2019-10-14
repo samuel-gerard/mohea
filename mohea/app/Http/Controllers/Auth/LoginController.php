@@ -51,7 +51,7 @@ class LoginController extends Controller
        try {
            $user = Socialite::driver($provider)->user();
        } catch (Exception $e) {
-           return redirect('/login');
+           return redirect('/logiin');
        }
 
        $authUser = $this->findOrCreateUser($user, $provider);
@@ -63,8 +63,8 @@ class LoginController extends Controller
    public function findOrCreateUser($providerUser, $provider)
    {
        $account = SocialIdentity::whereProviderName($provider)
-                  ->whereProviderId($providerUser->getId())
-                  ->first();
+            ->whereProviderId($providerUser->getId())
+            ->first();
 
        if ($account) {
            return $account->user;

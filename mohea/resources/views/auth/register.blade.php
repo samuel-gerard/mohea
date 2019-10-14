@@ -3,16 +3,16 @@
 @section('main-content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8 offset-md-4">
-            <a href="{{ url('/login/google') }}" class="btn btn-google" class="btn btn-google"><i class="fa fa-google"></i>Google</a>
-            <a href="{{ url('/login/facebook') }}" class="btn btn-facebook" class="btn btn-facebook"><i class="fa fa-facebook"></i> Facebook</a>
-        </div>
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Register') }}</div>
-
+                
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
+                        <div class="col-md-8 offset-md-4">
+                            <a href="{{ url('/login/google') }}" class="btn btn-google" class="btn btn-google"><i class="fa fa-google"></i>Google</a>
+                            <a href="{{ url('/login/facebook') }}" class="btn btn-facebook" class="btn btn-facebook"><i class="fa fa-facebook"></i> Facebook</a>
+                        </div>
                         @csrf
 
                         <div class="form-group row">

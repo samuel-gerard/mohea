@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique()->nullable();
             $table->string('avatar')->nullable();
             $table->string('password')->nullable();
-            $table->boolean('is_admin')->nullable();
+            $table->boolean('theme_dark')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -16,8 +16,11 @@ Route::get('/', function () {
 })->name('home');
 
 Route::middleware(['auth'])->group(function() {
+
+    // Route Home & Dashboard
     Route::redirect('/', '/dashboard');
     
+    // Routes of each modules
     Route::get('/create', function() {
         return view('pages.create');
     })->name('create');
@@ -25,7 +28,8 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/create/form');
     Route::get('/create/menu');
 
-    Route::get('/user_edit');
+    // Routes of user update 
+    Route::post('/dashboard', 'UserController@update')->name('user.update');
 
 });
 

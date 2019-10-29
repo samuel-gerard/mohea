@@ -2,15 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\User;
+use App\Http\Requests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-
-    function __construct()
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
     {
-        $this->authorizeResource('App\User');
+        $this->middleware('auth');
     }
 
     /**
@@ -73,12 +80,32 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(\App\Http\Requests\UserRequest $request, User $user)
+    public function updateInfo(\App\Http\Requests\UserInfoRequest $request)
     {
-        $data = $request->validated();
+        $user = Auth::user();
+        $data = $request->validated($user);
         $user->fill($data);
         $user->save();
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard')->with('message', 'Informations modified successfully !');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function updatePassword(\App\Http\Requests\UserPasswordRequest $request)
+    {
+        // si oui -> hash password
+        $user = Auth::user();
+        $data = $request->validated($user);        
+        $passwordHash = Hash::make($data['password']);
+        $data['password'] = $passwordHash;
+        $user->fill($data);
+        $user->save();
+        return redirect()->route('dashboard')->with('message', 'Password modified successfully !');
     }
 
     /**
@@ -87,8 +114,10 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy()
     {
-        //
+        $user = Auth::user();
+        $user->delete();
+        return redirect()->route('home');
     }
 }

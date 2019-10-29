@@ -15,3 +15,4 @@ require('./bootstrap');
 require('./modules/form/form');
 require('./modules/menu/menu');
 require('./modules/table/table');
+

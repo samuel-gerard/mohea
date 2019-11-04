@@ -29,7 +29,9 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/create/menu');
 
     // Routes of user update 
-    Route::post('/dashboard', 'UserController@update')->name('user.update');
+    Route::post('/user/info', 'UserController@updateInfo')->name('user.update.info');
+    Route::post('/user/password', 'UserController@updatePassword')->name('user.update.password');
+    Route::post('/user/delete', 'UserController@destroy')->name('user.delete');
 
 });
 

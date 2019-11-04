@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserRequest extends FormRequest
+class UserPasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +14,6 @@ class UserRequest extends FormRequest
     public function authorize()
     {
         return true;
-        // return Auth::check();
     }
 
     /**
@@ -25,7 +24,8 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password_confirmation' => 'required', 'string', 'min:8', 'confirmed',
         ];
     }
 }

@@ -36918,13 +36918,6 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-
-__webpack_require__(/*! ./modules/form/form */ "./resources/js/modules/form/form.js");
-
-__webpack_require__(/*! ./modules/menu/menu */ "./resources/js/modules/menu/menu.js");
-
-__webpack_require__(/*! ./modules/table/table */ "./resources/js/modules/table/table.js");
-
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -36972,39 +36965,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/modules/form/form.js":
-/*!*******************************************!*\
-  !*** ./resources/js/modules/form/form.js ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-
-
-/***/ }),
-
-/***/ "./resources/js/modules/menu/menu.js":
-/*!*******************************************!*\
-  !*** ./resources/js/modules/menu/menu.js ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-
-
-/***/ }),
-
-/***/ "./resources/js/modules/table/table.js":
-/*!*********************************************!*\
-  !*** ./resources/js/modules/table/table.js ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-
-
-/***/ }),
-
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -37016,15 +36976,27 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
+/***/ "./resources/sass/form.scss":
+/*!**********************************!*\
+  !*** ./resources/sass/form.scss ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ 0:
-/*!*************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ***!
-  \*************************************************************/
+/*!****************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/form.scss ***!
+  \****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! D:\wamp\www\Mohea\mohea.bach.mmi-unistra.fr\mohea\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\wamp\www\Mohea\mohea.bach.mmi-unistra.fr\mohea\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\wamp\www\Mohea\mohea.bach.mmi-unistra.fr\mohea\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! D:\wamp\www\Mohea\mohea.bach.mmi-unistra.fr\mohea\resources\sass\form.scss */"./resources/sass/form.scss");
 
 
 /***/ })

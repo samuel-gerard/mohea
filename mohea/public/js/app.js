@@ -36923,8 +36923,6 @@ __webpack_require__(/*! ./modules/form/form */ "./resources/js/modules/form/form
 
 __webpack_require__(/*! ./modules/menu/menu */ "./resources/js/modules/menu/menu.js");
 
-__webpack_require__(/*! ./modules/table/table */ "./resources/js/modules/table/table.js");
-
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -36994,17 +36992,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/modules/table/table.js":
-/*!*********************************************!*\
-  !*** ./resources/js/modules/table/table.js ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-
-
-/***/ }),
-
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -37023,8 +37010,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\wamp\www\Mohea\mohea.bach.mmi-unistra.fr\mohea\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\wamp\www\Mohea\mohea.bach.mmi-unistra.fr\mohea\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\coral\Desktop\IUT\LP_MI\mohea\mohea.bach.mmi-unistra.fr\mohea\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\coral\Desktop\IUT\LP_MI\mohea\mohea.bach.mmi-unistra.fr\mohea\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

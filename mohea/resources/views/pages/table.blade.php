@@ -5,5 +5,9 @@
 @endsection
 
 @section('main-content')
-    <h1>New table</h1>
+    <div id="app-table"></div>
+@endsection
+
+@section('scripts-end')
+    <script src="{{ mix('/js/modules/TableApp.js') }}"></script>
 @endsection

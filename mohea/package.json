@@ -23,6 +23,8 @@
         "popper.js": "^1.12",
         "react": "^16.11.0",
         "react-dom": "^16.11.0",
+        "react-redux": "^7.1.3",
+        "redux": "^4.0.4",
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.20.1",
         "sass-loader": "7.*"

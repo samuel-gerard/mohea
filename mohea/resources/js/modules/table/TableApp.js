@@ -1,29 +1,16 @@
-const Table = require('./components/table.jsx');
-      Provider = require("react-redux").Provider,
-      React = require("react"),
-      ReactDOM = require("react-dom"),
-      reducers = require("./redux/reducers.js"),
-      Redux = require("redux");
+import Table from './components/table';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-let store = null;
-const defaultTab = {
-  'head': [],
-  'body': [],
-  'footer': []
-}
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import rootReducer from './redux/reducers';
 
-store = Redux.createStore(
-    reducers,
-    {
-      'nbCol': 1,
-      'tableau': defaultTab,
-      'caption': '',
-      'name': ''
-    }
-);
+const store = createStore(rootReducer);
 
 ReactDOM.render(
-    <Provider store={store} >
+    <Provider store={ store }>
       <Table />
     </Provider>,
-  document.getElementById('app-table'));
+  document.getElementById('app-table')
+);

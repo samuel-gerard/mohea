@@ -1,28 +1,30 @@
-function deleteItem(dispatch, item) {
-    dispatch({
-        type: "REMOVE_ITEM",
-        item: item
-    });
+export const deleteItem = (item) => {
+  return {
+    type: "REMOVE_ITEM",
+    item: item
+  }
 }
 
-function addRow(dispatch, row, type) {
-    dispatch({
-        type: "ADD_ROW",
-        typeTable: type,
-        row: row
-    });
+export const deleteCol = (col = {}) => {
+  return {
+    type: "REMOVE_COL",
+    col: col
+  }
 }
 
-function addCol(dispatch, table) {
-    console.log(table)
-    dispatch({
-        type: "ADD_COL",
-        table: table,
-    });
+/* ===============================================
+* FUNCTIONS TO ADD
+=============================================== */
+
+export const addNewRow = (items) => {
+  
+  return {
+    type: "ADD_ROW",
+    typeTable: 'head',
+    items: items
+  }
 }
 
-module.exports = {
-    deleteItem: deleteItem,
-    addRow: addRow,
-    addCol: addCol
-};
+export const addNewCol = () => ({
+  type: "ADD_COL",
+});

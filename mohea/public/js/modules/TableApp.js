@@ -35491,37 +35491,529 @@ module.exports = function(originalModule) {
 /*!************************************************!*\
   !*** ./resources/js/modules/table/TableApp.js ***!
   \************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-var Table = __webpack_require__(/*! ./components/table.jsx */ "./resources/js/modules/table/components/table.jsx");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_table__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/table */ "./resources/js/modules/table/components/table.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _redux_reducers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./redux/reducers */ "./resources/js/modules/table/redux/reducers.js");
 
-Provider = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js").Provider, React = __webpack_require__(/*! react */ "./node_modules/react/index.js"), ReactDOM = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js"), reducers = __webpack_require__(/*! ./redux/reducers.js */ "./resources/js/modules/table/redux/reducers.js"), Redux = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-var store = null;
-var defaultTab = {
-  'head': [],
-  'body': [],
-  'footer': []
-};
-store = Redux.createStore(reducers, {
-  'nbCol': 1,
-  'tableau': defaultTab,
-  'caption': '',
-  'name': ''
-});
-ReactDOM.render(React.createElement(Provider, {
+
+
+
+
+
+var store = Object(redux__WEBPACK_IMPORTED_MODULE_3__["createStore"])(_redux_reducers__WEBPACK_IMPORTED_MODULE_5__["default"]);
+react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_4__["Provider"], {
   store: store
-}, React.createElement(Table, null)), document.getElementById('app-table'));
+}, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_table__WEBPACK_IMPORTED_MODULE_0__["default"], null)), document.getElementById('app-table'));
 
 /***/ }),
 
-/***/ "./resources/js/modules/table/components/table.jsx":
-/*!*********************************************************!*\
-  !*** ./resources/js/modules/table/components/table.jsx ***!
-  \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ "./resources/js/modules/table/components/table.js":
+/*!********************************************************!*\
+  !*** ./resources/js/modules/table/components/table.js ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _tbody_jsx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tbody.jsx */ "./resources/js/modules/table/components/tbody.jsx");
+/* harmony import */ var _thead_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./thead.jsx */ "./resources/js/modules/table/components/thead.jsx");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+var Table =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(Table, _Component);
+
+  /* ===============================================
+  * DELETE FUNCTIONS
+  =============================================== */
+  function Table(props) {
+    var _this;
+
+    _classCallCheck(this, Table);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Table).call(this, props));
+
+    _defineProperty(_assertThisInitialized(_this), "handleReset", function () {
+      _this.props.resetTable();
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleDeleteCol", function () {
+      _this.props.deleteCol();
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleCaption", function (e) {
+      _this.props.updateCaption(e.target.value);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleName", function (e) {
+      _this.props.updateName(e.target.value);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleGenerate", function () {
+      console.log(_this.props);
+    });
+
+    console.log(_this.props);
+    return _this;
+  } // Delete all the table
+
+
+  _createClass(Table, [{
+    key: "render",
+
+    /* ===============================================
+    * DISPLAY COMPONENT
+    =============================================== */
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h1", null, this.props.name || 'New table'), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        className: "col-md-3"
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("label", {
+        htmlFor: "table-name"
+      }, "Name for this table"), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("input", {
+        type: "text",
+        className: "form-control",
+        name: "name",
+        id: "table-name",
+        onChange: this.handleName,
+        value: this.props.name
+      })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("label", {
+        htmlFor: "table-caption"
+      }, "Caption for this table"), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("input", {
+        type: "text",
+        className: "form-control",
+        name: "caption",
+        id: "table-caption",
+        onChange: this.handleCaption,
+        value: this.props.caption
+      })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        className: "form-group d-flex justify-content-between"
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("input", {
+        type: "button",
+        className: "btn btn-primary form-control mr-1",
+        value: "Generate",
+        onClick: this.handleGenerate
+      }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("input", {
+        type: "button",
+        className: "w-25 btn btn-primary",
+        value: "Reset",
+        onClick: this.handleReset
+      })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("input", {
+        type: "button",
+        className: "btn btn-secondary mr-1",
+        value: "Col -",
+        onClick: this.handleDeleteCol
+      }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("input", {
+        type: "button",
+        className: "btn btn-secondary",
+        value: "Col +"
+      }))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        className: "col-md-9"
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("table", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_thead_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_tbody_jsx__WEBPACK_IMPORTED_MODULE_0__["default"], null)))));
+    }
+  }]);
+
+  return Table;
+}(react__WEBPACK_IMPORTED_MODULE_2__["Component"]);
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    tableau: state.tableau,
+    name: state.name,
+    caption: state.caption
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    updateCaption: function updateCaption(caption) {
+      dispatch({
+        type: "UPDATE_CAPTION",
+        caption: caption
+      });
+    },
+    updateName: function updateName(name) {
+      dispatch({
+        type: "UPDATE_NAME",
+        name: name
+      });
+    },
+    resetTable: function resetTable() {
+      dispatch({
+        type: "RESET_TABLE"
+      });
+    },
+    deleteCol: function deleteCol() {
+      dispatch({
+        type: "DELETE_COL"
+      });
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, mapDispatchToProps)(Table));
+
+/***/ }),
+
+/***/ "./resources/js/modules/table/components/tbody.jsx":
+/*!*********************************************************!*\
+  !*** ./resources/js/modules/table/components/tbody.jsx ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+var Tbody =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(Tbody, _Component);
+
+  function Tbody(props) {
+    var _this;
+
+    _classCallCheck(this, Tbody);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Tbody).call(this, props));
+
+    _defineProperty(_assertThisInitialized(_this), "componentDidUpdate", function (prevProps) {
+      console.log('update Tbody');
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleChange", function (event) {
+      var split = event.target.id.split('/');
+      var col = split[1];
+      var row = split[0];
+      _this.props.items[row][col] = event.target.value;
+    });
+
+    console.log('props body', _this.props);
+    return _this;
+  }
+
+  _createClass(Tbody, [{
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      var bodyItems = this.props.items;
+      var listItems = bodyItems.length ? Object.values(bodyItems).map(function (items, i) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+          key: 'lineBody' + i,
+          id: 'tb-tr-' + i
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, i === bodyItems.length - 1 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "button",
+          className: "btn btn-secondary",
+          value: "Body +"
+        })), Object.values(items).map(function (item, j) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+            key: 'item' + j
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            type: "text",
+            id: i + '/' + j,
+            onChange: _this2.handleChange,
+            value: item
+          }));
+        }));
+      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "button",
+        className: "btn btn-secondary",
+        value: "Body +"
+      })));
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, listItems);
+    }
+  }]);
+
+  return Tbody;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    items: state.tableau.body,
+    nbCol: state.nbCol
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(Tbody));
+
+/***/ }),
+
+/***/ "./resources/js/modules/table/components/thead.jsx":
+/*!*********************************************************!*\
+  !*** ./resources/js/modules/table/components/thead.jsx ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _redux_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../redux/actions */ "./resources/js/modules/table/redux/actions.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+var Thead =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(Thead, _Component);
+
+  function Thead(props) {
+    var _this;
+
+    _classCallCheck(this, Thead);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Thead).call(this, props));
+
+    _defineProperty(_assertThisInitialized(_this), "componentDidUpdate", function (prevProps) {
+      console.log('update Thead');
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleChange", function (event) {
+      var split = event.target.id.split('/');
+      var col = split[1];
+      var row = split[0];
+      _this.props.items[row][col] = event.target.value;
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleDeleteCol", function () {
+      _this.props.deleteCol();
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleAddCol", function () {
+      _this.props.addCol();
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleAddRow", function () {
+      _this.props.addRow(_this.props.tableau.head);
+    });
+
+    console.log('props head', props);
+    return _this;
+  }
+
+  _createClass(Thead, [{
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      var group = Object.values(this.props.tableau.head);
+      console.log('---', group);
+      var groupList = group.length > 0 ? group.map(function (items, i) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+          key: 'lineHead' + i
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, i === group.length - 1 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "button",
+          onClick: _this2.handleAddRow,
+          className: "btn btn-secondary",
+          value: "Head +"
+        })), Object.values(items).map(function (item, j) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+            key: 'head' + j
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            type: "text",
+            id: i + '/' + j,
+            onChange: _this2.handleChange,
+            value: item
+          }));
+        }));
+      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Nothing"));
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, this.props.nbCol > 1 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "button",
+        onClick: this.handleDeleteCol,
+        className: "btn btn-primary",
+        value: "Col -"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "button",
+        onClick: this.handleAddCol,
+        className: "btn btn-primary",
+        value: "Col +"
+      }))), group.length === 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "button",
+        onClick: this.handleAddRow,
+        className: "btn btn-secondary",
+        value: "Head +"
+      }))), groupList);
+    }
+  }]);
+
+  return Thead;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    tableau: state.tableau,
+    nbCol: state.nbCol
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch, stateProps) {
+  return {
+    deleteCol: function deleteCol() {
+      dispatch({
+        type: "DELETE_COL"
+      });
+    },
+    addCol: function addCol() {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["addNewCol"])());
+    },
+    addRow: function addRow(items) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["addNewRow"])(items));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(Thead));
+
+/***/ }),
+
+/***/ "./resources/js/modules/table/redux/actions.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/modules/table/redux/actions.js ***!
+  \*****************************************************/
+/*! exports provided: deleteItem, deleteCol, addNewRow, addNewCol */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteItem", function() { return deleteItem; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteCol", function() { return deleteCol; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNewRow", function() { return addNewRow; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNewCol", function() { return addNewCol; });
+var deleteItem = function deleteItem(item) {
+  return {
+    type: "REMOVE_ITEM",
+    item: item
+  };
+};
+var deleteCol = function deleteCol() {
+  var col = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  return {
+    type: "REMOVE_COL",
+    col: col
+  };
+};
+/* ===============================================
+* FUNCTIONS TO ADD
+=============================================== */
+
+var addNewRow = function addNewRow(items) {
+  return {
+    type: "ADD_ROW",
+    typeTable: 'head',
+    items: items
+  };
+};
+var addNewCol = function addNewCol() {
+  return {
+    type: "ADD_COL"
+  };
+};
+
+/***/ }),
+
+/***/ "./resources/js/modules/table/redux/reducers.js":
+/*!******************************************************!*\
+  !*** ./resources/js/modules/table/redux/reducers.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
@@ -35532,515 +36024,131 @@ function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) ||
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-var actions = __webpack_require__(/*! ../redux/actions.js */ "./resources/js/modules/table/redux/actions.js"),
-    Tbody = __webpack_require__(/*! ./tbody.jsx */ "./resources/js/modules/table/components/tbody.jsx"),
-    Thead = __webpack_require__(/*! ./thead.jsx */ "./resources/js/modules/table/components/thead.jsx"),
-    React = __webpack_require__(/*! react */ "./node_modules/react/index.js"),
-    ReactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-
-var Table =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(Table, _React$Component);
-
-  function Table(props) {
-    var _this;
-
-    _classCallCheck(this, Table);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Table).call(this, props)); // Bind this class to function needed
-
-    _this.handleReset = _this.handleReset.bind(_assertThisInitialized(_this));
-    _this.handleDeleteCol = _this.handleDeleteCol.bind(_assertThisInitialized(_this));
-    _this.handleCaption = _this.handleCaption.bind(_assertThisInitialized(_this));
-    _this.handleName = _this.handleName.bind(_assertThisInitialized(_this));
-    _this.handleGenerate = _this.handleGenerate.bind(_assertThisInitialized(_this));
-    return _this;
-  }
-  /* ===============================================
-  * ADDING FUNCTIONS
-  =============================================== */
-  // Add a new column to all the table
-  // handleAddCol() {
-  //   for (let [key, value] of Object.entries(this.props.tableau)) {
-  //     value.map((row) => {
-  //       row[this.props.nbCol] = ''
-  //       return row
-  //     })
-  //   }
-  //   this.setState(state => ({
-  //     nbCol: state.nbCol + 1,
-  //   }))
-  // }
-  // Help top add new column for new row
-
-
-  _createClass(Table, [{
-    key: "completeCol",
-    value: function completeCol(nbCol) {
-      var tab = {};
-
-      for (var i = 0; i < nbCol; i++) {
-        tab[i] = '';
-      }
-
-      return tab;
-    }
-    /* ===============================================
-    * DELETE FUNCTIONS
-    =============================================== */
-    // Delete all the table
-
-  }, {
-    key: "handleReset",
-    value: function handleReset() {
-      this.setState(function (state) {
-        return {
-          'tableau': {
-            'head': [],
-            'body': [],
-            'footer': []
-          }
-        };
-      });
-    } // Add a new column to all the table
-
-  }, {
-    key: "handleDeleteCol",
-    value: function handleDeleteCol() {
-      var _this2 = this;
-
-      if (this.props.nbCol <= 1) {
-        return false;
-      }
-
-      for (var _i = 0, _Object$entries = Object.entries(this.props.tableau); _i < _Object$entries.length; _i++) {
-        var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
-            key = _Object$entries$_i[0],
-            value = _Object$entries$_i[1];
-
-        value.map(function (row) {
-          delete row[_this2.props.nbCol - 1];
-          return row;
-        });
-      }
-
-      this.setState(function (state) {
-        return {
-          nbCol: state.nbCol - 1
-        };
-      });
-    }
-  }, {
-    key: "handleCaption",
-    value: function handleCaption(event) {
-      this.setState({
-        'caption': event.target.value
-      });
-    }
-  }, {
-    key: "handleName",
-    value: function handleName(event) {
-      this.setState({
-        'name': event.target.value
-      });
-    }
-    /* ===============================================
-    * Get JSON about this table
-    =============================================== */
-
-  }, {
-    key: "handleGenerate",
-    value: function handleGenerate() {
-      console.log(this.props);
-    }
-    /* ===============================================
-    * DISPLAY COMPONENT
-    =============================================== */
-
-  }, {
-    key: "render",
-    value: function render() {
-      var _this3 = this;
-
-      return React.createElement("section", null, React.createElement("h1", null, this.props.name || 'New table'), React.createElement("div", {
-        className: "row"
-      }, React.createElement("div", {
-        className: "col-md-3"
-      }, React.createElement("div", {
-        className: "form-group"
-      }, React.createElement("label", {
-        htmlFor: "table-name"
-      }, "Name for this table"), React.createElement("input", {
-        type: "text",
-        className: "form-control",
-        name: "name",
-        id: "table-name",
-        onChange: this.handleName
-      })), React.createElement("div", {
-        className: "form-group"
-      }, React.createElement("label", {
-        htmlFor: "table-caption"
-      }, "Caption for this table"), React.createElement("input", {
-        type: "text",
-        className: "form-control",
-        name: "caption",
-        id: "table-caption",
-        onChange: this.handleCaption
-      })), React.createElement("div", {
-        className: "form-group d-flex justify-content-between"
-      }, React.createElement("input", {
-        type: "button",
-        className: "btn btn-primary form-control mr-1",
-        value: "Generate",
-        onClick: this.handleGenerate
-      }), React.createElement("input", {
-        type: "button",
-        className: "w-25 btn btn-primary",
-        value: "Reset",
-        onClick: this.handleReset
-      })), React.createElement("div", {
-        className: "form-group"
-      }, React.createElement("input", {
-        type: "button",
-        className: "btn btn-secondary mr-1",
-        value: "Col -",
-        onClick: this.handleDeleteCol
-      }), React.createElement("input", {
-        type: "button",
-        className: "btn btn-secondary",
-        value: "Col +",
-        onClick: this.props.addCol.bind(null, this.props.tableau)
-      }))), React.createElement("div", {
-        className: "col-md-9"
-      }, React.createElement("input", {
-        type: "button",
-        value: "Row Body +",
-        onClick: function onClick() {
-          return _this3.handleAddRow('body');
-        }
-      }), React.createElement("input", {
-        type: "button",
-        value: "Row Footer +",
-        onClick: function onClick() {
-          return _this3.handleAddRow('footer');
-        }
-      }), React.createElement("table", null, React.createElement(Thead, {
-        items: this.props.tableau.head,
-        addRow: this.props.addRow.bind(null, this.completeCol(this.props.nbCol), 'head')
-      }), React.createElement(Tbody, {
-        items: this.props.tableau.body,
-        addRow: this.props.addRow.bind(null, this.completeCol(this.props.nbCol), 'body')
-      })))));
-    }
-  }]);
-
-  return Table;
-}(React.Component);
-
-module.exports = ReactRedux.connect(function () {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return state;
-}, function (dispatch, props) {
-  return Object.assign({}, props, {
-    deleteItem: actions.deleteItem.bind(null, dispatch),
-    addRow: actions.addRow.bind(null, dispatch),
-    addCol: actions.addCol.bind(null, dispatch)
-  });
-})(Table);
-
-/***/ }),
-
-/***/ "./resources/js/modules/table/components/tbody.jsx":
-/*!*********************************************************!*\
-  !*** ./resources/js/modules/table/components/tbody.jsx ***!
-  \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var Tbody =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(Tbody, _React$Component);
-
-  function Tbody(props) {
-    var _this;
-
-    _classCallCheck(this, Tbody);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Tbody).call(this, props));
-    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
-    _this.handleAddRow = _this.handleAddRow.bind(_assertThisInitialized(_this));
-    return _this;
-  }
-
-  _createClass(Tbody, [{
-    key: "handleChange",
-    value: function handleChange(event) {
-      var split = event.target.id.split('/');
-      var col = split[1];
-      var row = split[0];
-      this.props.items[row][col] = event.target.value;
-    }
-  }, {
-    key: "handleAddRow",
-    value: function handleAddRow() {
-      console.log(this.props);
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this2 = this;
-
-      var group = Object.values(this.props.items);
-      return React.createElement("tbody", null, group.length === 0 && React.createElement("tr", null, React.createElement("td", null, React.createElement("input", {
-        type: "button",
-        className: "btn btn-secondary",
-        value: "Body +",
-        onClick: this.props.addRow
-      }))), group.map(function (items, i) {
-        React.createElement("tr", {
-          key: 'lineBody' + i,
-          id: 'tb-tr-' + i
-        }, React.createElement("td", null, i === group.length - 1 && React.createElement("input", {
-          type: "button",
-          className: "btn btn-secondary",
-          value: "Body +",
-          onClick: _this2.props.addRow
-        })), Object.values(items).map(function (item, j) {
-          return React.createElement("td", {
-            key: 'item' + j
-          }, React.createElement("input", {
-            type: "text",
-            id: i + '/' + j,
-            onChange: _this2.handleChange
-          }));
-        }));
-      }));
-    }
-  }]);
-
-  return Tbody;
-}(React.Component);
-
-module.exports = Tbody;
-
-/***/ }),
-
-/***/ "./resources/js/modules/table/components/thead.jsx":
-/*!*********************************************************!*\
-  !*** ./resources/js/modules/table/components/thead.jsx ***!
-  \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var Thead =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(Thead, _React$Component);
-
-  function Thead(props) {
-    var _this;
-
-    _classCallCheck(this, Thead);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Thead).call(this, props));
-    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
-    return _this;
-  }
-
-  _createClass(Thead, [{
-    key: "deleteType",
-    value: function deleteType(item) {
-      var val = Object.assign({}, item);
-      delete val.type;
-      return val;
-    }
-  }, {
-    key: "handleChange",
-    value: function handleChange(event) {
-      var split = event.target.id.split('/');
-      var col = split[1];
-      var row = split[0];
-      this.props.items[row][col] = event.target.value;
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this2 = this;
-
-      var group = Object.values(this.props.items);
-      return React.createElement("thead", null, group.length === 0 && React.createElement("tr", null, React.createElement("td", null, React.createElement("input", {
-        type: "button",
-        className: "btn btn-secondary",
-        value: "Head +",
-        onClick: this.props.addRow
-      }))), group.map(function (items, i) {
-        React.createElement("tr", {
-          key: 'lineHead' + i
-        }, React.createElement("td", null, i === group.length - 1 && React.createElement("input", {
-          type: "button",
-          className: "btn btn-secondary",
-          value: "Head +",
-          onClick: _this2.props.addRow
-        })), Object.values(items).map(function (item, j) {
-          return React.createElement("td", {
-            key: 'head' + j
-          }, React.createElement("input", {
-            type: "text",
-            id: i + '/' + j,
-            onChange: _this2.handleChange
-          }));
-        }));
-      }));
-    }
-  }]);
-
-  return Thead;
-}(React.Component);
-
-module.exports = Thead;
-
-/***/ }),
-
-/***/ "./resources/js/modules/table/redux/actions.js":
-/*!*****************************************************!*\
-  !*** ./resources/js/modules/table/redux/actions.js ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function deleteItem(dispatch, item) {
-  dispatch({
-    type: "REMOVE_ITEM",
-    item: item
-  });
-}
-
-function addRow(dispatch, row, type) {
-  dispatch({
-    type: "ADD_ROW",
-    typeTable: type,
-    row: row
-  });
-}
-
-function addCol(dispatch, table) {
-  console.log(table);
-  dispatch({
-    type: "ADD_COL",
-    table: table
-  });
-}
-
-module.exports = {
-  deleteItem: deleteItem,
-  addRow: addRow,
-  addCol: addCol
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var defaultTab = {
+  'head': [],
+  'body': [],
+  'footer': []
+};
+var initState = {
+  'defaultTab': defaultTab,
+  'nbCol': 1,
+  'tableau': {
+    'head': [],
+    'body': [],
+    'footer': []
+  },
+  'caption': '',
+  'name': ''
 };
 
-/***/ }),
-
-/***/ "./resources/js/modules/table/redux/reducers.js":
-/*!******************************************************!*\
-  !*** ./resources/js/modules/table/redux/reducers.js ***!
-  \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function reducer(state, action) {
+function rootReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
   var newState = Object.assign({}, state);
+  var i;
 
-  switch (action.type) {
-    case "REMOVE_ITEM":
-      var index = newState.items.indexOf(action.item);
+  var _ret = function () {
+    switch (action.type) {
+      case "DELETE_COL":
+        var nbCol = state.nbCol;
 
-      if (index !== -1) {
-        newState.items.splice(index, 1);
-      }
+        if (nbCol <= 1) {
+          return {
+            v: state
+          };
+        }
 
-      break;
+        for (var _i = 0, _Object$entries = Object.entries(newState.tableau); _i < _Object$entries.length; _i++) {
+          var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+              key = _Object$entries$_i[0],
+              value = _Object$entries$_i[1];
 
-    case "ADD_ROW":
-      newState.tableau[action.typeTable].push(action.row);
-      break;
+          value.map(function (row) {
+            delete row[nbCol - 1];
+            return row;
+          });
+        }
 
-    case "ADD_COL":
-      // for (let [key, value] of Object.entries(action.tableau)) {
-      //     value.map((row) => {
-      //         row[state.nbCol] = ''
-      //         return row
-      //     })
-      // }
-      console.log(action.table);
-      newState.nbCol += 1;
-      break;
+        return {
+          v: _objectSpread({}, state, {
+            nbCol: state.nbCol - 1,
+            tableau: newState.tableau
+          })
+        };
 
-    default:
-      return state;
-  }
+      case "ADD_ROW":
+        var tab = {};
 
-  console.log(newState.tableau);
-  return newState;
+        for (i = 0; i < state.nbCol; i++) {
+          tab[i] = '';
+        }
+
+        newState.tableau[action.typeTable] = action.items.concat(tab);
+        return {
+          v: _objectSpread({}, state, {
+            tableau: _objectSpread({}, state.tableau, {
+              head: newState.tableau.head
+            })
+          })
+        };
+
+      case "ADD_COL":
+        console.log('-----ADD COL', newState);
+
+        for (var _i2 = 0, _Object$entries2 = Object.entries(newState.tableau); _i2 < _Object$entries2.length; _i2++) {
+          var _Object$entries2$_i = _slicedToArray(_Object$entries2[_i2], 2),
+              _key = _Object$entries2$_i[0],
+              _value = _Object$entries2$_i[1];
+
+          _value.map(function (row) {
+            row[state.nbCol] = '';
+            return row;
+          });
+        }
+
+        return {
+          v: _objectSpread({}, state, {
+            nbCol: state.nbCol + 1,
+            tableau: newState.tableau
+          })
+        };
+
+      case "UPDATE_CAPTION":
+        return {
+          v: _objectSpread({}, state, {
+            caption: action.caption
+          })
+        };
+
+      case "UPDATE_NAME":
+        return {
+          v: _objectSpread({}, state, {
+            name: action.name
+          })
+        };
+
+      case "RESET_TABLE":
+        return {
+          v: initState
+        };
+
+      default:
+        return {
+          v: state
+        };
+    }
+  }();
+
+  if (_typeof(_ret) === "object") return _ret.v;
 }
 
-module.exports = reducer;
+/* harmony default export */ __webpack_exports__["default"] = (rootReducer);
 
 /***/ }),
 

@@ -61,15 +61,8 @@ class Table extends Component {
               <input type="button" className="btn btn-primary form-control mr-1" value="Generate" onClick={this.handleGenerate} />
               <input type="button" className="w-25 btn btn-primary" value="Reset" onClick={this.handleReset} />
             </div>
-            <div className="form-group">
-              <input type="button" className="btn btn-secondary mr-1" value="Col -" onClick={this.handleDeleteCol} />
-              <input type="button" className="btn btn-secondary" value="Col +" />
-            </div>
           </div>
           <div className="col-md-9">
-            {/* <input type="button" value="Row Head +" onClick={() => this.handleAddRow('head')} />
-            {/* <input type="button" value="Row Body +" onClick={() => this.handleAddRow('body')} />
-            <input type="button" value="Row Footer +" onClick={() => this.handleAddRow('footer')} /> */}
             <table>
                 <Thead/>
                 <Tbody/>

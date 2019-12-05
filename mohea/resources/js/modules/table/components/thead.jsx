@@ -1,15 +1,11 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
-import { addNewRow, addNewCol } from "../redux/actions";
+import { addNewRow, addNewCol, deleteCol, deleteRow } from "../redux/actions";
 
 class Thead extends Component {
   constructor(props) {
     super(props)
     console.log('props head', props)
-  }
-
-  componentDidUpdate = (prevProps) => {
-    console.log('update Thead')
   }
 
   handleChange = (event) => {
@@ -19,8 +15,8 @@ class Thead extends Component {
     this.props.items[row][col] = event.target.value
   }
 
-  handleDeleteCol = () => {
-    this.props.deleteCol();
+  handleDeleteCol = (e) => {
+    this.props.deleteCol(e.target.dataset.col);
   }
 
   handleAddCol = () => {
@@ -31,14 +27,18 @@ class Thead extends Component {
     this.props.addRow(this.props.tableau.head);
   }
 
+  handleDeleteRow = (e) => {
+    this.props.deleteRow('head', e.target.dataset.col)
+  }
+
   render() {
     const group = Object.values(this.props.tableau.head)
-    console.log('---', group);
     const groupList = group.length > 0 ? (
       group.map((items, i) => {
         return (
         <tr key={'lineHead' + i}>
           <td>
+            <input type="button" onClick={this.handleDeleteRow} className="btn btn-danger" value="Head -" />
             {i === (group.length - 1) &&
               <input type="button" onClick={this.handleAddRow} className="btn btn-secondary" value="Head +" />
             }
@@ -54,27 +54,33 @@ class Thead extends Component {
       )})) : (
         <tr>
           <td>
+            <input type="button" onClick={this.handleAddRow} className="btn btn-secondary" value="Head +" />
+          </td>
+          <td>
             Nothing
           </td>
         </tr>
       );
 
+    const groupHandler = [];
+    if(this.props.nbCol > 0) {
+      for(var i = 0; i < this.props.nbCol; i++) {
+        groupHandler.push(
+          <td key={'headHandler' + i}>
+            <input type="button" onClick={this.handleDeleteCol} className="btn btn-danger" value="Col -" data-col={i} />
+          </td>
+        )
+      }
+    }
     return (
       <thead>
-        {this.props.nbCol > 1 &&
+        {this.props.nbCol > 0 &&
           <tr>
             <td>
-              <input type="button" onClick={this.handleDeleteCol} className="btn btn-primary" value="Col -" />
             </td>
+            {groupHandler}
             <td>
               <input type="button" onClick={this.handleAddCol} className="btn btn-primary" value="Col +" />
-            </td>
-          </tr>
-        }
-        {group.length === 0 &&
-          <tr>
-            <td>
-              <input type="button" onClick={this.handleAddRow} className="btn btn-secondary" value="Head +" />
             </td>
           </tr>
         }
@@ -92,14 +98,17 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, stateProps) => {
   return {
-    deleteCol: () => {
-      dispatch({ type: "DELETE_COL" })
+    deleteCol: (idx) => {
+      dispatch(deleteCol(idx))
     },
     addCol: () => {
       dispatch(addNewCol())
     },
     addRow: (items) => {
       dispatch(addNewRow(items))
+    },
+    deleteRow: (type, idx) => {
+      dispatch(deleteRow(type, idx))
     }
   }
 }

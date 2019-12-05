@@ -1,14 +1,15 @@
-export const deleteItem = (item) => {
+export const deleteCol = (idx) => {
   return {
-    type: "REMOVE_ITEM",
-    item: item
+    type: "DELETE_COL",
+    col: idx
   }
 }
 
-export const deleteCol = (col = {}) => {
+export const deleteRow = (type, idx) => {
   return {
-    type: "REMOVE_COL",
-    col: col
+    type: "DELETE_ROW",
+    typeTable: type,
+    row: idx
   }
 }
 
@@ -17,7 +18,6 @@ export const deleteCol = (col = {}) => {
 =============================================== */
 
 export const addNewRow = (items) => {
-  
   return {
     type: "ADD_ROW",
     typeTable: 'head',

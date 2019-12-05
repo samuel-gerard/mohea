@@ -1,61 +1,91 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
+import { addNewRow, deleteRow, updateValue } from "../redux/actions";
 
 class Tbody extends Component {
   constructor(props) {
     super(props)
-    console.log('props body', this.props)
+    console.log('props body', props)
   }
 
-  handleChange = (event) => {
-    const split = event.target.id.split('/')
-    const col = split[1]
+  handleUpdateValue = (e) => {
+    const split = event.target.id.split('/');
+    const col = split[1];
     const row = split[0];
-    this.props.items[row][col] = event.target.value
+    this.props.updateValue('body', e.target.value, row, col);
+  }
+
+  handleDeleteCol = (e) => {
+    this.props.deleteCol(e.target.dataset.col);
+  }
+
+  handleAddCol = (e) => {
+    this.props.addCol(e.target.dataset.col);
+  }
+
+  handleAddRow = (e) => {
+    this.props.addRow('body', e.target.dataset.row);
+  }
+
+  handleDeleteRow = (e) => {
+    this.props.deleteRow('body', e.target.dataset.row)
   }
 
   render() {
-    const bodyItems = this.props.items
-    const listItems = bodyItems.length ? (
-      Object.values(bodyItems).map( (items, i) => {
+    const group = Object.values(this.props.tableau.body)
+    const groupList = group.length > 0 ? (
+      group.map((items, i) => {
         return (
-          <tr key={'lineBody' + i} id={'tb-tr-' + i}>
-            <td>
-              {i === (bodyItems.length - 1) &&
-                <input type="button" className="btn btn-secondary" value="Body +" />
-              }
-            </td>
-            {Object.values(items).map( (item, j) => {
-              return (
-                <td key={'item' + j}>
-                  <input type='text' id={i + '/' + j} onChange={this.handleChange} value={item} />
-                </td>
-                );
-              })}
-          </tr>
-        )
-      })
-    ) : (
-      <tr>
-        <td>
-          <input type="button" className="btn btn-secondary" value="Body +" />
-        </td>
-      </tr>
-    );
+        <tr key={'lineBody' + i}>
+          <td>
+            <input type="button" onClick={this.handleDeleteRow} data-row={i} className="btn btn-danger" value="Body -" />
+            <input type="button" onClick={this.handleAddRow} data-row={i} className="btn btn-secondary" value="Body +" />
+          </td>
+          {Object.values(items).map((item, j) => {
+            return (
+              <td key={'body' + j}>
+                <input type='text' id={i + '/' + j} onChange={this.handleUpdateValue} value={item} />
+              </td>
+            );
+          })}
+        </tr>
+      )})) : (
+        <tr>
+          <td>
+            <input type="button" onClick={this.handleAddRow} data-row={0} className="btn btn-secondary" value="Body +" />
+          </td>
+          <td>
+            Nothing
+          </td>
+        </tr>
+      );
 
     return (
       <tbody>
-        { listItems }
-      </tbody>
-    )
+        {groupList}
+      </tbody>)
   }
 }
 
 const mapStateToProps = state => {
   return {
-    items: state.tableau.body,
+    tableau: state.tableau,
     nbCol: state.nbCol,
   }
 }
 
-export default connect(mapStateToProps)(Tbody);
+const mapDispatchToProps = (dispatch, stateProps) => {
+  return {
+    addRow: (type, idx) => {
+      dispatch(addNewRow(type, idx))
+    },
+    deleteRow: (type, idx) => {
+      dispatch(deleteRow(type, idx))
+    },
+    updateValue: (type, val, row, col) => {
+      dispatch(updateValue(type, val, row, col));
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Tbody);

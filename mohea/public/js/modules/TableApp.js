@@ -35701,6 +35701,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _redux_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../redux/actions */ "./resources/js/modules/table/redux/actions.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -35724,6 +35725,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var Tbody =
 /*#__PURE__*/
 function (_Component) {
@@ -35736,14 +35738,31 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Tbody).call(this, props));
 
-    _defineProperty(_assertThisInitialized(_this), "handleChange", function (event) {
+    _defineProperty(_assertThisInitialized(_this), "handleUpdateValue", function (e) {
       var split = event.target.id.split('/');
       var col = split[1];
       var row = split[0];
-      _this.props.items[row][col] = event.target.value;
+
+      _this.props.updateValue('body', e.target.value, row, col);
     });
 
-    console.log('props body', _this.props);
+    _defineProperty(_assertThisInitialized(_this), "handleDeleteCol", function (e) {
+      _this.props.deleteCol(e.target.dataset.col);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleAddCol", function (e) {
+      _this.props.addCol(e.target.dataset.col);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleAddRow", function (e) {
+      _this.props.addRow('body', e.target.dataset.row);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleDeleteRow", function (e) {
+      _this.props.deleteRow('body', e.target.dataset.row);
+    });
+
+    console.log('props body', props);
     return _this;
   }
 
@@ -35752,31 +35771,40 @@ function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      var bodyItems = this.props.items;
-      var listItems = bodyItems.length ? Object.values(bodyItems).map(function (items, i) {
+      var group = Object.values(this.props.tableau.body);
+      var groupList = group.length > 0 ? group.map(function (items, i) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
-          key: 'lineBody' + i,
-          id: 'tb-tr-' + i
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, i === bodyItems.length - 1 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          key: 'lineBody' + i
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "button",
+          onClick: _this2.handleDeleteRow,
+          "data-row": i,
+          className: "btn btn-danger",
+          value: "Body -"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "button",
+          onClick: _this2.handleAddRow,
+          "data-row": i,
           className: "btn btn-secondary",
           value: "Body +"
         })), Object.values(items).map(function (item, j) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-            key: 'item' + j
+            key: 'body' + j
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             type: "text",
             id: i + '/' + j,
-            onChange: _this2.handleChange,
+            onChange: _this2.handleUpdateValue,
             value: item
           }));
         }));
       }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "button",
+        onClick: this.handleAddRow,
+        "data-row": 0,
         className: "btn btn-secondary",
         value: "Body +"
-      })));
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, listItems);
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Nothing"));
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, groupList);
     }
   }]);
 
@@ -35785,12 +35813,26 @@ function (_Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    items: state.tableau.body,
+    tableau: state.tableau,
     nbCol: state.nbCol
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(Tbody));
+var mapDispatchToProps = function mapDispatchToProps(dispatch, stateProps) {
+  return {
+    addRow: function addRow(type, idx) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["addNewRow"])(type, idx));
+    },
+    deleteRow: function deleteRow(type, idx) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["deleteRow"])(type, idx));
+    },
+    updateValue: function updateValue(type, val, row, col) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["updateValue"])(type, val, row, col));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(Tbody));
 
 /***/ }),
 
@@ -35843,11 +35885,12 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Thead).call(this, props));
 
-    _defineProperty(_assertThisInitialized(_this), "handleChange", function (event) {
+    _defineProperty(_assertThisInitialized(_this), "handleUpdateValue", function (e) {
       var split = event.target.id.split('/');
       var col = split[1];
       var row = split[0];
-      _this.props.items[row][col] = event.target.value;
+
+      _this.props.updateValue('head', e.target.value, row, col);
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleDeleteCol", function (e) {
@@ -35859,7 +35902,7 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleAddRow", function (e) {
-      _this.props.addRow(e.target.dataset.row);
+      _this.props.addRow('head', e.target.dataset.row);
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleDeleteRow", function (e) {
@@ -35897,7 +35940,7 @@ function (_Component) {
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             type: "text",
             id: i + '/' + j,
-            onChange: _this2.handleChange,
+            onChange: _this2.handleUpdateValue,
             value: item
           }));
         }));
@@ -35952,11 +35995,14 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, stateProps) {
     addCol: function addCol(idx) {
       dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["addNewCol"])(idx));
     },
-    addRow: function addRow(idx) {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["addNewRow"])(idx));
+    addRow: function addRow(type, idx) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["addNewRow"])(type, idx));
     },
     deleteRow: function deleteRow(type, idx) {
       dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["deleteRow"])(type, idx));
+    },
+    updateValue: function updateValue(type, val, row, col) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["updateValue"])(type, val, row, col));
     }
   };
 };
@@ -35969,7 +36015,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, stateProps) {
 /*!*****************************************************!*\
   !*** ./resources/js/modules/table/redux/actions.js ***!
   \*****************************************************/
-/*! exports provided: deleteCol, deleteRow, addNewRow, addNewCol */
+/*! exports provided: deleteCol, deleteRow, addNewRow, addNewCol, updateValue */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -35978,6 +36024,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteRow", function() { return deleteRow; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNewRow", function() { return addNewRow; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNewCol", function() { return addNewCol; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateValue", function() { return updateValue; });
 var deleteCol = function deleteCol(idx) {
   return {
     type: "DELETE_COL",
@@ -35995,10 +36042,10 @@ var deleteRow = function deleteRow(type, idx) {
 * FUNCTIONS TO ADD
 =============================================== */
 
-var addNewRow = function addNewRow(idx) {
+var addNewRow = function addNewRow(type, idx) {
   return {
     type: "ADD_ROW",
-    typeTable: 'head',
+    typeTable: type,
     idx: idx
   };
 };
@@ -36006,6 +36053,15 @@ var addNewCol = function addNewCol(idx) {
   return {
     type: "ADD_COL",
     idx: idx
+  };
+};
+var updateValue = function updateValue(type, val, row, col) {
+  return {
+    type: "UPDATE_VALUE",
+    typeTable: type,
+    value: val,
+    row: row,
+    col: col
   };
 };
 
@@ -36070,7 +36126,7 @@ function rootReducer() {
             value = _Object$entries$_i[1];
 
         value.forEach(function (el) {
-          el.splice(action.row, 1);
+          el.splice(action.col, 1);
         });
       }
 
@@ -36091,7 +36147,7 @@ function rootReducer() {
 
         _value.map(function (row) {
           console.log(row);
-          row.splice(action.idx, 0, '');
+          row.splice(action.idx + 1, 0, '');
           return row;
         });
       }
@@ -36114,11 +36170,9 @@ function rootReducer() {
         tab.push('');
       }
 
-      newState.tableau[action.typeTable].splice(action.idx, 0, tab);
+      newState.tableau[action.typeTable].splice(action.idx + 1, 0, tab);
       return _objectSpread({}, state, {
-        tableau: _objectSpread({}, state.tableau, {
-          head: newState.tableau.head
-        })
+        tableau: _objectSpread({}, state.tableau, _defineProperty({}, action.typeTable, newState.tableau[action.typeTable]))
       });
 
     case "UPDATE_CAPTION":
@@ -36129,6 +36183,12 @@ function rootReducer() {
     case "UPDATE_NAME":
       return _objectSpread({}, state, {
         name: action.name
+      });
+
+    case "UPDATE_VALUE":
+      newState.tableau[action.typeTable][action.row][action.col] = action.value;
+      return _objectSpread({}, state, {
+        tableau: _objectSpread({}, state.tableau, _defineProperty({}, action.typeTable, newState.tableau[action.typeTable]))
       });
 
     case "RESET_TABLE":

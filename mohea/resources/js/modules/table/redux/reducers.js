@@ -26,7 +26,7 @@ function rootReducer(state = initState, action) {
 
       for (let [key, value] of Object.entries(newState.tableau)) {
         value.forEach(el => {
-          el.splice(action.row, 1);
+          el.splice(action.col, 1);
         });
       }
 
@@ -44,7 +44,7 @@ function rootReducer(state = initState, action) {
       for (let [key, value] of Object.entries(newState.tableau)) {
         value.map(row => {
           console.log(row);
-          row.splice(action.idx, 0, '');
+          row.splice(action.idx + 1, 0, '');
           return row
         })
       }
@@ -69,12 +69,12 @@ function rootReducer(state = initState, action) {
         tab.push('');
       }
 
-      newState.tableau[action.typeTable].splice(action.idx, 0, tab);
+      newState.tableau[action.typeTable].splice(action.idx + 1, 0, tab);
       return {
         ...state,
         tableau: {
           ...state.tableau,
-          head: newState.tableau.head
+          [action.typeTable]: newState.tableau[action.typeTable]
         }
       }
     case "UPDATE_CAPTION":
@@ -86,6 +86,15 @@ function rootReducer(state = initState, action) {
       return {
         ...state,
         name: action.name
+      }
+    case "UPDATE_VALUE":
+      newState.tableau[action.typeTable][action.row][action.col] = action.value;
+      return {
+        ...state,
+        tableau: {
+          ...state.tableau,
+          [action.typeTable]: newState.tableau[action.typeTable],
+        }
       }
     case "RESET_TABLE":
       return initState;

@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
-import { addNewRow, addNewCol, deleteCol, deleteRow } from "../redux/actions";
+import { addNewRow, addNewCol, deleteCol, deleteRow, updateValue } from "../redux/actions";
 
 class Thead extends Component {
   constructor(props) {
@@ -8,11 +8,11 @@ class Thead extends Component {
     console.log('props head', props)
   }
 
-  handleChange = (event) => {
-    const split = event.target.id.split('/')
-    const col = split[1]
+  handleUpdateValue = (e) => {
+    const split = event.target.id.split('/');
+    const col = split[1];
     const row = split[0];
-    this.props.items[row][col] = event.target.value
+    this.props.updateValue('head', e.target.value, row, col);
   }
 
   handleDeleteCol = (e) => {
@@ -24,7 +24,7 @@ class Thead extends Component {
   }
 
   handleAddRow = (e) => {
-    this.props.addRow(e.target.dataset.row);
+    this.props.addRow('head', e.target.dataset.row);
   }
 
   handleDeleteRow = (e) => {
@@ -44,7 +44,7 @@ class Thead extends Component {
           {Object.values(items).map((item, j) => {
             return (
               <td key={'head' + j}>
-                <input type='text' id={i + '/' + j} onChange={this.handleChange} value={item} />
+                <input type='text' id={i + '/' + j} onChange={this.handleUpdateValue} value={item} />
               </td>
             );
           })}
@@ -100,11 +100,14 @@ const mapDispatchToProps = (dispatch, stateProps) => {
     addCol: (idx) => {
       dispatch(addNewCol(idx))
     },
-    addRow: (idx) => {
-      dispatch(addNewRow(idx))
+    addRow: (type, idx) => {
+      dispatch(addNewRow(type, idx))
     },
     deleteRow: (type, idx) => {
       dispatch(deleteRow(type, idx))
+    },
+    updateValue: (type, val, row, col) => {
+      dispatch(updateValue(type, val, row, col));
     }
   }
 }

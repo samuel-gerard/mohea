@@ -17,14 +17,15 @@ export const deleteRow = (type, idx) => {
 * FUNCTIONS TO ADD
 =============================================== */
 
-export const addNewRow = (items) => {
+export const addNewRow = (idx) => {
   return {
     type: "ADD_ROW",
     typeTable: 'head',
-    items: items
+    idx: idx
   }
 }
 
-export const addNewCol = () => ({
+export const addNewCol = (idx) => ({
   type: "ADD_COL",
+  idx: idx
 });

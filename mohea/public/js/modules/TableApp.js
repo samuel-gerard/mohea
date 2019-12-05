@@ -35736,10 +35736,6 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Tbody).call(this, props));
 
-    _defineProperty(_assertThisInitialized(_this), "componentDidUpdate", function (prevProps) {
-      console.log('update Tbody');
-    });
-
     _defineProperty(_assertThisInitialized(_this), "handleChange", function (event) {
       var split = event.target.id.split('/');
       var col = split[1];
@@ -35858,16 +35854,16 @@ function (_Component) {
       _this.props.deleteCol(e.target.dataset.col);
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleAddCol", function () {
-      _this.props.addCol();
+    _defineProperty(_assertThisInitialized(_this), "handleAddCol", function (e) {
+      _this.props.addCol(e.target.dataset.col);
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleAddRow", function () {
-      _this.props.addRow(_this.props.tableau.head);
+    _defineProperty(_assertThisInitialized(_this), "handleAddRow", function (e) {
+      _this.props.addRow(e.target.dataset.row);
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleDeleteRow", function (e) {
-      _this.props.deleteRow('head', e.target.dataset.col);
+      _this.props.deleteRow('head', e.target.dataset.row);
     });
 
     console.log('props head', props);
@@ -35886,11 +35882,13 @@ function (_Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "button",
           onClick: _this2.handleDeleteRow,
+          "data-row": i,
           className: "btn btn-danger",
           value: "Head -"
-        }), i === group.length - 1 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "button",
           onClick: _this2.handleAddRow,
+          "data-row": i,
           className: "btn btn-secondary",
           value: "Head +"
         })), Object.values(items).map(function (item, j) {
@@ -35906,6 +35904,7 @@ function (_Component) {
       }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "button",
         onClick: this.handleAddRow,
+        "data-row": 0,
         className: "btn btn-secondary",
         value: "Head +"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Nothing"));
@@ -35918,19 +35917,20 @@ function (_Component) {
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             type: "button",
             onClick: this.handleDeleteCol,
+            "data-col": i,
             className: "btn btn-danger",
-            value: "Col -",
-            "data-col": i
+            value: "Col -"
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            type: "button",
+            onClick: this.handleAddCol,
+            "data-col": i,
+            className: "btn btn-primary",
+            value: "Col +"
           })));
         }
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, this.props.nbCol > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), groupHandler, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "button",
-        onClick: this.handleAddCol,
-        className: "btn btn-primary",
-        value: "Col +"
-      }))), groupList);
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, this.props.nbCol > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), groupHandler), groupList);
     }
   }]);
 
@@ -35949,11 +35949,11 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, stateProps) {
     deleteCol: function deleteCol(idx) {
       dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["deleteCol"])(idx));
     },
-    addCol: function addCol() {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["addNewCol"])());
+    addCol: function addCol(idx) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["addNewCol"])(idx));
     },
-    addRow: function addRow(items) {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["addNewRow"])(items));
+    addRow: function addRow(idx) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["addNewRow"])(idx));
     },
     deleteRow: function deleteRow(type, idx) {
       dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["deleteRow"])(type, idx));
@@ -35995,16 +35995,17 @@ var deleteRow = function deleteRow(type, idx) {
 * FUNCTIONS TO ADD
 =============================================== */
 
-var addNewRow = function addNewRow(items) {
+var addNewRow = function addNewRow(idx) {
   return {
     type: "ADD_ROW",
     typeTable: 'head',
-    items: items
+    idx: idx
   };
 };
-var addNewCol = function addNewCol() {
+var addNewCol = function addNewCol(idx) {
   return {
-    type: "ADD_COL"
+    type: "ADD_COL",
+    idx: idx
   };
 };
 
@@ -36068,15 +36069,9 @@ function rootReducer() {
             key = _Object$entries$_i[0],
             value = _Object$entries$_i[1];
 
-        var valueReordered = value.map(function (row) {
-          delete row[action.col];
-          var tmp = {};
-          Object.keys(row).map(function (el, idx) {
-            tmp[idx] = row[el];
-          });
-          return tmp;
+        value.forEach(function (el) {
+          el.splice(action.row, 1);
         });
-        newState.tableau[key] = valueReordered;
       }
 
       return _objectSpread({}, state, {
@@ -36095,7 +36090,8 @@ function rootReducer() {
             _value = _Object$entries2$_i[1];
 
         _value.map(function (row) {
-          row[state.nbCol] = '';
+          console.log(row);
+          row.splice(action.idx, 0, '');
           return row;
         });
       }
@@ -36106,20 +36102,19 @@ function rootReducer() {
       });
 
     case "DELETE_ROW":
-      console.log(newState.tableau[action.typeTable]);
       newState.tableau[action.typeTable].splice(action.row, 1);
       return _objectSpread({}, state, {
         tableau: _objectSpread({}, state.tableau, _defineProperty({}, action.typeTable, newState.tableau[action.typeTable]))
       });
 
     case "ADD_ROW":
-      var tab = {};
+      var tab = [];
 
       for (var i = 0; i < state.nbCol; i++) {
-        tab[i] = '';
+        tab.push('');
       }
 
-      newState.tableau[action.typeTable] = action.items.concat(tab);
+      newState.tableau[action.typeTable].splice(action.idx, 0, tab);
       return _objectSpread({}, state, {
         tableau: _objectSpread({}, state.tableau, {
           head: newState.tableau.head

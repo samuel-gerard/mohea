@@ -7,10 +7,6 @@ class Tbody extends Component {
     console.log('props body', this.props)
   }
 
-  componentDidUpdate = (prevProps) => {
-    console.log('update Tbody')
-  }
-
   handleChange = (event) => {
     const split = event.target.id.split('/')
     const col = split[1]

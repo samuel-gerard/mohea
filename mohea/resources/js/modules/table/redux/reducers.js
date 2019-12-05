@@ -25,16 +25,50 @@ function rootReducer(state = initState, action) {
       }
 
       for (let [key, value] of Object.entries(newState.tableau)) {
-        value.map((row) => {
-          delete row[nbCol - 1]
+        const valueReordered = value.map(row => {
+          delete row[action.col]
+          const tmp = {};
+
+          Object.keys(row).map( (el, idx) => {
+            tmp[idx] = row[el];
+          })
+          return tmp
+        })
+        newState.tableau[key] = valueReordered;
+      }
+
+      return {
+        ...state,
+        nbCol: state.nbCol - 1,
+        tableau: {
+          ...state.tableau,
+          head: newState.tableau.head,
+          body: newState.tableau.body,
+          footer: newState.tableau.footer
+        }
+      }
+    case "ADD_COL":
+      for (let [key, value] of Object.entries(newState.tableau)) {
+        value.map(row => {
+          row[state.nbCol] = ''
           return row
         })
       }
 
       return {
         ...state,
-        nbCol: state.nbCol - 1,
+        nbCol: state.nbCol + 1,
         tableau: newState.tableau
+      }
+    case "DELETE_ROW":
+      console.log(newState.tableau[action.typeTable]);
+      newState.tableau[action.typeTable].splice(action.row ,1);
+      return {
+        ...state,
+        tableau: {
+          ...state.tableau,
+          [action.typeTable]: newState.tableau[action.typeTable]
+        }
       }
     case "ADD_ROW":
       const tab = {}
@@ -49,20 +83,6 @@ function rootReducer(state = initState, action) {
           ...state.tableau,
           head: newState.tableau.head
         }
-      }
-    case "ADD_COL":
-      console.log('-----ADD COL', newState);
-      for (let [key, value] of Object.entries(newState.tableau)) {
-        value.map(row => {
-          row[state.nbCol] = ''
-          return row
-        })
-      }
-
-      return {
-        ...state,
-        nbCol: state.nbCol + 1,
-        tableau: newState.tableau
       }
     case "UPDATE_CAPTION":
       return {

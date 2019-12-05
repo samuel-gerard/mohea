@@ -35641,17 +35641,6 @@ function (_Component) {
         className: "w-25 btn btn-primary",
         value: "Reset",
         onClick: this.handleReset
-      })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-        className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("input", {
-        type: "button",
-        className: "btn btn-secondary mr-1",
-        value: "Col -",
-        onClick: this.handleDeleteCol
-      }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("input", {
-        type: "button",
-        className: "btn btn-secondary",
-        value: "Col +"
       }))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
         className: "col-md-9"
       }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("table", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_thead_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_tbody_jsx__WEBPACK_IMPORTED_MODULE_0__["default"], null)))));
@@ -35858,10 +35847,6 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Thead).call(this, props));
 
-    _defineProperty(_assertThisInitialized(_this), "componentDidUpdate", function (prevProps) {
-      console.log('update Thead');
-    });
-
     _defineProperty(_assertThisInitialized(_this), "handleChange", function (event) {
       var split = event.target.id.split('/');
       var col = split[1];
@@ -35869,8 +35854,8 @@ function (_Component) {
       _this.props.items[row][col] = event.target.value;
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleDeleteCol", function () {
-      _this.props.deleteCol();
+    _defineProperty(_assertThisInitialized(_this), "handleDeleteCol", function (e) {
+      _this.props.deleteCol(e.target.dataset.col);
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleAddCol", function () {
@@ -35879,6 +35864,10 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "handleAddRow", function () {
       _this.props.addRow(_this.props.tableau.head);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleDeleteRow", function (e) {
+      _this.props.deleteRow('head', e.target.dataset.col);
     });
 
     console.log('props head', props);
@@ -35891,11 +35880,15 @@ function (_Component) {
       var _this2 = this;
 
       var group = Object.values(this.props.tableau.head);
-      console.log('---', group);
       var groupList = group.length > 0 ? group.map(function (items, i) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
           key: 'lineHead' + i
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, i === group.length - 1 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "button",
+          onClick: _this2.handleDeleteRow,
+          className: "btn btn-danger",
+          value: "Head -"
+        }), i === group.length - 1 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "button",
           onClick: _this2.handleAddRow,
           className: "btn btn-secondary",
@@ -35910,22 +35903,33 @@ function (_Component) {
             value: item
           }));
         }));
-      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Nothing"));
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, this.props.nbCol > 1 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "button",
-        onClick: this.handleDeleteCol,
-        className: "btn btn-primary",
-        value: "Col -"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "button",
-        onClick: this.handleAddCol,
-        className: "btn btn-primary",
-        value: "Col +"
-      }))), group.length === 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "button",
         onClick: this.handleAddRow,
         className: "btn btn-secondary",
         value: "Head +"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Nothing"));
+      var groupHandler = [];
+
+      if (this.props.nbCol > 0) {
+        for (var i = 0; i < this.props.nbCol; i++) {
+          groupHandler.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+            key: 'headHandler' + i
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            type: "button",
+            onClick: this.handleDeleteCol,
+            className: "btn btn-danger",
+            value: "Col -",
+            "data-col": i
+          })));
+        }
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, this.props.nbCol > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), groupHandler, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "button",
+        onClick: this.handleAddCol,
+        className: "btn btn-primary",
+        value: "Col +"
       }))), groupList);
     }
   }]);
@@ -35942,16 +35946,17 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch, stateProps) {
   return {
-    deleteCol: function deleteCol() {
-      dispatch({
-        type: "DELETE_COL"
-      });
+    deleteCol: function deleteCol(idx) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["deleteCol"])(idx));
     },
     addCol: function addCol() {
       dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["addNewCol"])());
     },
     addRow: function addRow(items) {
       dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["addNewRow"])(items));
+    },
+    deleteRow: function deleteRow(type, idx) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["deleteRow"])(type, idx));
     }
   };
 };
@@ -35964,26 +35969,26 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, stateProps) {
 /*!*****************************************************!*\
   !*** ./resources/js/modules/table/redux/actions.js ***!
   \*****************************************************/
-/*! exports provided: deleteItem, deleteCol, addNewRow, addNewCol */
+/*! exports provided: deleteCol, deleteRow, addNewRow, addNewCol */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteItem", function() { return deleteItem; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteCol", function() { return deleteCol; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteRow", function() { return deleteRow; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNewRow", function() { return addNewRow; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNewCol", function() { return addNewCol; });
-var deleteItem = function deleteItem(item) {
+var deleteCol = function deleteCol(idx) {
   return {
-    type: "REMOVE_ITEM",
-    item: item
+    type: "DELETE_COL",
+    col: idx
   };
 };
-var deleteCol = function deleteCol() {
-  var col = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+var deleteRow = function deleteRow(type, idx) {
   return {
-    type: "REMOVE_COL",
-    col: col
+    type: "DELETE_ROW",
+    typeTable: type,
+    row: idx
   };
 };
 /* ===============================================
@@ -36014,8 +36019,6 @@ var addNewCol = function addNewCol() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -36051,101 +36054,94 @@ function rootReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initState;
   var action = arguments.length > 1 ? arguments[1] : undefined;
   var newState = Object.assign({}, state);
-  var i;
 
-  var _ret = function () {
-    switch (action.type) {
-      case "DELETE_COL":
-        var nbCol = state.nbCol;
+  switch (action.type) {
+    case "DELETE_COL":
+      var nbCol = state.nbCol;
 
-        if (nbCol <= 1) {
-          return {
-            v: state
-          };
-        }
+      if (nbCol <= 1) {
+        return state;
+      }
 
-        for (var _i = 0, _Object$entries = Object.entries(newState.tableau); _i < _Object$entries.length; _i++) {
-          var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
-              key = _Object$entries$_i[0],
-              value = _Object$entries$_i[1];
+      for (var _i = 0, _Object$entries = Object.entries(newState.tableau); _i < _Object$entries.length; _i++) {
+        var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+            key = _Object$entries$_i[0],
+            value = _Object$entries$_i[1];
 
-          value.map(function (row) {
-            delete row[nbCol - 1];
-            return row;
+        var valueReordered = value.map(function (row) {
+          delete row[action.col];
+          var tmp = {};
+          Object.keys(row).map(function (el, idx) {
+            tmp[idx] = row[el];
           });
-        }
+          return tmp;
+        });
+        newState.tableau[key] = valueReordered;
+      }
 
-        return {
-          v: _objectSpread({}, state, {
-            nbCol: state.nbCol - 1,
-            tableau: newState.tableau
-          })
-        };
+      return _objectSpread({}, state, {
+        nbCol: state.nbCol - 1,
+        tableau: _objectSpread({}, state.tableau, {
+          head: newState.tableau.head,
+          body: newState.tableau.body,
+          footer: newState.tableau.footer
+        })
+      });
 
-      case "ADD_ROW":
-        var tab = {};
+    case "ADD_COL":
+      for (var _i2 = 0, _Object$entries2 = Object.entries(newState.tableau); _i2 < _Object$entries2.length; _i2++) {
+        var _Object$entries2$_i = _slicedToArray(_Object$entries2[_i2], 2),
+            _key = _Object$entries2$_i[0],
+            _value = _Object$entries2$_i[1];
 
-        for (i = 0; i < state.nbCol; i++) {
-          tab[i] = '';
-        }
+        _value.map(function (row) {
+          row[state.nbCol] = '';
+          return row;
+        });
+      }
 
-        newState.tableau[action.typeTable] = action.items.concat(tab);
-        return {
-          v: _objectSpread({}, state, {
-            tableau: _objectSpread({}, state.tableau, {
-              head: newState.tableau.head
-            })
-          })
-        };
+      return _objectSpread({}, state, {
+        nbCol: state.nbCol + 1,
+        tableau: newState.tableau
+      });
 
-      case "ADD_COL":
-        console.log('-----ADD COL', newState);
+    case "DELETE_ROW":
+      console.log(newState.tableau[action.typeTable]);
+      newState.tableau[action.typeTable].splice(action.row, 1);
+      return _objectSpread({}, state, {
+        tableau: _objectSpread({}, state.tableau, _defineProperty({}, action.typeTable, newState.tableau[action.typeTable]))
+      });
 
-        for (var _i2 = 0, _Object$entries2 = Object.entries(newState.tableau); _i2 < _Object$entries2.length; _i2++) {
-          var _Object$entries2$_i = _slicedToArray(_Object$entries2[_i2], 2),
-              _key = _Object$entries2$_i[0],
-              _value = _Object$entries2$_i[1];
+    case "ADD_ROW":
+      var tab = {};
 
-          _value.map(function (row) {
-            row[state.nbCol] = '';
-            return row;
-          });
-        }
+      for (var i = 0; i < state.nbCol; i++) {
+        tab[i] = '';
+      }
 
-        return {
-          v: _objectSpread({}, state, {
-            nbCol: state.nbCol + 1,
-            tableau: newState.tableau
-          })
-        };
+      newState.tableau[action.typeTable] = action.items.concat(tab);
+      return _objectSpread({}, state, {
+        tableau: _objectSpread({}, state.tableau, {
+          head: newState.tableau.head
+        })
+      });
 
-      case "UPDATE_CAPTION":
-        return {
-          v: _objectSpread({}, state, {
-            caption: action.caption
-          })
-        };
+    case "UPDATE_CAPTION":
+      return _objectSpread({}, state, {
+        caption: action.caption
+      });
 
-      case "UPDATE_NAME":
-        return {
-          v: _objectSpread({}, state, {
-            name: action.name
-          })
-        };
+    case "UPDATE_NAME":
+      return _objectSpread({}, state, {
+        name: action.name
+      });
 
-      case "RESET_TABLE":
-        return {
-          v: initState
-        };
+    case "RESET_TABLE":
+      return initState;
 
-      default:
-        return {
-          v: state
-        };
-    }
-  }();
-
-  if (_typeof(_ret) === "object") return _ret.v;
+    default:
+      return state;
+  }
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (rootReducer);

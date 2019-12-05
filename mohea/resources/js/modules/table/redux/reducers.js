@@ -25,16 +25,9 @@ function rootReducer(state = initState, action) {
       }
 
       for (let [key, value] of Object.entries(newState.tableau)) {
-        const valueReordered = value.map(row => {
-          delete row[action.col]
-          const tmp = {};
-
-          Object.keys(row).map( (el, idx) => {
-            tmp[idx] = row[el];
-          })
-          return tmp
-        })
-        newState.tableau[key] = valueReordered;
+        value.forEach(el => {
+          el.splice(action.row, 1);
+        });
       }
 
       return {
@@ -50,7 +43,8 @@ function rootReducer(state = initState, action) {
     case "ADD_COL":
       for (let [key, value] of Object.entries(newState.tableau)) {
         value.map(row => {
-          row[state.nbCol] = ''
+          console.log(row);
+          row.splice(action.idx, 0, '');
           return row
         })
       }
@@ -61,8 +55,7 @@ function rootReducer(state = initState, action) {
         tableau: newState.tableau
       }
     case "DELETE_ROW":
-      console.log(newState.tableau[action.typeTable]);
-      newState.tableau[action.typeTable].splice(action.row ,1);
+      newState.tableau[action.typeTable].splice(action.row, 1);
       return {
         ...state,
         tableau: {
@@ -71,12 +64,12 @@ function rootReducer(state = initState, action) {
         }
       }
     case "ADD_ROW":
-      const tab = {}
+      const tab = []
       for (var i = 0; i < state.nbCol; i++) {
-        tab[i] = '';
+        tab.push('');
       }
 
-      newState.tableau[action.typeTable] = action.items.concat(tab)
+      newState.tableau[action.typeTable].splice(action.idx, 0, tab);
       return {
         ...state,
         tableau: {

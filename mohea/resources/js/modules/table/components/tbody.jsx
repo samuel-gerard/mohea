@@ -3,11 +3,6 @@ import { connect } from "react-redux";
 import { addNewRow, deleteRow, updateValue } from "../redux/actions";
 
 class Tbody extends Component {
-  constructor(props) {
-    super(props)
-    console.log('props body', props)
-  }
-
   handleUpdateValue = (e) => {
     const split = event.target.id.split('/');
     const col = split[1];

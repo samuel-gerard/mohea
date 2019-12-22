@@ -1,7 +1,7 @@
 const defaultTab = {
   'head': [],
   'body': [],
-  'footer': []
+  'foot': []
 }
 const initState = {
   'defaultTab': defaultTab,
@@ -9,7 +9,7 @@ const initState = {
   'tableau': {
     'head': [],
     'body': [],
-    'footer': [],
+    'foot': [],
   },
   'caption': '',
   'name': '',
@@ -37,7 +37,7 @@ function rootReducer(state = initState, action) {
           ...state.tableau,
           head: newState.tableau.head,
           body: newState.tableau.body,
-          footer: newState.tableau.footer
+          foot: newState.tableau.foot
         }
       }
     case "ADD_COL":

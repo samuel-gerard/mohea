@@ -35531,6 +35531,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _tableReturn_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./tableReturn.jsx */ "./resources/js/modules/table/components/tableReturn.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -35556,20 +35557,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var Table =
 /*#__PURE__*/
 function (_Component) {
   _inherits(Table, _Component);
 
-  /* ===============================================
-  * DELETE FUNCTIONS
-  =============================================== */
-  function Table(props) {
+  function Table() {
+    var _getPrototypeOf2;
+
     var _this;
 
     _classCallCheck(this, Table);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Table).call(this, props));
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Table)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_this), "handleReset", function () {
       _this.props.resetTable();
@@ -35591,10 +35596,8 @@ function (_Component) {
       console.log(_this.props);
     });
 
-    console.log(_this.props);
     return _this;
-  } // Delete all the table
-
+  }
 
   _createClass(Table, [{
     key: "render",
@@ -35643,7 +35646,9 @@ function (_Component) {
         onClick: this.handleReset
       }))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
         className: "col-md-9"
-      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("table", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_thead_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_tbody_jsx__WEBPACK_IMPORTED_MODULE_0__["default"], null)))));
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("table", null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_thead_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_tbody_jsx__WEBPACK_IMPORTED_MODULE_0__["default"], null)))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_tableReturn_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
     }
   }]);
 
@@ -35689,6 +35694,95 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
+/***/ "./resources/js/modules/table/components/tableReturn.jsx":
+/*!***************************************************************!*\
+  !*** ./resources/js/modules/table/components/tableReturn.jsx ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var TableReturn =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(TableReturn, _Component);
+
+  function TableReturn() {
+    _classCallCheck(this, TableReturn);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(TableReturn).apply(this, arguments));
+  }
+
+  _createClass(TableReturn, [{
+    key: "render",
+    value: function render() {
+      var end = "</table>";
+      var head = this.props.tableau.head;
+      var body = this.props.tableau.body;
+      var foot = this.props.tableau.foot;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Your HTML code"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("pre", {
+        style: {
+          backgroundColor: '#232323',
+          color: 'white'
+        }
+      }, "<table summary=\"".concat(this.props.caption, "\">"), "<thead>", head.length > 0 && head.map(function (headRow, idx) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("code", {
+          key: 'headRow' + idx
+        }, "<tr>", headRow.map(function (headEl, idxBis) {
+          return "<th id=\"col-".concat(idxBis, "\">").concat(headEl, "</th>");
+        }), "<tr>");
+      }), "</thead>", "<tbody>", body.length > 0 && body.map(function (bodyRow, idx) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("code", {
+          key: 'bodyRow' + idx
+        }, "<tr id=\"bodyRow-".concat(idx, "\">"), bodyRow.map(function (bodyEl, idxBis) {
+          return "<th headers=\"col-".concat(idxBis, " bodyRow-").concat(idx, "\">").concat(bodyEl, "</th>");
+        }), "<tr>");
+      }), "</tbody>", "<tfoot>", foot.length > 0 && foot.map(function (footRow, idx) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("code", {
+          key: 'footRow' + idx
+        }, "<tr id=\"footRow-".concat(idx, "\">"), footRow.map(function (footEl, idxBis) {
+          return "<th headers=\"col-".concat(idxBis, " footRow-").concat(idx, "\">").concat(footEl, "</th>");
+        }), "<tr>");
+      }), "</tfoot>", end));
+    }
+  }]);
+
+  return TableReturn;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+var mapStateToProps = function mapStateToProps(state) {
+  return state;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(TableReturn));
+
+/***/ }),
+
 /***/ "./resources/js/modules/table/components/tbody.jsx":
 /*!*********************************************************!*\
   !*** ./resources/js/modules/table/components/tbody.jsx ***!
@@ -35731,12 +35825,18 @@ var Tbody =
 function (_Component) {
   _inherits(Tbody, _Component);
 
-  function Tbody(props) {
+  function Tbody() {
+    var _getPrototypeOf2;
+
     var _this;
 
     _classCallCheck(this, Tbody);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Tbody).call(this, props));
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Tbody)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_this), "handleUpdateValue", function (e) {
       var split = event.target.id.split('/');
@@ -35762,7 +35862,6 @@ function (_Component) {
       _this.props.deleteRow('body', e.target.dataset.row);
     });
 
-    console.log('props body', props);
     return _this;
   }
 
@@ -35878,12 +35977,18 @@ var Thead =
 function (_Component) {
   _inherits(Thead, _Component);
 
-  function Thead(props) {
+  function Thead() {
+    var _getPrototypeOf2;
+
     var _this;
 
     _classCallCheck(this, Thead);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Thead).call(this, props));
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Thead)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_this), "handleUpdateValue", function (e) {
       var split = event.target.id.split('/');
@@ -35909,7 +36014,6 @@ function (_Component) {
       _this.props.deleteRow('head', e.target.dataset.row);
     });
 
-    console.log('props head', props);
     return _this;
   }
 
@@ -36093,7 +36197,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var defaultTab = {
   'head': [],
   'body': [],
-  'footer': []
+  'foot': []
 };
 var initState = {
   'defaultTab': defaultTab,
@@ -36101,7 +36205,7 @@ var initState = {
   'tableau': {
     'head': [],
     'body': [],
-    'footer': []
+    'foot': []
   },
   'caption': '',
   'name': ''
@@ -36135,7 +36239,7 @@ function rootReducer() {
         tableau: _objectSpread({}, state.tableau, {
           head: newState.tableau.head,
           body: newState.tableau.body,
-          footer: newState.tableau.footer
+          foot: newState.tableau.foot
         })
       });
 

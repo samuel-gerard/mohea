@@ -2,17 +2,12 @@ import Tbody from "./tbody.jsx";
 import Thead from "./thead.jsx";
 import React, {Component} from "react";
 import { connect } from "react-redux";
-
+import TableReturn from "./tableReturn.jsx";
 
 class Table extends Component {
   /* ===============================================
   * DELETE FUNCTIONS
   =============================================== */
-  constructor(props) {
-    super(props)
-    console.log(this.props);
-  }
-
   // Delete all the table
   handleReset = () => {
     this.props.resetTable();
@@ -68,6 +63,9 @@ class Table extends Component {
                 <Tbody/>
             </table>
           </div>
+        </div>
+        <div className="row">
+          <TableReturn />
         </div>
       </section>
   }

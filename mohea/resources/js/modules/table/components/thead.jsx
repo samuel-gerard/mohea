@@ -3,11 +3,6 @@ import { connect } from "react-redux";
 import { addNewRow, addNewCol, deleteCol, deleteRow, updateValue } from "../redux/actions";
 
 class Thead extends Component {
-  constructor(props) {
-    super(props)
-    console.log('props head', props)
-  }
-
   handleUpdateValue = (e) => {
     const split = event.target.id.split('/');
     const col = split[1];

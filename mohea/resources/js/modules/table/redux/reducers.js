@@ -43,7 +43,6 @@ function rootReducer(state = initState, action) {
     case "ADD_COL":
       for (let [key, value] of Object.entries(newState.tableau)) {
         value.map(row => {
-          console.log(row);
           row.splice(action.idx + 1, 0, '');
           return row
         })

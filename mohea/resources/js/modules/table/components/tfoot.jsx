@@ -2,12 +2,12 @@ import React, {Component} from "react";
 import { connect } from "react-redux";
 import { addNewRow, deleteRow, updateValue } from "../redux/actions";
 
-class Tbody extends Component {
+class Tfoot extends Component {
   handleUpdateValue = (e) => {
     const split = event.target.id.split('/');
     const col = split[1];
     const row = split[0];
-    this.props.updateValue('body', e.target.value, row, col);
+    this.props.updateValue('foot', e.target.value, row, col);
   }
 
   handleDeleteCol = (e) => {
@@ -19,26 +19,26 @@ class Tbody extends Component {
   }
 
   handleAddRow = (e) => {
-    this.props.addRow('body', e.target.dataset.row);
+    this.props.addRow('foot', e.target.dataset.row);
   }
 
   handleDeleteRow = (e) => {
-    this.props.deleteRow('body', e.target.dataset.row)
+    this.props.deleteRow('foot', e.target.dataset.row)
   }
 
   render() {
-    const group = Object.values(this.props.tableau.body)
+    const group = Object.values(this.props.tableau.foot)
     const groupList = group.length > 0 ? (
       group.map((items, i) => {
         return (
-        <tr key={'lineBody' + i}>
+        <tr key={'linefoot' + i}>
           <td>
-            <input type="button" onClick={this.handleDeleteRow} data-row={i} className="btn btn-danger" value="Body -" />
-            <input type="button" onClick={this.handleAddRow} data-row={i} className="btn btn-secondary" value="Body +" />
+            <input type="button" onClick={this.handleDeleteRow} data-row={i} className="btn btn-danger" value="Foot -" />
+            <input type="button" onClick={this.handleAddRow} data-row={i} className="btn btn-secondary" value="Foot +" />
           </td>
           {Object.values(items).map((item, j) => {
             return (
-              <td key={'body' + j}>
+              <td key={'foot' + j}>
                 <input type='text' id={i + '/' + j} onChange={this.handleUpdateValue} value={item} className="form-control" />
               </td>
             );
@@ -47,7 +47,7 @@ class Tbody extends Component {
       )})) : (
         <tr>
           <td>
-            <input type="button" onClick={this.handleAddRow} data-row={0} className="btn btn-secondary" value="Body +" />
+            <input type="button" onClick={this.handleAddRow} data-row={0} className="btn btn-secondary" value="Foot +" />
           </td>
           <td colSpan={this.props.nbCol}>
             Nothing
@@ -56,9 +56,9 @@ class Tbody extends Component {
       );
 
     return (
-      <tbody>
+      <tfoot>
         {groupList}
-      </tbody>)
+      </tfoot>)
   }
 }
 
@@ -83,4 +83,4 @@ const mapDispatchToProps = (dispatch, stateProps) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Tbody);
+export default connect(mapStateToProps, mapDispatchToProps)(Tfoot);

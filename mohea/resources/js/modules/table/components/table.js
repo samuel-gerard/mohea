@@ -1,5 +1,6 @@
-import Tbody from "./tbody.jsx";
 import Thead from "./thead.jsx";
+import Tbody from "./tbody.jsx";
+import Tfoot from "./tfoot.jsx";
 import React, {Component} from "react";
 import { connect } from "react-redux";
 import TableReturn from "./tableReturn.jsx";
@@ -58,14 +59,17 @@ class Table extends Component {
             </div>
           </div>
           <div className="col-md-9">
-            <table>
-                <Thead/>
-                <Tbody/>
+            <table className="table table-bordered">
+                <Thead />
+                <Tbody />
+                <Tfoot />
             </table>
           </div>
         </div>
         <div className="row">
-          <TableReturn />
+          <div className="col-md-12">
+            <TableReturn />
+          </div>
         </div>
       </section>
   }

@@ -32,26 +32,26 @@ class Thead extends Component {
       group.map((items, i) => {
         return (
         <tr key={'lineHead' + i}>
-          <td>
+          <th>
             <input type="button" onClick={this.handleDeleteRow} data-row={i} className="btn btn-danger" value="Head -" />
             <input type="button" onClick={this.handleAddRow} data-row={i} className="btn btn-secondary" value="Head +" />
-          </td>
+          </th>
           {Object.values(items).map((item, j) => {
             return (
-              <td key={'head' + j}>
-                <input type='text' id={i + '/' + j} onChange={this.handleUpdateValue} value={item} />
-              </td>
+              <th key={'head' + j}>
+                <input type='text' id={i + '/' + j} onChange={this.handleUpdateValue} value={item} className="form-control" />
+              </th>
             );
           })}
         </tr>
       )})) : (
         <tr>
-          <td>
+          <th>
             <input type="button" onClick={this.handleAddRow} data-row={0} className="btn btn-secondary" value="Head +" />
-          </td>
-          <td>
+          </th>
+          <th colSpan={this.props.nbCol}>
             Nothing
-          </td>
+          </th>
         </tr>
       );
 
@@ -67,7 +67,7 @@ class Thead extends Component {
       }
     }
     return (
-      <thead>
+      <thead className="thead-light">
         {this.props.nbCol > 0 &&
           <tr>
             <td>

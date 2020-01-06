@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { PrismCode } from "../../../components/PrismCode";
+import "../../../../sass/input.scss";
+
+
 const TableReturn = props => {
 
         const caption = props.caption;
-        const head = props.tableau.head;
-        const body = props.tableau.body;
-        const foot = props.tableau.foot;
+        const { head, body, foot } = props.tableau;
         let html = '';
 
         const handleStart = () => {
@@ -54,7 +55,7 @@ const TableReturn = props => {
                 html += `       <tr id="bodyRow-${idx}">
 `
                 bodyRow.map((bodyEl, idxBis) => {
-                    html += `           <td id="col-${idxBis} bodyRow-${idx}">${bodyEl}</td>
+                    html += `           <td headers="col-${idxBis} bodyRow-${idx}">${bodyEl}</td>
 `
                 })
                 html += `       </tr>
@@ -77,7 +78,7 @@ const TableReturn = props => {
                 html += `       <tr id="footRow-${idx}">
 `
                 footRow.map((footEl, idxBis) => {
-                    html += `           <td id="col-${idxBis} footRow-${idx}">${footEl}</td>
+                    html += `           <td headers="col-${idxBis} footRow-${idx}">${footEl}</td>
 `
                 })
                 html += `       </tr>
@@ -103,64 +104,11 @@ const TableReturn = props => {
                     <PrismCode
                         code={html}
                         language="html"
-                        plugins={["line-numbers", "remove-initial-line-feed"]}
+                        plugins={["line-numbers", "normalize-whitespace", "copy-to-clipboard"]}
                     />
                 </div>
             </div>
         )
-                {/* <pre>
-                    <code className="language-html">
-                    {`<table summary="${this.props.caption}">`}
-                    {`<thead>`}
-                    {head.length > 0 &&
-                    head.map((headRow, idx) => {
-                        return (
-                            <code key={'headRow' + idx} className="language-html">
-                            {`<tr>`}
-                                {headRow.map((headEl, idxBis) => (
-                                    `<th id="col-${idxBis}">${headEl}</th>`
-                                ))}
-                            {`</tr>`}
-                            </code>
-                        )
-                    })
-                    }
-                    {`</thead>`}
-                    {`<tbody>`}
-                    {body.length > 0 &&
-                    body.map((bodyRow, idx) => {
-                        return (
-                        <code key={'bodyRow' + idx} className="language-html">
-                            {`<tr id="bodyRow-${idx}">`}
-                            {bodyRow.map((bodyEl, idxBis) => (
-                                `<th headers="col-${idxBis} bodyRow-${idx}">${bodyEl}</th>`
-                            ))}
-                            {`<tr>`}
-                        </code>
-                    )
-                    })
-                    }
-                    {`</tbody>`}
-                    {`<tfoot>`}
-                    {foot.length > 0 &&
-                    foot.map((footRow, idx) => {
-                        return(
-                        <code key={'footRow' + idx} className="language-html">
-                            {`<tr id="footRow-${idx}">`}
-                            {footRow.map((footEl, idxBis) => (
-                                `<th headers="col-${idxBis} footRow-${idx}">${footEl}</th>`
-                            ))}
-                            {`<tr>`}
-                        </code>
-                    )
-                    })
-                    }
-                    {`</tfoot>`}
-                    {end}
-                    </code>
-                </pre>
-            </div>
-        )*/}
 }
 
 const mapStateToProps = state => state;

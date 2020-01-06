@@ -25,8 +25,8 @@ Route::middleware(['auth'])->group(function() {
         return view('pages.create');
     })->name('create');
     Route::get('/create/table', 'TableModuleController@create')->name('table.create');
-    Route::get('/create/form');
-    Route::get('/create/menu');
+    Route::get('/create/form', 'FormModuleController@create')->name('form.create');
+    Route::get('/create/menu')->name('menu.create');
 
     // Routes of user update 
     Route::post('/user/info', 'UserController@updateInfo')->name('user.update.info');

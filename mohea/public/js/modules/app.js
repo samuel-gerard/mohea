@@ -81,66 +81,20 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ "./resources/js/app.js":
-/*!*****************************!*\
-  !*** ./resources/js/app.js ***!
-  \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes React and other helpers. It's a great starting point while
- * building robust, powerful web applications using React + Laravel.
- */
-
-/**
- * Next, we will create a fresh React component instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-/***/ }),
-
-/***/ "./resources/sass/app.scss":
-/*!*********************************!*\
-  !*** ./resources/sass/app.scss ***!
-  \*********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ "./resources/sass/form.scss":
-/*!**********************************!*\
-  !*** ./resources/sass/form.scss ***!
-  \**********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ 0:
-/*!****************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/form.scss ***!
-  \****************************************************************************************/
+/******/ ([
+/* 0 */,
+/* 1 */
+/*!************************************************!*\
+  !*** multi ./resources/js/modules/form/app.js ***!
+  \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/html/LpWeb/Mohea/mohea.bach.mmi-unistra.fr/mohea/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /var/www/html/LpWeb/Mohea/mohea.bach.mmi-unistra.fr/mohea/resources/sass/app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! /var/www/html/LpWeb/Mohea/mohea.bach.mmi-unistra.fr/mohea/resources/sass/form.scss */"./resources/sass/form.scss");
+!(function webpackMissingModule() { var e = new Error("Cannot find module 'D:\\wamp\\www\\Mohea\\mohea.bach.mmi-unistra.fr\\mohea\\resources\\js\\modules\\form\\app.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 
 
 /***/ })
-
-/******/ });
+/******/ ]);

@@ -24,7 +24,7 @@ class FormModuleController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.form');
     }
 
     /**

@@ -4,8 +4,17 @@ import Tfoot from "./tfoot.jsx";
 import React, {Component} from "react";
 import { connect } from "react-redux";
 import TableReturn from "./tableReturn.jsx";
+import { addNewRow, addNewCol, resetTable, updateCaption, updateName } from "../redux/actions";
 
 class Table extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      heightCol: 0,
+      widthCol: 0
+    }
+  }
   /* ===============================================
   * DELETE FUNCTIONS
   =============================================== */
@@ -27,6 +36,31 @@ class Table extends Component {
     this.props.updateName(e.target.value);
   }
 
+  handleInitialize = (e) => {
+    e.preventDefault();
+
+    for(var i = 0; i < this.state.heightCol; i ++) {
+      const type = i === 0 ? 'head' : 'body';
+      this.props.addRow(type, i);
+    }
+
+    for(var i = 1; i < this.state.widthCol; i ++) {
+      this.props.addCol(i);
+    }
+  }
+
+  updateWidthCol = (e) => {
+    this.setState({
+      widthCol: e.target.value
+    })
+  }
+
+  updateHeightCol = (e) => {
+    this.setState({
+      heightCol: e.target.value
+    })
+  }
+
   /* ===============================================
   * Get JSON about this table
   =============================================== */
@@ -39,7 +73,20 @@ class Table extends Component {
   render() {
     return <section>
         <h1>{this.props.name || 'New table'}</h1>
-        <p class="card bg-warning p-2">Attention, le fusionnage de cellule n'est pas conseillé en accessibilité. Vous ne pourrez donc pas réaliser cette action.</p>
+        <p className="card bg-warning p-2">Be careful, merging cells is not advised in accessibility. Therefore, you will not be able to perform this action.</p>
+        {this.props.tableau.head.length === 0 && this.props.tableau.body.length === 0 && this.props.tableau.foot.length == 0 &&
+          <div className="card bg-dark text-white p-2">
+            <h4 className="card-title">Generate a table</h4>
+            <form onSubmit={this.handleInitialize}>
+              <div className="flex">
+                <input type="number" onChange={this.updateWidthCol} value={this.widthCol} />
+                <span>x</span>
+                <input type="number" onChange={this.updateHeightCol} value={this.heightCol} />
+              </div>
+              <input type="submit" value="Generate table" />
+            </form>
+          </div>
+        }
         <div className="row">
           <div className="col-md-3">
             <div className="form-group">
@@ -55,7 +102,7 @@ class Table extends Component {
               <input type="text" className="form-control" name="caption" id="table-caption" onChange={this.handleCaption} value={this.props.caption} />
             </div>
             <div className="form-group d-flex justify-content-between">
-              <input type="button" className="btn btn-primary form-control mr-1" value="Generate" onClick={this.handleGenerate} />
+              <input type="button" className="btn btn-primary form-control mr-1" value="Display code" onClick={this.handleGenerate} />
               <input type="button" className="w-25 btn btn-primary" value="Reset" onClick={this.handleReset} />
             </div>
           </div>
@@ -87,17 +134,20 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     updateCaption: caption => {
-      dispatch({ type: "UPDATE_CAPTION", caption})
+      dispatch(updateCaption(caption))
     },
     updateName: name => {
-      dispatch({ type: "UPDATE_NAME", name})
+      dispatch(updateName(name))
     },
     resetTable: () => {
-      dispatch({type: "RESET_TABLE"})
+      dispatch(resetTable())
     },
-    deleteCol: () => {
-      dispatch({ type: "DELETE_COL"})
-    }
+    addRow: (type, idx) => {
+      dispatch(addNewRow(type, idx))
+    },
+    addCol: (idx) => {
+      dispatch(addNewCol(idx))
+    },
   }
 }
 

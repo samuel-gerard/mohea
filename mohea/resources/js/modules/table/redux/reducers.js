@@ -15,9 +15,9 @@ const initState = {
   'name': '',
 }
 
-function rootReducer(state = initState, action) {
+function rootReducer(state = initState, payload) {
   let newState = Object.assign({}, state);
-  switch (action.type) {
+  switch (payload.type) {
     case "DELETE_COL":
       const nbCol = state.nbCol;
       if (nbCol <= 1) {
@@ -26,7 +26,7 @@ function rootReducer(state = initState, action) {
 
       for (let [key, value] of Object.entries(newState.tableau)) {
         value.forEach(el => {
-          el.splice(action.col, 1);
+          el.splice(payload.col, 1);
         });
       }
 
@@ -43,7 +43,7 @@ function rootReducer(state = initState, action) {
     case "ADD_COL":
       for (let [key, value] of Object.entries(newState.tableau)) {
         value.map(row => {
-          row.splice(action.idx + 1, 0, '');
+          row.splice(payload.idx + 1, 0, '');
           return row
         })
       }
@@ -54,12 +54,12 @@ function rootReducer(state = initState, action) {
         tableau: newState.tableau
       }
     case "DELETE_ROW":
-      newState.tableau[action.typeTable].splice(action.row, 1);
+      newState.tableau[payload.typeTable].splice(payload.row, 1);
       return {
         ...state,
         tableau: {
           ...state.tableau,
-          [action.typeTable]: newState.tableau[action.typeTable]
+          [payload.typeTable]: newState.tableau[payload.typeTable]
         }
       }
     case "ADD_ROW":
@@ -68,35 +68,45 @@ function rootReducer(state = initState, action) {
         tab.push('');
       }
 
-      newState.tableau[action.typeTable].splice(action.idx + 1, 0, tab);
+      newState.tableau[payload.typeTable].splice(payload.idx + 1, 0, tab);
       return {
         ...state,
         tableau: {
           ...state.tableau,
-          [action.typeTable]: newState.tableau[action.typeTable]
+          [payload.typeTable]: newState.tableau[payload.typeTable]
         }
       }
     case "UPDATE_CAPTION":
       return {
         ...state,
-        caption: action.caption
+        caption: payload.caption
       }
     case "UPDATE_NAME":
       return {
         ...state,
-        name: action.name
+        name: payload.name
       }
     case "UPDATE_VALUE":
-      newState.tableau[action.typeTable][action.row][action.col] = action.value;
+      newState.tableau[payload.typeTable][payload.row][payload.col] = payload.value;
       return {
         ...state,
         tableau: {
           ...state.tableau,
-          [action.typeTable]: newState.tableau[action.typeTable],
+          [payload.typeTable]: newState.tableau[payload.typeTable],
         }
       }
     case "RESET_TABLE":
-      return initState;
+      return {
+        'defaultTab': defaultTab,
+        'nbCol': 1,
+        'tableau': {
+          'head': [],
+          'body': [],
+          'foot': [],
+        },
+        'caption': '',
+        'name': '',
+      }
     default:
       return state;
   }

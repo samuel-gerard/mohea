@@ -1,17 +1,21 @@
-export const deleteCol = (idx) => {
-  return {
-    type: "DELETE_COL",
-    col: idx
-  }
-}
+/* ===============================================
+* FUNCTIONS TO DELETE
+=============================================== */
 
-export const deleteRow = (type, idx) => {
-  return {
-    type: "DELETE_ROW",
-    typeTable: type,
-    row: idx
-  }
-}
+export const deleteCol = (idx) => ({
+  type: "DELETE_COL",
+  col: idx
+})
+
+export const deleteRow = (type, idx) => ({
+  type: "DELETE_ROW",
+  typeTable: type,
+  row: idx
+})
+
+export const resetTable = () => ({
+  type: "RESET_TABLE"
+})
 
 /* ===============================================
 * FUNCTIONS TO ADD
@@ -28,6 +32,10 @@ export const addNewCol = (idx) => ({
   idx: idx
 });
 
+/* ===============================================
+* FUNCTIONS TO UPDATE
+=============================================== */
+
 export const updateValue = (type, val, row, col) => ({
   type: "UPDATE_VALUE",
   typeTable: type,
@@ -35,3 +43,13 @@ export const updateValue = (type, val, row, col) => ({
   row: row,
   col: col,
 });
+
+export const updateName = (val) => ({
+  type: "UPDATE_NAME",
+  name: val,
+})
+
+export const updateCaption = (val) => ({
+  type: "UPDATE_CAPTION",
+  caption: val,
+})

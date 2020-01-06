@@ -4,7 +4,7 @@ import { addNewRow, addNewCol, deleteCol, deleteRow, updateValue } from "../redu
 
 class Thead extends Component {
   handleUpdateValue = (e) => {
-    const split = event.target.id.split('/');
+    const split = event.target.dataset.id.split('/');
     const col = split[1];
     const row = split[0];
     this.props.updateValue('head', e.target.value, row, col);
@@ -39,7 +39,7 @@ class Thead extends Component {
           {Object.values(items).map((item, j) => {
             return (
               <th key={'head' + j}>
-                <input type='text' id={i + '/' + j} onChange={this.handleUpdateValue} value={item} className="form-control" />
+                <input type='text' data-id={i + '/' + j} onChange={this.handleUpdateValue} value={item} className="form-control" />
               </th>
             );
           })}

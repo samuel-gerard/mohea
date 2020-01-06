@@ -1,0 +1,15 @@
+{
+    "plugins": [
+        "@babel/plugin-proposal-class-properties",
+        ["prismjs", {
+            "languages": ["javascript", "css", "html"],
+            "plugins": ["line-numbers", "show-language", "copy-to-clipboard", "normalize-whitespace"],
+            "theme": "okaidia",
+            "css": true
+        }]
+    ],
+    "presets": [
+        ["@babel/preset-env", {"modules": false}],
+        "@babel/preset-react"
+    ]
+}

@@ -12,7 +12,3 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-require('./modules/form/form');
-require('./modules/menu/menu');
-require('./modules/table/table');
-

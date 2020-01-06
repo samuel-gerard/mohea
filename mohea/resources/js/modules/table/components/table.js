@@ -4,7 +4,7 @@ import Tfoot from "./tfoot.jsx";
 import React, {Component} from "react";
 import { connect } from "react-redux";
 import TableReturn from "./tableReturn.jsx";
-import { addNewRow, addNewCol, resetTable, updateCaption, updateName } from "../redux/actions";
+import { addNewRow, addNewCol, resetTable, updateCaption, updateName, updateClasses } from "../redux/actions";
 
 class Table extends Component {
   constructor(props) {
@@ -61,6 +61,10 @@ class Table extends Component {
     })
   }
 
+  handleClasses = (e) => {
+    this.props.updateClasses(e.target.value);
+  }
+
   /* ===============================================
   * Get JSON about this table
   =============================================== */
@@ -71,6 +75,8 @@ class Table extends Component {
   * DISPLAY COMPONENT
   =============================================== */
   render() {
+    const tableClasses = this.props.classes.join(' ')
+
     return <section>
         <h1>{this.props.name || 'New table'}</h1>
         <p className="card bg-warning p-2">Be careful, merging cells is not advised in accessibility. Therefore, you will not be able to perform this action.</p>
@@ -79,9 +85,9 @@ class Table extends Component {
             <h4 className="card-title">Generate a table</h4>
             <form onSubmit={this.handleInitialize}>
               <div className="flex">
-                <input type="number" onChange={this.updateWidthCol} value={this.widthCol} />
+                <input type="number" onChange={this.updateWidthCol} value={this.widthCol} max="16" />
                 <span>x</span>
-                <input type="number" onChange={this.updateHeightCol} value={this.heightCol} />
+                <input type="number" onChange={this.updateHeightCol} value={this.heightCol} max="16" />
               </div>
               <input type="submit" value="Generate table" />
             </form>
@@ -101,13 +107,39 @@ class Table extends Component {
               </label>
               <input type="text" className="form-control" name="caption" id="table-caption" onChange={this.handleCaption} value={this.props.caption} />
             </div>
+            <div className="form-group card p-2 bg-info text-white">
+              <div className="form-check">
+                <input className="form-check-input" type="checkbox" id="class-style" onChange={this.handleClasses} value="table" />
+                <label className="form-check-label" htmlFor="class-style">With bootstrap initial style</label>
+              </div>
+              <div className="form-check">
+                <input className="form-check-input" type="checkbox" id="class-striped" onChange={this.handleClasses} value="table-striped" />
+                <label className="form-check-label" htmlFor="class-striped">Striped</label>
+              </div>
+              <div className="form-check">
+                <input className="form-check-input" type="checkbox" id="class-dark" onChange={this.handleClasses} value="table-dark" />
+                <label className="form-check-label" htmlFor="class-dark">Dark</label>
+              </div>
+              <div className="form-check">
+                <input className="form-check-input" type="checkbox" id="class-bordered" onChange={this.handleClasses} value="table-bordered" />
+                <label className="form-check-label" htmlFor="class-bordered">Bordered</label>
+              </div>
+              <div className="form-check">
+                <input className="form-check-input" type="checkbox" id="class-hover" onChange={this.handleClasses} value="table-hover" />
+                <label className="form-check-label" htmlFor="class-hover">Hover</label>
+              </div>
+              <div className="form-check">
+                <input className="form-check-input" type="checkbox" id="class-responsive" onChange={this.handleClasses} value="table-responsive" />
+                <label className="form-check-label" htmlFor="class-responsive">Responsive</label>
+              </div>
+            </div>
             <div className="form-group d-flex justify-content-between">
               <input type="button" className="btn btn-primary form-control mr-1" value="Display code" onClick={this.handleGenerate} />
               <input type="button" className="w-25 btn btn-primary" value="Reset" onClick={this.handleReset} />
             </div>
           </div>
           <div className="col-md-9">
-            <table className="table table-bordered">
+            <table className={tableClasses}>
                 <Thead />
                 <Tbody />
                 <Tfoot />
@@ -128,6 +160,7 @@ const mapStateToProps = state => {
     tableau: state.tableau,
     name: state.name,
     caption: state.caption,
+    classes: state.classes
   }
 }
 
@@ -138,6 +171,9 @@ const mapDispatchToProps = dispatch => {
     },
     updateName: name => {
       dispatch(updateName(name))
+    },
+    updateClasses: classe => {
+      dispatch(updateClasses(classe))
     },
     resetTable: () => {
       dispatch(resetTable())

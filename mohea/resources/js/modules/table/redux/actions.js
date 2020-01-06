@@ -53,3 +53,8 @@ export const updateCaption = (val) => ({
   type: "UPDATE_CAPTION",
   caption: val,
 })
+
+export const updateClasses = (data) => ({
+  type: "UPDATE_CLASSES",
+  classe: data,
+})

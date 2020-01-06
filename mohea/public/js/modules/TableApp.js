@@ -1138,7 +1138,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, ".table input.form-control {\n  background: transparent;\n  border: 0;\n}\n.table input.form-control:focus, .table input.form-control:active {\n  border-radius: 0;\n  background: transparent;\n  box-shadow: inset 0 0 6px rgba(50, 50, 50, 0.5);\n}\n\n.table th,\n.table td {\n  padding: 0;\n}", ""]);
+exports.push([module.i, "table input.form-control {\n  background: rgba(0, 0, 0, 0.02);\n  border-radius: 0;\n  border: 0;\n  transition: background 0.2s ease-in-out;\n}\ntable input.form-control:focus, table input.form-control:active {\n  border-radius: 0;\n  background: transparent;\n  border: 1px solid rgba(0, 0, 0, 0.1);\n  box-shadow: none;\n}\n\n.table-dark input.form-control {\n  background: rgba(255, 255, 255, 0.02);\n  color: white;\n}\n.table-dark input.form-control:focus, .table-dark input.form-control:active {\n  background: transparent;\n  border: 1px solid rgba(255, 255, 255, 0.1);\n}\n\n.table th,\n.table td {\n  margin: 0;\n  padding: 0;\n}", ""]);
 
 // exports
 
@@ -2448,92 +2448,6 @@ Prism.languages.xml = Prism.languages.extend('markup', {});
 Prism.languages.html = Prism.languages.markup;
 Prism.languages.mathml = Prism.languages.markup;
 Prism.languages.svg = Prism.languages.markup;
-
-
-/***/ }),
-
-/***/ "./node_modules/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.js":
-/*!***********************************************************************************!*\
-  !*** ./node_modules/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.js ***!
-  \***********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-(function(){
-	if (typeof self === 'undefined' || !self.Prism || !self.document) {
-		return;
-	}
-
-	if (!Prism.plugins.toolbar) {
-		console.warn('Copy to Clipboard plugin loaded before Toolbar plugin.');
-
-		return;
-	}
-
-	var ClipboardJS = window.ClipboardJS || undefined;
-
-	if (!ClipboardJS && "function" === 'function') {
-		ClipboardJS = __webpack_require__(/*! clipboard */ "./node_modules/clipboard/dist/clipboard.js");
-	}
-
-	var callbacks = [];
-
-	if (!ClipboardJS) {
-		var script = document.createElement('script');
-		var head = document.querySelector('head');
-
-		script.onload = function() {
-			ClipboardJS = window.ClipboardJS;
-
-			if (ClipboardJS) {
-				while (callbacks.length) {
-					callbacks.pop()();
-				}
-			}
-		};
-
-		script.src = 'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js';
-		head.appendChild(script);
-	}
-
-	Prism.plugins.toolbar.registerButton('copy-to-clipboard', function (env) {
-		var linkCopy = document.createElement('button');
-		linkCopy.textContent = 'Copy';
-
-		if (!ClipboardJS) {
-			callbacks.push(registerClipboard);
-		} else {
-			registerClipboard();
-		}
-
-		return linkCopy;
-
-		function registerClipboard() {
-			var clip = new ClipboardJS(linkCopy, {
-				'text': function () {
-					return env.code;
-				}
-			});
-
-			clip.on('success', function() {
-				linkCopy.textContent = 'Copied!';
-
-				resetText();
-			});
-			clip.on('error', function () {
-				linkCopy.textContent = 'Press Ctrl+C to copy';
-
-				resetText();
-			});
-		}
-
-		function resetText() {
-			setTimeout(function () {
-				linkCopy.textContent = 'Copy';
-			}, 5000);
-		}
-	});
-})();
 
 
 /***/ }),
@@ -38969,12 +38883,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prismjs_plugins_toolbar_prism_toolbar__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(prismjs_plugins_toolbar_prism_toolbar__WEBPACK_IMPORTED_MODULE_9__);
 /* harmony import */ var prismjs_plugins_show_language_prism_show_language__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! prismjs/plugins/show-language/prism-show-language */ "./node_modules/prismjs/plugins/show-language/prism-show-language.js");
 /* harmony import */ var prismjs_plugins_show_language_prism_show_language__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(prismjs_plugins_show_language_prism_show_language__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var prismjs_plugins_copy_to_clipboard_prism_copy_to_clipboard__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard */ "./node_modules/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.js");
-/* harmony import */ var prismjs_plugins_copy_to_clipboard_prism_copy_to_clipboard__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(prismjs_plugins_copy_to_clipboard_prism_copy_to_clipboard__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var prismjs_plugins_normalize_whitespace_prism_normalize_whitespace__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! prismjs/plugins/normalize-whitespace/prism-normalize-whitespace */ "./node_modules/prismjs/plugins/normalize-whitespace/prism-normalize-whitespace.js");
-/* harmony import */ var prismjs_plugins_normalize_whitespace_prism_normalize_whitespace__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(prismjs_plugins_normalize_whitespace_prism_normalize_whitespace__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var prismjs_themes_prism_okaidia_css__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! prismjs/themes/prism-okaidia.css */ "./node_modules/prismjs/themes/prism-okaidia.css");
-/* harmony import */ var prismjs_themes_prism_okaidia_css__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(prismjs_themes_prism_okaidia_css__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var prismjs_plugins_normalize_whitespace_prism_normalize_whitespace__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! prismjs/plugins/normalize-whitespace/prism-normalize-whitespace */ "./node_modules/prismjs/plugins/normalize-whitespace/prism-normalize-whitespace.js");
+/* harmony import */ var prismjs_plugins_normalize_whitespace_prism_normalize_whitespace__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(prismjs_plugins_normalize_whitespace_prism_normalize_whitespace__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var prismjs_themes_prism_okaidia_css__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! prismjs/themes/prism-okaidia.css */ "./node_modules/prismjs/themes/prism-okaidia.css");
+/* harmony import */ var prismjs_themes_prism_okaidia_css__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(prismjs_themes_prism_okaidia_css__WEBPACK_IMPORTED_MODULE_12__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -38994,7 +38906,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -39192,6 +39103,10 @@ function (_Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_this), "handleClasses", function (e) {
+      _this.props.updateClasses(e.target.value);
+    });
+
     _defineProperty(_assertThisInitialized(_this), "handleGenerate", function () {
       console.log(_this.props);
     });
@@ -39215,6 +39130,7 @@ function (_Component) {
     * DISPLAY COMPONENT
     =============================================== */
     value: function render() {
+      var tableClasses = this.props.classes.join(' ');
       return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("h1", null, this.props.name || 'New table'), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("p", {
         className: "card bg-warning p-2"
       }, "Be careful, merging cells is not advised in accessibility. Therefore, you will not be able to perform this action."), this.props.tableau.head.length === 0 && this.props.tableau.body.length === 0 && this.props.tableau.foot.length == 0 && react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
@@ -39228,11 +39144,13 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input", {
         type: "number",
         onChange: this.updateWidthCol,
-        value: this.widthCol
+        value: this.widthCol,
+        max: "16"
       }), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("span", null, "x"), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input", {
         type: "number",
         onChange: this.updateHeightCol,
-        value: this.heightCol
+        value: this.heightCol,
+        max: "16"
       })), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input", {
         type: "submit",
         value: "Generate table"
@@ -39263,6 +39181,74 @@ function (_Component) {
         onChange: this.handleCaption,
         value: this.props.caption
       })), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
+        className: "form-group card p-2 bg-info text-white"
+      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
+        className: "form-check"
+      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input", {
+        className: "form-check-input",
+        type: "checkbox",
+        id: "class-style",
+        onChange: this.handleClasses,
+        value: "table"
+      }), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("label", {
+        className: "form-check-label",
+        htmlFor: "class-style"
+      }, "With bootstrap initial style")), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
+        className: "form-check"
+      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input", {
+        className: "form-check-input",
+        type: "checkbox",
+        id: "class-striped",
+        onChange: this.handleClasses,
+        value: "table-striped"
+      }), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("label", {
+        className: "form-check-label",
+        htmlFor: "class-striped"
+      }, "Striped")), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
+        className: "form-check"
+      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input", {
+        className: "form-check-input",
+        type: "checkbox",
+        id: "class-dark",
+        onChange: this.handleClasses,
+        value: "table-dark"
+      }), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("label", {
+        className: "form-check-label",
+        htmlFor: "class-dark"
+      }, "Dark")), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
+        className: "form-check"
+      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input", {
+        className: "form-check-input",
+        type: "checkbox",
+        id: "class-bordered",
+        onChange: this.handleClasses,
+        value: "table-bordered"
+      }), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("label", {
+        className: "form-check-label",
+        htmlFor: "class-bordered"
+      }, "Bordered")), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
+        className: "form-check"
+      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input", {
+        className: "form-check-input",
+        type: "checkbox",
+        id: "class-hover",
+        onChange: this.handleClasses,
+        value: "table-hover"
+      }), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("label", {
+        className: "form-check-label",
+        htmlFor: "class-hover"
+      }, "Hover")), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
+        className: "form-check"
+      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input", {
+        className: "form-check-input",
+        type: "checkbox",
+        id: "class-responsive",
+        onChange: this.handleClasses,
+        value: "table-responsive"
+      }), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("label", {
+        className: "form-check-label",
+        htmlFor: "class-responsive"
+      }, "Responsive"))), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
         className: "form-group d-flex justify-content-between"
       }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input", {
         type: "button",
@@ -39277,7 +39263,7 @@ function (_Component) {
       }))), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
         className: "col-md-9"
       }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("table", {
-        className: "table table-bordered"
+        className: tableClasses
       }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_thead_jsx__WEBPACK_IMPORTED_MODULE_0__["default"], null), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_tbody_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_tfoot_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null)))), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
@@ -39293,7 +39279,8 @@ var mapStateToProps = function mapStateToProps(state) {
   return {
     tableau: state.tableau,
     name: state.name,
-    caption: state.caption
+    caption: state.caption,
+    classes: state.classes
   };
 };
 
@@ -39304,6 +39291,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     updateName: function updateName(name) {
       dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_6__["updateName"])(name));
+    },
+    updateClasses: function updateClasses(classe) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_6__["updateClasses"])(classe));
     },
     resetTable: function resetTable() {
       dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_6__["resetTable"])());
@@ -39336,6 +39326,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_PrismCode__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../components/PrismCode */ "./resources/js/components/PrismCode.js");
 /* harmony import */ var _sass_input_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../sass/input.scss */ "./resources/sass/input.scss");
 /* harmony import */ var _sass_input_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_sass_input_scss__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var clipboard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! clipboard */ "./node_modules/clipboard/dist/clipboard.js");
+/* harmony import */ var clipboard__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(clipboard__WEBPACK_IMPORTED_MODULE_4__);
+
 
 
 
@@ -39347,13 +39340,16 @@ var TableReturn = function TableReturn(props) {
       head = _props$tableau.head,
       body = _props$tableau.body,
       foot = _props$tableau.foot;
+  var tableClasses = props.classes.join(' '); // Init clipboard button
+
+  new clipboard__WEBPACK_IMPORTED_MODULE_4___default.a('#button-to-copy');
   var html = '';
 
   var handleStart = function handleStart() {
     if (caption.length <= 0) {
-      html += "<table>\n";
+      html += "<table class=\"".concat(tableClasses, "\">\n");
     } else {
-      html += "<table summary=\"".concat(caption, "\">\n");
+      html += "<table summary=\"".concat(caption, "\" class=\"").concat(tableClasses, "\">\n");
     }
   };
 
@@ -39418,8 +39414,11 @@ var TableReturn = function TableReturn(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PrismCode__WEBPACK_IMPORTED_MODULE_2__["PrismCode"], {
     code: html,
     language: "html",
-    plugins: ["line-numbers", "normalize-whitespace", "copy-to-clipboard"]
-  })));
+    plugins: ["line-numbers", "normalize-whitespace"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    id: "button-to-copy",
+    "data-clipboard-text": html
+  }, "Copy to clipboard")));
 };
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -39869,7 +39868,7 @@ function (_Component) {
         for (var i = 0; i < this.props.nbCol; i++) {
           groupHandler.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
             key: 'headHandler' + i
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          }, this.props.nbCol > 1 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             type: "button",
             onClick: this.handleDeleteCol,
             "data-col": i,
@@ -39885,9 +39884,7 @@ function (_Component) {
         }
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", {
-        className: "thead-light"
-      }, this.props.nbCol > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), groupHandler), groupList);
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, this.props.nbCol > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), groupHandler), groupList);
     }
   }]);
 
@@ -39929,7 +39926,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, stateProps) {
 /*!*****************************************************!*\
   !*** ./resources/js/modules/table/redux/actions.js ***!
   \*****************************************************/
-/*! exports provided: deleteCol, deleteRow, resetTable, addNewRow, addNewCol, updateValue, updateName, updateCaption */
+/*! exports provided: deleteCol, deleteRow, resetTable, addNewRow, addNewCol, updateValue, updateName, updateCaption, updateClasses */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -39942,6 +39939,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateValue", function() { return updateValue; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateName", function() { return updateName; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateCaption", function() { return updateCaption; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateClasses", function() { return updateClasses; });
 /* ===============================================
 * FUNCTIONS TO DELETE
 =============================================== */
@@ -40005,6 +40003,12 @@ var updateCaption = function updateCaption(val) {
     caption: val
   };
 };
+var updateClasses = function updateClasses(data) {
+  return {
+    type: "UPDATE_CLASSES",
+    classe: data
+  };
+};
 
 /***/ }),
 
@@ -40017,6 +40021,14 @@ var updateCaption = function updateCaption(val) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -40039,6 +40051,7 @@ var defaultTab = {
 var initState = {
   'defaultTab': defaultTab,
   'nbCol': 1,
+  classes: [],
   'tableau': {
     'head': [],
     'body': [],
@@ -40087,7 +40100,7 @@ function rootReducer() {
             _value = _Object$entries2$_i[1];
 
         _value.map(function (row) {
-          row.splice(payload.idx + 1, 0, '');
+          row.splice(parseInt(payload.idx, 10) + 1, 0, '');
           return row;
         });
       }
@@ -40110,7 +40123,7 @@ function rootReducer() {
         tab.push('');
       }
 
-      newState.tableau[payload.typeTable].splice(payload.idx + 1, 0, tab);
+      newState.tableau[payload.typeTable].splice(parseInt(payload.idx, 10) + 1, 0, tab);
       return _objectSpread({}, state, {
         tableau: _objectSpread({}, state.tableau, _defineProperty({}, payload.typeTable, newState.tableau[payload.typeTable]))
       });
@@ -40140,9 +40153,23 @@ function rootReducer() {
           'body': [],
           'foot': []
         },
+        classes: [],
         'caption': '',
         'name': ''
       };
+
+    case "UPDATE_CLASSES":
+      var indexOfClasse = newState.classes.indexOf(payload.classe); // Here we search to know if we need to remove or to add the classe
+
+      if (indexOfClasse >= 0) {
+        newState.classes.splice(indexOfClasse, 1);
+      } else {
+        newState.classes.push(payload.classe);
+      }
+
+      return _objectSpread({}, state, {
+        'classes': _toConsumableArray(newState.classes)
+      });
 
     default:
       return state;

@@ -6,6 +6,7 @@ const defaultTab = {
 const initState = {
   'defaultTab': defaultTab,
   'nbCol': 1,
+  classes: [],
   'tableau': {
     'head': [],
     'body': [],
@@ -43,7 +44,7 @@ function rootReducer(state = initState, payload) {
     case "ADD_COL":
       for (let [key, value] of Object.entries(newState.tableau)) {
         value.map(row => {
-          row.splice(payload.idx + 1, 0, '');
+          row.splice(parseInt(payload.idx, 10) + 1, 0, '');
           return row
         })
       }
@@ -68,7 +69,7 @@ function rootReducer(state = initState, payload) {
         tab.push('');
       }
 
-      newState.tableau[payload.typeTable].splice(payload.idx + 1, 0, tab);
+      newState.tableau[payload.typeTable].splice(parseInt(payload.idx, 10) + 1, 0, tab);
       return {
         ...state,
         tableau: {
@@ -104,8 +105,25 @@ function rootReducer(state = initState, payload) {
           'body': [],
           'foot': [],
         },
+        classes: [],
         'caption': '',
         'name': '',
+      }
+    case "UPDATE_CLASSES":
+      const indexOfClasse = newState.classes.indexOf(payload.classe);
+
+      // Here we search to know if we need to remove or to add the classe
+      if(indexOfClasse >= 0) {
+        newState.classes.splice(indexOfClasse, 1)
+      } else {
+        newState.classes.push(payload.classe)
+      }
+
+      return {
+        ...state,
+        'classes': [
+          ...newState.classes,
+        ]
       }
     default:
       return state;

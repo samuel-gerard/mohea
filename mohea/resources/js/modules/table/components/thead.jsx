@@ -60,14 +60,16 @@ class Thead extends Component {
       for(var i = 0; i < this.props.nbCol; i++) {
         groupHandler.push(
           <td key={'headHandler' + i}>
+            {this.props.nbCol > 1 &&
             <input type="button" onClick={this.handleDeleteCol} data-col={i} className="btn btn-danger" value="Col -" />
+            }
             <input type="button" onClick={this.handleAddCol} data-col={i} className="btn btn-primary" value="Col +" />
           </td>
         )
       }
     }
     return (
-      <thead className="thead-light">
+      <thead>
         {this.props.nbCol > 0 &&
           <tr>
             <td>

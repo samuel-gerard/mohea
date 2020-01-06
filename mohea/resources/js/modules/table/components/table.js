@@ -39,6 +39,7 @@ class Table extends Component {
   render() {
     return <section>
         <h1>{this.props.name || 'New table'}</h1>
+        <p class="card bg-warning p-2">Attention, le fusionnage de cellule n'est pas conseillé en accessibilité. Vous ne pourrez donc pas réaliser cette action.</p>
         <div className="row">
           <div className="col-md-3">
             <div className="form-group">

@@ -39184,7 +39184,9 @@ function (_Component) {
     * DISPLAY COMPONENT
     =============================================== */
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("h1", null, this.props.name || 'New table'), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
+      return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("h1", null, this.props.name || 'New table'), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("p", {
+        "class": "card bg-warning p-2"
+      }, "Attention, le fusionnage de cellule n'est pas conseill\xE9 en accessibilit\xE9. Vous ne pourrez donc pas r\xE9aliser cette action."), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
         className: "col-md-3"

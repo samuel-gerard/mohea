@@ -16,8 +16,11 @@ Route::get('/', function () {
 })->name('home');
 
 Route::middleware(['auth'])->group(function() {
+
+    // Route Home & Dashboard
     Route::redirect('/', '/dashboard');
     
+    // Routes of each modules
     Route::get('/create', function() {
         return view('pages.create');
     })->name('create');
@@ -25,7 +28,10 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/create/form');
     Route::get('/create/menu');
 
-    Route::get('/user_edit');
+    // Routes of user update 
+    Route::post('/user/info', 'UserController@updateInfo')->name('user.update.info');
+    Route::post('/user/password', 'UserController@updatePassword')->name('user.update.password');
+    Route::post('/user/delete', 'UserController@destroy')->name('user.delete');
 
 });
 
@@ -34,5 +40,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
-Route::get('/callback/{provider}', 'SocialController@callback');
+// Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
+// Route::get('/callback/{provider}', 'SocialController@callback');
+
+Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');
+Route::get('login/{provider}/callback','Auth\LoginController@handleProviderCallback');

@@ -4,7 +4,7 @@ import Tfoot from "./tfoot.jsx";
 import React, {Component} from "react";
 import { connect } from "react-redux";
 import TableReturn from "./tableReturn.jsx";
-import { addNewRow, addNewCol, importFile, resetTable, updateCaption, updateName, updateClasses } from "../redux/actions";
+import { addNewRow, addNewCol, importFile, resetTable, updateCaption, updateName, updateClasses, updateNbCol } from "../redux/actions";
 import * as d3 from "d3";
 
 class Table extends Component {
@@ -68,28 +68,41 @@ class Table extends Component {
   }
 
   
-  importFile = async (e) => {
-    const file = e.target.files[0];
+  importFile = (e) => {
+    e.preventDefault();
+
+    const file = document.getElementById('import-file').files[0];
     const reader = new FileReader();
 
     reader.onload = () => {
-      const data = d3.dsvFormat(';').parse(reader.result)
+      const typeFileSelected = document.querySelector('input[name="type-imported"]:checked').value;
+      let data;
+
+      if(typeFileSelected === "CSV") {
+        data = d3.dsvFormat(';').parse(reader.result)
+      } else if(typeFileSelected === "JSON") {
+        data = JSON.parse(reader.result);
+        data['columns'] = Object.keys(data[0]);
+      } else {
+        return;
+      }
+
       let tableImported = { 'head': [], 'body': [], 'foot': []}
 
       data.forEach((el, i) => {
         if(i === data.length) {
           return;
         }
-        console.log(el)
         tableImported['body'].push(Object.values(el))
       });
 
       tableImported['head'].push(data['columns']);
 
       this.props.importFile(tableImported);
+      this.props.updateNbCol(data['columns'].length)
+      
     }
     if(file) {
-      console.log(reader)
       reader.readAsBinaryString(file);
     }
   }
@@ -119,8 +132,21 @@ class Table extends Component {
               </div>
               <input type="submit" value="Generate table" />
             </form>
-            <h4 className="card-title">Import a CSV <small>(with ; like separator)</small></h4>
-            <input type="file" accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" onChange={this.importFile} />
+            <h4 className="card-title">Import a CSV or a JSON</h4>
+            <form onSubmit={this.importFile}>
+              <div className="form-group">
+                <div className="group-check">
+                  <input type="radio" name="type-imported" id="type-json" value="JSON" />
+                  <label htmlFor="type-json">JSON</label>
+                </div>
+                <div className="group-check">
+                  <input type="radio" name="type-imported" id="type-csv" value="CSV" />
+                  <label htmlFor="type-csv">CSV</label>
+                </div>
+              </div>
+              <input type="file" id="import-file" accept=".csv, .json, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+              <input type="submit" value="Import" />
+            </form>
           </div>
         }
         <div className="row">
@@ -218,6 +244,9 @@ const mapDispatchToProps = dispatch => {
     importFile: (data) => {
       dispatch(importFile(data))
     },
+    updateNbCol: (number) => {
+      dispatch(updateNbCol(number))
+    }
   }
 }
 

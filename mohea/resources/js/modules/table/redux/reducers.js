@@ -130,6 +130,11 @@ function rootReducer(state = initState, payload) {
           ...newState.classes,
         ]
       }
+    case "UPDATE_NBCOL":
+      return {
+        ...state,
+        nbCol: payload.nbCol
+      }
     default:
       return state;
   }

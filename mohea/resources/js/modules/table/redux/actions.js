@@ -62,3 +62,8 @@ export const updateClasses = (data) => ({
   type: "UPDATE_CLASSES",
   classe: data,
 })
+
+export const updateNbCol = (nbCol) => ({
+  type: "UPDATE_NBCOL",
+  nbCol,
+})

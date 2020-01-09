@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
+Route::get('/privacy', 'HomeController@privacy')->name('privacy');
+
 Route::middleware(['auth'])->group(function() {
 
     // Route Home & Dashboard
@@ -45,3 +47,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('login/{provider}/callback','Auth\LoginController@handleProviderCallback');
+

@@ -109,6 +109,11 @@ function rootReducer(state = initState, payload) {
         'caption': '',
         'name': '',
       }
+    case "IMPORT_TABLE":
+      return {
+        ...state,
+        tableau: payload.data
+      }
     case "UPDATE_CLASSES":
       const indexOfClasse = newState.classes.indexOf(payload.classe);
 

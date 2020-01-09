@@ -32,6 +32,10 @@ export const addNewCol = (idx) => ({
   idx: idx
 });
 
+export const importFile = (data) => ({
+  type: "IMPORT_TABLE",
+  data,
+})
 /* ===============================================
 * FUNCTIONS TO UPDATE
 =============================================== */

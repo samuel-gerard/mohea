@@ -4,7 +4,8 @@ import Tfoot from "./tfoot.jsx";
 import React, {Component} from "react";
 import { connect } from "react-redux";
 import TableReturn from "./tableReturn.jsx";
-import { addNewRow, addNewCol, resetTable, updateCaption, updateName, updateClasses } from "../redux/actions";
+import { addNewRow, addNewCol, importFile, resetTable, updateCaption, updateName, updateClasses } from "../redux/actions";
+import * as d3 from "d3";
 
 class Table extends Component {
   constructor(props) {
@@ -12,7 +13,8 @@ class Table extends Component {
 
     this.state = {
       heightCol: 0,
-      widthCol: 0
+      widthCol: 0,
+      dataImported: {},
     }
   }
   /* ===============================================
@@ -65,6 +67,32 @@ class Table extends Component {
     this.props.updateClasses(e.target.value);
   }
 
+  
+  importFile = async (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const data = d3.dsvFormat(';').parse(reader.result)
+      let tableImported = { 'head': [], 'body': [], 'foot': []}
+
+      data.forEach((el, i) => {
+        if(i === data.length) {
+          return;
+        }
+        console.log(el)
+        tableImported['body'].push(Object.values(el))
+      });
+
+      tableImported['head'].push(data['columns']);
+
+      this.props.importFile(tableImported);
+    }
+    if(file) {
+      console.log(reader)
+      reader.readAsBinaryString(file);
+    }
+  }
   /* ===============================================
   * Get JSON about this table
   =============================================== */
@@ -91,6 +119,8 @@ class Table extends Component {
               </div>
               <input type="submit" value="Generate table" />
             </form>
+            <h4 className="card-title">Import a CSV <small>(with ; like separator)</small></h4>
+            <input type="file" accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" onChange={this.importFile} />
           </div>
         }
         <div className="row">
@@ -108,6 +138,7 @@ class Table extends Component {
               <input type="text" className="form-control" name="caption" id="table-caption" onChange={this.handleCaption} value={this.props.caption} />
             </div>
             <div className="form-group card p-2 bg-info text-white">
+              <h4>Table global style</h4>
               <div className="form-check">
                 <input className="form-check-input" type="checkbox" id="class-style" onChange={this.handleClasses} value="table" />
                 <label className="form-check-label" htmlFor="class-style">With bootstrap initial style</label>
@@ -183,6 +214,9 @@ const mapDispatchToProps = dispatch => {
     },
     addCol: (idx) => {
       dispatch(addNewCol(idx))
+    },
+    importFile: (data) => {
+      dispatch(importFile(data))
     },
   }
 }

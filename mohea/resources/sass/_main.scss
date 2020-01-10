@@ -1,0 +1,502 @@
+*::selection {
+    background: rgba(255, 71, 87, 0.1);
+    border-radius: 8px;
+}
+
+img,
+.button,
+.type-message {
+    user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+input[type=text] {
+    &::-ms-clear {
+        display: none;
+        width: 0;
+        height: 0;
+    }
+
+    &::-ms-reveal {
+        display: none;
+        width: 0;
+        height: 0;
+    }
+}
+
+input[type="search"] {
+    &::-webkit-search-decoration,
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-results-button,
+    &::-webkit-search-results-decoration {
+        display: none;
+    }
+}
+
+body {
+    margin: 0px;
+    font-family: 'Neue Plak Light', sans-serif;
+    background-color: #ffffff;
+    color: #000000;
+    cursor: default;
+}
+
+.header {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    padding: 30px;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 0px transparent;
+    overflow: hidden;
+    transition: background-color 0.2s, padding 0.2s, box-shadow 0.3s;
+
+    ul li {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+            height: 25px;
+        }
+    }
+
+    .logo {
+        opacity: 0;
+        transform: translateY(100%);
+        transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .min {
+        padding: 10px 30px;
+        background-color: #ffffff;
+        box-shadow: 0px 0px 5px #bbbbbb;
+    }
+
+    .show-logo .logo {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.home-screen {
+    min-height: 100vh;
+    padding-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: url("../img/blotch1.svg") right 90px/auto 65% no-repeat, url("../img/blotch2.svg") left bottom/50% auto no-repeat;
+}
+
+.home-screen-logo {
+    width: 600px;
+    margin-top: 5%;
+}
+
+.home-screen-content {
+    width: 100%;
+    padding: calc(5% + 50px) 30px 30px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.home-screen-illustration {
+    width: 40%;
+}
+
+.home-screen-text {
+    max-width: 45%;
+    padding: 20px 20px 20px 50px;
+    box-sizing: border-box;
+}
+
+.headline {
+    margin: 0px;
+    font-family: 'Keep Calm', sans-serif;
+    font-size: 35pt;
+    text-transform: lowercase;
+}
+
+h1 {
+    margin: 0px;
+    font-weight: normal;
+    font-size: 20pt;
+}
+
+.mohea {
+    position: relative;
+    font-family: 'Keep Calm', sans-serif;
+    text-transform: lowercase;
+    color: #ff4757;
+    transition: padding 0.2s;
+
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0px;
+        top: calc(50% - 12px);
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        background-image: url("../img/conv_mohea.png");
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        transform: rotate(360deg) scale(0);
+        transition: transform 0.2s;
+    }
+
+    &:hover {
+        padding-left: 30px;
+
+        &::before {
+            transform: rotate(0deg) scale(1);
+        }
+    }
+}
+
+ul {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+
+    li {
+        padding: 0px 15px;
+    }
+}
+
+a {
+    font-family: 'Neue Plak Regular', sans-serif;
+    cursor: pointer;
+
+    &.link {
+        display: inline-block;
+        transition: padding 0.2s;
+
+        &::after {
+            content: '';
+            display: block;
+            height: 2px;
+            width: 0px;
+            background: transparent;
+            transition: width 0.2s, background-color 0.2s, margin 0.2s;
+        }
+
+        &:hover {
+            padding-bottom: 4px;
+
+            &::after {
+                width: 100%;
+                margin-top: 2px;
+                background: #000000;
+            }
+        }
+
+        &.primary {
+            color: #ff4757;
+
+            &:hover::after {
+                background: #000000;
+            }
+        }
+
+        &.secondary {
+            color: #6c63ff;
+
+            &:hover::after {
+                background: #000000;
+            }
+        }
+
+        .action:hover::after {
+            background: #ff4757;
+        }
+
+        .info:hover::after {
+            background: #6c63ff;
+        }
+    }
+
+    &.button {
+        padding: 7px 35px 10px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Neue Plak Bold', sans-serif;
+        text-align: center;
+        background-color: whitesmoke;
+        color: #000000;
+        border-radius: 30px;
+
+        &:hover {
+            animation: squeeze 0.45s;
+        }
+
+        &.primary {
+            background-color: #ff4757;
+            color: #ffffff;
+        }
+
+        &.secondary {
+            background-color: #6c63ff;
+            color: #ffffff;
+        }
+
+        &.home-cta {
+            margin: 30px 5px 10px;
+        }
+    }
+}
+
+.type-message {
+    display: inline-block;
+    position: relative;
+    width: 180px;
+    margin: 30px 5px 10px;
+    padding: 3px 25px 8px;
+    font-family: 'Neue Plak Narrow Regular', sans-serif;
+    font-size: 15pt;
+    background-image: url("../img/arrow.svg");
+    background-size: 25px 25px;
+    background-position: calc(100% - 20px) center;
+    background-repeat: no-repeat;
+    color: #000000;
+    border: 4px solid #000000;
+    border-radius: 50px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: background-position 0.2s, border 0.2s;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        width: 50px;
+        height: 100%;
+        padding: 0px 20px 5px;
+        box-sizing: border-box;
+        border-radius: 50px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        font-family: 'Neue Plak Narrow Regular', sans-serif;
+        background-color: #6c63ff;
+        color: #ffffff;
+        opacity: 0;
+        transition: all 0.2s;
+        transition-delay: 0.05s;
+    }
+
+    &::after {
+        content: "Learn more";
+        position: absolute;
+        top: 3px;
+        left: 25px;
+        width: 90px;
+        font-family: 'Neue Plak Narrow Regular', sans-serif;
+        text-align: left;
+        color: #000000;
+        opacity: 0;
+        transition: all 0.25s;
+    }
+
+    &:hover {
+        background-position: calc(100% + 25px) center;
+        border-color: #6c63ff;
+
+        &::before {
+            width: 100%;
+            opacity: 1;
+        }
+
+        &::after {
+            left: calc(50% - 45px);
+            text-align: center;
+            color: #ffffff;
+            opacity: 1;
+        }
+    }
+}
+
+.blinking-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 25px;
+    margin-bottom: -5px;
+    margin-left: 3px;
+    background-color: #000000;
+    animation: blinking 1s infinite;
+}
+
+@keyframes blinking {
+
+    0%,
+    100% {
+        background-color: #000000;
+    }
+
+    50% {
+        background-color: transparent;
+    }
+}
+
+.conversation {
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    .from-user {
+        position: relative;
+        align-self: flex-end;
+        text-align: right;
+        margin: 15px 0px;
+        padding: 6px 20px 11px;
+        font-family: "Neue Plak Narrow Light";
+        font-size: 16pt;
+        background-color: #6c63ff;
+        color: #ffffff;
+        border-radius: 100px;
+
+        .spine {
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: -2.5px;
+            width: 28px;
+            z-index: -1;
+        }
+    }
+
+    .from-mohea {
+        position: relative;
+        align-self: flex-start;
+        text-align: left;
+        margin: 15px 0px;
+        padding: 6px 30px 11px;
+        font-family: "Neue Plak Narrow Regular";
+        font-size: 17pt;
+        background-color: #ff4757;
+        color: #ffffff;
+        border-radius: 100px;
+
+        &::before {
+            content: "";
+            position: absolute;
+            left: -60px;
+            bottom: 5px;
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            background-image: url("../img/conv_mohea.png");
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .spine {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: -3px;
+            width: 41px;
+            z-index: -1;
+        }
+    }
+}
+
+strong {
+    font-family: 'Neue Plak Bold', sans-serif;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.d-block {
+    display: block;
+}
+
+.d-iblock {
+    display: inline-block;
+}
+
+.d-inline {
+    display: inline;
+}
+
+.flexdir-r {
+    flex-direction: row;
+}
+
+.flexdir-c {
+    flex-direction: column;
+}
+
+.jc-c {
+    justify-content: center;
+}
+
+.jc-s {
+    justify-content: flex-start;
+}
+
+.jc-e {
+    justify-content: flex-end;
+}
+
+.ai-c {
+    align-items: center;
+}
+
+.ai-s {
+    align-items: flex-start;
+}
+
+.ai-e {
+    align-items: flex-end;
+}
+
+.ml-auto {
+    margin-left: auto;
+}
+
+.mr-auto {
+    margin-right: auto;
+}
+
+@keyframes squeeze {
+
+    0%,
+    100% {
+        transform: scaleY(1);
+    }
+
+    15%,
+    85% {
+        transform: scaleY(0.95);
+    }
+
+    30% {
+        transform: scaleY(0.9);
+    }
+
+    55% {
+        transform: scaleY(0.75);
+    }
+
+    70% {
+        transform: scaleY(1.3);
+    }
+}

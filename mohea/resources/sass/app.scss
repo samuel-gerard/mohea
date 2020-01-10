@@ -1,10 +1,11 @@
 // Fonts
-// TODO: import fonts
-
-// Variables
-@import 'variables';
 @import 'fonts';
-@import 'main';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+// Variables
+@import 'variables';
+
+// Pages
+@import 'main';

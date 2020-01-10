@@ -8,16 +8,16 @@
     <nav id="header" class="header">
         <ul class="d-flex jc-e ai-c">
             <li><a class="button primary">Start a new project</a></li>
-            <li class="logo ml-auto mr-auto"><img src="logo_medium.png" alt="Logo of Mohea" draggable="false"></li>
+            <li class="logo ml-auto mr-auto"><img src="images/logo_medium.png" alt="Logo of Mohea" draggable="false"></li>
             <li><a class="link primary">Create my account</a></li>
             <li><a class="link action">Log in</a></li>
         </ul>
     </nav>
     <main>
         <div id="home-screen" class="home-screen">
-            <img id="home-screen-logo" class="home-screen-logo" src="logo_complete.png" alt="Logo of Mohea, your accessibility assistant" draggable="false">
+            <img id="home-screen-logo" class="home-screen-logo" src="images/logo_complete.png" alt="Logo of Mohea, your accessibility assistant" draggable="false">
             <div class="home-screen-content">
-                <img class="home-screen-illustration" src="breathe.svg" alt="Group of people relaxing around a table" draggable="false">
+                <img class="home-screen-illustration" src="images/breathe.svg" alt="Group of people relaxing around a table" draggable="false">
                 <div class="home-screen-text">
                     <p class="headline">Breathe, smile.</p>
                     <h1><span class="mohea">Mohea</span> is here to help you create <strong>accessible tables</strong>, <strong>forms</strong> and <strong>menus</strong>.</h1>

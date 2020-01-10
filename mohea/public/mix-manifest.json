@@ -1,7 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css",
     "/css/form.css": "/css/form.css",
     "/js/modules/FormApp.js": "/js/modules/FormApp.js",
-    "/js/modules/TableApp.js": "/js/modules/TableApp.js"
+    "/js/modules/TableApp.js": "/js/modules/TableApp.js",
+    "/css/app.css": "/css/app.css"
 }

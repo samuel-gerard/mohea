@@ -68137,6 +68137,95 @@ module.exports = function(originalModule) {
 
 /***/ }),
 
+/***/ "./resources/js/components/CustomInput.js":
+/*!************************************************!*\
+  !*** ./resources/js/components/CustomInput.js ***!
+  \************************************************/
+/*! exports provided: CustomInput */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CustomInput", function() { return CustomInput; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+var CustomInput = function CustomInput(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "checkbox",
+    id: ""
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    htmlFor: "color-text"
+  }, "Text color"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "color",
+    id: "color-text"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    htmlFor: "color-background"
+  }, "Background color"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "color",
+    id: "color-background"
+  }));
+}; // onFocus => update store variable from inputSelected and add if it necessary custom code
+// add on input the style
+// add on tablereturn good style
+
+/***/ }),
+
+/***/ "./resources/js/components/ImportFile.js":
+/*!***********************************************!*\
+  !*** ./resources/js/components/ImportFile.js ***!
+  \***********************************************/
+/*! exports provided: ImportFile */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ImportFile", function() { return ImportFile; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+var ImportFile = function ImportFile(props) {
+  var handleFile = function handleFile(e) {
+    e.preventDefault();
+    props.func();
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+    className: "card-title"
+  }, "Import a CSV or a JSON"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    onSubmit: handleFile
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "group-check"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "radio",
+    name: "type-imported",
+    id: "type-json",
+    value: "JSON"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    htmlFor: "type-json"
+  }, "JSON")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "group-check"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "radio",
+    name: "type-imported",
+    id: "type-csv",
+    value: "CSV"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    htmlFor: "type-csv"
+  }, "CSV"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "file",
+    id: "import-file",
+    accept: ".csv, .json"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "submit",
+    value: "Import"
+  })));
+};
+
+/***/ }),
+
 /***/ "./resources/js/components/PrismCode.js":
 /*!**********************************************!*\
   !*** ./resources/js/components/PrismCode.js ***!
@@ -68308,6 +68397,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tableReturn_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./tableReturn.jsx */ "./resources/js/modules/table/components/tableReturn.jsx");
 /* harmony import */ var _redux_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../redux/actions */ "./resources/js/modules/table/redux/actions.js");
 /* harmony import */ var d3__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! d3 */ "./node_modules/d3/index.js");
+/* harmony import */ var _components_ImportFile__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../components/ImportFile */ "./resources/js/components/ImportFile.js");
+/* harmony import */ var _components_CustomInput__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../components/CustomInput */ "./resources/js/components/CustomInput.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -68327,6 +68418,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -68395,22 +68488,27 @@ function (_Component) {
       _this.props.updateClasses(e.target.value);
     });
 
-    _defineProperty(_assertThisInitialized(_this), "importFile", function (e) {
-      e.preventDefault();
+    _defineProperty(_assertThisInitialized(_this), "importFile", function () {
       var file = document.getElementById('import-file').files[0];
       var reader = new FileReader();
 
       reader.onload = function () {
-        var typeFileSelected = document.querySelector('input[name="type-imported"]:checked').value;
+        var typeFileSelected = document.querySelector('input[name="type-imported"]:checked');
         var data;
 
-        if (typeFileSelected === "CSV") {
-          data = d3__WEBPACK_IMPORTED_MODULE_7__["dsvFormat"](';').parse(reader.result);
-        } else if (typeFileSelected === "JSON") {
-          data = JSON.parse(reader.result);
-          data['columns'] = Object.keys(data[0]);
-        } else {
+        if (typeFileSelected === null) {
+          alert('You need to select a file type !');
           return;
+        }
+
+        switch (typeFileSelected.value) {
+          case "CSV":
+            data = d3__WEBPACK_IMPORTED_MODULE_7__["dsvFormat"](';').parse(reader.result);
+            break;
+
+          case "JSON":
+            data = JSON.parse(reader.result);
+            data['columns'] = Object.keys(data[0]);
         }
 
         var tableImported = {
@@ -68466,6 +68564,10 @@ function (_Component) {
         className: "card bg-warning p-2"
       }, "Be careful, merging cells is not advised in accessibility. Therefore, you will not be able to perform this action."), this.props.tableau.head.length === 0 && this.props.tableau.body.length === 0 && this.props.tableau.foot.length == 0 && react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
         className: "card bg-dark text-white p-2"
+      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
+        className: "col-md-6"
       }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("h4", {
         className: "card-title"
       }, "Generate a table"), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("form", {
@@ -68485,38 +68587,10 @@ function (_Component) {
       })), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input", {
         type: "submit",
         value: "Generate table"
-      })), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("h4", {
-        className: "card-title"
-      }, "Import a CSV or a JSON"), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("form", {
-        onSubmit: this.importFile
-      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
-        className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
-        className: "group-check"
-      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input", {
-        type: "radio",
-        name: "type-imported",
-        id: "type-json",
-        value: "JSON"
-      }), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("label", {
-        htmlFor: "type-json"
-      }, "JSON")), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
-        className: "group-check"
-      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input", {
-        type: "radio",
-        name: "type-imported",
-        id: "type-csv",
-        value: "CSV"
-      }), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("label", {
-        htmlFor: "type-csv"
-      }, "CSV"))), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input", {
-        type: "file",
-        id: "import-file",
-        accept: ".csv, .json, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-      }), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input", {
-        type: "submit",
-        value: "Import"
-      }))), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
+      }))), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_components_ImportFile__WEBPACK_IMPORTED_MODULE_8__["ImportFile"], {
+        func: this.importFile,
+        className: "col-md-6"
+      }))), this.props.inputSelected && react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_components_CustomInput__WEBPACK_IMPORTED_MODULE_9__["CustomInput"], null), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
         className: "col-md-3"
@@ -68810,6 +68884,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _redux_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../redux/actions */ "./resources/js/modules/table/redux/actions.js");
+/* harmony import */ var _components_CustomInput__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../components/CustomInput */ "./resources/js/components/CustomInput.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -68829,6 +68904,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -69440,7 +69516,8 @@ var initState = {
     'foot': []
   },
   'caption': '',
-  'name': ''
+  'name': '',
+  inputSelected: null
 };
 
 function rootReducer() {
@@ -69537,7 +69614,8 @@ function rootReducer() {
         },
         classes: [],
         'caption': '',
-        'name': ''
+        'name': '',
+        inputSelected: null
       };
 
     case "IMPORT_TABLE":
@@ -69561,6 +69639,11 @@ function rootReducer() {
     case "UPDATE_NBCOL":
       return _objectSpread({}, state, {
         nbCol: payload.nbCol
+      });
+
+    case "UPDATE_INPUT_SELECTED":
+      return _objectSpread({}, state, {
+        inputSelected: payload.input
       });
 
     default:

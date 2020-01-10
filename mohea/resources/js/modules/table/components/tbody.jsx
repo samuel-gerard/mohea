@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
 import { addNewRow, deleteRow, updateValue } from "../redux/actions";
+import { CustomInput } from "../../../components/CustomInput";
 
 class Tbody extends Component {
   handleUpdateValue = (e) => {

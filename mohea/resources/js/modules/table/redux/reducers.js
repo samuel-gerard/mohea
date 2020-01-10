@@ -14,6 +14,7 @@ const initState = {
   },
   'caption': '',
   'name': '',
+  inputSelected: null
 }
 
 function rootReducer(state = initState, payload) {
@@ -108,6 +109,7 @@ function rootReducer(state = initState, payload) {
         classes: [],
         'caption': '',
         'name': '',
+        inputSelected: null
       }
     case "IMPORT_TABLE":
       return {
@@ -134,6 +136,11 @@ function rootReducer(state = initState, payload) {
       return {
         ...state,
         nbCol: payload.nbCol
+      }
+    case "UPDATE_INPUT_SELECTED":
+      return {
+        ...state,
+        inputSelected: payload.input
       }
     default:
       return state;

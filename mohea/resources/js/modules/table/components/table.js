@@ -6,6 +6,8 @@ import { connect } from "react-redux";
 import TableReturn from "./tableReturn.jsx";
 import { addNewRow, addNewCol, importFile, resetTable, updateCaption, updateName, updateClasses, updateNbCol } from "../redux/actions";
 import * as d3 from "d3";
+import { ImportFile } from "../../../components/ImportFile";
+import { CustomInput } from "../../../components/CustomInput";
 
 class Table extends Component {
   constructor(props) {
@@ -68,23 +70,27 @@ class Table extends Component {
   }
 
   
-  importFile = (e) => {
-    e.preventDefault();
+  importFile = () => {
 
     const file = document.getElementById('import-file').files[0];
     const reader = new FileReader();
 
     reader.onload = () => {
-      const typeFileSelected = document.querySelector('input[name="type-imported"]:checked').value;
+      const typeFileSelected = document.querySelector('input[name="type-imported"]:checked');
       let data;
 
-      if(typeFileSelected === "CSV") {
-        data = d3.dsvFormat(';').parse(reader.result)
-      } else if(typeFileSelected === "JSON") {
-        data = JSON.parse(reader.result);
-        data['columns'] = Object.keys(data[0]);
-      } else {
+      if(typeFileSelected === null) {
+        alert('You need to select a file type !');
         return;
+      }
+
+      switch(typeFileSelected.value) {
+        case "CSV":
+          data = d3.dsvFormat(';').parse(reader.result)
+          break;
+        case "JSON":
+          data = JSON.parse(reader.result);
+          data['columns'] = Object.keys(data[0]);
       }
 
       let tableImported = { 'head': [], 'body': [], 'foot': []}
@@ -123,31 +129,24 @@ class Table extends Component {
         <p className="card bg-warning p-2">Be careful, merging cells is not advised in accessibility. Therefore, you will not be able to perform this action.</p>
         {this.props.tableau.head.length === 0 && this.props.tableau.body.length === 0 && this.props.tableau.foot.length == 0 &&
           <div className="card bg-dark text-white p-2">
-            <h4 className="card-title">Generate a table</h4>
-            <form onSubmit={this.handleInitialize}>
-              <div className="flex">
-                <input type="number" onChange={this.updateWidthCol} value={this.widthCol} max="16" />
-                <span>x</span>
-                <input type="number" onChange={this.updateHeightCol} value={this.heightCol} max="16" />
+            <div className="row">
+              <div className="col-md-6">
+                <h4 className="card-title">Generate a table</h4>
+                <form onSubmit={this.handleInitialize}>
+                  <div className="flex">
+                    <input type="number" onChange={this.updateWidthCol} value={this.widthCol} max="16" />
+                    <span>x</span>
+                    <input type="number" onChange={this.updateHeightCol} value={this.heightCol} max="16" />
+                  </div>
+                  <input type="submit" value="Generate table" />
+                </form>
               </div>
-              <input type="submit" value="Generate table" />
-            </form>
-            <h4 className="card-title">Import a CSV or a JSON</h4>
-            <form onSubmit={this.importFile}>
-              <div className="form-group">
-                <div className="group-check">
-                  <input type="radio" name="type-imported" id="type-json" value="JSON" />
-                  <label htmlFor="type-json">JSON</label>
-                </div>
-                <div className="group-check">
-                  <input type="radio" name="type-imported" id="type-csv" value="CSV" />
-                  <label htmlFor="type-csv">CSV</label>
-                </div>
-              </div>
-              <input type="file" id="import-file" accept=".csv, .json, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
-              <input type="submit" value="Import" />
-            </form>
+              <ImportFile func={this.importFile} className="col-md-6" />
+            </div>
           </div>
+        }
+        {this.props.inputSelected && 
+          <CustomInput />
         }
         <div className="row">
           <div className="col-md-3">

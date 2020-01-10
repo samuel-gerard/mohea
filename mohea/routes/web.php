@@ -20,7 +20,7 @@ Route::get('/privacy', 'HomeController@privacy')->name('privacy');
 Route::middleware(['auth'])->group(function() {
 
     // Route Home & Dashboard
-    Route::redirect('/', '/dashboard');
+    // Route::redirect('/', '/dashboard');
     
     // Routes of each modules
     Route::get('/create', function() {

@@ -31925,35 +31925,106 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_Form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Form */ "./resources/js/modules/form/components/Form.js");
-/* harmony import */ var _components_Edition__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Edition */ "./resources/js/modules/form/components/Edition.js");
-/* harmony import */ var _components_Elements__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Elements */ "./resources/js/modules/form/components/Elements.js");
+/* harmony import */ var _components_Form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Form */ "./resources/js/modules/form/components/Form.jsx");
+/* harmony import */ var _components_Edition__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Edition */ "./resources/js/modules/form/components/Edition.jsx");
+/* harmony import */ var _components_Element__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Element */ "./resources/js/modules/form/components/Element.jsx");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
 
 
 
-function FormApp() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "App"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Form Builder"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "container_app"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Elements__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Form__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Edition__WEBPACK_IMPORTED_MODULE_3__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("script", {
-    src: "https://kit.fontawesome.com/1cd05482a2.js",
-    crossorigin: "anonymous"
-  }));
-}
+
+var FormApp =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(FormApp, _React$Component);
+
+  function FormApp() {
+    var _getPrototypeOf2;
+
+    var _this;
+
+    _classCallCheck(this, FormApp);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(FormApp)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_this), "state", {
+      usedElements: []
+    });
+
+    return _this;
+  }
+
+  _createClass(FormApp, [{
+    key: "handleAddElement",
+    value: function handleAddElement(element) {
+      var usedElements = _toConsumableArray(this.state.usedElements);
+
+      usedElements.push(element);
+      this.setState({
+        usedElements: usedElements
+      }); // console.log(this.state.usedElements)
+      // console.log(usedElements)
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "App"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Form Builder"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container_app"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Element__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        onAddElement: this.handleAddElement.bind(this)
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Form__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        usedElements: this.state.usedElements
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Edition__WEBPACK_IMPORTED_MODULE_3__["default"], null)));
+    }
+  }]);
+
+  return FormApp;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 var rootElement = document.getElementById("app-form");
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(FormApp, null), rootElement);
 
 /***/ }),
 
-/***/ "./resources/js/modules/form/components/Edition.js":
-/*!*********************************************************!*\
-  !*** ./resources/js/modules/form/components/Edition.js ***!
-  \*********************************************************/
+/***/ "./resources/js/modules/form/components/Edition.jsx":
+/*!**********************************************************!*\
+  !*** ./resources/js/modules/form/components/Edition.jsx ***!
+  \**********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -32008,9 +32079,9 @@ function (_React$Component) {
 
 /***/ }),
 
-/***/ "./resources/js/modules/form/components/Elements.js":
+/***/ "./resources/js/modules/form/components/Element.jsx":
 /*!**********************************************************!*\
-  !*** ./resources/js/modules/form/components/Elements.js ***!
+  !*** ./resources/js/modules/form/components/Element.jsx ***!
   \**********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -32037,20 +32108,29 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
-var Elements =
+
+var Element =
 /*#__PURE__*/
 function (_React$Component) {
-  _inherits(Elements, _React$Component);
+  _inherits(Element, _React$Component);
 
-  function Elements(props) {
+  function Element() {
+    var _getPrototypeOf2;
+
     var _this;
 
-    _classCallCheck(this, Elements);
+    _classCallCheck(this, Element);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Elements).call(this, props));
-    _this.state = {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Element)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_this), "state", {
       elements_1: [{
         id: 1,
         name: "Text",
@@ -32135,19 +32215,12 @@ function (_React$Component) {
         tag: "input",
         type: "number"
       }]
-    };
-    _this.handleAddElement = _this.handleAddElement.bind(_assertThisInitialized(_this));
+    });
+
     return _this;
   }
 
-  _createClass(Elements, [{
-    key: "handleAddElement",
-    value: function handleAddElement(Element) {
-      alert("ok");
-      console.log(Element);
-      return 0;
-    }
-  }, {
+  _createClass(Element, [{
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -32163,7 +32236,7 @@ function (_React$Component) {
           className: "element_item",
           type: "button",
           onClick: function onClick() {
-            return _this2.handleAddElement(element);
+            return _this2.props.onAddElement(element);
           }
         }, element.name);
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -32173,7 +32246,7 @@ function (_React$Component) {
           className: "element_item",
           type: "button",
           onClick: function onClick() {
-            return _this2.handleAddElement();
+            return _this2.props.onAddElement(element);
           }
         }, element.name);
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -32183,24 +32256,24 @@ function (_React$Component) {
           className: "element_item",
           type: "button",
           onClick: function onClick() {
-            return _this2.handleAddElement();
+            return _this2.props.onAddElement(element);
           }
         }, element.name);
       }))));
     }
   }]);
 
-  return Elements;
+  return Element;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (Elements);
+/* harmony default export */ __webpack_exports__["default"] = (Element);
 
 /***/ }),
 
-/***/ "./resources/js/modules/form/components/Form.js":
-/*!******************************************************!*\
-  !*** ./resources/js/modules/form/components/Form.js ***!
-  \******************************************************/
+/***/ "./resources/js/modules/form/components/Form.jsx":
+/*!*******************************************************!*\
+  !*** ./resources/js/modules/form/components/Form.jsx ***!
+  \*******************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -32240,11 +32313,25 @@ function (_React$Component) {
   }
 
   _createClass(Form, [{
+    key: "setMarkup",
+    value: function setMarkup(element) {
+      return {
+        __html: '<label for="name">' + element.name + '</label>' + '<' + element.tag + ' type="' + element.type + '" className="form-control" id="' + element.name + '_" name="' + element.name + '" ' + element.require + '></' + element.tag + '>'
+      };
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this = this;
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form_box"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Your form"));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Your form"), this.props.usedElements.map(function (element) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "form-group",
+          dangerouslySetInnerHTML: _this.setMarkup(element)
+        });
+      })));
     }
   }]);
 

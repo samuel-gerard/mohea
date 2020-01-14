@@ -3,23 +3,35 @@ import ReactDOM from "react-dom";
 
 import Form from "./components/Form";
 import Edition from "./components/Edition";
-import Elements from "./components/Elements";
+import Element from "./components/Element";
 
-function FormApp() {
-  return (
-    <div className="App">
-      <h1>Form Builder</h1>
-      <div className="container_app">
-        <Elements />
-        <Form />
-        <Edition />
+class FormApp extends React.Component {
+
+  state = {
+    usedElements: [
+    ]
+  };
+
+  handleAddElement(element)
+  {
+    const usedElements = [...this.state.usedElements];
+    usedElements.push(element);
+    this.setState({usedElements});
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <h1>Form Builder</h1>
+        <div className="container_app">
+          <Element onAddElement={this.handleAddElement.bind(this)} />
+          <Form usedElements={this.state.usedElements} />
+          <Edition />
+        </div>
       </div>
-      <script
-        src="https://kit.fontawesome.com/1cd05482a2.js"
-        crossorigin="anonymous"
-      />
-    </div>
-  );
+    );
+  }
+
 }
 
 const rootElement = document.getElementById("app-form");

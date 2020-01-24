@@ -9,7 +9,8 @@ class FormApp extends React.Component {
 
   state = {
     usedElements: [
-    ]
+    ],
+    focus: ''
   };
 
   handleAddElement(element)
@@ -19,14 +20,19 @@ class FormApp extends React.Component {
     this.setState({usedElements});
   }
 
+  handleAddFocus(element)
+  {
+    this.setState({focus: element});
+  }
+
   render() {
     return (
       <div className="App">
-        <h1>Form Builder</h1>
+        <h1>Your Form</h1>
         <div className="container_app">
           <Element onAddElement={this.handleAddElement.bind(this)} />
-          <Form usedElements={this.state.usedElements} />
-          <Edition />
+          <Form usedElements={this.state.usedElements} onFocusElement={this.handleAddFocus.bind(this)} />
+          <Edition focusedElement={this.state.focus} />
         </div>
       </div>
     );

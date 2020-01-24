@@ -31981,7 +31981,8 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(FormApp)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_this), "state", {
-      usedElements: []
+      usedElements: [],
+      focus: ''
     });
 
     return _this;
@@ -31995,21 +31996,30 @@ function (_React$Component) {
       usedElements.push(element);
       this.setState({
         usedElements: usedElements
-      }); // console.log(this.state.usedElements)
-      // console.log(usedElements)
+      });
+    }
+  }, {
+    key: "handleAddFocus",
+    value: function handleAddFocus(element) {
+      this.setState({
+        focus: element
+      });
     }
   }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "App"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Form Builder"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Your Form"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container_app"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Element__WEBPACK_IMPORTED_MODULE_4__["default"], {
         onAddElement: this.handleAddElement.bind(this)
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Form__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        usedElements: this.state.usedElements
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Edition__WEBPACK_IMPORTED_MODULE_3__["default"], null)));
+        usedElements: this.state.usedElements,
+        onFocusElement: this.handleAddFocus.bind(this)
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Edition__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        focusedElement: this.state.focus
+      })));
     }
   }]);
 
@@ -32042,13 +32052,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
@@ -32058,17 +32070,83 @@ function (_React$Component) {
   _inherits(Edition, _React$Component);
 
   function Edition() {
+    var _getPrototypeOf2;
+
+    var _this;
+
     _classCallCheck(this, Edition);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Edition).apply(this, arguments));
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Edition)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_this), "state", {
+      focus: _this.props.focusedElement
+    });
+
+    return _this;
   }
 
   _createClass(Edition, [{
+    key: "editionMarkup",
+    value: function editionMarkup(focus) {
+      switch (focus.name) {
+        case 'Text':
+          return {
+            __html: '<label for="content">' + focus.name + '</label>' + '<textarea rows="5" col="10">'
+          };
+
+        case 'Title':
+          return {
+            __html: '<label for="content">' + focus.name + '</label>' + '<input type="text" onChange={this.handleChangeTitle} />' + '<label for="content">Title size</label>' + '<select type="titleSize" />' + '<option value="h1">H1</option>' + '<option value="h2">H2</option>' + '<option value="h3">H3</option>' + '<option value="h4">H4</option>' + '</select>'
+          };
+
+        case 'Submit':
+          return {
+            __html: '<label for="content">Value</label>' + '<input type="text" />'
+          };
+
+        case 'Text Input':
+        case 'Date':
+        case 'Email':
+        case 'Phone':
+        case 'Link':
+        case 'Password':
+          return {
+            __html: '<label for="content">Label</label>' + '<input type="text" />' + '<label for="content">Required</label>' + '<input type="checkbox" />' + '<label for="content">Placeholder</label>' + '<input type="text" />'
+          };
+
+        case 'Text Area':
+          return {
+            __html: '<label for="content">Label</label>' + '<input type="text" />' + '<label for="content">Required</label>' + '<input type="checkbox" />' + '<label for="content">Placeholder</label>' + '<input type="text" />'
+          };
+
+        case 'Select':
+          return {
+            __html: '<label for="content">Label</label>' + '<input type="text" />' + '<label for="content">Edit options</label>' + '<select>' + focus.options.map(function (option) {
+              return '<option value="' + option.value + '">' + option.content + '</option>';
+            }) + '</select>' + '<label for="content">Required</label>' + '<input type="checkbox" />' + '<label for="content">Placeholder</label>' + '<input type="text" />'
+          };
+
+        case 'Check Box':
+        case 'Radio Button':
+          return {
+            __html: '<label for="content">Label</label>' + '<input type="text" />' + '<select>' + focus.options.map(function (option) {
+              return '<option value="' + option.label + '">' + option.label + '</option>';
+            }) + '</select>' + '<label for="content">Required</label>' + '<input type="checkbox" />' + '<label for="content">Placeholder</label>' + '<input type="text" />'
+          };
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "edition_box"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Edit element"));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Edit element"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.props.focusedElement.label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Copy element"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Delete element"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        dangerouslySetInnerHTML: this.editionMarkup(this.props.focusedElement)
+      }));
     }
   }]);
 
@@ -32135,85 +32213,136 @@ function (_React$Component) {
         id: 1,
         name: "Text",
         tag: "p",
-        type: ""
+        className: "moheaText",
+        content: "My New Text"
       }, {
         id: 2,
         name: "Title",
         tag: "h1",
-        type: ""
+        className: "moheaTitle",
+        content: "My New Title"
       }, {
         id: 3,
-        name: "Label",
-        tag: "label",
-        type: "",
-        "for": ""
-      }, {
-        id: 4,
         name: "Legend",
         tag: "legend",
+        className: "moheaLegend",
         type: ""
       }, {
-        id: 5,
+        id: 4,
         name: "Submit",
         tag: "input",
-        type: "submit"
-      }, {
-        id: 6,
-        name: "Button",
-        tag: "button",
-        type: "button"
+        className: "moheaSubmit",
+        type: "submit",
+        value: "Send my new Form"
       }],
       elements_2: [{
-        id: 7,
-        name: "Input",
+        id: 5,
+        name: "Text Input",
         tag: "input",
-        type: "text"
+        className: "moheaTextInput",
+        type: "text",
+        label: "My New Text Input",
+        required: "",
+        placeholder: "My placeholder"
       }, {
-        id: 8,
+        id: 6,
         name: "Text Area",
         tag: "textarea",
-        required: ""
+        className: "moheaTextArea",
+        label: "My New Text Area",
+        rows: 3,
+        col: 10,
+        required: "",
+        placeholder: "My placeholder"
       }, {
-        id: 9,
+        id: 7,
         name: "Select",
         tag: "select",
-        type: ""
+        className: "moheaSelect",
+        label: "My New Select",
+        title: "Options",
+        required: "",
+        options: [{
+          tag: "option",
+          value: "first",
+          content: "My First Option"
+        }, {
+          tag: "option",
+          value: "deux",
+          content: "My Second Option"
+        }]
       }, {
-        id: 10,
+        id: 8,
         name: "Date",
         tag: "input",
-        type: "date"
+        className: "moheaDate",
+        label: "My New Date",
+        type: "date",
+        required: "",
+        placeholder: "12/02/2020"
       }, {
-        id: 11,
+        id: 9,
         name: "Check Box",
-        tag: "input",
-        type: "checkbox"
+        tag: "div",
+        className: "moheaCheckbox",
+        label: "My New Check Box",
+        required: "",
+        options: [{
+          tag: "input",
+          type: "checkbox",
+          label: "My first Option"
+        }]
       }, {
-        id: 12,
+        id: 10,
         name: "Radio Button",
-        tag: "input",
-        type: "radio"
+        tag: "div",
+        className: "moheaRadiobutton",
+        label: "My New Radio Button",
+        required: "",
+        options: [{
+          tag: "input",
+          type: "radio",
+          label: "My first Option"
+        }]
       }],
       elements_3: [{
-        id: 13,
+        id: 11,
         name: "Email",
         tag: "input",
-        type: "email"
+        className: "moheaEmail",
+        label: "My Email",
+        type: "email",
+        pattern: "",
+        required: "",
+        placeholder: "My placeholder"
       }, {
-        id: 14,
+        id: 12,
         name: "Link",
-        tag: "select",
-        type: ""
+        tag: "input",
+        className: "moheaLink",
+        label: "My Link",
+        type: "url",
+        required: "",
+        placeholder: "My placeholder"
       }, {
-        id: 15,
+        id: 13,
         name: "Password",
         tag: "input",
-        type: "password"
+        className: "moheaPassword",
+        label: "My Password",
+        type: "password",
+        required: "",
+        placeholder: "My placeholder"
       }, {
-        id: 16,
+        id: 14,
         name: "Phone",
         tag: "input",
-        type: "number"
+        className: "moheaPhone",
+        label: "My Phone Number",
+        type: "tel",
+        pattern: "",
+        required: "",
+        placeholder: "My placeholder"
       }]
     });
 
@@ -32226,7 +32355,7 @@ function (_React$Component) {
       var _this2 = this;
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "elements_choice_box"
+        className: "elements_box"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Elements choice"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "element_list"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -32315,9 +32444,48 @@ function (_React$Component) {
   _createClass(Form, [{
     key: "setMarkup",
     value: function setMarkup(element) {
-      return {
-        __html: '<label for="name">' + element.name + '</label>' + '<' + element.tag + ' type="' + element.type + '" className="form-control" id="' + element.name + '_" name="' + element.name + '" ' + element.require + '></' + element.tag + '>'
-      };
+      switch (element.name) {
+        case 'Text':
+        case 'Title':
+          return {
+            __html: '<' + element.tag + ' >' + element.content + '</' + element.tag + '>'
+          };
+
+        case 'Submit':
+          return {
+            __html: '<' + element.tag + ' type="' + element.type + '" />'
+          };
+
+        case 'Text Input':
+        case 'Date':
+        case 'Email':
+        case 'Phone':
+        case 'Link':
+        case 'Password':
+          return {
+            __html: '<label for="label">' + element.label + '</label>' + '<' + element.tag + ' type="' + element.type + '" placeholder="' + element.placeholder + '" ' + element.required + ' />'
+          };
+
+        case 'Text Area':
+          return {
+            __html: '<label for="label">' + element.label + '</label>' + '<' + element.tag + ' rows="' + element.rows + '" col="' + element.col + '" placeholder="' + element.placeholder + '" ' + element.required + ' />'
+          };
+
+        case 'Select':
+          return {
+            __html: '<label for="label">' + element.label + '</label>' + '<' + element.tag + ' ' + element.required + ' >' + element.options.map(function (option) {
+              return '<option value="' + option.value + '">' + option.content + '</option>';
+            }) + '</' + element.tag + '>'
+          };
+
+        case 'Check Box':
+        case 'Radio Button':
+          return {
+            __html: '<label for="label">' + element.label + '</label>' + '<' + element.tag + ' ' + element.required + ' >' + element.options.map(function (option) {
+              return '<div>' + '<' + option.tag + ' type="' + option.type + '">' + option.label + '</' + option.tag + '>' + '</div>';
+            }) + '</' + element.tag + '>'
+          };
+      }
     }
   }, {
     key: "render",
@@ -32329,6 +32497,9 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Your form"), this.props.usedElements.map(function (element) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "form-group",
+          onClick: function onClick() {
+            return _this.props.onFocusElement(element);
+          },
           dangerouslySetInnerHTML: _this.setMarkup(element)
         });
       })));

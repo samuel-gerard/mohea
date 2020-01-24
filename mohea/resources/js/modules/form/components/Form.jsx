@@ -5,9 +5,62 @@ class Form extends React.Component {
 
   setMarkup(element)
   {
-    return {__html: 
-      '<label for="name">'+element.name+'</label>'+
-      '<'+element.tag+' type="'+element.type+'" className="form-control" id="'+element.name+'_" name="'+element.name+'" '+element.require+'></'+element.tag+'>'    };
+    
+    switch(element.name)
+    {
+      case 'Text' :
+      case 'Title':
+        return {__html: 
+          '<'+element.tag+' >'+element.content+'</'+element.tag+'>' 
+        }
+
+      case 'Submit':
+        return {__html:
+          '<'+element.tag+' type="'+element.type+'" />' 
+        }
+        
+      case 'Text Input':
+      case 'Date':
+      case 'Email':
+      case 'Phone':
+      case 'Link':
+      case 'Password':
+        return {__html:
+          '<label for="label">'+element.label+'</label>'+
+          '<'+element.tag+' type="'+element.type+'" placeholder="'+element.placeholder+'" '+element.required+' />' 
+        }
+
+      case 'Text Area':
+        return {__html:
+          '<label for="label">'+element.label+'</label>'+
+          '<'+element.tag+' rows="'+element.rows+'" col="'+element.col+'" placeholder="'+element.placeholder+'" '+element.required+' />' 
+        }
+        
+      case 'Select':
+        return {__html:
+          '<label for="label">'+element.label+'</label>'+
+          '<'+element.tag+' '+element.required+' >'+
+            element.options.map(option => (
+              '<option value="'+option.value+'">'+option.content+'</option>'
+            ))+
+          '</'+element.tag+'>'
+          }
+
+      case 'Check Box':
+      case 'Radio Button':
+        return {__html:
+          '<label for="label">'+element.label+'</label>'+
+          '<'+element.tag+' '+element.required+' >'+
+            element.options.map(option => (
+              '<div>'+
+                '<'+option.tag+' type="'+option.type+'">'+option.label+'</'+option.tag+'>'+
+              '</div>'
+            ))+
+          '</'+element.tag+'>'
+          }
+
+    }
+  
   }
 
 
@@ -20,7 +73,7 @@ class Form extends React.Component {
           <h2>Your form</h2>
 
           {this.props.usedElements.map(element => (
-            <div className="form-group" dangerouslySetInnerHTML={this.setMarkup(element)} />
+            <div className="form-group" onClick={() => this.props.onFocusElement(element)} dangerouslySetInnerHTML={this.setMarkup(element)} />
           ))}
 
         </form>

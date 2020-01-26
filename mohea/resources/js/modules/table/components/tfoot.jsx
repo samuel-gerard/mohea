@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
-import { addNewRow, deleteRow, updateValue } from "../redux/actions";
+import { addNewRow, deleteRow, updateValue, updateInputSelected } from "../redux/actions";
 
 class Tfoot extends Component {
   handleUpdateValue = (e) => {
@@ -26,6 +26,13 @@ class Tfoot extends Component {
     this.props.deleteRow('foot', e.target.dataset.row)
   }
 
+  handleInputSelected = (e) => {
+    const split = event.target.dataset.id.split('/');
+    const row = split[0];
+    const col = split[1];
+    this.props.updateInputSelected('foot', row, col)
+  }
+
   render() {
     const group = Object.values(this.props.tableau.foot)
     const groupList = group.length > 0 ? (
@@ -39,7 +46,13 @@ class Tfoot extends Component {
           {Object.values(items).map((item, j) => {
             return (
               <td key={'foot' + j}>
-                <input type='text' data-id={i + '/' + j} onChange={this.handleUpdateValue} value={item} className="form-control" />
+                <input type='text'
+                  data-id={i + '/' + j}
+                  onFocus={this.handleInputSelected}
+                  onChange={this.handleUpdateValue}
+                  value={item.value}
+                  className="form-control"
+                  style={item.style} />
               </td>
             );
           })}
@@ -79,6 +92,9 @@ const mapDispatchToProps = (dispatch, stateProps) => {
     },
     updateValue: (type, val, row, col) => {
       dispatch(updateValue(type, val, row, col));
+    },
+    updateInputSelected: (type, row, col) => {
+      dispatch(updateInputSelected(type, row, col))
     }
   }
 }

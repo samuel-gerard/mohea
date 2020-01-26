@@ -68137,40 +68137,6 @@ module.exports = function(originalModule) {
 
 /***/ }),
 
-/***/ "./resources/js/components/CustomInput.js":
-/*!************************************************!*\
-  !*** ./resources/js/components/CustomInput.js ***!
-  \************************************************/
-/*! exports provided: CustomInput */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CustomInput", function() { return CustomInput; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-var CustomInput = function CustomInput(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "checkbox",
-    id: ""
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    htmlFor: "color-text"
-  }, "Text color"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "color",
-    id: "color-text"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    htmlFor: "color-background"
-  }, "Background color"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "color",
-    id: "color-background"
-  }));
-}; // onFocus => update store variable from inputSelected and add if it necessary custom code
-// add on input the style
-// add on tablereturn good style
-
-/***/ }),
-
 /***/ "./resources/js/components/ImportFile.js":
 /*!***********************************************!*\
   !*** ./resources/js/components/ImportFile.js ***!
@@ -68379,6 +68345,144 @@ react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render(react__WEBPACK_IMPORTED_
 
 /***/ }),
 
+/***/ "./resources/js/modules/table/components/CustomInput.js":
+/*!**************************************************************!*\
+  !*** ./resources/js/modules/table/components/CustomInput.js ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _redux_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../redux/actions */ "./resources/js/modules/table/redux/actions.js");
+
+
+
+
+var CustomInput = function CustomInput(props) {
+  var details = props.inputSelected;
+  var cell = {};
+
+  if (details.type) {
+    var style = props.tableau[details.type][details.row][details.col].style;
+
+    if (style) {
+      style = Object.assign({}, style);
+      style.fontSize = style.fontSize ? style.fontSize.replace('px', '') : '';
+      cell = style;
+    }
+  }
+
+  var handleStyle = function handleStyle(e) {
+    var val = e.target.dataset.key === 'fontSize' ? e.target.value + 'px' : e.target.value;
+    if (e.target.type === 'checkbox') val = e.target.checked ? e.target.value : '';
+    cell[e.target.dataset.key] = val;
+    props.updateInputStyle(details.type, cell, details.row, details.col);
+  };
+
+  if (details.type) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      htmlFor: "color-text"
+    }, "Text color"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "color",
+      id: "color-text",
+      onChange: handleStyle,
+      value: cell.color ? cell.color : '#000000',
+      "data-key": "color"
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      htmlFor: "color-background"
+    }, "Background color"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "color",
+      id: "color-background",
+      onChange: handleStyle,
+      value: cell.backgroundColor ? cell.backgroundColor : '#ffffff',
+      "data-key": "backgroundColor"
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      htmlFor: "text-align"
+    }, "Alignment"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+      id: "text-align",
+      onChange: handleStyle,
+      value: cell.textAlign ? cell.textAlign : 'left',
+      "data-key": "textAlign"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+      value: "left"
+    }, "Left"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+      value: "center"
+    }, "Center"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+      value: "right"
+    }, "Right"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+      value: "justify"
+    }, "Justify")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "from-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      htmlFor: "font-size"
+    }, "Font size (px)"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "number",
+      id: "font-size",
+      onChange: handleStyle,
+      value: cell.fontSize ? cell.fontSize : '14',
+      "data-key": "fontSize"
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "from-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      htmlFor: "text-decoration"
+    }, "Underline"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "checkbox",
+      id: "text-decoration",
+      onChange: handleStyle,
+      value: "underline",
+      checked: cell.textDecoration ? true : false,
+      "data-key": "textDecoration"
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "from-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      htmlFor: "font-style"
+    }, "Italic"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "checkbox",
+      id: "font-style",
+      onChange: handleStyle,
+      value: "italic",
+      checked: cell.fontStyle ? true : false,
+      "data-key": "fontStyle"
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "from-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      htmlFor: "font-weight"
+    }, "Bold"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "checkbox",
+      id: "font-weight",
+      onChange: handleStyle,
+      value: "bold",
+      checked: cell.fontWeight ? true : false,
+      "data-key": "fontWeight"
+    })));
+  } else {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Select a cell to customize."));
+  }
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    tableau: state.tableau,
+    inputSelected: state.inputSelected
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch, stateProps) {
+  return {
+    updateInputStyle: function updateInputStyle(type, cell, row, col) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["updateInputStyle"])(type, cell, row, col));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(CustomInput));
+
+/***/ }),
+
 /***/ "./resources/js/modules/table/components/table.js":
 /*!********************************************************!*\
   !*** ./resources/js/modules/table/components/table.js ***!
@@ -68398,7 +68502,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _redux_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../redux/actions */ "./resources/js/modules/table/redux/actions.js");
 /* harmony import */ var d3__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! d3 */ "./node_modules/d3/index.js");
 /* harmony import */ var _components_ImportFile__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../components/ImportFile */ "./resources/js/components/ImportFile.js");
-/* harmony import */ var _components_CustomInput__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../components/CustomInput */ "./resources/js/components/CustomInput.js");
+/* harmony import */ var _CustomInput__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./CustomInput */ "./resources/js/modules/table/components/CustomInput.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -68521,9 +68625,19 @@ function (_Component) {
             return;
           }
 
-          tableImported['body'].push(Object.values(el));
+          var rowBody = Object.values(el).map(function (val) {
+            return {
+              'value': val
+            };
+          });
+          tableImported['body'].push(rowBody);
         });
-        tableImported['head'].push(data['columns']);
+        var rowHead = data['columns'].map(function (val) {
+          return {
+            'value': val
+          };
+        });
+        tableImported['head'].push(rowHead);
 
         _this.props.importFile(tableImported);
 
@@ -68541,8 +68655,7 @@ function (_Component) {
 
     _this.state = {
       heightCol: 0,
-      widthCol: 0,
-      dataImported: {}
+      widthCol: 0
     };
     return _this;
   }
@@ -68590,7 +68703,7 @@ function (_Component) {
       }))), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_components_ImportFile__WEBPACK_IMPORTED_MODULE_8__["ImportFile"], {
         func: this.importFile,
         className: "col-md-6"
-      }))), this.props.inputSelected && react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_components_CustomInput__WEBPACK_IMPORTED_MODULE_9__["CustomInput"], null), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
+      }))), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_CustomInput__WEBPACK_IMPORTED_MODULE_9__["default"], null), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
         className: "col-md-3"
@@ -68795,6 +68908,10 @@ var TableReturn = function TableReturn(props) {
     }
   };
 
+  var camelToKebab = function camelToKebab(string) {
+    return string.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase();
+  };
+
   var handleHeader = function handleHeader() {
     if (head.length <= 0) {
       return '';
@@ -68804,7 +68921,16 @@ var TableReturn = function TableReturn(props) {
     head.forEach(function (headRow) {
       html += "       <tr>\n";
       headRow.map(function (headEl, idxBis) {
-        html += "           <th id=\"col-".concat(idxBis, "\">").concat(headEl, "</th>\n");
+        if (headEl.style) {
+          var style = '';
+          Object.keys(headEl.style).map(function (key) {
+            if (!headEl.style[key]) return;
+            style += camelToKebab(key) + ':' + headEl.style[key] + ';';
+          });
+          html += "           <th id=\"col-".concat(idxBis, "\" style=\"").concat(style, "\">").concat(headEl.value, "</th>\n");
+        } else {
+          html += "           <th id=\"col-".concat(idxBis, "\">").concat(headEl.value, "</th>\n");
+        }
       });
       html += "       </tr>\n";
     });
@@ -68821,7 +68947,16 @@ var TableReturn = function TableReturn(props) {
     body.forEach(function (bodyRow, idx) {
       html += "       <tr id=\"bodyRow-".concat(idx, "\">\n");
       bodyRow.map(function (bodyEl, idxBis) {
-        html += "           <td headers=\"col-".concat(idxBis, " bodyRow-").concat(idx, "\">").concat(bodyEl, "</td>\n");
+        if (bodyEl.style) {
+          var style = '';
+          Object.keys(bodyEl.style).map(function (key) {
+            if (!bodyEl.style[key]) return;
+            style += camelToKebab(key) + ':' + bodyEl.style[key] + ';';
+          });
+          html += "           <td headers=\"col-".concat(idxBis, " bodyRow-").concat(idx, "\" style=\"").concat(style, "\">").concat(bodyEl.value, "</td>\n");
+        } else {
+          html += "           <td headers=\"col-".concat(idxBis, " bodyRow-").concat(idx, "\">").concat(bodyEl.value, "</td>\n");
+        }
       });
       html += "       </tr>\n";
     });
@@ -68838,7 +68973,16 @@ var TableReturn = function TableReturn(props) {
     foot.forEach(function (footRow, idx) {
       html += "       <tr id=\"footRow-".concat(idx, "\">\n");
       footRow.map(function (footEl, idxBis) {
-        html += "           <td headers=\"col-".concat(idxBis, " footRow-").concat(idx, "\">").concat(footEl, "</td>\n");
+        if (footEl.style) {
+          var style = '';
+          Object.keys(footEl.style).map(function (key) {
+            if (!footEl.style[key]) return;
+            style += camelToKebab(key) + ':' + footEl.style[key] + ';';
+          });
+          html += "           <td headers=\"col-".concat(idxBis, " footRow-").concat(idx, "\" style=\"").concat(style, "\">").concat(footEl.value, "</td>\n");
+        } else {
+          html += "           <td headers=\"col-".concat(idxBis, " footRow-").concat(idx, "\">").concat(footEl.value, "</td>\n");
+        }
       });
       html += "       </tr>\n";
     });
@@ -68884,7 +69028,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _redux_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../redux/actions */ "./resources/js/modules/table/redux/actions.js");
-/* harmony import */ var _components_CustomInput__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../components/CustomInput */ "./resources/js/components/CustomInput.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -68904,7 +69047,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -68930,8 +69072,8 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "handleUpdateValue", function (e) {
       var split = event.target.dataset.id.split('/');
-      var col = split[1];
       var row = split[0];
+      var col = split[1];
 
       _this.props.updateValue('body', e.target.value, row, col);
     });
@@ -68950,6 +69092,14 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "handleDeleteRow", function (e) {
       _this.props.deleteRow('body', e.target.dataset.row);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleInputSelected", function (e) {
+      var split = event.target.dataset.id.split('/');
+      var row = split[0];
+      var col = split[1];
+
+      _this.props.updateInputSelected('body', row, col);
     });
 
     return _this;
@@ -68982,9 +69132,11 @@ function (_Component) {
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             type: "text",
             "data-id": i + '/' + j,
+            onFocus: _this2.handleInputSelected,
             onChange: _this2.handleUpdateValue,
-            value: item,
-            className: "form-control"
+            value: item.value,
+            className: "form-control",
+            style: item.style
           }));
         }));
       }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -69020,6 +69172,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, stateProps) {
     },
     updateValue: function updateValue(type, val, row, col) {
       dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["updateValue"])(type, val, row, col));
+    },
+    updateInputSelected: function updateInputSelected(type, row, col) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["updateInputSelected"])(type, row, col));
     }
   };
 };
@@ -69107,6 +69262,14 @@ function (_Component) {
       _this.props.deleteRow('foot', e.target.dataset.row);
     });
 
+    _defineProperty(_assertThisInitialized(_this), "handleInputSelected", function (e) {
+      var split = event.target.dataset.id.split('/');
+      var row = split[0];
+      var col = split[1];
+
+      _this.props.updateInputSelected('foot', row, col);
+    });
+
     return _this;
   }
 
@@ -69137,9 +69300,11 @@ function (_Component) {
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             type: "text",
             "data-id": i + '/' + j,
+            onFocus: _this2.handleInputSelected,
             onChange: _this2.handleUpdateValue,
-            value: item,
-            className: "form-control"
+            value: item.value,
+            className: "form-control",
+            style: item.style
           }));
         }));
       }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -69175,6 +69340,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, stateProps) {
     },
     updateValue: function updateValue(type, val, row, col) {
       dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["updateValue"])(type, val, row, col));
+    },
+    updateInputSelected: function updateInputSelected(type, row, col) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["updateInputSelected"])(type, row, col));
     }
   };
 };
@@ -69240,8 +69408,8 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "handleUpdateValue", function (e) {
       var split = event.target.dataset.id.split('/');
-      var col = split[1];
       var row = split[0];
+      var col = split[1];
 
       _this.props.updateValue('head', e.target.value, row, col);
     });
@@ -69260,6 +69428,14 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "handleDeleteRow", function (e) {
       _this.props.deleteRow('head', e.target.dataset.row);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleInputSelected", function (e) {
+      var split = event.target.dataset.id.split('/');
+      var row = split[0];
+      var col = split[1];
+
+      _this.props.updateInputSelected('head', row, col);
     });
 
     return _this;
@@ -69292,9 +69468,11 @@ function (_Component) {
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             type: "text",
             "data-id": i + '/' + j,
+            onFocus: _this2.handleInputSelected,
             onChange: _this2.handleUpdateValue,
-            value: item,
-            className: "form-control"
+            value: item.value,
+            className: "form-control",
+            style: item.style
           }));
         }));
       }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -69358,6 +69536,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, stateProps) {
     },
     updateValue: function updateValue(type, val, row, col) {
       dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["updateValue"])(type, val, row, col));
+    },
+    updateInputSelected: function updateInputSelected(type, row, col) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["updateInputSelected"])(type, row, col));
     }
   };
 };
@@ -69370,7 +69551,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, stateProps) {
 /*!*****************************************************!*\
   !*** ./resources/js/modules/table/redux/actions.js ***!
   \*****************************************************/
-/*! exports provided: deleteCol, deleteRow, resetTable, addNewRow, addNewCol, importFile, updateValue, updateName, updateCaption, updateClasses, updateNbCol */
+/*! exports provided: deleteCol, deleteRow, resetTable, addNewRow, addNewCol, importFile, updateValue, updateName, updateCaption, updateClasses, updateNbCol, updateInputSelected, updateInputStyle */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -69386,6 +69567,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateCaption", function() { return updateCaption; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateClasses", function() { return updateClasses; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateNbCol", function() { return updateNbCol; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateInputSelected", function() { return updateInputSelected; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateInputStyle", function() { return updateInputStyle; });
 /* ===============================================
 * FUNCTIONS TO DELETE
 =============================================== */
@@ -69467,6 +69650,23 @@ var updateNbCol = function updateNbCol(nbCol) {
     nbCol: nbCol
   };
 };
+var updateInputSelected = function updateInputSelected(type, row, col) {
+  return {
+    type: "UPDATE_INPUT_SELECTED",
+    typeTable: type,
+    row: row,
+    col: col
+  };
+};
+var updateInputStyle = function updateInputStyle(type, cell, row, col) {
+  return {
+    type: "UPDATE_INPUT_STYLE",
+    typeTable: type,
+    cell: cell,
+    row: row,
+    col: col
+  };
+};
 
 /***/ }),
 
@@ -69509,7 +69709,7 @@ var defaultTab = {
 var initState = {
   'defaultTab': defaultTab,
   'nbCol': 1,
-  classes: [],
+  'classes': [],
   'tableau': {
     'head': [],
     'body': [],
@@ -69517,7 +69717,7 @@ var initState = {
   },
   'caption': '',
   'name': '',
-  inputSelected: null
+  inputSelected: {}
 };
 
 function rootReducer() {
@@ -69559,7 +69759,9 @@ function rootReducer() {
             _value = _Object$entries2$_i[1];
 
         _value.map(function (row) {
-          row.splice(parseInt(payload.idx, 10) + 1, 0, '');
+          row.splice(parseInt(payload.idx, 10) + 1, 0, {
+            'value': ''
+          });
           return row;
         });
       }
@@ -69579,7 +69781,9 @@ function rootReducer() {
       var tab = [];
 
       for (var i = 0; i < state.nbCol; i++) {
-        tab.push('');
+        tab.push({
+          'value': ''
+        });
       }
 
       newState.tableau[payload.typeTable].splice(parseInt(payload.idx, 10) + 1, 0, tab);
@@ -69598,7 +69802,7 @@ function rootReducer() {
       });
 
     case "UPDATE_VALUE":
-      newState.tableau[payload.typeTable][payload.row][payload.col] = payload.value;
+      newState.tableau[payload.typeTable][payload.row][payload.col].value = payload.value;
       return _objectSpread({}, state, {
         tableau: _objectSpread({}, state.tableau, _defineProperty({}, payload.typeTable, newState.tableau[payload.typeTable]))
       });
@@ -69615,7 +69819,7 @@ function rootReducer() {
         classes: [],
         'caption': '',
         'name': '',
-        inputSelected: null
+        inputSelected: {}
       };
 
     case "IMPORT_TABLE":
@@ -69643,7 +69847,19 @@ function rootReducer() {
 
     case "UPDATE_INPUT_SELECTED":
       return _objectSpread({}, state, {
-        inputSelected: payload.input
+        inputSelected: {
+          type: payload.typeTable,
+          row: payload.row,
+          col: payload.col
+        }
+      });
+
+    case "UPDATE_INPUT_STYLE":
+      newState.tableau[payload.typeTable][payload.row][payload.col] = _objectSpread({}, newState.tableau[payload.typeTable][payload.row][payload.col], {
+        style: payload.cell
+      });
+      return _objectSpread({}, state, {
+        tableau: _objectSpread({}, state.tableau, _defineProperty({}, payload.typeTable, newState.tableau[payload.typeTable]))
       });
 
     default:

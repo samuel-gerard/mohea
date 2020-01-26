@@ -7,7 +7,7 @@ import TableReturn from "./tableReturn.jsx";
 import { addNewRow, addNewCol, importFile, resetTable, updateCaption, updateName, updateClasses, updateNbCol } from "../redux/actions";
 import * as d3 from "d3";
 import { ImportFile } from "../../../components/ImportFile";
-import { CustomInput } from "../../../components/CustomInput";
+import CustomInput from "./CustomInput";
 
 class Table extends Component {
   constructor(props) {
@@ -16,7 +16,6 @@ class Table extends Component {
     this.state = {
       heightCol: 0,
       widthCol: 0,
-      dataImported: {},
     }
   }
   /* ===============================================
@@ -99,10 +98,16 @@ class Table extends Component {
         if(i === data.length) {
           return;
         }
-        tableImported['body'].push(Object.values(el))
+        const rowBody = Object.values(el).map(val => {
+          return { 'value': val }
+        })
+        tableImported['body'].push(rowBody)
       });
 
-      tableImported['head'].push(data['columns']);
+      const rowHead = data['columns'].map(val => {
+        return { 'value': val }
+      })
+      tableImported['head'].push(rowHead);
 
       this.props.importFile(tableImported);
       this.props.updateNbCol(data['columns'].length)
@@ -145,9 +150,7 @@ class Table extends Component {
             </div>
           </div>
         }
-        {this.props.inputSelected && 
-          <CustomInput />
-        }
+        <CustomInput />
         <div className="row">
           <div className="col-md-3">
             <div className="form-group">
@@ -216,7 +219,7 @@ const mapStateToProps = state => {
     tableau: state.tableau,
     name: state.name,
     caption: state.caption,
-    classes: state.classes
+    classes: state.classes,
   }
 }
 

@@ -67,3 +67,18 @@ export const updateNbCol = (nbCol) => ({
   type: "UPDATE_NBCOL",
   nbCol,
 })
+
+export const updateInputSelected = (type, row, col) => ({
+  type: "UPDATE_INPUT_SELECTED",
+  typeTable: type,
+  row,
+  col,
+})
+
+export const updateInputStyle = (type, cell, row, col) => ({
+  type: "UPDATE_INPUT_STYLE",
+  typeTable: type,
+  cell: cell,
+  row: row,
+  col: col,
+});

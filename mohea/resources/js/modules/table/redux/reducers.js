@@ -14,7 +14,7 @@ const initState = {
   },
   'caption': '',
   'name': '',
-  inputSelected: {}
+  'inputSelected': {}
 }
 
 function rootReducer(state = initState, payload) {
@@ -106,10 +106,10 @@ function rootReducer(state = initState, payload) {
           'body': [],
           'foot': [],
         },
-        classes: [],
+        'classes': [],
         'caption': '',
         'name': '',
-        inputSelected: {}
+        'inputSelected': {}
       }
     case "IMPORT_TABLE":
       return {

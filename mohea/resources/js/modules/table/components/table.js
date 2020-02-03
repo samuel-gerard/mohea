@@ -13,6 +13,7 @@ class Table extends Component {
   constructor(props) {
     super(props);
 
+    // State to init an empty table
     this.state = {
       heightCol: 0,
       widthCol: 0,

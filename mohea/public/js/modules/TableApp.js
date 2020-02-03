@@ -1128,7 +1128,7 @@ module.exports = closest;
 
 /***/ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./resources/sass/input.scss":
 /*!**********************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader!./node_modules/postcss-loader/src??ref--8-2!./node_modules/sass-loader/dist/cjs.js??ref--8-3!./resources/sass/input.scss ***!
+  !*** ./node_modules/css-loader!./node_modules/postcss-loader/src??ref--9-2!./node_modules/sass-loader/dist/cjs.js??ref--9-3!./resources/sass/input.scss ***!
   \**********************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -1147,7 +1147,7 @@ exports.push([module.i, "table input.form-control {\n  background: rgba(0, 0, 0,
 
 /***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/prismjs/plugins/line-numbers/prism-line-numbers.css":
 /*!**********************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--7-1!./node_modules/postcss-loader/src??ref--7-2!./node_modules/prismjs/plugins/line-numbers/prism-line-numbers.css ***!
+  !*** ./node_modules/css-loader??ref--8-1!./node_modules/postcss-loader/src??ref--8-2!./node_modules/prismjs/plugins/line-numbers/prism-line-numbers.css ***!
   \**********************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -1166,7 +1166,7 @@ exports.push([module.i, "pre[class*=\"language-\"].line-numbers {\n\tposition: r
 
 /***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/prismjs/plugins/toolbar/prism-toolbar.css":
 /*!************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--7-1!./node_modules/postcss-loader/src??ref--7-2!./node_modules/prismjs/plugins/toolbar/prism-toolbar.css ***!
+  !*** ./node_modules/css-loader??ref--8-1!./node_modules/postcss-loader/src??ref--8-2!./node_modules/prismjs/plugins/toolbar/prism-toolbar.css ***!
   \************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -1185,7 +1185,7 @@ exports.push([module.i, "div.code-toolbar {\n\tposition: relative;\n}\n\ndiv.cod
 
 /***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/prismjs/themes/prism-okaidia.css":
 /*!***************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--7-1!./node_modules/postcss-loader/src??ref--7-2!./node_modules/prismjs/themes/prism-okaidia.css ***!
+  !*** ./node_modules/css-loader??ref--8-1!./node_modules/postcss-loader/src??ref--8-2!./node_modules/prismjs/themes/prism-okaidia.css ***!
   \***************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -31746,7 +31746,7 @@ Prism.languages.svg = Prism.languages.markup;
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../css-loader??ref--7-1!../../../postcss-loader/src??ref--7-2!./prism-line-numbers.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/prismjs/plugins/line-numbers/prism-line-numbers.css");
+var content = __webpack_require__(/*! !../../../css-loader??ref--8-1!../../../postcss-loader/src??ref--8-2!./prism-line-numbers.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/prismjs/plugins/line-numbers/prism-line-numbers.css");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -32345,7 +32345,7 @@ Prism.hooks.add('before-sanity-check', function (env) {
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../css-loader??ref--7-1!../../../postcss-loader/src??ref--7-2!./prism-toolbar.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/prismjs/plugins/toolbar/prism-toolbar.css");
+var content = __webpack_require__(/*! !../../../css-loader??ref--8-1!../../../postcss-loader/src??ref--8-2!./prism-toolbar.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/prismjs/plugins/toolbar/prism-toolbar.css");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -32540,7 +32540,7 @@ if(false) {}
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../css-loader??ref--7-1!../../postcss-loader/src??ref--7-2!./prism-okaidia.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/prismjs/themes/prism-okaidia.css");
+var content = __webpack_require__(/*! !../../css-loader??ref--8-1!../../postcss-loader/src??ref--8-2!./prism-okaidia.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/prismjs/themes/prism-okaidia.css");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -68544,7 +68544,7 @@ function (_Component) {
 
     _classCallCheck(this, Table);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Table).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Table).call(this, props)); // State to init an empty table
 
     _defineProperty(_assertThisInitialized(_this), "handleReset", function () {
       _this.props.resetTable();
@@ -68651,6 +68651,10 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "handleGenerate", function () {
       console.log(_this.props);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleSave", function () {
+      _this.props.saveTable();
     });
 
     _this.state = {
@@ -68858,7 +68862,20 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     updateNbCol: function updateNbCol(number) {
       dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_6__["updateNbCol"])(number));
-    }
+    },
+    saveTable: function (_saveTable) {
+      function saveTable() {
+        return _saveTable.apply(this, arguments);
+      }
+
+      saveTable.toString = function () {
+        return _saveTable.toString();
+      };
+
+      return saveTable;
+    }(function () {
+      dispatch(saveTable);
+    })
   };
 };
 
@@ -69717,7 +69734,7 @@ var initState = {
   },
   'caption': '',
   'name': '',
-  inputSelected: {}
+  'inputSelected': {}
 };
 
 function rootReducer() {
@@ -69816,10 +69833,10 @@ function rootReducer() {
           'body': [],
           'foot': []
         },
-        classes: [],
+        'classes': [],
         'caption': '',
         'name': '',
-        inputSelected: {}
+        'inputSelected': {}
       };
 
     case "IMPORT_TABLE":
@@ -69879,7 +69896,7 @@ function rootReducer() {
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../node_modules/css-loader!../../node_modules/postcss-loader/src??ref--8-2!../../node_modules/sass-loader/dist/cjs.js??ref--8-3!./input.scss */ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./resources/sass/input.scss");
+var content = __webpack_require__(/*! !../../node_modules/css-loader!../../node_modules/postcss-loader/src??ref--9-2!../../node_modules/sass-loader/dist/cjs.js??ref--9-3!./input.scss */ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./resources/sass/input.scss");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 

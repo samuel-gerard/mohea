@@ -1,13 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
-import { updateInputStyle } from "../redux/actions";
+import { updateInputStyle, updateInputOptions } from "../redux/actions";
 
 const CustomInput = (props) => {
   const details = props.inputSelected
   let cell = {}
+  let item = {}
 
-  if(details.type) {
-    let style = props.menu[details.type][details.row][details.col].style
+  if(details.index) {
+    item = props.menu[details.index]
+    let style = item.style
     if(style) {
       style = Object.assign({}, style);
       style.fontSize = style.fontSize ? style.fontSize.replace('px', '') : ''
@@ -20,11 +22,24 @@ const CustomInput = (props) => {
     if(e.target.type === 'checkbox') val = e.target.checked ? e.target.value : ''
 
     cell[e.target.dataset.key] = val
-    props.updateInputStyle(details.type, cell, details.row, details.col)
+    props.updateInputStyle(cell, details.parent_index, details.index)
   }
 
-  if(details.type) {
+  const handleLink = (e) => {
+    props.updateInputOptions('link', e.target.value, details.parent_index, details.index)
+  }
+
+  const handleTarget = (e) => {
+    props.updateInputOptions('target', e.target.checked ? e.target.value : '_self', details.parent_index, details.index)
+  }
+
+  const handleTitle = (e) => {
+    props.updateInputOptions('title', e.target.value, details.parent_index, details.index)
+  }
+
+  if(details.index) {
     return (<div>
+      <h1>Style</h1>
       <label htmlFor="color-text">Text color</label>
       <input type="color"
         id="color-text"
@@ -82,6 +97,31 @@ const CustomInput = (props) => {
           checked={cell.fontWeight ? true : false}
           data-key="fontWeight" />
       </div>
+
+      <h2>Options</h2>
+      <div className="from-group">
+        <label htmlFor="option-target">Open in a new tab</label>
+        <input type="checkbox"
+          onChange={handleTarget}
+          value='_blank'
+          id="option-target"
+          checked={item.target === '_blank' ? true : false} />
+      </div>
+      <div className="from-group">
+        <label htmlFor="option-link">URL</label>
+        <input type="text"
+          onChange={handleLink}
+          placeholder="http:// or https://"
+          id="option-link"
+          value={item.link} />
+      </div>
+      <div className="from-group">
+        <label htmlFor="option-title">Link title</label>
+        <input type="text"
+          onChange={handleTitle}
+          id="option-title"
+          value={item.title} />
+      </div>
     </div>)
   }
   else {
@@ -100,9 +140,12 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, stateProps) => {
   return {
-    updateInputStyle: (type, cell, row, col) => {
-      dispatch(updateInputStyle(type, cell, row, col))
+    updateInputStyle: (cell, parent_idx, idx) => {
+      dispatch(updateInputStyle(cell, parent_idx, idx))
     },
+    updateInputOptions: (type, value, parent_idx, idx) => {
+      dispatch(updateInputOptions(type, value, parent_idx, idx))
+    }
   }
 }
 

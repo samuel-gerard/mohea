@@ -14,11 +14,6 @@ class Menu extends Component {
     this.props.resetMenu();
   }
 
-  // Add a new column to all the menu
-  handleDeleteItem = () => {
-    this.props.deleteItem();
-  }
-
   handleName = (e) => {
     this.props.updateName(e.target.value);
   }
@@ -38,7 +33,7 @@ class Menu extends Component {
   * Get JSON about this menu
   =============================================== */
   handleGenerate = () => {
-    console.log(this.props)
+    console.log(this.props.menu)
   }
 
   handleSave = () => {
@@ -48,8 +43,6 @@ class Menu extends Component {
   * DISPLAY COMPONENT
   =============================================== */
   render() {
-    const menuClasses = this.props.classes.join(' ')
-
     return <section>
         <h1>{this.props.name || 'New Menu'}</h1>
         <CustomInput />
@@ -64,28 +57,16 @@ class Menu extends Component {
             <div className="form-group card p-2 bg-info text-white">
               <h4>Menu global style</h4>
               <div className="form-check">
-                <input className="form-check-input" type="checkbox" id="class-style" onChange={this.handleClasses} value="table" />
+                <input className="form-check-input" type="checkbox" id="class-style" onChange={this.handleClasses} value="navbar" defaultChecked/>
                 <label className="form-check-label" htmlFor="class-style">With bootstrap initial style</label>
               </div>
               <div className="form-check">
-                <input className="form-check-input" type="checkbox" id="class-striped" onChange={this.handleClasses} value="table-striped" />
-                <label className="form-check-label" htmlFor="class-striped">Striped</label>
+                <input className="form-check-input" type="checkbox" id="class-light" onChange={this.handleClasses} value="navbar-light bg-light" defaultChecked/>
+                <label className="form-check-label" htmlFor="class-light">Light</label>
               </div>
               <div className="form-check">
-                <input className="form-check-input" type="checkbox" id="class-dark" onChange={this.handleClasses} value="table-dark" />
+                <input className="form-check-input" type="checkbox" id="class-dark" onChange={this.handleClasses} value="navbar-dark bg-dark" />
                 <label className="form-check-label" htmlFor="class-dark">Dark</label>
-              </div>
-              <div className="form-check">
-                <input className="form-check-input" type="checkbox" id="class-bordered" onChange={this.handleClasses} value="table-bordered" />
-                <label className="form-check-label" htmlFor="class-bordered">Bordered</label>
-              </div>
-              <div className="form-check">
-                <input className="form-check-input" type="checkbox" id="class-hover" onChange={this.handleClasses} value="table-hover" />
-                <label className="form-check-label" htmlFor="class-hover">Hover</label>
-              </div>
-              <div className="form-check">
-                <input className="form-check-input" type="checkbox" id="class-responsive" onChange={this.handleClasses} value="table-responsive" />
-                <label className="form-check-label" htmlFor="class-responsive">Responsive</label>
               </div>
             </div>
             <div className="form-group d-flex justify-content-between">
@@ -94,9 +75,7 @@ class Menu extends Component {
             </div>
           </div>
           <div className="col-md-9">
-            <ul className={menuClasses}>
-              <MenuContent />
-            </ul>
+            <MenuContent />
           </div>
         </div>
         <div className="row">
@@ -112,7 +91,6 @@ const mapStateToProps = state => {
   return {
     menu: state.menu,
     name: state.name,
-    classes: state.classes,
   }
 }
 

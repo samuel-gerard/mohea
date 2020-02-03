@@ -16,10 +16,9 @@ export const resetMenu = () => ({
 * FUNCTIONS TO ADD
 =============================================== */
 
-export const addNewItem = (parent_idx, idx) => ({
-    type: "ADD_ROW",
+export const addNewItem = (parent_idx) => ({
+    type: "ADD_ITEM",
     parent_idx: parent_idx,
-    idx: idx
 });
 
 export const saveMenu = () => ({
@@ -54,9 +53,17 @@ export const updateInputSelected = (parent_idx, idx) => ({
   idx: idx,
 })
 
-export const updateInputStyle = (parent_idx, cell, row, col) => ({
+export const updateInputStyle = (cell, parent_idx, idx) => ({
   type: "UPDATE_INPUT_STYLE",
   cell: cell,
   parent_idx: parent_idx,
   idx: idx,
 });
+
+export const updateInputOptions = (type, value, parent_idx, idx) => ({
+  type: "UDPATE_INPUT_OPTIONS",
+  key: type,
+  value: value,
+  parent_idx: parent_idx,
+  idx: idx,
+})

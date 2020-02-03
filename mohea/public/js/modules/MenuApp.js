@@ -1126,25 +1126,6 @@ module.exports = closest;
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./resources/sass/input.scss":
-/*!**********************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader!./node_modules/postcss-loader/src??ref--8-2!./node_modules/sass-loader/dist/cjs.js??ref--8-3!./resources/sass/input.scss ***!
-  \**********************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "table input.form-control {\n  background: rgba(0, 0, 0, 0.02);\n  border-radius: 0;\n  border: 0;\n  transition: background 0.2s ease-in-out;\n}\ntable input.form-control:focus, table input.form-control:active {\n  border-radius: 0;\n  background: transparent;\n  border: 1px solid rgba(0, 0, 0, 0.1);\n  box-shadow: none;\n}\n\n.table-dark input.form-control {\n  background: rgba(255, 255, 255, 0.02);\n  color: white;\n}\n.table-dark input.form-control:focus, .table-dark input.form-control:active {\n  background: transparent;\n  border: 1px solid rgba(255, 255, 255, 0.1);\n}\n\n.table th,\n.table td {\n  margin: 0;\n  padding: 0;\n}", ""]);
-
-// exports
-
-
-/***/ }),
-
 /***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/prismjs/plugins/line-numbers/prism-line-numbers.css":
 /*!**********************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--7-1!./node_modules/postcss-loader/src??ref--7-2!./node_modules/prismjs/plugins/line-numbers/prism-line-numbers.css ***!
@@ -39024,9 +39005,11 @@ __webpack_require__.r(__webpack_exports__);
 var CustomInput = function CustomInput(props) {
   var details = props.inputSelected;
   var cell = {};
+  var item = {};
 
-  if (details.type) {
-    var style = props.menu[details.type][details.row][details.col].style;
+  if (details.index) {
+    item = props.menu[details.index];
+    var style = item.style;
 
     if (style) {
       style = Object.assign({}, style);
@@ -39039,11 +39022,23 @@ var CustomInput = function CustomInput(props) {
     var val = e.target.dataset.key === 'fontSize' ? e.target.value + 'px' : e.target.value;
     if (e.target.type === 'checkbox') val = e.target.checked ? e.target.value : '';
     cell[e.target.dataset.key] = val;
-    props.updateInputStyle(details.type, cell, details.row, details.col);
+    props.updateInputStyle(cell, details.parent_index, details.index);
   };
 
-  if (details.type) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+  var handleLink = function handleLink(e) {
+    props.updateInputOptions('link', e.target.value, details.parent_index, details.index);
+  };
+
+  var handleTarget = function handleTarget(e) {
+    props.updateInputOptions('target', e.target.checked ? e.target.value : '_self', details.parent_index, details.index);
+  };
+
+  var handleTitle = function handleTitle(e) {
+    props.updateInputOptions('title', e.target.value, details.parent_index, details.index);
+  };
+
+  if (details.index) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Style"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       htmlFor: "color-text"
     }, "Text color"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "color",
@@ -39117,6 +39112,35 @@ var CustomInput = function CustomInput(props) {
       value: "bold",
       checked: cell.fontWeight ? true : false,
       "data-key": "fontWeight"
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Options"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "from-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      htmlFor: "option-target"
+    }, "Open in a new tab"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "checkbox",
+      onChange: handleTarget,
+      value: "_blank",
+      id: "option-target",
+      checked: item.target === '_blank' ? true : false
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "from-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      htmlFor: "option-link"
+    }, "URL"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "text",
+      onChange: handleLink,
+      placeholder: "http:// or https://",
+      id: "option-link",
+      value: item.link
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "from-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      htmlFor: "option-title"
+    }, "Link title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "text",
+      onChange: handleTitle,
+      id: "option-title",
+      value: item.title
     })));
   } else {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Select an item to customize."));
@@ -39132,8 +39156,11 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch, stateProps) {
   return {
-    updateInputStyle: function updateInputStyle(type, cell, row, col) {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["updateInputStyle"])(type, cell, row, col));
+    updateInputStyle: function updateInputStyle(cell, parent_idx, idx) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["updateInputStyle"])(cell, parent_idx, idx));
+    },
+    updateInputOptions: function updateInputOptions(type, value, parent_idx, idx) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["updateInputOptions"])(type, value, parent_idx, idx));
     }
   };
 };
@@ -39165,13 +39192,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
@@ -39183,15 +39212,103 @@ function (_Component) {
   _inherits(MenuContent, _Component);
 
   function MenuContent() {
+    var _getPrototypeOf2;
+
+    var _this;
+
     _classCallCheck(this, MenuContent);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(MenuContent).apply(this, arguments));
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(MenuContent)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_this), "handleAddItem", function (parent_idx) {
+      _this.props.addNewItem(parent_idx);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleDeleteItem", function (idx) {
+      _this.props.deleteItem(null, idx);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleUpdateValue", function (e) {
+      var split = e.target.dataset.idx.split('/');
+      var parent_idx = split[0];
+      var idx = split[1];
+
+      _this.props.updateItemValue(e.target.value, parent_idx, idx);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleInputSelected", function (e) {
+      var split = e.target.dataset.idx.split('/');
+      var parent_idx = split[0];
+      var idx = split[1];
+
+      _this.props.updateInputSelected(parent_idx, idx);
+    });
+
+    return _this;
   }
 
   _createClass(MenuContent, [{
     key: "render",
     value: function render() {
-      return '<h1>hello</h1>';
+      var _this2 = this;
+
+      var menuClasses = this.props.classes.join(' ');
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
+        className: menuClasses + ' navbar-expand-sm'
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "navbar-toggler",
+        type: "button",
+        "data-toggle": "collapse",
+        "data-target": "#navbarSupportedContent",
+        "aria-controls": "navbarSupportedContent",
+        "aria-expanded": "false",
+        "aria-label": "Toggle navigation"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "navbar-toggler-icon"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "collapse navbar-collapse",
+        id: "navbarSupportedContent"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "navbar-nav mr-auto"
+      }, Object.values(this.props.menu).map(function (item, idx) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          key: 'menu-0-' + idx,
+          className: "nav-item d-flex align-items-center"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "text",
+          "data-idx": '-1/' + idx,
+          onFocus: _this2.handleInputSelected,
+          onChange: _this2.handleUpdateValue,
+          value: item.value,
+          className: "form-control",
+          style: item.style
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "button",
+          onClick: function onClick() {
+            return _this2.handleDeleteItem(idx);
+          },
+          className: "btn btn-secondary d-inline-block",
+          value: "-"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "button",
+          onClick: function onClick() {
+            return _this2.handleAddItem(idx);
+          },
+          className: "btn btn-primary",
+          value: "+"
+        }));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "button",
+        onClick: function onClick() {
+          return _this2.handleAddItem(-1);
+        },
+        className: "btn btn-primary",
+        value: "+"
+      }))));
     }
   }]);
 
@@ -39200,23 +39317,24 @@ function (_Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    menu: state.menu
+    menu: state.menu,
+    classes: state.classes
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch, stateProps) {
   return {
-    addNewItem: function addNewItem(type, idx) {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["addNewItem"])(type, idx));
+    addNewItem: function addNewItem(parent_idx) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["addNewItem"])(parent_idx));
     },
-    deleteItem: function deleteItem(type, idx) {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["deleteItem"])(type, idx));
+    deleteItem: function deleteItem(parent_idx, idx) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["deleteItem"])(parent_idx, idx));
     },
-    updateItemValue: function updateItemValue(type, val, row, col) {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["updateItemValue"])(type, val, row, col));
+    updateItemValue: function updateItemValue(val, parent_idx, idx) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["updateItemValue"])(val, parent_idx, idx));
     },
-    updateInputSelected: function updateInputSelected(type, row, col) {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["updateInputSelected"])(type, row, col));
+    updateInputSelected: function updateInputSelected(parent_idx, idx) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["updateInputSelected"])(parent_idx, idx));
     }
   };
 };
@@ -39238,11 +39356,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _components_PrismCode__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../components/PrismCode */ "./resources/js/components/PrismCode.js");
-/* harmony import */ var _sass_input_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../sass/input.scss */ "./resources/sass/input.scss");
-/* harmony import */ var _sass_input_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_sass_input_scss__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var clipboard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! clipboard */ "./node_modules/clipboard/dist/clipboard.js");
-/* harmony import */ var clipboard__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(clipboard__WEBPACK_IMPORTED_MODULE_4__);
-
+/* harmony import */ var clipboard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! clipboard */ "./node_modules/clipboard/dist/clipboard.js");
+/* harmony import */ var clipboard__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(clipboard__WEBPACK_IMPORTED_MODULE_3__);
 
 
 
@@ -39252,16 +39367,47 @@ var MenuReturn = function MenuReturn(props) {
   var menu = props.menu;
   var menuClasses = props.classes.join(' '); // Init clipboard button
 
-  new clipboard__WEBPACK_IMPORTED_MODULE_4___default.a('#button-to-copy');
+  new clipboard__WEBPACK_IMPORTED_MODULE_3___default.a('#button-to-copy');
   var html = '';
 
   var camelToKebab = function camelToKebab(string) {
     return string.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase();
-  }; // Start
+  };
+
+  if (menu.length < 1) {
+    return '';
+  } // Start
 
 
-  html += "<table class=\"".concat(menuClasses, "\">\n");
-  html += "</table>";
+  html += "<nav class=\"".concat(menuClasses, "\">\n");
+  html += "   <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n";
+  html += "     <span class=\"navbar-toggler-icon\"></span>\n";
+  html += "   </button>\n";
+  html += "   <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n";
+  html += "       <ul class=\"navbar-nav mr-auto\">\n";
+  {
+    Object.values(menu).map(function (item, idx) {
+      html += "           <li class=\"nav-item\">\n";
+
+      if (Object.keys(item.style).length > 0) {
+        var style = '';
+        Object.keys(item.style).map(function (key) {
+          if (!item.style[key]) return;
+          style += camelToKebab(key) + ':' + item.style[key] + ';';
+        });
+        html += "               <a href=\"".concat(item.link, "\" title=\"").concat(item.title, "\" style=\"").concat(style, "\" ").concat(item.target === '_blank' ? 'target="_blank"' : '', ">\n");
+      } else {
+        html += "               <a href=\"".concat(item.link, "\" title=\"").concat(item.title, " ").concat(item.target === '_blank' ? 'target="_blank"' : '', "\">\n");
+      }
+
+      html += "                   ".concat(item.value, "\n");
+      html += "               </a>\n";
+      html += "           </li>\n";
+    });
+  }
+  html += "       </ul>\n";
+  html += "   </div>\n";
+  html += "</nav>";
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Your HTML code"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "w-50 mx-auto"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PrismCode__WEBPACK_IMPORTED_MODULE_2__["PrismCode"], {
@@ -39347,10 +39493,6 @@ function (_Component) {
       _this.props.resetMenu();
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleDeleteItem", function () {
-      _this.props.deleteItem();
-    });
-
     _defineProperty(_assertThisInitialized(_this), "handleName", function (e) {
       _this.props.updateName(e.target.value);
     });
@@ -39366,7 +39508,7 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleGenerate", function () {
-      console.log(_this.props);
+      console.log(_this.props.menu);
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleSave", function () {
@@ -39383,7 +39525,6 @@ function (_Component) {
     * DISPLAY COMPONENT
     =============================================== */
     value: function render() {
-      var menuClasses = this.props.classes.join(' ');
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.props.name || 'New Menu'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CustomInput__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -39408,7 +39549,8 @@ function (_Component) {
         type: "checkbox",
         id: "class-style",
         onChange: this.handleClasses,
-        value: "table"
+        value: "navbar",
+        defaultChecked: true
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "form-check-label",
         htmlFor: "class-style"
@@ -39417,57 +39559,25 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "form-check-input",
         type: "checkbox",
-        id: "class-striped",
+        id: "class-light",
         onChange: this.handleClasses,
-        value: "table-striped"
+        value: "navbar-light bg-light",
+        defaultChecked: true
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "form-check-label",
-        htmlFor: "class-striped"
-      }, "Striped")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        htmlFor: "class-light"
+      }, "Light")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-check"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "form-check-input",
         type: "checkbox",
         id: "class-dark",
         onChange: this.handleClasses,
-        value: "table-dark"
+        value: "navbar-dark bg-dark"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "form-check-label",
         htmlFor: "class-dark"
-      }, "Dark")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-check"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        className: "form-check-input",
-        type: "checkbox",
-        id: "class-bordered",
-        onChange: this.handleClasses,
-        value: "table-bordered"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "form-check-label",
-        htmlFor: "class-bordered"
-      }, "Bordered")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-check"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        className: "form-check-input",
-        type: "checkbox",
-        id: "class-hover",
-        onChange: this.handleClasses,
-        value: "table-hover"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "form-check-label",
-        htmlFor: "class-hover"
-      }, "Hover")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-check"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        className: "form-check-input",
-        type: "checkbox",
-        id: "class-responsive",
-        onChange: this.handleClasses,
-        value: "table-responsive"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "form-check-label",
-        htmlFor: "class-responsive"
-      }, "Responsive"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Dark"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group d-flex justify-content-between"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "button",
@@ -39481,9 +39591,7 @@ function (_Component) {
         onClick: this.handleReset
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-9"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: menuClasses
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MenuContent__WEBPACK_IMPORTED_MODULE_4__["default"], null)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MenuContent__WEBPACK_IMPORTED_MODULE_4__["default"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-12"
@@ -39497,8 +39605,7 @@ function (_Component) {
 var mapStateToProps = function mapStateToProps(state) {
   return {
     menu: state.menu,
-    name: state.name,
-    classes: state.classes
+    name: state.name
   };
 };
 
@@ -39530,7 +39637,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 /*!****************************************************!*\
   !*** ./resources/js/modules/menu/redux/actions.js ***!
   \****************************************************/
-/*! exports provided: deleteItem, resetMenu, addNewItem, saveMenu, updateItemValue, updateName, updateClasses, updateInputSelected, updateInputStyle */
+/*! exports provided: deleteItem, resetMenu, addNewItem, saveMenu, updateItemValue, updateName, updateClasses, updateInputSelected, updateInputStyle, updateInputOptions */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -39544,6 +39651,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateClasses", function() { return updateClasses; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateInputSelected", function() { return updateInputSelected; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateInputStyle", function() { return updateInputStyle; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateInputOptions", function() { return updateInputOptions; });
 /* ===============================================
 * FUNCTIONS TO DELETE
 =============================================== */
@@ -39563,11 +39671,10 @@ var resetMenu = function resetMenu() {
 * FUNCTIONS TO ADD
 =============================================== */
 
-var addNewItem = function addNewItem(parent_idx, idx) {
+var addNewItem = function addNewItem(parent_idx) {
   return {
-    type: "ADD_ROW",
-    parent_idx: parent_idx,
-    idx: idx
+    type: "ADD_ITEM",
+    parent_idx: parent_idx
   };
 };
 var saveMenu = function saveMenu() {
@@ -39606,10 +39713,19 @@ var updateInputSelected = function updateInputSelected(parent_idx, idx) {
     idx: idx
   };
 };
-var updateInputStyle = function updateInputStyle(parent_idx, cell, row, col) {
+var updateInputStyle = function updateInputStyle(cell, parent_idx, idx) {
   return {
     type: "UPDATE_INPUT_STYLE",
     cell: cell,
+    parent_idx: parent_idx,
+    idx: idx
+  };
+};
+var updateInputOptions = function updateInputOptions(type, value, parent_idx, idx) {
+  return {
+    type: "UDPATE_INPUT_OPTIONS",
+    key: type,
+    value: value,
     parent_idx: parent_idx,
     idx: idx
   };
@@ -39640,13 +39756,16 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+var initItem = {
+  'title': '',
+  'link': '',
+  'value': '',
+  'target': '_self',
+  'style': {},
+  children: []
+};
 var initState = {
-  'initItem': {
-    'value': '',
-    'style': {},
-    children: []
-  },
-  'classes': [],
+  'classes': ['navbar', 'navbar-light bg-light'],
   'menu': [],
   'name': '',
   'inputSelected': {}
@@ -39659,12 +39778,24 @@ function rootReducer() {
 
   switch (payload.type) {
     case "DELETE_ITEM":
-      return _objectSpread({}, state);
+      newState.menu.splice(payload.idx, 1);
+      return _objectSpread({}, state, {
+        menu: _toConsumableArray(newState.menu)
+      });
 
     case "ADD_ITEM":
+      var item = Object.assign({}, initItem);
+
+      if (payload.parent_idx < 0) {
+        return _objectSpread({}, state, {
+          menu: [].concat(_toConsumableArray(state.menu), [item])
+        });
+      }
+
       return _objectSpread({}, state, {
-        nbCol: state.nbCol + 1,
-        menu: newState.menu
+        menu: [].concat(_toConsumableArray(state.menu.slice(0, payload.parent_idx)), [_objectSpread({}, state.menu[payload.parent_idx], {
+          children: [].concat(_toConsumableArray(newState.menu[payload.parent_idx].children), [item])
+        })], _toConsumableArray(state.menu.slice(payload.parent_idx + 1)))
       });
 
     case "UPDATE_NAME":
@@ -39673,16 +39804,23 @@ function rootReducer() {
       });
 
     case "UPDATE_ITEM_VALUE":
-      newState.menu[payload.index].value = payload.value;
+      var parent_idx = parseInt(payload.parent_idx, 10);
+      var idx = parseInt(payload.idx, 10);
+
+      if (parent_idx < 0) {
+        newState.menu[idx].value = payload.value;
+      } else {
+        newState.menu[parent_idx].children[idx].value = payload.value;
+      }
+
       return _objectSpread({}, state, {
-        menu: _objectSpread({}, state.menu, _defineProperty({}, payload.typeTable, newState.menu[payload.typeTable]))
+        menu: _toConsumableArray(newState.menu)
       });
 
     case "RESET_MENU":
       return {
-        'menu': {},
-        'classes': [],
-        'caption': '',
+        'classes': ['navbar', 'navbar-light bg-light'],
+        'menu': [],
         'name': '',
         'inputSelected': {}
       };
@@ -39693,7 +39831,9 @@ function rootReducer() {
       if (indexOfClasse >= 0) {
         newState.classes.splice(indexOfClasse, 1);
       } else {
-        newState.classes.push(payload.classe);
+        var _newState$classes;
+
+        (_newState$classes = newState.classes).push.apply(_newState$classes, [payload.classe]);
       }
 
       return _objectSpread({}, state, {
@@ -39708,17 +39848,23 @@ function rootReducer() {
     case "UPDATE_INPUT_SELECTED":
       return _objectSpread({}, state, {
         inputSelected: {
-          index: payload.index,
-          parent_index: payload.parent_index
+          index: payload.idx,
+          parent_index: payload.parent_idx
         }
       });
 
     case "UPDATE_INPUT_STYLE":
-      newState.menu[payload.index] = _objectSpread({}, newState.menu[payload.index], {
+      newState.menu[payload.idx] = _objectSpread({}, newState.menu[payload.idx], {
         style: payload.cell
       });
       return _objectSpread({}, state, {
-        menu: _objectSpread({}, state.menu, _defineProperty({}, payload.typeTable, newState.menu[payload.typeTable]))
+        menu: _toConsumableArray(newState.menu)
+      });
+
+    case "UDPATE_INPUT_OPTIONS":
+      newState.menu[payload.idx] = _objectSpread({}, newState.menu[payload.idx], _defineProperty({}, payload.key, payload.value));
+      return _objectSpread({}, state, {
+        menu: _toConsumableArray(newState.menu)
       });
 
     default:
@@ -39727,36 +39873,6 @@ function rootReducer() {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (rootReducer);
-
-/***/ }),
-
-/***/ "./resources/sass/input.scss":
-/*!***********************************!*\
-  !*** ./resources/sass/input.scss ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../node_modules/css-loader!../../node_modules/postcss-loader/src??ref--8-2!../../node_modules/sass-loader/dist/cjs.js??ref--8-3!./input.scss */ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./resources/sass/input.scss");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
 
 /***/ }),
 

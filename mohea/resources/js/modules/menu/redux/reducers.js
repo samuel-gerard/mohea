@@ -1,10 +1,13 @@
+const initItem = {
+  'title': '',
+  'link': '',
+  'value': '',
+  'target': '_self',
+  'style': {},
+  children: [],
+}
 const initState = {
-  'initItem': {
-    'value': '',
-    'style': {},
-    children: [],
-  },
-  'classes': [],
+  'classes': ['navbar', 'navbar-light bg-light'],
   'menu': [],
   'name': '',
   'inputSelected': {}
@@ -14,14 +17,40 @@ function rootReducer(state = initState, payload) {
   let newState = Object.assign({}, state);
   switch (payload.type) {
     case "DELETE_ITEM":
+      newState.menu.splice(payload.idx, 1)
+
       return {
         ...state,
+        menu: [
+          ...newState.menu
+        ]
       }
     case "ADD_ITEM":
+      const item = Object.assign({}, initItem);
+
+      if(payload.parent_idx < 0) {
+        return {
+          ...state,
+          menu: [
+            ...state.menu,
+            item
+          ]
+        }
+      }
+
       return {
         ...state,
-        nbCol: state.nbCol + 1,
-        menu: newState.menu
+        menu: [
+          ...state.menu.slice(0, payload.parent_idx),
+          {
+            ...state.menu[payload.parent_idx],
+            children: [
+              ...newState.menu[payload.parent_idx].children,
+              item
+            ]
+          },
+          ...state.menu.slice(payload.parent_idx + 1)
+        ]
       }
     case "UPDATE_NAME":
       return {
@@ -29,19 +58,25 @@ function rootReducer(state = initState, payload) {
         name: payload.name
       }
     case "UPDATE_ITEM_VALUE":
-      newState.menu[payload.index].value = payload.value;
+      const parent_idx = parseInt(payload.parent_idx, 10)
+      const idx = parseInt(payload.idx, 10);
+      if(parent_idx < 0) {
+        newState.menu[idx].value = payload.value;
+      }
+      else {
+        newState.menu[parent_idx].children[idx].value = payload.value;
+      }
+
       return {
         ...state,
-        menu: {
-          ...state.menu,
-          [payload.typeTable]: newState.menu[payload.typeTable],
-        }
+        menu: [
+          ...newState.menu,
+        ]
       }
     case "RESET_MENU":
       return {
-        'menu': {},
-        'classes': [],
-        'caption': '',
+        'classes': ['navbar', 'navbar-light bg-light'],
+        'menu': [],
         'name': '',
         'inputSelected': {}
       }
@@ -52,7 +87,7 @@ function rootReducer(state = initState, payload) {
       if(indexOfClasse >= 0) {
         newState.classes.splice(indexOfClasse, 1)
       } else {
-        newState.classes.push(payload.classe)
+        newState.classes.push(...[payload.classe])
       }
 
       return {
@@ -70,21 +105,33 @@ function rootReducer(state = initState, payload) {
       return {
         ...state,
         inputSelected: {
-          index: payload.index,
-          parent_index: payload.parent_index,
+          index: payload.idx,
+          parent_index: payload.parent_idx,
         }
       }
     case "UPDATE_INPUT_STYLE":
-      newState.menu[payload.index] = {
-        ...newState.menu[payload.index],
+      newState.menu[payload.idx] = {
+        ...newState.menu[payload.idx],
         style: payload.cell
       }
+
       return {
         ...state,
-        menu: {
-          ...state.menu,
-          [payload.typeTable]: newState.menu[payload.typeTable],
-        }
+        menu: [
+          ...newState.menu
+        ]
+      }
+    case "UDPATE_INPUT_OPTIONS":
+      newState.menu[payload.idx] = {
+        ...newState.menu[payload.idx],
+        [payload.key]: payload.value
+      }
+
+      return {
+        ...state,
+        menu: [
+          ...newState.menu
+        ]
       }
     default:
       return state;

@@ -1,31 +1,33 @@
 import React from "react";
 
+import Text from "./elementList/Text";
+import Title from "./elementList/Title";
+
+
 class Edition extends React.Component {
 
-  state = { focus: this.props.focusedElement }
+  constructor(props) {
+    super(props)
+    this.state = { focus: this.props.focusedElement, field: 'salut' }
+    this.handleUpdate = this.handleUpdate.bind(this);
+  }
+
+  // code à la place de content
+  handleUpdate(content)
+  {
+    // console.log(content)
+    this.props.onUpdateElement(content)
+  }
 
   editionMarkup(focus)
   {
     switch(focus.name)
     {
       case 'Text':
-        return {__html: 
-          '<label for="content">'+focus.name+'</label>'+
-          '<textarea rows="5" col="10">'
-        }
+        return <Text display={'edition'} currentElement={focus} onUpdate={this.handleUpdate.bind(this)} />
 
       case 'Title':
-        return {__html: 
-          '<label for="content">'+focus.name+'</label>'+
-          '<input type="text" onChange={this.handleChangeTitle} />'+
-          '<label for="content">Title size</label>'+
-          '<select type="titleSize" />'+
-            '<option value="h1">H1</option>'+
-            '<option value="h2">H2</option>'+
-            '<option value="h3">H3</option>'+
-            '<option value="h4">H4</option>'+
-          '</select>'
-        }
+        return <Title display={'edition'} currentElement={focus} onUpdate={this.handleUpdate.bind(this)} />
       
       case 'Submit':
         return {__html: 
@@ -101,13 +103,12 @@ class Edition extends React.Component {
       <div className="edition_box">
         <h2>Edit element</h2>
 
-        <h3>{this.props.focusedElement.label}</h3>
+        <h3>{this.props.focusedElement.name}</h3>
 
-        <p>Copy element</p>
-        <p>Delete element</p>
+        {/* <div dangerouslySetInnerHTML={this.editionMarkup(this.props.focusedElement)} /> */}
+        <div>{this.editionMarkup(this.props.focusedElement)}</div>
 
-        <div dangerouslySetInnerHTML={this.editionMarkup(this.props.focusedElement)} />
-        
+
       </div>
 
     );

@@ -31982,7 +31982,8 @@ function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "state", {
       usedElements: [],
-      focus: ''
+      focus: '',
+      content: ''
     });
 
     return _this;
@@ -31996,14 +31997,33 @@ function (_React$Component) {
       usedElements.push(element);
       this.setState({
         usedElements: usedElements
-      });
+      }); // stocker dans le tableau l'ELEMENT correspondant // ou le COMPOSANT ?
+      // créer nouvrau composant avec ID/key unique
     }
   }, {
     key: "handleAddFocus",
     value: function handleAddFocus(element) {
+      // FOCUS PAS BIEN MIT A JOUR QUAND PLUSIEURS MEMES ELEMENTS
+      console.log(element);
       this.setState({
         focus: element
       });
+    }
+  }, {
+    key: "handleUpdateElement",
+    value: function handleUpdateElement(content) {
+      // console.log(content)
+      // chercher elem dans usedElements
+      var usedElements = _toConsumableArray(this.state.usedElements);
+
+      usedElements[0].content = content;
+      this.setState({
+        usedElements: usedElements
+      }); // ICI !!! modifier focus avec nouvelle val + ajouter nouveau focus dans tab used
+      // console.log(this.state.focus)
+      // this.setState({usedElements});
+      // console.log(this.state.usedElements)
+      // console.log('OKOKOK = '+content)
     }
   }, {
     key: "render",
@@ -32018,7 +32038,8 @@ function (_React$Component) {
         usedElements: this.state.usedElements,
         onFocusElement: this.handleAddFocus.bind(this)
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Edition__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        focusedElement: this.state.focus
+        focusedElement: this.state.focus,
+        onUpdateElement: this.handleUpdateElement.bind(this)
       })));
     }
   }]);
@@ -32042,6 +32063,8 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _elementList_Text__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./elementList/Text */ "./resources/js/modules/form/components/elementList/Text.jsx");
+/* harmony import */ var _elementList_Title__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./elementList/Title */ "./resources/js/modules/form/components/elementList/Title.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -32060,7 +32083,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -32069,39 +32092,44 @@ var Edition =
 function (_React$Component) {
   _inherits(Edition, _React$Component);
 
-  function Edition() {
-    var _getPrototypeOf2;
-
+  function Edition(props) {
     var _this;
 
     _classCallCheck(this, Edition);
 
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Edition)).call.apply(_getPrototypeOf2, [this].concat(args)));
-
-    _defineProperty(_assertThisInitialized(_this), "state", {
-      focus: _this.props.focusedElement
-    });
-
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Edition).call(this, props));
+    _this.state = {
+      focus: _this.props.focusedElement,
+      field: 'salut'
+    };
+    _this.handleUpdate = _this.handleUpdate.bind(_assertThisInitialized(_this));
     return _this;
-  }
+  } // code à la place de content
+
 
   _createClass(Edition, [{
+    key: "handleUpdate",
+    value: function handleUpdate(content) {
+      // console.log(content)
+      this.props.onUpdateElement(content);
+    }
+  }, {
     key: "editionMarkup",
     value: function editionMarkup(focus) {
       switch (focus.name) {
         case 'Text':
-          return {
-            __html: '<label for="content">' + focus.name + '</label>' + '<textarea rows="5" col="10">'
-          };
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementList_Text__WEBPACK_IMPORTED_MODULE_1__["default"], {
+            display: 'edition',
+            currentElement: focus,
+            onUpdate: this.handleUpdate.bind(this)
+          });
 
         case 'Title':
-          return {
-            __html: '<label for="content">' + focus.name + '</label>' + '<input type="text" onChange={this.handleChangeTitle} />' + '<label for="content">Title size</label>' + '<select type="titleSize" />' + '<option value="h1">H1</option>' + '<option value="h2">H2</option>' + '<option value="h3">H3</option>' + '<option value="h4">H4</option>' + '</select>'
-          };
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementList_Title__WEBPACK_IMPORTED_MODULE_2__["default"], {
+            display: 'edition',
+            currentElement: focus,
+            onUpdate: this.handleUpdate.bind(this)
+          });
 
         case 'Submit':
           return {
@@ -32144,9 +32172,7 @@ function (_React$Component) {
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "edition_box"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Edit element"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.props.focusedElement.label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Copy element"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Delete element"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        dangerouslySetInnerHTML: this.editionMarkup(this.props.focusedElement)
-      }));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Edit element"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.props.focusedElement.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.editionMarkup(this.props.focusedElement)));
     }
   }]);
 
@@ -32209,12 +32235,12 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Element)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_this), "state", {
-      elements_1: [{
+      elements: [{
         id: 1,
         name: "Text",
         tag: "p",
         className: "moheaText",
-        content: "My New Text"
+        content: "My New Text MODIFIER"
       }, {
         id: 2,
         name: "Title",
@@ -32234,8 +32260,7 @@ function (_React$Component) {
         className: "moheaSubmit",
         type: "submit",
         value: "Send my new Form"
-      }],
-      elements_2: [{
+      }, {
         id: 5,
         name: "Text Input",
         tag: "input",
@@ -32304,8 +32329,7 @@ function (_React$Component) {
           type: "radio",
           label: "My first Option"
         }]
-      }],
-      elements_3: [{
+      }, {
         id: 11,
         name: "Email",
         tag: "input",
@@ -32343,13 +32367,26 @@ function (_React$Component) {
         pattern: "",
         required: "",
         placeholder: "My placeholder"
-      }]
+      }],
+      countElements: 0
     });
 
     return _this;
   }
 
   _createClass(Element, [{
+    key: "newElement",
+    value: function newElement(element) {
+      element.id = this.state.countElements;
+      var count = this.state.countElements;
+      count = count + 1;
+      this.setState({
+        countElements: count
+      });
+      console.log(element);
+      this.props.onAddElement(element);
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -32360,33 +32397,16 @@ function (_React$Component) {
         className: "element_list"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "list_1"
-      }, this.state.elements_1.map(function (element) {
+      }, this.state.elements.map(function (element, i) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          key: i,
           className: "element_item",
           type: "button",
           onClick: function onClick() {
-            return _this2.props.onAddElement(element);
-          }
-        }, element.name);
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "list_2"
-      }, this.state.elements_2.map(function (element) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          className: "element_item",
-          type: "button",
-          onClick: function onClick() {
-            return _this2.props.onAddElement(element);
-          }
-        }, element.name);
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "list_3"
-      }, this.state.elements_3.map(function (element) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          className: "element_item",
-          type: "button",
-          onClick: function onClick() {
-            return _this2.props.onAddElement(element);
-          }
+            return _this2.newElement(element);
+          } // onClick={() => this.props.onAddElement(element)}
+          // onAddElement(<Text function={'create'} >)
+
         }, element.name);
       }))));
     }
@@ -32410,6 +32430,8 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _elementList_Text__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./elementList/Text */ "./resources/js/modules/form/components/elementList/Text.jsx");
+/* harmony import */ var _elementList_Title__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./elementList/Title */ "./resources/js/modules/form/components/elementList/Title.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -32430,6 +32452,8 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
+
 var Form =
 /*#__PURE__*/
 function (_React$Component) {
@@ -32446,10 +32470,18 @@ function (_React$Component) {
     value: function setMarkup(element) {
       switch (element.name) {
         case 'Text':
+          // ajouter fonction dans elem text ?
+          // afficher les infos de l'element précis passé en param // avec id ? // ou passer l'element entier (actualElement) ?
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementList_Text__WEBPACK_IMPORTED_MODULE_1__["default"], {
+            display: 'form',
+            currentElement: element
+          });
+
         case 'Title':
-          return {
-            __html: '<' + element.tag + ' >' + element.content + '</' + element.tag + '>'
-          };
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementList_Title__WEBPACK_IMPORTED_MODULE_2__["default"], {
+            display: 'form',
+            currentElement: element
+          });
 
         case 'Submit':
           return {
@@ -32494,14 +32526,16 @@ function (_React$Component) {
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form_box"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Your form"), this.props.usedElements.map(function (element) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "form-group",
-          onClick: function onClick() {
-            return _this.props.onFocusElement(element);
-          },
-          dangerouslySetInnerHTML: _this.setMarkup(element)
-        });
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Your form"), this.props.usedElements.map(function (element, i) {
+        return (// <div className="form-group" onClick={() => this.props.onFocusElement(element)} dangerouslySetInnerHTML={this.setMarkup(element)} />
+          react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "form-group",
+            key: i,
+            onClick: function onClick() {
+              return _this.props.onFocusElement(element);
+            }
+          }, _this.setMarkup(element))
+        );
       })));
     }
   }]);
@@ -32510,6 +32544,299 @@ function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (Form);
+
+/***/ }),
+
+/***/ "./resources/js/modules/form/components/elementList/Text.jsx":
+/*!*******************************************************************!*\
+  !*** ./resources/js/modules/form/components/elementList/Text.jsx ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var Text =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Text, _React$Component);
+
+  function Text(props) {
+    var _this$state;
+
+    var _this;
+
+    _classCallCheck(this, Text);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Text).call(this, props));
+    _this.state = (_this$state = {
+      element: {
+        id: "",
+        name: "",
+        tag: "",
+        className: "",
+        content: ""
+      },
+      id: 1,
+      name: "Text",
+      tag: "p",
+      className: "moheaText",
+      content: _this.props.currentElement.content,
+      edition: '',
+      form: ''
+    }, _defineProperty(_this$state, "element", _this.props.currentElement), _defineProperty(_this$state, "display", _this.props.display), _defineProperty(_this$state, "generated", 0), _this$state);
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+  /* constructor(props) {
+      super(props)
+      this.handleChange = this.handleChange.bind(this);
+      this.state = { 
+          id: 1, 
+          name: "Text", 
+          content: this.props.currentElement,
+          editionCode: '', 
+          formCode: '', 
+          display: this.props.display
+      }
+  } */
+
+
+  _createClass(Text, [{
+    key: "handleChange",
+    value: function handleChange(event) {
+      this.setState({
+        content: event.target.value
+      }); // console.log(this.props.currentElement)
+      // console.log(this.state.element)
+      // element est null dans le state au départ !
+
+      /* const elem = [...this.state.element]
+      elem.content = event.target.value
+      this.setState({element: elem})
+      console.log(this.state.element.content) */
+
+      this.props.onUpdate(this.state.content); // Renvoyer infos modifiées avec champs ETC
+    }
+  }, {
+    key: "handleCreate",
+    value: function handleCreate() {
+      var element = _toConsumableArray(this.state.element);
+
+      element.id = this.state.generated;
+      this.setState({
+        element: element
+      });
+      var count = this.state.generated;
+      count = count + 1;
+      this.setState({
+        generated: count
+      });
+      this.props.onCreate(this.state.element);
+    }
+  }, {
+    key: "handleDisplay",
+    value: function handleDisplay(display) {
+      if (display == 'edition') {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          "for": "content"
+        }, this.state.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+          rows: "5",
+          col: "10",
+          onChange: this.handleChange,
+          defaultValue: this.state.content
+        }));
+      } else if (display == 'form') {
+        // return <p>{this.state.content}</p>
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.currentElement.content);
+      } else if (display == 'create') {
+        this.handleCreate();
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.handleDisplay(this.state.display)));
+    }
+  }]);
+
+  return Text;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (Text);
+
+/***/ }),
+
+/***/ "./resources/js/modules/form/components/elementList/Title.jsx":
+/*!********************************************************************!*\
+  !*** ./resources/js/modules/form/components/elementList/Title.jsx ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var Title =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Title, _React$Component);
+
+  function Title(props) {
+    var _this$state;
+
+    var _this;
+
+    _classCallCheck(this, Title);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Title).call(this, props));
+    _this.state = (_this$state = {
+      element: {
+        id: 2,
+        name: "Title",
+        tag: "h1",
+        className: "moheaTitle",
+        content: "My New Title"
+      },
+      id: 1,
+      name: "Text",
+      tag: "p",
+      className: "moheaText",
+      content: _this.props.currentElement.content,
+      edition: '',
+      form: ''
+    }, _defineProperty(_this$state, "element", _this.props.currentElement), _defineProperty(_this$state, "display", _this.props.display), _defineProperty(_this$state, "generated", 0), _this$state);
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(Title, [{
+    key: "handleChange",
+    value: function handleChange(event) {
+      this.setState({
+        content: event.target.value
+      });
+      this.props.onUpdate(this.state.content);
+    }
+  }, {
+    key: "handleCreate",
+    value: function handleCreate() {
+      var element = _toConsumableArray(this.state.element);
+
+      element.id = this.state.generated;
+      this.setState({
+        element: element
+      });
+      var count = this.state.generated;
+      count = count + 1;
+      this.setState({
+        generated: count
+      });
+      this.props.onCreate(this.state.element);
+    }
+  }, {
+    key: "handleDisplay",
+    value: function handleDisplay(display) {
+      if (display == 'edition') {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          "for": "content"
+        }, this.state.element.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "text",
+          onChange: this.handleChange,
+          value: this.state.content
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          "for": "content"
+        }, "Title size"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+          type: "titleSize"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          value: "h1"
+        }, "H1"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          value: "h2"
+        }, "H2"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          value: "h3"
+        }, "H3"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          value: "h4"
+        }, "H4")));
+      } else if (display == 'form') {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.props.currentElement.content);
+      } else if (display == 'create') {
+        this.handleCreate();
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.handleDisplay(this.state.display)));
+    }
+  }]);
+
+  return Title;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (Title);
 
 /***/ }),
 

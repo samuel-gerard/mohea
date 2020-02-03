@@ -1,5 +1,8 @@
 import React from "react";
 
+import Text from "./elementList/Text";
+import Title from "./elementList/Title";
+
 
 class Form extends React.Component {
 
@@ -9,10 +12,12 @@ class Form extends React.Component {
     switch(element.name)
     {
       case 'Text' :
+        // ajouter fonction dans elem text ?
+        // afficher les infos de l'element précis passé en param // avec id ? // ou passer l'element entier (actualElement) ?
+        return <Text display={'form'} currentElement={element} />
+
       case 'Title':
-        return {__html: 
-          '<'+element.tag+' >'+element.content+'</'+element.tag+'>' 
-        }
+        return <Title display={'form'} currentElement={element} />
 
       case 'Submit':
         return {__html:
@@ -72,8 +77,9 @@ class Form extends React.Component {
 
           <h2>Your form</h2>
 
-          {this.props.usedElements.map(element => (
-            <div className="form-group" onClick={() => this.props.onFocusElement(element)} dangerouslySetInnerHTML={this.setMarkup(element)} />
+          {this.props.usedElements.map((element, i) => (
+            // <div className="form-group" onClick={() => this.props.onFocusElement(element)} dangerouslySetInnerHTML={this.setMarkup(element)} />
+            <div className="form-group" key={i} onClick={() => this.props.onFocusElement(element)}>{this.setMarkup(element)}</div>
           ))}
 
         </form>

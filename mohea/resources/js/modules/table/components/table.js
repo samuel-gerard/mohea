@@ -123,6 +123,10 @@ class Table extends Component {
   handleGenerate = () => {
     console.log(this.props)
   }
+
+  handleSave = () => {
+    this.props.saveTable();
+  }
   /* ===============================================
   * DISPLAY COMPONENT
   =============================================== */
@@ -248,6 +252,9 @@ const mapDispatchToProps = dispatch => {
     },
     updateNbCol: (number) => {
       dispatch(updateNbCol(number))
+    },
+    saveTable: () => {
+      dispatch(saveTable)
     }
   }
 }

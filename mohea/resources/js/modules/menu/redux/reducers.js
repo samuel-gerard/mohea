@@ -17,10 +17,19 @@ function rootReducer(state = initState, payload) {
   let newState = Object.assign({}, state);
   switch (payload.type) {
     case "DELETE_ITEM":
-      newState.menu.splice(payload.idx, 1)
+      console.log(payload.parent_idx < 0)
+      if(payload.parent_idx < 0) {
+        // If first level
+        newState.menu.splice(payload.idx, 1)
+      }
+      else {
+        // If second level
+        newState.menu[payload.parent_idx].children.splice(payload.idx, 1)
+      }
 
       return {
         ...state,
+        inputSelected: {},
         menu: [
           ...newState.menu
         ]
@@ -28,6 +37,7 @@ function rootReducer(state = initState, payload) {
     case "ADD_ITEM":
       const item = Object.assign({}, initItem);
 
+      // If first level
       if(payload.parent_idx < 0) {
         return {
           ...state,
@@ -38,6 +48,7 @@ function rootReducer(state = initState, payload) {
         }
       }
 
+      // If second level
       return {
         ...state,
         menu: [
@@ -58,13 +69,13 @@ function rootReducer(state = initState, payload) {
         name: payload.name
       }
     case "UPDATE_ITEM_VALUE":
-      const parent_idx = parseInt(payload.parent_idx, 10)
-      const idx = parseInt(payload.idx, 10);
-      if(parent_idx < 0) {
-        newState.menu[idx].value = payload.value;
+      if(payload.parent_idx < 0) {
+        // If first level
+        newState.menu[payload.idx].value = payload.value;
       }
       else {
-        newState.menu[parent_idx].children[idx].value = payload.value;
+        // If second level
+        newState.menu[payload.parent_idx].children[payload.idx].value = payload.value;
       }
 
       return {
@@ -105,14 +116,23 @@ function rootReducer(state = initState, payload) {
       return {
         ...state,
         inputSelected: {
-          index: payload.idx,
-          parent_index: payload.parent_idx,
+          idx: payload.idx,
+          parent_idx: payload.parent_idx,
         }
       }
     case "UPDATE_INPUT_STYLE":
-      newState.menu[payload.idx] = {
-        ...newState.menu[payload.idx],
-        style: payload.cell
+      if(payload.parent_idx < 0) {
+        // If first level
+        newState.menu[payload.idx] = {
+          ...newState.menu[payload.idx],
+          style: payload.cell
+        }
+      } else {
+        // If second level
+        newState.menu[payload.parent_idx].children[payload.idx] = {
+          ...newState.menu[payload.parent_idx].children[payload.idx],
+          style: payload.cell
+        }
       }
 
       return {
@@ -122,9 +142,17 @@ function rootReducer(state = initState, payload) {
         ]
       }
     case "UDPATE_INPUT_OPTIONS":
-      newState.menu[payload.idx] = {
-        ...newState.menu[payload.idx],
-        [payload.key]: payload.value
+      if(payload.parent_idx < 0) {
+        // If first level
+        newState.menu[payload.idx] = {
+          ...newState.menu[payload.idx],
+        }
+      } else {
+        // If second level
+        newState.menu[payload.parent_idx].children[payload.idx] = {
+          ...newState.menu[payload.parent_idx].children[payload.idx],
+          [payload.key]: payload.value
+        }
       }
 
       return {

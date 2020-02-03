@@ -39007,8 +39007,8 @@ var CustomInput = function CustomInput(props) {
   var cell = {};
   var item = {};
 
-  if (details.index) {
-    item = props.menu[details.index];
+  if (details.parent_idx >= 0 && props.menu[details.parent_idx].children[details.idx] || details.idx && props.menu[details.idx]) {
+    item = details.parent_idx >= 0 ? props.menu[details.parent_idx].children[details.idx] : props.menu[details.idx];
     var style = item.style;
 
     if (style) {
@@ -39022,22 +39022,22 @@ var CustomInput = function CustomInput(props) {
     var val = e.target.dataset.key === 'fontSize' ? e.target.value + 'px' : e.target.value;
     if (e.target.type === 'checkbox') val = e.target.checked ? e.target.value : '';
     cell[e.target.dataset.key] = val;
-    props.updateInputStyle(cell, details.parent_index, details.index);
+    props.updateInputStyle(cell, details.parent_idx, details.idx);
   };
 
   var handleLink = function handleLink(e) {
-    props.updateInputOptions('link', e.target.value, details.parent_index, details.index);
+    props.updateInputOptions('link', e.target.value, details.parent_idx, details.idx);
   };
 
   var handleTarget = function handleTarget(e) {
-    props.updateInputOptions('target', e.target.checked ? e.target.value : '_self', details.parent_index, details.index);
+    props.updateInputOptions('target', e.target.checked ? e.target.value : '_self', details.parent_idx, details.idx);
   };
 
   var handleTitle = function handleTitle(e) {
-    props.updateInputOptions('title', e.target.value, details.parent_index, details.index);
+    props.updateInputOptions('title', e.target.value, details.parent_idx, details.idx);
   };
 
-  if (details.index) {
+  if (details.idx) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Style"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       htmlFor: "color-text"
     }, "Text color"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -39228,8 +39228,8 @@ function (_Component) {
       _this.props.addNewItem(parent_idx);
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleDeleteItem", function (idx) {
-      _this.props.deleteItem(null, idx);
+    _defineProperty(_assertThisInitialized(_this), "handleDeleteItem", function (parent_idx, idx) {
+      _this.props.deleteItem(parent_idx, idx);
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleUpdateValue", function (e) {
@@ -39275,21 +39275,53 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "navbar-nav mr-auto"
       }, Object.values(this.props.menu).map(function (item, idx) {
+        if (item.children.length === 0) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            key: 'menu-0-' + idx,
+            className: "nav-item d-flex align-items-center"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            type: "text",
+            "data-idx": '-1/' + idx,
+            onFocus: _this2.handleInputSelected,
+            onChange: _this2.handleUpdateValue,
+            value: item.value,
+            className: "nav-link",
+            style: item.style
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            type: "button",
+            onClick: function onClick() {
+              return _this2.handleDeleteItem(-1, idx);
+            },
+            className: "btn btn-secondary d-inline-block",
+            value: "-"
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            type: "button",
+            onClick: function onClick() {
+              return _this2.handleAddItem(idx);
+            },
+            className: "btn btn-primary",
+            value: "+"
+          }));
+        }
+
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           key: 'menu-0-' + idx,
-          className: "nav-item d-flex align-items-center"
+          className: "nav-item dropdown show"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "text",
           "data-idx": '-1/' + idx,
           onFocus: _this2.handleInputSelected,
           onChange: _this2.handleUpdateValue,
           value: item.value,
-          className: "form-control",
-          style: item.style
+          className: "nav-link dropdown-toggle",
+          style: item.style,
+          "data-toggle": "dropdown",
+          "aria-haspopup": "false",
+          "aria-expanded": "true"
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "button",
           onClick: function onClick() {
-            return _this2.handleDeleteItem(idx);
+            return _this2.handleDeleteItem(-1, idx);
           },
           className: "btn btn-secondary d-inline-block",
           value: "-"
@@ -39300,7 +39332,29 @@ function (_Component) {
           },
           className: "btn btn-primary",
           value: "+"
-        }));
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "dropdown-menu show",
+          "aria-labelledby": item.title + '-' + idx
+        }, Object.values(item.children).map(function (child, child_idx) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            key: 'child-' + idx + '-' + child_idx,
+            className: "dropdown-item"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            type: "text",
+            "data-idx": idx + '/' + child_idx,
+            onFocus: _this2.handleInputSelected,
+            onChange: _this2.handleUpdateValue,
+            value: child.value,
+            style: child.style
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            type: "button",
+            onClick: function onClick() {
+              return _this2.handleDeleteItem(idx, child_idx);
+            },
+            className: "btn btn-secondary d-inline-block",
+            value: "-"
+          }));
+        })));
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "button",
         onClick: function onClick() {
@@ -39387,21 +39441,45 @@ var MenuReturn = function MenuReturn(props) {
   html += "       <ul class=\"navbar-nav mr-auto\">\n";
   {
     Object.values(menu).map(function (item, idx) {
-      html += "           <li class=\"nav-item\">\n";
+      var areChildren = item.children.length > 0;
+      html += "           <li class=\"nav-item".concat(areChildren ? ' dropdown' : '', "\">\n");
+      var style = '';
 
       if (Object.keys(item.style).length > 0) {
-        var style = '';
         Object.keys(item.style).map(function (key) {
           if (!item.style[key]) return;
           style += camelToKebab(key) + ':' + item.style[key] + ';';
         });
-        html += "               <a href=\"".concat(item.link, "\" title=\"").concat(item.title, "\" style=\"").concat(style, "\" ").concat(item.target === '_blank' ? 'target="_blank"' : '', ">\n");
-      } else {
-        html += "               <a href=\"".concat(item.link, "\" title=\"").concat(item.title, " ").concat(item.target === '_blank' ? 'target="_blank"' : '', "\">\n");
       }
 
-      html += "                   ".concat(item.value, "\n");
-      html += "               </a>\n";
+      if (areChildren) {
+        html += "               <a".concat(item.link ? ' href="' + item.link + '"' : '', " class=\"nav-link dropdown-toggle\" id=\"").concat(item.title + '-nav-' + idx, "\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"").concat(style ? ' style="' + style + '"' : '', ">\n");
+        html += "                   ".concat(item.value, "\n");
+        html += "               </a>\n";
+        html += "               <div class=\"dropdown-menu\" aria-labelledby=\"".concat(item.title + '-nav-' + idx, "\">\n");
+        {
+          Object.values(item.children).map(function (child) {
+            var child_style = '';
+
+            if (Object.keys(child.style).length > 0) {
+              Object.keys(child.style).map(function (key) {
+                if (!child.style[key]) return;
+                child_style += camelToKebab(key) + ':' + child.style[key] + ';';
+              });
+            }
+
+            html += "                   <a class=\"dropdown-item\"".concat(child.link ? ' href="' + child.link + '"' : '').concat(child.title ? ' title="' + child.title + '"' : '').concat(child_style ? ' style="' + child_style + '"' : '').concat(child.target === '_blank' ? ' target="_blank"' : '', ">\n");
+            html += "                      ".concat(child.value, "\n");
+            html += "                   </a>\n";
+          });
+        }
+        html += "               </div>\n";
+      } else {
+        html += "               <a".concat(item.link ? ' href="' + item.link + '"' : '', " class=\"nav-link\"").concat(item.title ? ' title="' + item.title + '"' : '').concat(item.target === '_blank' ? ' target="_blank"' : '').concat(style ? ' style="' + style + '"' : '', ">\n");
+        html += "                   ".concat(item.value, "\n");
+        html += "               </a>\n";
+      }
+
       html += "           </li>\n";
     });
   }
@@ -39778,19 +39856,30 @@ function rootReducer() {
 
   switch (payload.type) {
     case "DELETE_ITEM":
-      newState.menu.splice(payload.idx, 1);
+      console.log(payload.parent_idx < 0);
+
+      if (payload.parent_idx < 0) {
+        // If first level
+        newState.menu.splice(payload.idx, 1);
+      } else {
+        // If second level
+        newState.menu[payload.parent_idx].children.splice(payload.idx, 1);
+      }
+
       return _objectSpread({}, state, {
+        inputSelected: {},
         menu: _toConsumableArray(newState.menu)
       });
 
     case "ADD_ITEM":
-      var item = Object.assign({}, initItem);
+      var item = Object.assign({}, initItem); // If first level
 
       if (payload.parent_idx < 0) {
         return _objectSpread({}, state, {
           menu: [].concat(_toConsumableArray(state.menu), [item])
         });
-      }
+      } // If second level
+
 
       return _objectSpread({}, state, {
         menu: [].concat(_toConsumableArray(state.menu.slice(0, payload.parent_idx)), [_objectSpread({}, state.menu[payload.parent_idx], {
@@ -39804,13 +39893,12 @@ function rootReducer() {
       });
 
     case "UPDATE_ITEM_VALUE":
-      var parent_idx = parseInt(payload.parent_idx, 10);
-      var idx = parseInt(payload.idx, 10);
-
-      if (parent_idx < 0) {
-        newState.menu[idx].value = payload.value;
+      if (payload.parent_idx < 0) {
+        // If first level
+        newState.menu[payload.idx].value = payload.value;
       } else {
-        newState.menu[parent_idx].children[idx].value = payload.value;
+        // If second level
+        newState.menu[payload.parent_idx].children[payload.idx].value = payload.value;
       }
 
       return _objectSpread({}, state, {
@@ -39848,21 +39936,37 @@ function rootReducer() {
     case "UPDATE_INPUT_SELECTED":
       return _objectSpread({}, state, {
         inputSelected: {
-          index: payload.idx,
-          parent_index: payload.parent_idx
+          idx: payload.idx,
+          parent_idx: payload.parent_idx
         }
       });
 
     case "UPDATE_INPUT_STYLE":
-      newState.menu[payload.idx] = _objectSpread({}, newState.menu[payload.idx], {
-        style: payload.cell
-      });
+      if (payload.parent_idx < 0) {
+        // If first level
+        newState.menu[payload.idx] = _objectSpread({}, newState.menu[payload.idx], {
+          style: payload.cell
+        });
+      } else {
+        // If second level
+        newState.menu[payload.parent_idx].children[payload.idx] = _objectSpread({}, newState.menu[payload.parent_idx].children[payload.idx], {
+          style: payload.cell
+        });
+      }
+
       return _objectSpread({}, state, {
         menu: _toConsumableArray(newState.menu)
       });
 
     case "UDPATE_INPUT_OPTIONS":
-      newState.menu[payload.idx] = _objectSpread({}, newState.menu[payload.idx], _defineProperty({}, payload.key, payload.value));
+      if (payload.parent_idx < 0) {
+        // If first level
+        newState.menu[payload.idx] = _objectSpread({}, newState.menu[payload.idx]);
+      } else {
+        // If second level
+        newState.menu[payload.parent_idx].children[payload.idx] = _objectSpread({}, newState.menu[payload.parent_idx].children[payload.idx], _defineProperty({}, payload.key, payload.value));
+      }
+
       return _objectSpread({}, state, {
         menu: _toConsumableArray(newState.menu)
       });

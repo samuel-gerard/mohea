@@ -7,8 +7,8 @@ class MenuContent extends Component {
     this.props.addNewItem(parent_idx)
   }
 
-  handleDeleteItem = (idx) => {
-    this.props.deleteItem(null, idx)
+  handleDeleteItem = (parent_idx, idx) => {
+    this.props.deleteItem(parent_idx, idx)
   }
 
   handleUpdateValue = (e) => {
@@ -36,20 +36,57 @@ class MenuContent extends Component {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             {Object.values(this.props.menu).map( (item, idx) => {
+              if(item.children.length === 0) {
+                return (
+                  <li key={'menu-0-' + idx}
+                    className="nav-item d-flex align-items-center">
+                    <input type="text"
+                      data-idx={'-1/' + idx}
+                      onFocus={this.handleInputSelected}
+                      onChange={this.handleUpdateValue}
+                      value={item.value}
+                      className="nav-link"
+                      style={item.style} />
+                    <input type="button" onClick={() => this.handleDeleteItem(-1, idx)} className="btn btn-secondary d-inline-block" value="-" />
+                    <input type="button" onClick={() => this.handleAddItem(idx)} className="btn btn-primary" value="+" />
+                  </li>
+                )
+              }
+
               return (
                 <li key={'menu-0-' + idx}
-                  className="nav-item d-flex align-items-center">
+                  className="nav-item dropdown show">
                   <input type="text"
-                    data-idx={'-1/' + idx}
-                    onFocus={this.handleInputSelected}
-                    onChange={this.handleUpdateValue}
-                    value={item.value}
-                    className="form-control"
-                    style={item.style} />
-                  <input type="button" onClick={() => this.handleDeleteItem(idx)} className="btn btn-secondary d-inline-block" value="-" />
-                  <input type="button" onClick={() => this.handleAddItem(idx)} className="btn btn-primary" value="+" />
+                      data-idx={'-1/' + idx}
+                      onFocus={this.handleInputSelected}
+                      onChange={this.handleUpdateValue}
+                      value={item.value}
+                      className="nav-link dropdown-toggle"
+                      style={item.style}
+                      data-toggle="dropdown"
+                      aria-haspopup="false"
+                      aria-expanded="true" />
+                    <input type="button" onClick={() => this.handleDeleteItem(-1, idx)} className="btn btn-secondary d-inline-block" value="-" />
+                    <input type="button" onClick={() => this.handleAddItem(idx)} className="btn btn-primary" value="+" />
+
+                  <div className="dropdown-menu show" aria-labelledby={item.title + '-' + idx}>
+                  {Object.values(item.children).map((child, child_idx) => {
+                    return (
+                      <div key={'child-' + idx + '-' + child_idx}
+                        className="dropdown-item">
+                        <input type="text"
+                          data-idx={idx + '/' + child_idx}
+                          onFocus={this.handleInputSelected}
+                          onChange={this.handleUpdateValue}
+                          value={child.value}
+                          style={child.style} />
+                        <input type="button" onClick={() => this.handleDeleteItem(idx, child_idx)} className="btn btn-secondary d-inline-block" value="-" />
+                      </div>
+                    )
+                  })}
+                  </div>
                 </li>
-              );
+              )
             })}
             <input type="button" onClick={() => this.handleAddItem(-1) } className="btn btn-primary" value="+" />
           </ul>

@@ -7,8 +7,8 @@ const CustomInput = (props) => {
   let cell = {}
   let item = {}
 
-  if(details.index) {
-    item = props.menu[details.index]
+  if(( details.parent_idx >= 0 && props.menu[details.parent_idx].children[details.idx] ) || (details.idx && props.menu[details.idx])) {
+    item = details.parent_idx >= 0 ? props.menu[details.parent_idx].children[details.idx] : props.menu[details.idx]
     let style = item.style
     if(style) {
       style = Object.assign({}, style);
@@ -22,22 +22,22 @@ const CustomInput = (props) => {
     if(e.target.type === 'checkbox') val = e.target.checked ? e.target.value : ''
 
     cell[e.target.dataset.key] = val
-    props.updateInputStyle(cell, details.parent_index, details.index)
+    props.updateInputStyle(cell, details.parent_idx, details.idx)
   }
 
   const handleLink = (e) => {
-    props.updateInputOptions('link', e.target.value, details.parent_index, details.index)
+    props.updateInputOptions('link', e.target.value, details.parent_idx, details.idx)
   }
 
   const handleTarget = (e) => {
-    props.updateInputOptions('target', e.target.checked ? e.target.value : '_self', details.parent_index, details.index)
+    props.updateInputOptions('target', e.target.checked ? e.target.value : '_self', details.parent_idx, details.idx)
   }
 
   const handleTitle = (e) => {
-    props.updateInputOptions('title', e.target.value, details.parent_index, details.index)
+    props.updateInputOptions('title', e.target.value, details.parent_idx, details.idx)
   }
 
-  if(details.index) {
+  if(details.idx) {
     return (<div>
       <h1>Style</h1>
       <label htmlFor="color-text">Text color</label>

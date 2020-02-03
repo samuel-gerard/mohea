@@ -35,26 +35,52 @@ const MenuReturn = props => {
     html += `       <ul class="navbar-nav mr-auto">
 `
     {Object.values(menu).map( (item, idx) => {
-        html += `           <li class="nav-item">
+        const areChildren = item.children.length > 0
+        html += `           <li class="nav-item${areChildren ? ' dropdown' : ''}">
 `
+        let style = '';
         if( Object.keys(item.style).length > 0 ) {
-            let style = '';
             Object.keys(item.style).map(key => {
                 if(!item.style[key]) return
     
                 style += camelToKebab(key) + ':' + item.style[key] + ';'
             })
-
-            html += `               <a href="${item.link}" title="${item.title}" style="${style}" ${item.target === '_blank' ? 'target="_blank"' : ''}>
+        }
+        if(areChildren) {
+            html += `               <a${item.link ? ' href="' + item.link + '"' : ''} class="nav-link dropdown-toggle" id="${item.title + '-nav-' + idx}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"${style ? ' style="' + style + '"' : ''}>
+`           
+            html += `                   ${item.value}
+`
+            html += `               </a>
+`
+            html += `               <div class="dropdown-menu" aria-labelledby="${item.title + '-nav-' + idx}">
+`
+                {Object.values(item.children).map(child => {
+                    let child_style = '';
+                    if( Object.keys(child.style).length > 0 ) {
+                        Object.keys(child.style).map(key => {
+                            if(!child.style[key]) return
+                
+                            child_style += camelToKebab(key) + ':' + child.style[key] + ';'
+                        })
+                    }
+                    html += `                   <a class="dropdown-item"${child.link ? ' href="' + child.link + '"' : ''}${child.title ? ' title="' + child.title + '"': ''}${child_style ? ' style="' + child_style + '"' : ''}${child.target === '_blank' ? ' target="_blank"' : ''}>
+`
+                    html += `                      ${child.value}
+`
+                    html += `                   </a>
+`
+                })}
+            html += `               </div>
 `
         } else {
-            html += `               <a href="${item.link}" title="${item.title} ${item.target === '_blank' ? 'target="_blank"' : ''}">
+            html += `               <a${item.link ? ' href="' + item.link + '"' : ''} class="nav-link"${item.title ? ' title="' + item.title + '"' : ''}${item.target === '_blank' ? ' target="_blank"' : ''}${style ? ' style="' + style + '"' : ''}>
 `           
+            html += `                   ${item.value}
+`
+            html += `               </a>
+`
         }
-        html += `                   ${item.value}
-`
-        html += `               </a>
-`
         html += `           </li>
 `
     })}

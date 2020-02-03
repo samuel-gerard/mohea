@@ -3,5 +3,6 @@
     "/css/app.css": "/css/app.css",
     "/css/form.css": "/css/form.css",
     "/js/modules/FormApp.js": "/js/modules/FormApp.js",
+    "/js/modules/MenuApp.js": "/js/modules/MenuApp.js",
     "/js/modules/TableApp.js": "/js/modules/TableApp.js"
 }

@@ -24,7 +24,7 @@ class MenuModuleController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.menu');
     }
 
     /**

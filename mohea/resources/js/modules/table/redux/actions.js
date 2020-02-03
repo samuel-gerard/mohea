@@ -32,6 +32,10 @@ export const addNewCol = (idx) => ({
   idx: idx
 });
 
+export const importFile = (data) => ({
+  type: "IMPORT_TABLE",
+  data,
+})
 /* ===============================================
 * FUNCTIONS TO UPDATE
 =============================================== */
@@ -58,3 +62,23 @@ export const updateClasses = (data) => ({
   type: "UPDATE_CLASSES",
   classe: data,
 })
+
+export const updateNbCol = (nbCol) => ({
+  type: "UPDATE_NBCOL",
+  nbCol,
+})
+
+export const updateInputSelected = (type, row, col) => ({
+  type: "UPDATE_INPUT_SELECTED",
+  typeTable: type,
+  row,
+  col,
+})
+
+export const updateInputStyle = (type, cell, row, col) => ({
+  type: "UPDATE_INPUT_STYLE",
+  typeTable: type,
+  cell: cell,
+  row: row,
+  col: col,
+});

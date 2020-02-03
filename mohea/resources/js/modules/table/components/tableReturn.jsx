@@ -26,6 +26,10 @@ const TableReturn = props => {
 
     }
 
+    const camelToKebab = string => {
+        return string.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase();
+    }
+
     const handleHeader = () => {
         if (head.length <= 0) {
             return '';
@@ -37,8 +41,19 @@ const TableReturn = props => {
             html += `       <tr>
 `
             headRow.map((headEl, idxBis) => {
-                html += `           <th id="col-${idxBis}">${headEl}</th>
+                if(headEl.style) {
+                    let style = '';
+                    Object.keys(headEl.style).map(key => {
+                        if(!headEl.style[key]) return
+
+                        style += camelToKebab(key) + ':' + headEl.style[key] + ';'
+                    })
+                    html += `           <th id="col-${idxBis}" style="${style}">${headEl.value}</th>
 `
+                } else {
+                    html += `           <th id="col-${idxBis}">${headEl.value}</th>
+`
+                }
             })
             html += `       </tr>
 `
@@ -60,8 +75,19 @@ const TableReturn = props => {
             html += `       <tr id="bodyRow-${idx}">
 `
             bodyRow.map((bodyEl, idxBis) => {
-                html += `           <td headers="col-${idxBis} bodyRow-${idx}">${bodyEl}</td>
+                if(bodyEl.style) {
+                    let style = '';
+                    Object.keys(bodyEl.style).map(key => {
+                        if(!bodyEl.style[key]) return
+                        
+                        style += camelToKebab(key) + ':' + bodyEl.style[key] + ';'
+                    })
+                    html += `           <td headers="col-${idxBis} bodyRow-${idx}" style="${style}">${bodyEl.value}</td>
 `
+                } else {
+                    html += `           <td headers="col-${idxBis} bodyRow-${idx}">${bodyEl.value}</td>
+`
+                }
             })
             html += `       </tr>
 `
@@ -83,8 +109,20 @@ const TableReturn = props => {
             html += `       <tr id="footRow-${idx}">
 `
             footRow.map((footEl, idxBis) => {
-                html += `           <td headers="col-${idxBis} footRow-${idx}">${footEl}</td>
+                if(footEl.style) {
+                    let style = '';
+                    Object.keys(footEl.style).map(key => {
+                        if(!footEl.style[key]) return
+                        
+                        style += camelToKebab(key) + ':' + footEl.style[key] + ';'
+                    })
+                    html += `           <td headers="col-${idxBis} footRow-${idx}" style="${style}">${footEl.value}</td>
 `
+                } else {
+                    html += `           <td headers="col-${idxBis} footRow-${idx}">${footEl.value}</td>
+`
+                }
+                
             })
             html += `       </tr>
 `

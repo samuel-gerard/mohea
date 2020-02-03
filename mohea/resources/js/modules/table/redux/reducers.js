@@ -6,7 +6,7 @@ const defaultTab = {
 const initState = {
   'defaultTab': defaultTab,
   'nbCol': 1,
-  classes: [],
+  'classes': [],
   'tableau': {
     'head': [],
     'body': [],
@@ -14,6 +14,7 @@ const initState = {
   },
   'caption': '',
   'name': '',
+  inputSelected: {}
 }
 
 function rootReducer(state = initState, payload) {
@@ -44,7 +45,7 @@ function rootReducer(state = initState, payload) {
     case "ADD_COL":
       for (let [key, value] of Object.entries(newState.tableau)) {
         value.map(row => {
-          row.splice(parseInt(payload.idx, 10) + 1, 0, '');
+          row.splice(parseInt(payload.idx, 10) + 1, 0, { 'value': '' });
           return row
         })
       }
@@ -66,7 +67,7 @@ function rootReducer(state = initState, payload) {
     case "ADD_ROW":
       const tab = []
       for (var i = 0; i < state.nbCol; i++) {
-        tab.push('');
+        tab.push({ 'value': '' });
       }
 
       newState.tableau[payload.typeTable].splice(parseInt(payload.idx, 10) + 1, 0, tab);
@@ -88,7 +89,7 @@ function rootReducer(state = initState, payload) {
         name: payload.name
       }
     case "UPDATE_VALUE":
-      newState.tableau[payload.typeTable][payload.row][payload.col] = payload.value;
+      newState.tableau[payload.typeTable][payload.row][payload.col].value = payload.value;
       return {
         ...state,
         tableau: {
@@ -108,6 +109,12 @@ function rootReducer(state = initState, payload) {
         classes: [],
         'caption': '',
         'name': '',
+        inputSelected: {}
+      }
+    case "IMPORT_TABLE":
+      return {
+        ...state,
+        tableau: payload.data
       }
     case "UPDATE_CLASSES":
       const indexOfClasse = newState.classes.indexOf(payload.classe);
@@ -124,6 +131,32 @@ function rootReducer(state = initState, payload) {
         'classes': [
           ...newState.classes,
         ]
+      }
+    case "UPDATE_NBCOL":
+      return {
+        ...state,
+        nbCol: payload.nbCol
+      }
+    case "UPDATE_INPUT_SELECTED":
+      return {
+        ...state,
+        inputSelected: {
+          type: payload.typeTable,
+          row: payload.row,
+          col: payload.col,
+        }
+      }
+    case "UPDATE_INPUT_STYLE":
+      newState.tableau[payload.typeTable][payload.row][payload.col] = {
+        ...newState.tableau[payload.typeTable][payload.row][payload.col],
+        style: payload.cell
+      }
+      return {
+        ...state,
+        tableau: {
+          ...state.tableau,
+          [payload.typeTable]: newState.tableau[payload.typeTable],
+        }
       }
     default:
       return state;

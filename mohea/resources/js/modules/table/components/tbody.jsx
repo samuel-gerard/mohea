@@ -1,12 +1,12 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
-import { addNewRow, deleteRow, updateValue } from "../redux/actions";
+import { addNewRow, deleteRow, updateValue, updateInputSelected } from "../redux/actions";
 
 class Tbody extends Component {
   handleUpdateValue = (e) => {
     const split = event.target.dataset.id.split('/');
-    const col = split[1];
     const row = split[0];
+    const col = split[1];
     this.props.updateValue('body', e.target.value, row, col);
   }
 
@@ -26,6 +26,13 @@ class Tbody extends Component {
     this.props.deleteRow('body', e.target.dataset.row)
   }
 
+  handleInputSelected = (e) => {
+    const split = event.target.dataset.id.split('/');
+    const row = split[0];
+    const col = split[1];
+    this.props.updateInputSelected('body', row, col)
+  }
+
   render() {
     const group = Object.values(this.props.tableau.body)
     const groupList = group.length > 0 ? (
@@ -39,7 +46,13 @@ class Tbody extends Component {
           {Object.values(items).map((item, j) => {
             return (
               <td key={'body' + j}>
-                <input type='text' data-id={i + '/' + j} onChange={this.handleUpdateValue} value={item} className="form-control" />
+                <input type='text'
+                  data-id={i + '/' + j}
+                  onFocus={this.handleInputSelected}
+                  onChange={this.handleUpdateValue}
+                  value={item.value}
+                  className="form-control"
+                  style={item.style} />
               </td>
             );
           })}
@@ -78,7 +91,10 @@ const mapDispatchToProps = (dispatch, stateProps) => {
       dispatch(deleteRow(type, idx))
     },
     updateValue: (type, val, row, col) => {
-      dispatch(updateValue(type, val, row, col));
+      dispatch(updateValue(type, val, row, col))
+    },
+    updateInputSelected: (type, row, col) => {
+      dispatch(updateInputSelected(type, row, col))
     }
   }
 }

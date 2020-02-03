@@ -4,7 +4,10 @@ import Tfoot from "./tfoot.jsx";
 import React, {Component} from "react";
 import { connect } from "react-redux";
 import TableReturn from "./tableReturn.jsx";
-import { addNewRow, addNewCol, resetTable, updateCaption, updateName, updateClasses } from "../redux/actions";
+import { addNewRow, addNewCol, importFile, resetTable, updateCaption, updateName, updateClasses, updateNbCol } from "../redux/actions";
+import * as d3 from "d3";
+import { ImportFile } from "../../../components/ImportFile";
+import CustomInput from "./CustomInput";
 
 class Table extends Component {
   constructor(props) {
@@ -12,7 +15,7 @@ class Table extends Component {
 
     this.state = {
       heightCol: 0,
-      widthCol: 0
+      widthCol: 0,
     }
   }
   /* ===============================================
@@ -65,11 +68,64 @@ class Table extends Component {
     this.props.updateClasses(e.target.value);
   }
 
+  
+  importFile = () => {
+
+    const file = document.getElementById('import-file').files[0];
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const typeFileSelected = document.querySelector('input[name="type-imported"]:checked');
+      let data;
+
+      if(typeFileSelected === null) {
+        alert('You need to select a file type !');
+        return;
+      }
+
+      switch(typeFileSelected.value) {
+        case "CSV":
+          data = d3.dsvFormat(';').parse(reader.result)
+          break;
+        case "JSON":
+          data = JSON.parse(reader.result);
+          data['columns'] = Object.keys(data[0]);
+      }
+
+      let tableImported = { 'head': [], 'body': [], 'foot': []}
+
+      data.forEach((el, i) => {
+        if(i === data.length) {
+          return;
+        }
+        const rowBody = Object.values(el).map(val => {
+          return { 'value': val }
+        })
+        tableImported['body'].push(rowBody)
+      });
+
+      const rowHead = data['columns'].map(val => {
+        return { 'value': val }
+      })
+      tableImported['head'].push(rowHead);
+
+      this.props.importFile(tableImported);
+      this.props.updateNbCol(data['columns'].length)
+      
+    }
+    if(file) {
+      reader.readAsBinaryString(file);
+    }
+  }
   /* ===============================================
   * Get JSON about this table
   =============================================== */
   handleGenerate = () => {
     console.log(this.props)
+  }
+
+  handleSave = () => {
+    this.props.saveTable();
   }
   /* ===============================================
   * DISPLAY COMPONENT
@@ -82,17 +138,23 @@ class Table extends Component {
         <p className="card bg-warning p-2">Be careful, merging cells is not advised in accessibility. Therefore, you will not be able to perform this action.</p>
         {this.props.tableau.head.length === 0 && this.props.tableau.body.length === 0 && this.props.tableau.foot.length == 0 &&
           <div className="card bg-dark text-white p-2">
-            <h4 className="card-title">Generate a table</h4>
-            <form onSubmit={this.handleInitialize}>
-              <div className="flex">
-                <input type="number" onChange={this.updateWidthCol} value={this.widthCol} max="16" />
-                <span>x</span>
-                <input type="number" onChange={this.updateHeightCol} value={this.heightCol} max="16" />
+            <div className="row">
+              <div className="col-md-6">
+                <h4 className="card-title">Generate a table</h4>
+                <form onSubmit={this.handleInitialize}>
+                  <div className="flex">
+                    <input type="number" onChange={this.updateWidthCol} value={this.widthCol} max="16" />
+                    <span>x</span>
+                    <input type="number" onChange={this.updateHeightCol} value={this.heightCol} max="16" />
+                  </div>
+                  <input type="submit" value="Generate table" />
+                </form>
               </div>
-              <input type="submit" value="Generate table" />
-            </form>
+              <ImportFile func={this.importFile} className="col-md-6" />
+            </div>
           </div>
         }
+        <CustomInput />
         <div className="row">
           <div className="col-md-3">
             <div className="form-group">
@@ -108,6 +170,7 @@ class Table extends Component {
               <input type="text" className="form-control" name="caption" id="table-caption" onChange={this.handleCaption} value={this.props.caption} />
             </div>
             <div className="form-group card p-2 bg-info text-white">
+              <h4>Table global style</h4>
               <div className="form-check">
                 <input className="form-check-input" type="checkbox" id="class-style" onChange={this.handleClasses} value="table" />
                 <label className="form-check-label" htmlFor="class-style">With bootstrap initial style</label>
@@ -160,7 +223,7 @@ const mapStateToProps = state => {
     tableau: state.tableau,
     name: state.name,
     caption: state.caption,
-    classes: state.classes
+    classes: state.classes,
   }
 }
 
@@ -184,6 +247,15 @@ const mapDispatchToProps = dispatch => {
     addCol: (idx) => {
       dispatch(addNewCol(idx))
     },
+    importFile: (data) => {
+      dispatch(importFile(data))
+    },
+    updateNbCol: (number) => {
+      dispatch(updateNbCol(number))
+    },
+    saveTable: () => {
+      dispatch(saveTable)
+    }
   }
 }
 

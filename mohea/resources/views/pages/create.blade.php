@@ -6,7 +6,7 @@
 
 @section('main-content')
     <h1>What do you want to create today ?</h1>
-    <a href="{{ route('table.create') }}">+ Table</a>
-    <a href="{{ route('menu.create') }}">+ Menu</a>
-    <a href="{{ route('form.create') }}">+ Formulaire</a>
+    <a href="/create/table">+ Table</a>
+    <a href="/create/menu">+ Menu</a>
+    <a href="/create/form">+ Formulaire</a>
 @endsection

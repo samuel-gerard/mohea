@@ -57,7 +57,7 @@
                     @endif
                     You are logged in!
                     <p>
-                        <a href="{{ route('create') }}">Create</a>
+                        <a href="{{ route('project.create') }}">Create</a>
                     </p>
                 </div>
             </div>

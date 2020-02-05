@@ -43,4 +43,11 @@ class User extends Authenticatable
     public function identities() {
         return $this->hasMany('App\SocialIdentity');
      }
+
+    /**
+     * Indicate that a user has many Projects
+     */
+    public function projects() {
+        return $this->hasMany('App\Project');
+    }
 }

@@ -2,56 +2,56 @@
 
 @font-face {
   font-family: "Neue Plak Bold";
-  src: url(/fonts/NeuePlak-Bold.eot?572c46942f0c0de8a4328eeece76ae5a);
-  src: url(/fonts/NeuePlak-Bold.eot?572c46942f0c0de8a4328eeece76ae5a) format("embedded-opentype"), url(/fonts/NeuePlak-Bold.woff2?31c554f1f3ad6bc07ab53259e88ea2ed) format("woff2"), url(/fonts/NeuePlak-Bold.woff?d577d8387c8c3f14fd0b49281ede1bef) format("woff"), url(/fonts/NeuePlak-Bold.ttf?4daf6c59d44ef896ae384e2e6f98644d) format("truetype"), url(/fonts/NeuePlak-Bold.svg?7392ae46fe43d6e55520288445edee5f) format("svg");
+  src: url("/fonts/NeuePlak-Bold.eot");
+  src: url("/fonts/NeuePlak-Bold.eot?#iefix") format("embedded-opentype"), url("/fonts/NeuePlak-Bold.woff2") format("woff2"), url("/fonts/NeuePlak-Bold.woff") format("woff"), url("/fonts/NeuePlak-Bold.ttf") format("truetype"), url("/fonts/NeuePlak-Bold.svg#NeuePlak-Bold") format("svg");
   font-weight: bold;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Neue Plak Light";
-  src: url(/fonts/NeuePlak-Light.eot?84a9523beb740236349ad9ff4c0c81e5);
-  src: url(/fonts/NeuePlak-Light.eot?84a9523beb740236349ad9ff4c0c81e5) format("embedded-opentype"), url(/fonts/NeuePlak-Light.woff2?28c4d3ba95469bd2d2ba9032c4d77881) format("woff2"), url(/fonts/NeuePlak-Light.woff?fa3ff48f521e5dc52b4f1b2001c3d1ce) format("woff"), url(/fonts/NeuePlak-Light.ttf?1145a148f90a4f6f808b8ee01b66d12f) format("truetype"), url(/fonts/NeuePlak-Light.svg?bce11f779441d92e38a5637a479dafa0) format("svg");
+  src: url("/fonts/NeuePlak-Light.eot");
+  src: url("/fonts/NeuePlak-Light.eot?#iefix") format("embedded-opentype"), url("/fonts/NeuePlak-Light.woff2") format("woff2"), url("/fonts/NeuePlak-Light.woff") format("woff"), url("/fonts/NeuePlak-Light.ttf") format("truetype"), url("/fonts/NeuePlak-Light.svg#NeuePlak-Light") format("svg");
   font-weight: 300;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Neue Plak Narrow Light";
-  src: url(/fonts/NeuePlak-NarrowLight.eot?2bb54a0f257057fffa5240a450afa888);
-  src: url(/fonts/NeuePlak-NarrowLight.eot?2bb54a0f257057fffa5240a450afa888) format("embedded-opentype"), url(/fonts/NeuePlak-NarrowLight.woff2?6067b17b66caae1e6c7a8161503bb16b) format("woff2"), url(/fonts/NeuePlak-NarrowLight.woff?dbc308944350abffa74c08960ab90adf) format("woff"), url(/fonts/NeuePlak-NarrowLight.ttf?07d2d5e17f08e82e2d4b5be9867c9d51) format("truetype"), url(/fonts/NeuePlak-NarrowLight.svg?2ec351c6fd905ef97d158da68652973a) format("svg");
+  src: url("/fonts/NeuePlak-NarrowLight.eot");
+  src: url("/fonts/NeuePlak-NarrowLight.eot?#iefix") format("embedded-opentype"), url("/fonts/NeuePlak-NarrowLight.woff2") format("woff2"), url("/fonts/NeuePlak-NarrowLight.woff") format("woff"), url("/fonts/NeuePlak-NarrowLight.ttf") format("truetype"), url("/fonts/NeuePlak-NarrowLight.svg#NeuePlak-NarrowLight") format("svg");
   font-weight: 300;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Neue Plak Regular";
-  src: url(/fonts/NeuePlak-Regular.eot?9b18ad149c63d7f71cae0c770394d323);
-  src: url(/fonts/NeuePlak-Regular.eot?9b18ad149c63d7f71cae0c770394d323) format("embedded-opentype"), url(/fonts/NeuePlak-Regular.woff2?2cfa2de84e9cc5962059d742cf13b257) format("woff2"), url(/fonts/NeuePlak-Regular.woff?208180258e7032a7f5509efd020b2490) format("woff"), url(/fonts/NeuePlak-Regular.ttf?5aca1ffbedf3f23a096e2878fa8d73a9) format("truetype"), url(/fonts/NeuePlak-Regular.svg?69463422baa8e5a3d1304ad14738de98) format("svg");
+  src: url("/fonts/NeuePlak-Regular.eot");
+  src: url("/fonts/NeuePlak-Regular.eot?#iefix") format("embedded-opentype"), url("/fonts/NeuePlak-Regular.woff2") format("woff2"), url("/fonts/NeuePlak-Regular.woff") format("woff"), url("/fonts/NeuePlak-Regular.ttf") format("truetype"), url("/fonts/NeuePlak-Regular.svg#NeuePlak-Regular") format("svg");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Neue Plak SemiBold";
-  src: url(/fonts/NeuePlak-SemiBold.eot?8f3990e1db4e179e14bb439c14e16d19);
-  src: url(/fonts/NeuePlak-SemiBold.eot?8f3990e1db4e179e14bb439c14e16d19) format("embedded-opentype"), url(/fonts/NeuePlak-SemiBold.woff2?cfe832fdf53c935dc18efff004378f8c) format("woff2"), url(/fonts/NeuePlak-SemiBold.woff?00205cb7c9448f5daf4ab5df36b77463) format("woff"), url(/fonts/NeuePlak-SemiBold.ttf?73b0aeb6e1ac123f997026c4dcd25b14) format("truetype"), url(/fonts/NeuePlak-SemiBold.svg?34f7ed7177dcf82b94c2bc4d05e5ac34) format("svg");
+  src: url("/fonts/NeuePlak-SemiBold.eot");
+  src: url("/fonts/NeuePlak-SemiBold.eot?#iefix") format("embedded-opentype"), url("/fonts/NeuePlak-SemiBold.woff2") format("woff2"), url("/fonts/NeuePlak-SemiBold.woff") format("woff"), url("/fonts/NeuePlak-SemiBold.ttf") format("truetype"), url("/fonts/NeuePlak-SemiBold.svg#NeuePlak-SemiBold") format("svg");
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Neue Plak Thin";
-  src: url(/fonts/NeuePlak-Thin.eot?991aa429afb7bebac5ad3ad6afc0762a);
-  src: url(/fonts/NeuePlak-Thin.eot?991aa429afb7bebac5ad3ad6afc0762a) format("embedded-opentype"), url(/fonts/NeuePlak-Thin.woff2?3afd2cb3cdcdc18d6ddfeabf79bf9c67) format("woff2"), url(/fonts/NeuePlak-Thin.woff?b32fbc27eaea97257ed0a0c0f962c1a7) format("woff"), url(/fonts/NeuePlak-Thin.ttf?a756cd6500e6b2c36be38ff7ab8bae5b) format("truetype"), url(/fonts/NeuePlak-Thin.svg?62d87539e624331d612c0a1e17827361) format("svg");
+  src: url("/fonts/NeuePlak-Thin.eot");
+  src: url("/fonts/NeuePlak-Thin.eot?#iefix") format("embedded-opentype"), url("/fonts/NeuePlak-Thin.woff2") format("woff2"), url("/fonts/NeuePlak-Thin.woff") format("woff"), url("/fonts/NeuePlak-Thin.ttf") format("truetype"), url("/fonts/NeuePlak-Thin.svg#NeuePlak-Thin") format("svg");
   font-weight: 100;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Neue Plak Narrow Regular";
-  src: url(/fonts/NeuePlak-NarrowRegular.eot?b1bd44bd5196f4ceb04b6eb0544dcb6a);
-  src: url(/fonts/NeuePlak-NarrowRegular.eot?b1bd44bd5196f4ceb04b6eb0544dcb6a) format("embedded-opentype"), url(/fonts/NeuePlak-NarrowRegular.woff2?bc012a65aee350f77f89bb30e466b4e5) format("woff2"), url(/fonts/NeuePlak-NarrowRegular.woff?e89904d43d4677ccdb4cd497994f23c5) format("woff"), url(/fonts/NeuePlak-NarrowRegular.ttf?d7f6af7f2d1108e74b21d2ec133ff44b) format("truetype"), url(/fonts/NeuePlak-NarrowRegular.svg?9b11aa0dcbc7c42807fb8f4354052dad) format("svg");
+  src: url("/fonts/NeuePlak-NarrowRegular.eot");
+  src: url("/fonts/NeuePlak-NarrowRegular.eot?#iefix") format("embedded-opentype"), url("/fonts/NeuePlak-NarrowRegular.woff2") format("woff2"), url("/fonts/NeuePlak-NarrowRegular.woff") format("woff"), url("/fonts/NeuePlak-NarrowRegular.ttf") format("truetype"), url("/fonts/NeuePlak-NarrowRegular.svg#NeuePlak-NarrowRegular") format("svg");
   font-weight: normal;
   font-style: normal;
 }

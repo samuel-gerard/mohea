@@ -35,6 +35,7 @@
     "vue-template-compiler": "^2.6.11"
   },
   "dependencies": {
+    "@crystallize/react-growl": "^1.12.0",
     "acorn": "^6.3.0",
     "ajv-errors": "^1.0.1",
     "ajv-keywords": "^3.4.1",
@@ -108,7 +109,9 @@
     "cssnano-util-same-parent": "^4.0.1",
     "csso": "^3.5.1",
     "cyclist": "^1.0.1",
-    "date-now": "^0.1.4"
+    "date-now": "^0.1.4",
+    "growly": "^1.3.0",
+    "styled-components": "^5.0.1"
   },
   "author": "",
   "license": "ISC",

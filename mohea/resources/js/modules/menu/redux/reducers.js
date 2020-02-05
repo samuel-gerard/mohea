@@ -16,6 +16,14 @@ const initState = {
 function rootReducer(state = initState, payload) {
   let newState = Object.assign({}, state);
   switch (payload.type) {
+    case "LOAD_MENU":
+
+      return {
+        ...state,
+        'classes': payload.classes ? payload.classes : [],
+        'menu': payload.menu,
+        'name': payload.name ? payload.name : ''
+      }
     case "DELETE_ITEM":
       console.log(payload.parent_idx < 0)
       if(payload.parent_idx < 0) {

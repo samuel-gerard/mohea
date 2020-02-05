@@ -20,6 +20,15 @@ export const resetTable = () => ({
 /* ===============================================
 * FUNCTIONS TO ADD
 =============================================== */
+export const loadTable = (id, classes, nbCol, tableau, caption, name) => ({
+  type: "LOAD_TABLE",
+  id: id,
+  classes: classes,
+  nbCol: nbCol,
+  tableau: tableau,
+  caption: caption,
+  name: name
+})
 
 export const addNewRow = (type, idx) => ({
     type: "ADD_ROW",

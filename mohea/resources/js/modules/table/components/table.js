@@ -2,11 +2,13 @@ import Thead from "./thead.jsx";
 import Tbody from "./tbody.jsx";
 import Tfoot from "./tfoot.jsx";
 import React, {Component} from "react";
+import axios from 'axios';
 import { connect } from "react-redux";
 import TableReturn from "./tableReturn.jsx";
-import { addNewRow, addNewCol, importFile, resetTable, updateCaption, updateName, updateClasses, updateNbCol } from "../redux/actions";
+import { loadTable, addNewRow, addNewCol, importFile, resetTable, updateCaption, updateName, updateClasses, updateNbCol } from "../redux/actions";
 import * as d3 from "d3";
 import { ImportFile } from "../../../components/ImportFile";
+import { SaveProject } from "../../../components/SaveProject";
 import CustomInput from "./CustomInput";
 
 class Table extends Component {
@@ -18,6 +20,30 @@ class Table extends Component {
       heightCol: 0,
       widthCol: 0,
     }
+  }
+
+  componentWillMount() {
+    const href = window.location.href;
+    const id = href.substring(href.lastIndexOf('/') + 1)
+
+    if( ! parseInt(id, 10) ) {
+      return;
+    }
+    
+    axios({
+        method: 'GET',
+        url: window.location.origin + '/project/' + id,
+      })
+      .then(res => {
+        if(res.status === 200) {
+          const data = res.data;
+          const table = JSON.parse(data.content);
+          this.props.loadTable(id, table.classes, table.nbCol, table.content, data.caption, data.name);
+        }
+      })
+      .catch(err => {
+        window.location.replace(window.location.origin + '/error');
+      })
   }
   /* ===============================================
   * DELETE FUNCTIONS
@@ -118,16 +144,7 @@ class Table extends Component {
       reader.readAsBinaryString(file);
     }
   }
-  /* ===============================================
-  * Get JSON about this table
-  =============================================== */
-  handleGenerate = () => {
-    console.log(this.props)
-  }
 
-  handleSave = () => {
-    this.props.saveTable();
-  }
   /* ===============================================
   * DISPLAY COMPONENT
   =============================================== */
@@ -155,6 +172,7 @@ class Table extends Component {
             </div>
           </div>
         }
+        <SaveProject content={this.props.tableau} classes={this.props.classes} caption={this.props.caption} nbCol={this.props.nbCol} name={this.props.name} type="table" />
         <CustomInput />
         <div className="row">
           <div className="col-md-3">
@@ -198,7 +216,6 @@ class Table extends Component {
               </div>
             </div>
             <div className="form-group d-flex justify-content-between">
-              <input type="button" className="btn btn-primary form-control mr-1" value="Display code" onClick={this.handleGenerate} />
               <input type="button" className="w-25 btn btn-primary" value="Reset" onClick={this.handleReset} />
             </div>
           </div>
@@ -223,6 +240,7 @@ const mapStateToProps = state => {
   return {
     tableau: state.tableau,
     name: state.name,
+    nbCol: state.nbCol,
     caption: state.caption,
     classes: state.classes,
   }
@@ -230,6 +248,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    loadTable: (id, classes, nbCol, tableau, caption, name) => {
+      dispatch(loadTable(id, classes, nbCol, tableau, caption, name));
+    },
     updateCaption: caption => {
       dispatch(updateCaption(caption))
     },
@@ -254,9 +275,6 @@ const mapDispatchToProps = dispatch => {
     updateNbCol: (number) => {
       dispatch(updateNbCol(number))
     },
-    saveTable: () => {
-      dispatch(saveTable)
-    }
   }
 }
 

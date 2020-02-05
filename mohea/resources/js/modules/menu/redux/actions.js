@@ -15,6 +15,13 @@ export const resetMenu = () => ({
 /* ===============================================
 * FUNCTIONS TO ADD
 =============================================== */
+export const loadMenu = (id, classes, menu, name) => ({
+  type: "LOAD_MENU",
+  id: id,
+  classes: classes,
+  menu: menu,
+  name: name
+})
 
 export const addNewItem = (parent_idx) => ({
     type: "ADD_ITEM",

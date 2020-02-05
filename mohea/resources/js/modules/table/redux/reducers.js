@@ -20,6 +20,16 @@ const initState = {
 function rootReducer(state = initState, payload) {
   let newState = Object.assign({}, state);
   switch (payload.type) {
+    case "LOAD_TABLE":
+
+      return {
+        ...state,
+        'classes': payload.classes ? payload.classes : [],
+        'nbCol': payload.nbCol ? payload.nbCol : 0,
+        'tableau': payload.tableau,
+        'caption': payload.caption ? payload.caption : '',
+        'name': payload.name ? payload.name : ''
+      }
     case "DELETE_COL":
       const nbCol = state.nbCol;
       if (nbCol <= 1) {

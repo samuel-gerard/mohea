@@ -31,6 +31,8 @@
                         </div>
                     </div>
 
+                    <div id="app-listing"></div>
+
                 @else
                     <a href="/login">Login</a>
 
@@ -67,4 +69,8 @@
     @include('components.editUser')
     
 </div>
+@endsection
+
+@section('scripts-end')
+    <script src="{{ mix('/js/ListingApp.js') }}"></script>
 @endsection

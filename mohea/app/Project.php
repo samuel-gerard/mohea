@@ -11,7 +11,7 @@ class Project extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'provider_name', 'provider_id'];
+    protected $fillable = ['name', 'caption', 'content', 'type'];
 
     /**
      * Indicate that a project has one User

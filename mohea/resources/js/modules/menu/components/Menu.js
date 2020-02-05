@@ -1,11 +1,37 @@
 import React, {Component} from "react";
+import axios from 'axios';
 import { connect } from "react-redux";
 import MenuReturn from "./MenuReturn.jsx";
-import { addNewItem, resetMenu, updateName, updateClasses, saveMenu } from "../redux/actions";
+import { loadMenu, addNewItem, resetMenu, updateName, updateClasses } from "../redux/actions";
 import MenuContent from "./MenuContent";
 import CustomInput from "./CustomInput";
+import { SaveProject } from "../../../components/SaveProject";
 
 class Menu extends Component {
+
+  componentWillMount() {
+    const href = window.location.href;
+    const id = href.substring(href.lastIndexOf('/') + 1)
+
+    if( ! parseInt(id, 10) ) {
+      return;
+    }
+    
+    axios({
+        method: 'GET',
+        url: window.location.origin + '/project/' + id,
+      })
+      .then(res => {
+        if(res.status === 200) {
+          const data = res.data;
+          const menu = JSON.parse(data.content);
+          this.props.loadMenu(id, menu.classes, menu.content, data.name);
+        }
+      })
+      .catch(err => {
+        window.location.replace(window.location.origin + '/error');
+      })
+  }
   /* ===============================================
   * DELETE FUNCTIONS
   =============================================== */
@@ -30,21 +56,12 @@ class Menu extends Component {
   }
 
   /* ===============================================
-  * Get JSON about this menu
-  =============================================== */
-  handleGenerate = () => {
-    console.log(this.props.menu)
-  }
-
-  handleSave = () => {
-    this.props.saveMenu();
-  }
-  /* ===============================================
   * DISPLAY COMPONENT
   =============================================== */
   render() {
     return <section>
         <h1>{this.props.name || 'New Menu'}</h1>
+        <SaveProject content={this.props.menu} classes={this.props.classes} name={this.props.name} type="menu" />
         <CustomInput />
         <div className="row">
           <div className="col-md-3">
@@ -70,7 +87,6 @@ class Menu extends Component {
               </div>
             </div>
             <div className="form-group d-flex justify-content-between">
-              <input type="button" className="btn btn-primary form-control mr-1" value="Display code" onClick={this.handleGenerate} />
               <input type="button" className="w-25 btn btn-primary" value="Reset" onClick={this.handleReset} />
             </div>
           </div>
@@ -91,11 +107,15 @@ const mapStateToProps = state => {
   return {
     menu: state.menu,
     name: state.name,
+    classes: state.classes,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
+    loadMenu: (id, classes, menu, name) => {
+      dispatch(loadMenu(id, classes, menu, name));
+    },
     updateName: name => {
       dispatch(updateName(name))
     },

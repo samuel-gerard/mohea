@@ -28178,6 +28178,75 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "./node_modules/react-id-generator/lib/index.js":
+/*!******************************************************!*\
+  !*** ./node_modules/react-id-generator/lib/index.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+
+var React = _interopDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var globalPrefix = "id";
+var lastId = 0;
+function nextId(localPrefix) {
+  lastId++;
+  return "".concat(localPrefix || globalPrefix).concat(lastId);
+}
+var resetId = function resetId() {
+  lastId = 0;
+};
+var setPrefix = function setPrefix(newPrefix) {
+  globalPrefix = newPrefix;
+};
+
+var getIds = function getIds(count, prefix) {
+  var ids = [];
+
+  for (var i = 0; i < count; i++) {
+    ids.push(nextId(prefix));
+  }
+
+  return ids;
+};
+
+function usePrevious(value) {
+  var ref = React.useRef();
+  React.useEffect(function () {
+    ref.current = value;
+  });
+  return ref.current;
+}
+
+function useId() {
+  var count = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+  var prefix = arguments.length > 1 ? arguments[1] : undefined;
+  var idsListRef = React.useRef([]);
+  var prevCount = usePrevious(count);
+  var prevPrefix = usePrevious(prefix);
+
+  if (count !== prevCount || prevPrefix !== prefix) {
+    idsListRef.current = getIds(count, prefix);
+  }
+
+  return idsListRef.current;
+}
+
+exports.default = nextId;
+exports.resetId = resetId;
+exports.setPrefix = setPrefix;
+exports.useId = useId;
+
+
+/***/ }),
+
 /***/ "./node_modules/react/cjs/react.development.js":
 /*!*****************************************************!*\
   !*** ./node_modules/react/cjs/react.development.js ***!
@@ -31992,22 +32061,27 @@ function (_React$Component) {
   _createClass(FormApp, [{
     key: "handleAddElement",
     value: function handleAddElement(element) {
+      console.log(element);
+
       var usedElements = _toConsumableArray(this.state.usedElements);
 
       usedElements.push(element);
       this.setState({
         usedElements: usedElements
-      }); // stocker dans le tableau l'ELEMENT correspondant // ou le COMPOSANT ?
+      });
+      console.log(this.state.usedElements); // this.setState({focus: element});
+      // console.log(this.state.usedElements)
+      // stocker dans le tableau l'ELEMENT correspondant // ou le COMPOSANT ?
       // créer nouvrau composant avec ID/key unique
     }
   }, {
     key: "handleAddFocus",
     value: function handleAddFocus(element) {
       // FOCUS PAS BIEN MIT A JOUR QUAND PLUSIEURS MEMES ELEMENTS
-      console.log(element);
       this.setState({
         focus: element
       });
+      console.log(element);
     }
   }, {
     key: "handleUpdateElement",
@@ -32033,7 +32107,8 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Your Form"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container_app"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Element__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        onAddElement: this.handleAddElement.bind(this)
+        onAddElement: this.handleAddElement.bind(this),
+        nbElement: this.state.nbElement
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Form__WEBPACK_IMPORTED_MODULE_2__["default"], {
         usedElements: this.state.usedElements,
         onFocusElement: this.handleAddFocus.bind(this)
@@ -32194,6 +32269,8 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_id_generator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-id-generator */ "./node_modules/react-id-generator/lib/index.js");
+/* harmony import */ var react_id_generator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_id_generator__WEBPACK_IMPORTED_MODULE_1__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -32213,6 +32290,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -32368,7 +32446,7 @@ function (_React$Component) {
         required: "",
         placeholder: "My placeholder"
       }],
-      countElements: 0
+      countElements: _this.props.nbElement
     });
 
     return _this;
@@ -32377,13 +32455,13 @@ function (_React$Component) {
   _createClass(Element, [{
     key: "newElement",
     value: function newElement(element) {
-      element.id = this.state.countElements;
-      var count = this.state.countElements;
-      count = count + 1;
-      this.setState({
-        countElements: count
-      });
-      console.log(element);
+      // console.log(this.state.countElements)
+      var elementId = react_id_generator__WEBPACK_IMPORTED_MODULE_1___default()();
+      element.id = elementId; // var count = this.state.countElements
+      // count = count + 1
+      // this.setState({countElements: count})
+      // console.log(element)
+
       this.props.onAddElement(element);
     }
   }, {
@@ -32472,6 +32550,7 @@ function (_React$Component) {
         case 'Text':
           // ajouter fonction dans elem text ?
           // afficher les infos de l'element précis passé en param // avec id ? // ou passer l'element entier (actualElement) ?
+          // console.log('voila = '+element.id)
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_elementList_Text__WEBPACK_IMPORTED_MODULE_1__["default"], {
             display: 'form',
             currentElement: element
@@ -32528,13 +32607,13 @@ function (_React$Component) {
         className: "form_box"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Your form"), this.props.usedElements.map(function (element, i) {
         return (// <div className="form-group" onClick={() => this.props.onFocusElement(element)} dangerouslySetInnerHTML={this.setMarkup(element)} />
-          react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "form-group",
             key: i,
             onClick: function onClick() {
               return _this.props.onFocusElement(element);
             }
-          }, _this.setMarkup(element))
+          }, _this.setMarkup(element)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, element.id))
         );
       })));
     }
@@ -32558,6 +32637,8 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_id_generator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-id-generator */ "./node_modules/react-id-generator/lib/index.js");
+/* harmony import */ var react_id_generator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_id_generator__WEBPACK_IMPORTED_MODULE_1__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
@@ -32588,6 +32669,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var Text =
 /*#__PURE__*/
 function (_React$Component) {
@@ -32609,7 +32691,7 @@ function (_React$Component) {
         className: "",
         content: ""
       },
-      id: 1,
+      id: react_id_generator__WEBPACK_IMPORTED_MODULE_1___default()(),
       name: "Text",
       tag: "p",
       className: "moheaText",
@@ -32670,6 +32752,7 @@ function (_React$Component) {
     key: "handleDisplay",
     value: function handleDisplay(display) {
       if (display == 'edition') {
+        // console.log(this.state.element)
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
           "for": "content"
         }, this.state.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {

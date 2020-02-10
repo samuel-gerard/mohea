@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+
 import Form from "./components/Form";
 import Edition from "./components/Edition";
 import Element from "./components/Element";
@@ -8,18 +9,23 @@ import Element from "./components/Element";
 
 class FormApp extends React.Component {
 
+  
   state = {
-    usedElements: [
-    ],
+    usedElements: [],
     focus: '',
     content: '',
   };
 
   handleAddElement(element)
   {
+    console.log(element)
     const usedElements = [...this.state.usedElements];
     usedElements.push(element);
-    this.setState({usedElements});
+    this.setState({usedElements: usedElements});
+    console.log(this.state.usedElements)
+    
+    // this.setState({focus: element});
+    // console.log(this.state.usedElements)
     // stocker dans le tableau l'ELEMENT correspondant // ou le COMPOSANT ?
     // créer nouvrau composant avec ID/key unique
   }
@@ -27,8 +33,8 @@ class FormApp extends React.Component {
   handleAddFocus(element)
   {
     // FOCUS PAS BIEN MIT A JOUR QUAND PLUSIEURS MEMES ELEMENTS
-    console.log(element)
     this.setState({focus: element});
+    console.log(element)
   }
 
   handleUpdateElement(content)
@@ -52,7 +58,7 @@ class FormApp extends React.Component {
       <div className="App">
         <h1>Your Form</h1>
         <div className="container_app">
-          <Element onAddElement={this.handleAddElement.bind(this)} />
+          <Element onAddElement={this.handleAddElement.bind(this)} nbElement={this.state.nbElement} />
           <Form usedElements={this.state.usedElements} onFocusElement={this.handleAddFocus.bind(this)} />
           <Edition focusedElement={this.state.focus} onUpdateElement={this.handleUpdateElement.bind(this)} />
         </div>

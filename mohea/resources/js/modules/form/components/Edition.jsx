@@ -24,7 +24,7 @@ class Edition extends React.Component {
     switch(focus.name)
     {
       case 'Text':
-        return <Text display={'edition'} currentElement={focus} onUpdate={this.handleUpdate.bind(this)} />
+        return (<Text display={'edition'} currentElement={focus} onUpdate={this.handleUpdate.bind(this)} />)
 
       case 'Title':
         return <Title display={'edition'} currentElement={focus} onUpdate={this.handleUpdate.bind(this)} />

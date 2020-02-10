@@ -14,6 +14,7 @@ class Form extends React.Component {
       case 'Text' :
         // ajouter fonction dans elem text ?
         // afficher les infos de l'element précis passé en param // avec id ? // ou passer l'element entier (actualElement) ?
+        // console.log('voila = '+element.id)
         return <Text display={'form'} currentElement={element} />
 
       case 'Title':
@@ -79,7 +80,10 @@ class Form extends React.Component {
 
           {this.props.usedElements.map((element, i) => (
             // <div className="form-group" onClick={() => this.props.onFocusElement(element)} dangerouslySetInnerHTML={this.setMarkup(element)} />
-            <div className="form-group" key={i} onClick={() => this.props.onFocusElement(element)}>{this.setMarkup(element)}</div>
+            <div>
+              <div className="form-group" key={i} onClick={() => this.props.onFocusElement(element)}>{this.setMarkup(element)}</div>
+              <h1>{element.id}</h1>
+            </div>
           ))}
 
         </form>

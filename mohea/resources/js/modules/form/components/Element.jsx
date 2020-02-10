@@ -1,4 +1,5 @@
 import React from "react";
+import nextId from "react-id-generator";
 
 class Element extends React.Component {
 
@@ -26,18 +27,20 @@ class Element extends React.Component {
       { id: 13, name: "Password", tag: "input", className:"moheaPassword", label:"My Password", type: "password", required: "", placeholder: "My placeholder" },
       { id: 14, name: "Phone", tag: "input", className:"moheaPhone", label:"My Phone Number", type: "tel", pattern: "", required: "", placeholder: "My placeholder" }
     ],
-    countElements: 0,
+    countElements: this.props.nbElement,
   };
 
 
 
   newElement(element)
   {
-    element.id = this.state.countElements
-    var count = this.state.countElements
-    count = count + 1
-    this.setState({countElements: count})
-    console.log(element)
+    // console.log(this.state.countElements)
+    var elementId = nextId()
+    element.id = elementId
+    // var count = this.state.countElements
+    // count = count + 1
+    // this.setState({countElements: count})
+    // console.log(element)
     this.props.onAddElement(element)
   }
 

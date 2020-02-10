@@ -1,4 +1,6 @@
 import React from "react";
+import nextId from "react-id-generator";
+
 
 class Text extends React.Component {
 
@@ -7,7 +9,7 @@ class Text extends React.Component {
         super(props)
         this.state = { 
             element: { id: "", name: "", tag: "", className:"", content: "" },
-            id: 1, name: "Text", tag: "p", className:"moheaText", content: this.props.currentElement.content, edition: '', form: '', 
+            id: nextId(), name: "Text", tag: "p", className:"moheaText", content: this.props.currentElement.content, edition: '', form: '', 
             element: this.props.currentElement, 
             display: this.props.display,
             generated: 0
@@ -61,6 +63,7 @@ class Text extends React.Component {
 
     handleDisplay(display){
         if(display == 'edition'){
+            // console.log(this.state.element)
             return (
                 <form>
                     <label for="content">{this.state.name}</label>

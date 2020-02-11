@@ -7,7 +7,7 @@
 @section('main-content')
     <nav id="header" class="header">
         <ul class="d-flex jc-e ai-c">
-            <li><a class="button primary" href="{{ route('create') }}">Start a new project</a></li>
+            <li><a class="button primary" href="{{ route('project.create') }}">Start a new project</a></li>
             <li class="logo ml-auto mr-auto"><img src="images/logo_medium.png" alt="Logo of Mohea" draggable="false"></li>
             <li><a class="link primary" href="{{ route('register') }}">Create my account</a></li>
             <li><a class="link action" href="{{ route('login') }}">Log in</a></li>
@@ -39,7 +39,7 @@
                 <li class="from-mohea light">To start creating accessible elements, simply click on the button below 👇<svg class="spine" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56.12 60.72"><g><path d="M4.41,2.08c0,23.18,0,31.37-4.37,56.43C-.19,59.82.67,61,2,60.66c6.38-1.77,36.9-9.49,53.27-9.49,3.85,0-5.8-9.54-7-14.37C45.51,26.3,7.14-8.83,4.41,2.08Z" style="fill: #ff4757" /></g></svg></li>
             </ul>
             <div class="attractive-button">
-                <a class="button primary" href="{{ route('create') }}">Start a new project</a>
+                <a class="button primary" href="{{ route('project.create') }}">Start a new project</a>
             </div>
             <ul class="conversation">
                 <li class="from-user">But why make accessible websites?<svg class="spine" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35.82 37.95"><g><path d="M32.58,2c0,17,0,16,3.21,34.38.17,1-.46,1.83-1.4,1.57C29.71,36.6,14.58,31,2.58,31c-2.83,0-3-7-2.09-10.55C2.45,12.71,30.58-6,32.58,2Z" style="fill: #6c63ff" /></g></svg></li>

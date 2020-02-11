@@ -2,7 +2,6 @@
 * FUNCTIONS TO ADD
 =============================================== */
 
-export const addNewItem = (item) => ({
+export const addNewItem = () => ({
     type: "ADD_ITEM",
-    item: item
 });

@@ -1,34 +1,12 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
 import FormContent from "./FormContent";
+import FormReturn from "./FormReturn";
+import FormEdit from "./FormEdit";
 // import CustomInput from "./CustomInput";
 
 
 class Form extends React.Component {
-
-  /* render(){
-    const { form } = this.props
-    const formData = form.length ? (
-      form.map(element => {
-        return (
-          <div key={element.id}>
-            <h2>Salut ! {element.title}</h2>
-            <h3>{element.content}</h3>
-          </div>
-        )
-      })
-    ) : (
-      <p>Aucun element encore ajouté</p>
-    )
-    return (
-      <div>
-        <h1>{this.props.title}</h1>
-        {formData}  
-      </div>
-    )
-  } */
-
-
 
   render() {
     return <section>
@@ -38,7 +16,7 @@ class Form extends React.Component {
           <div className="col-md-3">
             <div className="form-group">
               <label htmlFor="menu-name">
-                Name for this form
+                Name for this Form
               </label>
               <input type="text" className="form-control" name="name" id="menu-name" value={this.props.name} />
             </div>
@@ -68,7 +46,12 @@ class Form extends React.Component {
         </div>
         <div className="row">
           <div className="col-md-12">
-            {/* form return */}
+            <FormEdit />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-12">
+            <FormReturn />
           </div>
         </div>
       </section>
@@ -79,7 +62,8 @@ class Form extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    form: state.form,
+    form: state.elementsUsed,
+    elements: state.elementsChoices,
     title: state.title
   }
 }

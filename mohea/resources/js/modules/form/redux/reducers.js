@@ -1,21 +1,58 @@
 const initState = {
     'title': 'Mon nouveau formulaire',
-    form: [
+    elementsChoices: [
+        { name: "Text", tag: "p", content: "My New Text" },
+        { name: "Title", tag: "h1", content: "My New Title" },
+        { name: "Legend", tag: "legend", className:"moheaLegend", type: "" },
+        { name: "Submit", tag: "input", className:"moheaSubmit", type: "submit", value: "Send my new Form" },
+        { name: "Text Input", tag: "input", className:"moheaTextInput", type: "text", label:"My New Text Input", required: "", placeholder: "My placeholder" },
+        { name: "Text Area", tag: "textarea", className:"moheaTextArea", label:"My New Text Area", rows: 3, col: 10, required: "", placeholder: "My placeholder" },
+        { name: "Select", tag: "select", className:"moheaSelect", label:"My New Select", title: "Options", required: "", options: [
+          {tag: "option", value: "first", content: "My First Option"},
+          {tag: "option", value: "deux", content: "My Second Option"}
+        ]},
+        { name: "Date", tag: "input", className:"moheaDate", label:"My New Date", type: "date", required: "", placeholder: "12/02/2020" },
+        { name: "Check Box", tag: "div", className:"moheaCheckbox", label:"My New Check Box", required: "", options:[
+          { tag: "input", type: "checkbox", label: "My first Option" }
+        ]},
+        { name: "Radio Button", tag: "div", className:"moheaRadiobutton", label:"My New Radio Button", required: "", options: [
+          { tag: "input", type: "radio", label: "My first Option" }
+        ]},
+        { name: "Email", tag: "input", className:"moheaEmail", label:"My Email", type: "email", pattern: "", required: "", placeholder: "My placeholder" },
+        { name: "Link", tag: "input", className:"moheaLink", label:"My Link", type: "url", required: "", placeholder: "My placeholder" },
+        { name: "Password", tag: "input", className:"moheaPassword", label:"My Password", type: "password", required: "", placeholder: "My placeholder" },
+        { name: "Phone", tag: "input", className:"moheaPhone", label:"My Phone Number", type: "tel", pattern: "", required: "", placeholder: "My placeholder" }
+    ],
+    elementsUsed: [
         {
             id: 1,
-            title: "Mon premier element",
+            name: "Mon premier element",
             content: "Contenu de l'element 1"
         },
         {
             id: 2,
-            title: "Mon deuxieme element",
+            name: "Mon deuxieme element",
             content: "Contenu de l'element 2"
         }
     ]
 }
 
-const rootReducer = (state = initState, action) => {
-    return state;
-}
+
+function rootReducer(state = initState, payload) {
+
+    // let newState = Object.assign({}, state);
+
+    switch (payload.type) {
+
+      case "ADD_ITEM":
+          console.log('on est dans le reducer les gars!')
+        return 'nouvel item ajouté';
+
+      default:
+        return state;
+    }
+  }
+
+
 
 export default rootReducer;

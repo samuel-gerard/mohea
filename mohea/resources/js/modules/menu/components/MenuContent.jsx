@@ -25,6 +25,10 @@ class MenuContent extends Component {
     this.props.updateInputSelected(parent_idx, idx)
   }
 
+  handleInputBlur = () => {
+    this.props.updateInputSelected(null, null);
+  }
+
   render() {
     const menuClasses = this.props.classes.join(' ');
 
@@ -43,6 +47,7 @@ class MenuContent extends Component {
                     <input type="text"
                       data-idx={'-1/' + idx}
                       onFocus={this.handleInputSelected}
+                      onBlur={this.handleInputBlur}
                       onChange={this.handleUpdateValue}
                       value={item.value}
                       className="nav-link"
@@ -59,6 +64,7 @@ class MenuContent extends Component {
                   <input type="text"
                       data-idx={'-1/' + idx}
                       onFocus={this.handleInputSelected}
+                      onBlur={this.handleInputBlur}
                       onChange={this.handleUpdateValue}
                       value={item.value}
                       className="nav-link dropdown-toggle"
@@ -77,6 +83,7 @@ class MenuContent extends Component {
                         <input type="text"
                           data-idx={idx + '/' + child_idx}
                           onFocus={this.handleInputSelected}
+                          onBlur={this.handleInputBlur}
                           onChange={this.handleUpdateValue}
                           value={child.value}
                           style={child.style} />

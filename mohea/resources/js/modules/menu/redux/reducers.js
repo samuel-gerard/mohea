@@ -25,7 +25,6 @@ function rootReducer(state = initState, payload) {
         'name': payload.name ? payload.name : ''
       }
     case "DELETE_ITEM":
-      console.log(payload.parent_idx < 0)
       if(payload.parent_idx < 0) {
         // If first level
         newState.menu.splice(payload.idx, 1)
@@ -121,6 +120,12 @@ function rootReducer(state = initState, payload) {
         nbCol: payload.nbCol
       }
     case "UPDATE_INPUT_SELECTED":
+      if(!(payload.idx || payload.parent_idx)) {
+        return {
+          ...state,
+          inputSelected: {}
+        }
+      }
       return {
         ...state,
         inputSelected: {

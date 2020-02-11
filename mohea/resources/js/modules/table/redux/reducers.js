@@ -148,6 +148,13 @@ function rootReducer(state = initState, payload) {
         nbCol: payload.nbCol
       }
     case "UPDATE_INPUT_SELECTED":
+      if(! (payload.typeTable || payload.row || payload.col) ) {
+        return {
+          ...state,
+          inputSelected: {}
+        }
+      }
+
       return {
         ...state,
         inputSelected: {

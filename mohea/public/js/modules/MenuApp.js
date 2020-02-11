@@ -49921,6 +49921,35 @@ var SaveProject = function SaveProject(props) {
   var url = window.location.origin;
   var href = window.location.href;
   var id = href.substring(href.lastIndexOf('/') + 1);
+  var fired = false;
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function (props) {
+    document.addEventListener("keydown", function (e) {
+      checkKeyDown(e);
+    }, false);
+    document.addEventListener('keyup', checkKeyUp, false);
+    return function () {
+      document.removeEventListener("keydown", function (e) {
+        checkKeyDown(e);
+      }, false);
+      document.removeEventListener('keyup', checkKeyUp, false);
+    };
+  }, [props]);
+
+  var checkKeyDown = function checkKeyDown(e) {
+    if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
+      e.stopPropagation();
+      e.preventDefault();
+      fired = true;
+      return false;
+    }
+  };
+
+  var checkKeyUp = function checkKeyUp() {
+    if (fired) {
+      fired = false;
+      save();
+    }
+  };
 
   var save = function save() {
     if (!parseInt(id, 10)) {
@@ -50285,6 +50314,10 @@ function (_Component) {
       _this.props.updateInputSelected(parent_idx, idx);
     });
 
+    _defineProperty(_assertThisInitialized(_this), "handleInputBlur", function () {
+      _this.props.updateInputSelected(null, null);
+    });
+
     return _this;
   }
 
@@ -50320,6 +50353,7 @@ function (_Component) {
             type: "text",
             "data-idx": '-1/' + idx,
             onFocus: _this2.handleInputSelected,
+            onBlur: _this2.handleInputBlur,
             onChange: _this2.handleUpdateValue,
             value: item.value,
             className: "nav-link",
@@ -50348,6 +50382,7 @@ function (_Component) {
           type: "text",
           "data-idx": '-1/' + idx,
           onFocus: _this2.handleInputSelected,
+          onBlur: _this2.handleInputBlur,
           onChange: _this2.handleUpdateValue,
           value: item.value,
           className: "nav-link dropdown-toggle",
@@ -50380,6 +50415,7 @@ function (_Component) {
             type: "text",
             "data-idx": idx + '/' + child_idx,
             onFocus: _this2.handleInputSelected,
+            onBlur: _this2.handleInputBlur,
             onChange: _this2.handleUpdateValue,
             value: child.value,
             style: child.style
@@ -50617,13 +50653,11 @@ function (_Component) {
       _this.props.updateName(e.target.value);
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleInitialize", function (e) {
-      e.preventDefault(); // @TODO
-
-      _this.props.addNewItem(type, i);
-    });
-
     _defineProperty(_assertThisInitialized(_this), "handleClasses", function (e) {
+      if (e.target.name) {
+        _this.props.updateClasses(document.querySelector("input[name=" + e.target.name + "]:not(:checked").value);
+      }
+
       _this.props.updateClasses(e.target.value);
     });
 
@@ -50631,8 +50665,8 @@ function (_Component) {
   }
 
   _createClass(Menu, [{
-    key: "componentWillMount",
-    value: function componentWillMount() {
+    key: "componentDidMount",
+    value: function componentDidMount() {
       var _this2 = this;
 
       var href = window.location.href;
@@ -50703,27 +50737,29 @@ function (_Component) {
         className: "form-check-label",
         htmlFor: "class-style"
       }, "With bootstrap initial style")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-check"
+        className: "form-radio"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        className: "form-check-input",
-        type: "checkbox",
+        className: "form-radio-input",
+        name: "bg-color",
+        type: "radio",
         id: "class-light",
         onChange: this.handleClasses,
         value: "navbar-light bg-light",
         defaultChecked: true
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "form-check-label",
+        className: "form-radio-label",
         htmlFor: "class-light"
       }, "Light")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-check"
+        className: "form-radio"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        className: "form-check-input",
-        type: "checkbox",
+        className: "form-radio-input",
+        name: "bg-color",
+        type: "radio",
         id: "class-dark",
         onChange: this.handleClasses,
         value: "navbar-dark bg-dark"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "form-check-label",
+        className: "form-radio-label",
         htmlFor: "class-dark"
       }, "Dark"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group d-flex justify-content-between"
@@ -50766,23 +50802,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     resetMenu: function resetMenu() {
       dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_4__["resetMenu"])());
-    },
-    addNewItem: function addNewItem(parent_idx, idx) {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_4__["addNewItem"])(type, idx));
-    },
-    saveMenu: function (_saveMenu) {
-      function saveMenu() {
-        return _saveMenu.apply(this, arguments);
-      }
-
-      saveMenu.toString = function () {
-        return _saveMenu.toString();
-      };
-
-      return saveMenu;
-    }(function () {
-      dispatch(saveMenu);
-    })
+    }
   };
 };
 
@@ -50952,8 +50972,6 @@ function rootReducer() {
       });
 
     case "DELETE_ITEM":
-      console.log(payload.parent_idx < 0);
-
       if (payload.parent_idx < 0) {
         // If first level
         newState.menu.splice(payload.idx, 1);
@@ -51030,6 +51048,12 @@ function rootReducer() {
       });
 
     case "UPDATE_INPUT_SELECTED":
+      if (!(payload.idx || payload.parent_idx)) {
+        return _objectSpread({}, state, {
+          inputSelected: {}
+        });
+      }
+
       return _objectSpread({}, state, {
         inputSelected: {
           idx: payload.idx,
@@ -51083,7 +51107,7 @@ function rootReducer() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\wamp64\www\mohea.bach.mmi-unistra.fr\mohea\resources\js\modules\menu\MenuApp */"./resources/js/modules/menu/MenuApp.js");
+module.exports = __webpack_require__(/*! C:\Users\coral\Desktop\IUT\LP_MI\mohea\mohea.bach.mmi-unistra.fr\mohea\resources\js\modules\menu\MenuApp */"./resources/js/modules/menu/MenuApp.js");
 
 
 /***/ })

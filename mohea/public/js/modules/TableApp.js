@@ -79281,6 +79281,35 @@ var SaveProject = function SaveProject(props) {
   var url = window.location.origin;
   var href = window.location.href;
   var id = href.substring(href.lastIndexOf('/') + 1);
+  var fired = false;
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function (props) {
+    document.addEventListener("keydown", function (e) {
+      checkKeyDown(e);
+    }, false);
+    document.addEventListener('keyup', checkKeyUp, false);
+    return function () {
+      document.removeEventListener("keydown", function (e) {
+        checkKeyDown(e);
+      }, false);
+      document.removeEventListener('keyup', checkKeyUp, false);
+    };
+  }, [props]);
+
+  var checkKeyDown = function checkKeyDown(e) {
+    if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
+      e.stopPropagation();
+      e.preventDefault();
+      fired = true;
+      return false;
+    }
+  };
+
+  var checkKeyUp = function checkKeyUp() {
+    if (fired) {
+      fired = false;
+      save();
+    }
+  };
 
   var save = function save() {
     if (!parseInt(id, 10)) {
@@ -79699,8 +79728,8 @@ function (_Component) {
   }
 
   _createClass(Table, [{
-    key: "componentWillMount",
-    value: function componentWillMount() {
+    key: "componentDidMount",
+    value: function componentDidMount() {
       var _this2 = this;
 
       var href = window.location.href;
@@ -80172,6 +80201,10 @@ function (_Component) {
       _this.props.updateInputSelected('body', row, col);
     });
 
+    _defineProperty(_assertThisInitialized(_this), "handleInputBlur", function () {
+      _this.props.updateInputSelected(null, null, null);
+    });
+
     return _this;
   }
 
@@ -80203,6 +80236,7 @@ function (_Component) {
             type: "text",
             "data-id": i + '/' + j,
             onFocus: _this2.handleInputSelected,
+            onBlur: _this2.handleInputBlur,
             onChange: _this2.handleUpdateValue,
             value: item.value,
             className: "form-control",
@@ -80340,6 +80374,10 @@ function (_Component) {
       _this.props.updateInputSelected('foot', row, col);
     });
 
+    _defineProperty(_assertThisInitialized(_this), "handleInputBlur", function () {
+      _this.props.updateInputSelected(null, null, null);
+    });
+
     return _this;
   }
 
@@ -80371,6 +80409,7 @@ function (_Component) {
             type: "text",
             "data-id": i + '/' + j,
             onFocus: _this2.handleInputSelected,
+            onBlur: _this2.handleInputBlur,
             onChange: _this2.handleUpdateValue,
             value: item.value,
             className: "form-control",
@@ -80508,6 +80547,10 @@ function (_Component) {
       _this.props.updateInputSelected('head', row, col);
     });
 
+    _defineProperty(_assertThisInitialized(_this), "handleInputBlur", function () {
+      _this.props.updateInputSelected(null, null, null);
+    });
+
     return _this;
   }
 
@@ -80539,6 +80582,7 @@ function (_Component) {
             type: "text",
             "data-id": i + '/' + j,
             onFocus: _this2.handleInputSelected,
+            onBlur: _this2.handleInputBlur,
             onChange: _this2.handleUpdateValue,
             value: item.value,
             className: "form-control",
@@ -80937,6 +80981,12 @@ function rootReducer() {
       });
 
     case "UPDATE_INPUT_SELECTED":
+      if (!(payload.typeTable || payload.row || payload.col)) {
+        return _objectSpread({}, state, {
+          inputSelected: {}
+        });
+      }
+
       return _objectSpread({}, state, {
         inputSelected: {
           type: payload.typeTable,
@@ -80999,7 +81049,7 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\wamp64\www\mohea.bach.mmi-unistra.fr\mohea\resources\js\modules\table\TableApp */"./resources/js/modules/table/TableApp.js");
+module.exports = __webpack_require__(/*! C:\Users\coral\Desktop\IUT\LP_MI\mohea\mohea.bach.mmi-unistra.fr\mohea\resources\js\modules\table\TableApp */"./resources/js/modules/table/TableApp.js");
 
 
 /***/ })

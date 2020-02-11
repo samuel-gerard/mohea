@@ -3,7 +3,6 @@ const initState = {
     elementsChoices: [
         { name: "Text", tag: "p", content: "My New Text" },
         { name: "Title", tag: "h1", content: "My New Title" },
-        { name: "Legend", tag: "legend", className:"moheaLegend", type: "" },
         { name: "Submit", tag: "input", className:"moheaSubmit", type: "submit", value: "Send my new Form" },
         { name: "Text Input", tag: "input", className:"moheaTextInput", type: "text", label:"My New Text Input", required: "", placeholder: "My placeholder" },
         { name: "Text Area", tag: "textarea", className:"moheaTextArea", label:"My New Text Area", rows: 3, col: 10, required: "", placeholder: "My placeholder" },
@@ -23,30 +22,28 @@ const initState = {
         { name: "Password", tag: "input", className:"moheaPassword", label:"My Password", type: "password", required: "", placeholder: "My placeholder" },
         { name: "Phone", tag: "input", className:"moheaPhone", label:"My Phone Number", type: "tel", pattern: "", required: "", placeholder: "My placeholder" }
     ],
-    elementsUsed: [
-        {
-            id: 1,
-            name: "Mon premier element",
-            content: "Contenu de l'element 1"
-        },
-        {
-            id: 2,
-            name: "Mon deuxieme element",
-            content: "Contenu de l'element 2"
-        }
-    ]
+    elementsUsed: []
 }
 
 
 function rootReducer(state = initState, payload) {
 
-    // let newState = Object.assign({}, state);
+    let newState = Object.assign({}, state);
 
     switch (payload.type) {
 
       case "ADD_ITEM":
-          console.log('on est dans le reducer les gars!')
-        return 'nouvel item ajouté';
+          let elem = payload.element
+          elem.id = payload.id
+          let elementsUsed = [...state.elementsUsed]
+          elementsUsed.push(elem)
+          return {
+            ...state,
+            elementsUsed: elementsUsed
+          };
+
+      case "DELETE_ITEM":
+        return 'deleted item';
 
       default:
         return state;

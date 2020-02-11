@@ -107,7 +107,8 @@
     "cssnano-util-same-parent": "^4.0.1",
     "csso": "^3.5.1",
     "cyclist": "^1.0.1",
-    "date-now": "^0.1.4"
+    "date-now": "^0.1.4",
+    "newid": "^0.5.0"
   },
   "author": "",
   "license": "ISC",

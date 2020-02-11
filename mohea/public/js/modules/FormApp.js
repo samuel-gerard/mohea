@@ -32048,6 +32048,75 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "./node_modules/react-id-generator/lib/index.js":
+/*!******************************************************!*\
+  !*** ./node_modules/react-id-generator/lib/index.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+
+var React = _interopDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var globalPrefix = "id";
+var lastId = 0;
+function nextId(localPrefix) {
+  lastId++;
+  return "".concat(localPrefix || globalPrefix).concat(lastId);
+}
+var resetId = function resetId() {
+  lastId = 0;
+};
+var setPrefix = function setPrefix(newPrefix) {
+  globalPrefix = newPrefix;
+};
+
+var getIds = function getIds(count, prefix) {
+  var ids = [];
+
+  for (var i = 0; i < count; i++) {
+    ids.push(nextId(prefix));
+  }
+
+  return ids;
+};
+
+function usePrevious(value) {
+  var ref = React.useRef();
+  React.useEffect(function () {
+    ref.current = value;
+  });
+  return ref.current;
+}
+
+function useId() {
+  var count = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+  var prefix = arguments.length > 1 ? arguments[1] : undefined;
+  var idsListRef = React.useRef([]);
+  var prevCount = usePrevious(count);
+  var prevPrefix = usePrevious(prefix);
+
+  if (count !== prevCount || prevPrefix !== prefix) {
+    idsListRef.current = getIds(count, prefix);
+  }
+
+  return idsListRef.current;
+}
+
+exports.default = nextId;
+exports.resetId = resetId;
+exports.setPrefix = setPrefix;
+exports.useId = useId;
+
+
+/***/ }),
+
 /***/ "./node_modules/react-is/cjs/react-is.development.js":
 /*!***********************************************************!*\
   !*** ./node_modules/react-is/cjs/react-is.development.js ***!
@@ -39266,6 +39335,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _redux_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../redux/actions */ "./resources/js/modules/form/redux/actions.js");
+/* harmony import */ var react_id_generator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-id-generator */ "./node_modules/react-id-generator/lib/index.js");
+/* harmony import */ var react_id_generator__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_id_generator__WEBPACK_IMPORTED_MODULE_3__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -39290,6 +39361,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var FormContent =
 /*#__PURE__*/
 function (_Component) {
@@ -39308,10 +39380,8 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(FormContent)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
-    _defineProperty(_assertThisInitialized(_this), "handleAddItem", function () {
-      console.log(_this.props.elements);
-
-      _this.props.addNewItem();
+    _defineProperty(_assertThisInitialized(_this), "handleAddItem", function (id, element) {
+      _this.props.addNewItem(id, element);
     });
 
     return _this;
@@ -39331,17 +39401,17 @@ function (_Component) {
           key: i,
           type: "button",
           onClick: function onClick() {
-            return _this2.handleAddItem();
+            return _this2.handleAddItem(react_id_generator__WEBPACK_IMPORTED_MODULE_3___default()(), element);
           },
           className: "btn btn-primary",
           value: element.name
         });
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-display"
-      }, console.log(this.props.elementsUsed), this.props.elementsUsed.map(function (element, i) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: "form_box"
+      }, this.props.elementsUsed.map(function (element, i) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: i
-        }, element.name));
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, element.name));
       })));
     }
   }]);
@@ -39358,8 +39428,8 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch, stateProps) {
   return {
-    addNewItem: function addNewItem() {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["addNewItem"])());
+    addNewItem: function addNewItem(id, element) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["addNewItem"])(id, element));
     }
   };
 };
@@ -39492,18 +39562,27 @@ var mapStateToProps = function mapStateToProps(state) {
 /*!****************************************************!*\
   !*** ./resources/js/modules/form/redux/actions.js ***!
   \****************************************************/
-/*! exports provided: addNewItem */
+/*! exports provided: addNewItem, deleteItem */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNewItem", function() { return addNewItem; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteItem", function() { return deleteItem; });
 /* ===============================================
 * FUNCTIONS TO ADD
 =============================================== */
-var addNewItem = function addNewItem() {
+var addNewItem = function addNewItem(id, element) {
   return {
-    type: "ADD_ITEM"
+    type: "ADD_ITEM",
+    id: id,
+    element: element
+  };
+};
+var deleteItem = function deleteItem(id) {
+  return {
+    type: "DELETE_ITEM",
+    id: id
   };
 };
 
@@ -39518,6 +39597,20 @@ var addNewItem = function addNewItem() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 var initState = {
   'title': 'Mon nouveau formulaire',
   elementsChoices: [{
@@ -39528,11 +39621,6 @@ var initState = {
     name: "Title",
     tag: "h1",
     content: "My New Title"
-  }, {
-    name: "Legend",
-    tag: "legend",
-    className: "moheaLegend",
-    type: ""
   }, {
     name: "Submit",
     tag: "input",
@@ -39637,26 +39725,28 @@ var initState = {
     required: "",
     placeholder: "My placeholder"
   }],
-  elementsUsed: [{
-    id: 1,
-    name: "Mon premier element",
-    content: "Contenu de l'element 1"
-  }, {
-    id: 2,
-    name: "Mon deuxieme element",
-    content: "Contenu de l'element 2"
-  }]
+  elementsUsed: []
 };
 
 function rootReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initState;
   var payload = arguments.length > 1 ? arguments[1] : undefined;
+  var newState = Object.assign({}, state);
 
-  // let newState = Object.assign({}, state);
   switch (payload.type) {
     case "ADD_ITEM":
-      console.log('on est dans le reducer les gars!');
-      return 'nouvel item ajouté';
+      var elem = payload.element;
+      elem.id = payload.id;
+
+      var elementsUsed = _toConsumableArray(state.elementsUsed);
+
+      elementsUsed.push(elem);
+      return _objectSpread({}, state, {
+        elementsUsed: elementsUsed
+      });
+
+    case "DELETE_ITEM":
+      return 'deleted item';
 
     default:
       return state;

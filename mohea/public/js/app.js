@@ -124,7 +124,7 @@ if (document.getElementById("header") && document.getElementById("home-screen-lo
 
 if (document.getElementById("home-cta")) {
   document.getElementById("home-cta").addEventListener("click", function () {
-    scrollTo('home-presentation');
+    scrollTo('goToHomePresentation');
   });
 }
 
@@ -171,9 +171,9 @@ function scrollTo(el) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\coral\Desktop\IUT\LP_MI\mohea\mohea.bach.mmi-unistra.fr\mohea\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\Users\coral\Desktop\IUT\LP_MI\mohea\mohea.bach.mmi-unistra.fr\mohea\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\Users\coral\Desktop\IUT\LP_MI\mohea\mohea.bach.mmi-unistra.fr\mohea\resources\sass\form.scss */"./resources/sass/form.scss");
+__webpack_require__(/*! C:\wamp64\www\mohea.bach.mmi-unistra.fr\mohea\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\wamp64\www\mohea.bach.mmi-unistra.fr\mohea\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\wamp64\www\mohea.bach.mmi-unistra.fr\mohea\resources\sass\form.scss */"./resources/sass/form.scss");
 
 
 /***/ })

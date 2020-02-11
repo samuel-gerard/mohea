@@ -29,7 +29,7 @@ if (document.getElementById("header") && document.getElementById("home-screen-lo
 
 if (document.getElementById("home-cta")) {
     document.getElementById("home-cta").addEventListener("click", function () {
-        scrollTo('home-presentation');
+        scrollTo('goToHomePresentation');
     });
 }
 

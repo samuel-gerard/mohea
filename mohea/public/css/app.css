@@ -10741,6 +10741,7 @@ input[type=search]::-webkit-search-results-decoration {
 body {
   margin: 0px;
   font-family: "Neue Plak Light", sans-serif;
+  font-size: 13pt;
   background-color: #ffffff;
   color: #000000;
   cursor: default;
@@ -10756,6 +10757,7 @@ body {
   box-shadow: 0px 0px 0px transparent;
   overflow: hidden;
   transition: background-color 0.2s, padding 0.2s, box-shadow 0.3s;
+  z-index: 10;
 }
 
 .header ul li {
@@ -10832,6 +10834,72 @@ h1 {
   font-size: 20pt;
 }
 
+.home-presentation .video {
+  margin: 30px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-presentation .attractive-button {
+  margin: 20px 0px;
+  padding: 90px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url(/images/annotation.png?24e85ee1041dc112e57d6fd6382fe77e) center center/auto 100% no-repeat, url(/images/blotch3.svg?6e5043e3d163964904fa9838f0f5fd19) right center/auto 90% no-repeat;
+}
+
+.home-presentation .attractive-button .button {
+  padding: 15px 40px;
+  font-size: 22pt;
+  font-family: "Neue Plak SemiBold", sans-serif;
+  text-transform: uppercase;
+  border-radius: 50px;
+}
+
+.home-presentation .text-blotch {
+  margin: 20px 0px;
+  padding: 40px 0px;
+  background: url(/images/blotch4.svg?f6e33e517564b4415ca20ade50a24b35) center center/auto 100% no-repeat;
+}
+
+.home-presentation .text-blotch .content {
+  width: 640px;
+  margin: 0px auto;
+}
+
+.home-presentation .text-blotch .content .title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-presentation .text-blotch .content .title img {
+  margin-right: 20px;
+  width: 200px;
+}
+
+.home-presentation .text-blotch .content .title h2 {
+  font-family: "Keep Calm", sans-serif;
+}
+
+.home-presentation .text-blotch .content .left {
+  width: 80%;
+  margin: 20px 0px;
+}
+
+.home-presentation .text-blotch .content .right {
+  width: 80%;
+  margin-left: auto;
+  font-family: "Neue Plak", sans-serif;
+  font-size: 15pt;
+}
+
+footer img {
+  width: 100%;
+}
+
 .mohea {
   position: relative;
   font-family: "Keep Calm", sans-serif;
@@ -10876,7 +10944,14 @@ ul li {
 
 a {
   font-family: "Neue Plak Regular", sans-serif;
+  color: inherit;
   cursor: pointer;
+}
+
+a:hover,
+a:focus {
+  color: inherit;
+  text-decoration: none;
 }
 
 a.link {
@@ -10904,7 +10979,7 @@ a.link:hover::after {
 }
 
 a.link.primary {
-  color: #ff4757;
+  color: #ff4757 !important;
 }
 
 a.link.primary:hover::after {
@@ -10912,7 +10987,7 @@ a.link.primary:hover::after {
 }
 
 a.link.secondary {
-  color: #6c63ff;
+  color: #6c63ff !important;
 }
 
 a.link.secondary:hover::after {
@@ -10935,7 +11010,7 @@ a.button {
   font-family: "Neue Plak Bold", sans-serif;
   text-align: center;
   background-color: whitesmoke;
-  color: #000000;
+  color: #000000 !important;
   border-radius: 30px;
 }
 
@@ -10946,16 +11021,21 @@ a.button:hover {
 
 a.button.primary {
   background-color: #ff4757;
-  color: #ffffff;
+  color: #ffffff !important;
 }
 
 a.button.secondary {
   background-color: #6c63ff;
-  color: #ffffff;
+  color: #ffffff !important;
 }
 
 a.button.home-cta {
   margin: 30px 5px 10px;
+}
+
+.anchor {
+  margin-top: -70px;
+  margin-bottom: 70px;
 }
 
 .type-message {
@@ -11085,7 +11165,6 @@ a.button.home-cta {
 }
 
 .conversation .from-user .spine {
-  content: "";
   position: absolute;
   top: 50%;
   right: -2.5px;
@@ -11121,12 +11200,20 @@ a.button.home-cta {
 }
 
 .conversation .from-mohea .spine {
-  content: "";
   position: absolute;
   top: 50%;
   left: -3px;
   width: 41px;
   z-index: -1;
+}
+
+.conversation .from-mohea.light {
+  background-color: #ffecee;
+  color: #000000;
+}
+
+.conversation .from-mohea.light .spine path {
+  fill: #ffecee !important;
 }
 
 strong {
@@ -11169,6 +11256,10 @@ strong {
   justify-content: flex-end;
 }
 
+.jc-sb {
+  justify-content: space-between;
+}
+
 .ai-c {
   align-items: center;
 }
@@ -11187,6 +11278,18 @@ strong {
 
 .mr-auto {
   margin-right: auto;
+}
+
+.ta-left {
+  text-align: left;
+}
+
+.ta-center {
+  text-align: center;
+}
+
+.ta-right {
+  text-align: right;
 }
 
 @-webkit-keyframes squeeze {

@@ -27,6 +27,7 @@ input[type=text] {
 }
 
 input[type="search"] {
+
     &::-webkit-search-decoration,
     &::-webkit-search-cancel-button,
     &::-webkit-search-results-button,
@@ -38,6 +39,7 @@ input[type="search"] {
 body {
     margin: 0px;
     font-family: 'Neue Plak Light', sans-serif;
+    font-size: 13pt;
     background-color: #ffffff;
     color: #000000;
     cursor: default;
@@ -53,6 +55,7 @@ body {
     box-shadow: 0px 0px 0px transparent;
     overflow: hidden;
     transition: background-color 0.2s, padding 0.2s, box-shadow 0.3s;
+    z-index: 10;
 
     ul li {
         display: flex;
@@ -129,6 +132,76 @@ h1 {
     font-size: 20pt;
 }
 
+.home-presentation {
+    .video {
+        margin: 30px 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .attractive-button {
+        margin: 20px 0px;
+        padding: 90px 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: url("../images/annotation.png") center center/auto 100% no-repeat, url("../images/blotch3.svg") right center/auto 90% no-repeat;
+
+        .button {
+            padding: 15px 40px;
+            font-size: 22pt;
+            font-family: "Neue Plak SemiBold", sans-serif;
+            text-transform: uppercase;
+            border-radius: 50px;
+        }
+    }
+
+    .text-blotch {
+        margin: 20px 0px;
+        padding: 40px 0px;
+        background: url("../images/blotch4.svg") center center/auto 100% no-repeat;
+
+        .content {
+            width: 640px;
+            margin: 0px auto;
+
+            .title {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                img {
+                    margin-right: 20px;
+                    width: 200px;
+                }
+
+                h2 {
+                    font-family: 'Keep Calm', sans-serif;
+                }
+            }
+
+            .left {
+                width: 80%;
+                margin: 20px 0px;
+            }
+
+            .right {
+                width: 80%;
+                margin-left: auto;
+                font-family: "Neue Plak", sans-serif;
+                font-size: 15pt;
+            }
+        }
+    }
+}
+
+footer {
+    img {
+        width: 100%;
+    }
+}
+
 .mohea {
     position: relative;
     font-family: 'Keep Calm', sans-serif;
@@ -173,7 +246,14 @@ ul {
 
 a {
     font-family: 'Neue Plak Regular', sans-serif;
+    color: inherit;
     cursor: pointer;
+
+    &:hover,
+    &:focus {
+        color: inherit;
+        text-decoration: none;
+    }
 
     &.link {
         display: inline-block;
@@ -199,7 +279,7 @@ a {
         }
 
         &.primary {
-            color: #ff4757;
+            color: #ff4757 !important;
 
             &:hover::after {
                 background: #000000;
@@ -207,7 +287,7 @@ a {
         }
 
         &.secondary {
-            color: #6c63ff;
+            color: #6c63ff !important;
 
             &:hover::after {
                 background: #000000;
@@ -231,7 +311,7 @@ a {
         font-family: 'Neue Plak Bold', sans-serif;
         text-align: center;
         background-color: whitesmoke;
-        color: #000000;
+        color: #000000 !important;
         border-radius: 30px;
 
         &:hover {
@@ -240,18 +320,23 @@ a {
 
         &.primary {
             background-color: #ff4757;
-            color: #ffffff;
+            color: #ffffff !important;
         }
 
         &.secondary {
             background-color: #6c63ff;
-            color: #ffffff;
+            color: #ffffff !important;
         }
 
         &.home-cta {
             margin: 30px 5px 10px;
         }
     }
+}
+
+.anchor {
+    margin-top: -70px;
+    margin-bottom: 70px;
 }
 
 .type-message {
@@ -370,7 +455,6 @@ a {
         border-radius: 100px;
 
         .spine {
-            content: "";
             position: absolute;
             top: 50%;
             right: -2.5px;
@@ -406,12 +490,20 @@ a {
         }
 
         .spine {
-            content: "";
             position: absolute;
             top: 50%;
             left: -3px;
             width: 41px;
             z-index: -1;
+        }
+
+        &.light {
+            background-color: #ffecee;
+            color: #000000;
+
+            .spine path {
+                fill: #ffecee !important;
+            }
         }
     }
 }
@@ -456,6 +548,10 @@ strong {
     justify-content: flex-end;
 }
 
+.jc-sb {
+    justify-content: space-between;
+}
+
 .ai-c {
     align-items: center;
 }
@@ -474,6 +570,18 @@ strong {
 
 .mr-auto {
     margin-right: auto;
+}
+
+.ta-left {
+    text-align: left;
+}
+
+.ta-center {
+    text-align: center;
+}
+
+.ta-right {
+    text-align: right;
 }
 
 @keyframes squeeze {

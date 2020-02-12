@@ -50314,10 +50314,6 @@ function (_Component) {
       _this.props.updateInputSelected(parent_idx, idx);
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleInputBlur", function () {
-      _this.props.updateInputSelected(null, null);
-    });
-
     return _this;
   }
 
@@ -50353,7 +50349,6 @@ function (_Component) {
             type: "text",
             "data-idx": '-1/' + idx,
             onFocus: _this2.handleInputSelected,
-            onBlur: _this2.handleInputBlur,
             onChange: _this2.handleUpdateValue,
             value: item.value,
             className: "nav-link",
@@ -50382,7 +50377,6 @@ function (_Component) {
           type: "text",
           "data-idx": '-1/' + idx,
           onFocus: _this2.handleInputSelected,
-          onBlur: _this2.handleInputBlur,
           onChange: _this2.handleUpdateValue,
           value: item.value,
           className: "nav-link dropdown-toggle",
@@ -50415,7 +50409,6 @@ function (_Component) {
             type: "text",
             "data-idx": idx + '/' + child_idx,
             onFocus: _this2.handleInputSelected,
-            onBlur: _this2.handleInputBlur,
             onChange: _this2.handleUpdateValue,
             value: child.value,
             style: child.style
@@ -50707,7 +50700,7 @@ function (_Component) {
         classes: this.props.classes,
         name: this.props.name,
         type: "menu"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CustomInput__WEBPACK_IMPORTED_MODULE_6__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-3"
@@ -50770,7 +50763,7 @@ function (_Component) {
         onClick: this.handleReset
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-9"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MenuContent__WEBPACK_IMPORTED_MODULE_5__["default"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CustomInput__WEBPACK_IMPORTED_MODULE_6__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MenuContent__WEBPACK_IMPORTED_MODULE_5__["default"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-12"

@@ -43,32 +43,25 @@ function rootReducer(state = initState, payload) {
       for (let [key, value] of Object.entries(newState.tableau)) {
         value.forEach(el => {
           let nbCol = 0
-          let cellsMerged = false;
 
           for(var i = 0; i < el.length; i++) {
             console.log('----------- new boucle -------------', i)
             let colspan = el[i].colspan
             let payloadCol = parseInt(payload.col, 10);
             if(colspan && (nbCol <= payloadCol && payloadCol < nbCol + colspan)) {
-              cellsMerged = true
-              el[i].colspan -= 1;
+              if(colspan > 1) {
+                el[i].colspan -= 1;
+              }
+              else {
+                el.splice(i, 1);
+              }
               return;
             }
             if(nbCol === payloadCol) {
-              console.log('nbcol', nbCol)
-              console.log('paylo', payload.col)
-              console.log('el', el[i])
               el.splice(i, 1);
               return;
             }
             nbCol += colspan ? colspan : 1
-          }
-
-          console.log(cellsMerged)
-          if(!cellsMerged) {
-            console.log('hey')
-            console.log(nbCol)
-            console.log(payload.col)
           }
         });
       }

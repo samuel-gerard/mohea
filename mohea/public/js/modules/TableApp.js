@@ -80246,10 +80246,6 @@ function (_Component) {
       _this.props.updateInputSelected('body', row, col);
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleInputBlur", function () {
-      _this.props.updateInputSelected(null, null, null);
-    });
-
     return _this;
   }
 
@@ -80281,7 +80277,6 @@ function (_Component) {
             type: "text",
             "data-id": i + '/' + j,
             onFocus: _this2.handleInputSelected,
-            onBlur: _this2.handleInputBlur,
             onChange: _this2.handleUpdateValue,
             value: item.value,
             className: "form-control",
@@ -80419,10 +80414,6 @@ function (_Component) {
       _this.props.updateInputSelected('foot', row, col);
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleInputBlur", function () {
-      _this.props.updateInputSelected(null, null, null);
-    });
-
     return _this;
   }
 
@@ -80454,7 +80445,6 @@ function (_Component) {
             type: "text",
             "data-id": i + '/' + j,
             onFocus: _this2.handleInputSelected,
-            onBlur: _this2.handleInputBlur,
             onChange: _this2.handleUpdateValue,
             value: item.value,
             className: "form-control",
@@ -80592,10 +80582,6 @@ function (_Component) {
       _this.props.updateInputSelected('head', row, col);
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleInputBlur", function () {
-      _this.props.updateInputSelected(null, null, null);
-    });
-
     _defineProperty(_assertThisInitialized(_this), "handleMergeCells", function (colspan, i, j) {
       var nbCol = colspan ? colspan : 1;
 
@@ -80639,12 +80625,11 @@ function (_Component) {
             type: "text",
             "data-id": i + '/' + j,
             onFocus: _this2.handleInputSelected,
-            onBlur: _this2.handleInputBlur,
             onChange: _this2.handleUpdateValue,
             value: item.value,
             className: "form-control",
             style: item.style
-          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, item.colspan > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, item.colspan > 1 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
             onClick: function onClick() {
               return _this2.handleUnMergeCells(i, j);
             }
@@ -80977,7 +80962,6 @@ function rootReducer() {
 
         value.forEach(function (el) {
           var nbCol = 0;
-          var cellsMerged = false;
 
           for (var i = 0; i < el.length; i++) {
             console.log('----------- new boucle -------------', i);
@@ -80985,28 +80969,21 @@ function rootReducer() {
             var payloadCol = parseInt(payload.col, 10);
 
             if (_colspan && nbCol <= payloadCol && payloadCol < nbCol + _colspan) {
-              cellsMerged = true;
-              el[i].colspan -= 1;
+              if (_colspan > 1) {
+                el[i].colspan -= 1;
+              } else {
+                el.splice(i, 1);
+              }
+
               return;
             }
 
             if (nbCol === payloadCol) {
-              console.log('nbcol', nbCol);
-              console.log('paylo', payload.col);
-              console.log('el', el[i]);
               el.splice(i, 1);
               return;
             }
 
             nbCol += _colspan ? _colspan : 1;
-          }
-
-          console.log(cellsMerged);
-
-          if (!cellsMerged) {
-            console.log('hey');
-            console.log(nbCol);
-            console.log(payload.col);
           }
         });
       }

@@ -33,10 +33,6 @@ class Tbody extends Component {
     this.props.updateInputSelected('body', row, col)
   }
 
-  handleInputBlur = () => {
-    this.props.updateInputSelected(null, null, null);
-  }
-
   render() {
     const group = Object.values(this.props.tableau.body)
     const groupList = group.length > 0 ? (
@@ -53,7 +49,6 @@ class Tbody extends Component {
                 <input type='text'
                   data-id={i + '/' + j}
                   onFocus={this.handleInputSelected}
-                  onBlur={this.handleInputBlur}
                   onChange={this.handleUpdateValue}
                   value={item.value}
                   className="form-control"

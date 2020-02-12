@@ -33,10 +33,6 @@ class Thead extends Component {
     this.props.updateInputSelected('head', row, col)
   }
 
-  handleInputBlur = () => {
-    this.props.updateInputSelected(null, null, null);
-  }
-
   handleMergeCells = (colspan, i, j) => {
     const nbCol = colspan ? colspan : 1;
     this.props.mergeRow('head', nbCol, i, j)
@@ -62,13 +58,12 @@ class Thead extends Component {
                 <input type='text'
                   data-id={i + '/' + j}
                   onFocus={this.handleInputSelected}
-                  onBlur={this.handleInputBlur}
                   onChange={this.handleUpdateValue}
                   value={item.value}
                   className="form-control"
                   style={item.style} />
                   <p>
-                    {item.colspan > 0 &&
+                    {item.colspan > 1 &&
                       <span onClick={() => this.handleUnMergeCells(i, j)}>Unmerge</span>
                     }
                     {j < Object.values(items).length - 1 &&

@@ -96,8 +96,8 @@ class FormContent extends Component {
                     })}
                 </div>
             </div>
-            )   
-
+            )  
+            
         }
     
     }

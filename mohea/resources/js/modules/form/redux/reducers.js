@@ -70,6 +70,16 @@ function rootReducer(state = initState, payload) {
           ]
         };
 
+        case "UPDATE_ELEMENT":
+          let newElement = Object.assign({}, payload.element);
+          newState.elementsUsed[payload.id] = newElement
+          return {
+            ...state,
+            elementsUsed: [
+              ...newState.elementsUsed
+            ]
+          };
+
       default:
         return state;
     }

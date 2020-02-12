@@ -39465,13 +39465,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
@@ -39483,32 +39485,283 @@ function (_Component) {
   _inherits(FormEdit, _Component);
 
   function FormEdit() {
+    var _getPrototypeOf2;
+
+    var _this;
+
     _classCallCheck(this, FormEdit);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(FormEdit).apply(this, arguments));
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(FormEdit)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_this), "handleUpdateText", function (e) {
+      var newElement = _this.props.elementsUsed[_this.props.focus];
+
+      if (e.target.name == 'content') {
+        newElement.content = e.target.value;
+      }
+
+      _this.props.updateElement(newElement, _this.props.focus);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleUpdateTitle", function (e) {
+      var newElement = _this.props.elementsUsed[_this.props.focus];
+
+      if (e.target.name == 'content') {
+        newElement.content = e.target.value;
+      } else if (e.target.name == 'tag') {
+        newElement.tag = e.target.value;
+      }
+
+      _this.props.updateElement(newElement, _this.props.focus);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleUpdateSubmit", function (e) {
+      var newElement = _this.props.elementsUsed[_this.props.focus];
+
+      if (e.target.name == 'value') {
+        newElement.value = e.target.value;
+      }
+
+      _this.props.updateElement(newElement, _this.props.focus);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleInputBasic", function (e) {
+      var newElement = _this.props.elementsUsed[_this.props.focus];
+
+      if (e.target.name == 'label') {
+        newElement.label = e.target.value;
+      } else if (e.target.name == 'placeholder') {
+        newElement.placeholder = e.target.value;
+      } else if (e.target.name == 'required') {
+        newElement.required = true;
+      }
+
+      _this.props.updateElement(newElement, _this.props.focus);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleUpdateTextArea", function (e) {
+      var newElement = _this.props.elementsUsed[_this.props.focus];
+
+      if (e.target.name == 'label') {
+        newElement.label = e.target.value;
+      } else if (e.target.name == 'placeholder') {
+        newElement.placeholder = e.target.value;
+      } else if (e.target.name == 'required') {
+        newElement.required = true;
+      } else if (e.target.name == 'rows') {
+        newElement.rows = e.target.value;
+      } else if (e.target.name == 'col') {
+        newElement.col = e.target.value;
+      }
+
+      _this.props.updateElement(newElement, _this.props.focus);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleUpdateSelect", function (e) {
+      var newElement = _this.props.elementsUsed[_this.props.focus];
+
+      if (e.target.name == 'label') {
+        newElement.label = e.target.value;
+      } else if (e.target.name == 'required') {
+        newElement.required = true;
+      }
+
+      _this.props.updateElement(newElement, _this.props.focus);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleUpdateBoxAndRadio", function (e) {
+      var newElement = _this.props.elementsUsed[_this.props.focus];
+
+      if (e.target.name == 'label') {
+        newElement.label = e.target.value;
+      } else if (e.target.name == 'required') {
+        newElement.required = true;
+      }
+
+      _this.props.updateElement(newElement, _this.props.focus);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleSelectOption", function (e) {
+      return 'test';
+    });
+
+    return _this;
   }
 
   _createClass(FormEdit, [{
     key: "handleDeleteItem",
     value: function handleDeleteItem(element) {
-      // console.log(element)
       this.props.deleteItem(element);
+    }
+  }, {
+    key: "renderSwitch",
+    value: function renderSwitch(element) {
+      var _this2 = this;
+
+      switch (element.name) {
+        case 'Text':
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Content"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+            name: "content",
+            value: element.content,
+            onChange: this.handleUpdateText
+          }));
+
+        case 'Title':
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+            htmlFor: "content"
+          }, element.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            type: "text",
+            name: "content",
+            value: element.content,
+            onChange: this.handleUpdateTitle
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+            htmlFor: "content"
+          }, "Title size"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+            type: "titleSize",
+            name: "tag",
+            onChange: this.handleUpdateTitle
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: "h1"
+          }, "H1"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: "h2"
+          }, "H2"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: "h3"
+          }, "H3"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+            value: "h4"
+          }, "H4")));
+
+        case 'Submit':
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Value"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            type: "text",
+            name: "value",
+            onChange: this.handleUpdateSubmit,
+            value: element.value
+          }));
+
+        case 'Text Input':
+        case 'Date':
+        case 'Email':
+        case 'Phone':
+        case 'Link':
+        case 'Password':
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Label"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            type: "text",
+            name: "label",
+            onChange: this.handleInputBasic,
+            value: element.label
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Place Holder"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            type: "text",
+            name: "placeholder",
+            onChange: this.handleInputBasic,
+            value: element.placeholder
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Required"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            type: "checkbox",
+            name: "required",
+            onChange: this.handleInputBasic,
+            value: element.required
+          }));
+
+        case 'Text Area':
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Label"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            type: "text",
+            name: "label",
+            onChange: this.handleUpdateTextArea,
+            value: element.label
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Place Holder"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            type: "text",
+            name: "placeholder",
+            onChange: this.handleUpdateTextArea,
+            value: element.placeholder
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Row"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            type: "number",
+            name: "rows",
+            onChange: this.handleUpdateTextArea,
+            value: element.rows
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Required"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            type: "checkbox",
+            name: "required",
+            onChange: this.handleUpdateTextArea,
+            value: element.required
+          }));
+
+        case 'Select':
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+            htmlFor: "label"
+          }, "Label"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            type: "text",
+            name: "label",
+            onChange: this.handleUpdateSelect,
+            value: element.label
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+            htmlFor: "content"
+          }, "Edit options"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+            name: "options"
+          }, element.options.map(function (option, i) {
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+              key: i,
+              onClick: _this2.handleSelectOption,
+              value: option.value
+            }, option.content);
+          })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Required"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            type: "checkbox",
+            name: "required",
+            onChange: this.handleUpdateSelect,
+            value: element.required
+          }));
+
+        case 'Check Box':
+        case 'Radio Button':
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+            htmlFor: "label"
+          }, "Label"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            type: "text",
+            name: "label",
+            onChange: this.handleUpdateBoxAndRadio,
+            value: element.label
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+            htmlFor: "content"
+          }, "Edit options"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+            name: "options"
+          }, element.options.map(function (option, i) {
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+              key: i,
+              onClick: _this2.handleSelectOption,
+              value: option.label
+            }, option.label);
+          })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Required"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            type: "checkbox",
+            name: "required",
+            onChange: this.handleUpdateBoxAndRadio,
+            value: element.required
+          }));
+      }
     }
   }, {
     key: "render",
     value: function render() {
-      var _this = this;
+      var _this3 = this;
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: ""
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Edit an Element"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.focus > -1 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.props.elementsUsed[this.props.focus].name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Edit an Element"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.focus > -1 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.elementsUsed[this.props.focus].label !== undefined ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.props.elementsUsed[this.props.focus].label) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.props.elementsUsed[this.props.focus].name), this.renderSwitch(this.props.elementsUsed[this.props.focus]), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "button",
         onClick: function onClick() {
-          return _this.handleDeleteItem(_this.props.elementsUsed[_this.props.focus]);
+          return _this3.handleDeleteItem(_this3.props.elementsUsed[_this3.props.focus]);
         },
         className: "btn btn-primary",
         value: "Delete Element"
-      })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Click on an element to update it")));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "button",
+        onClick: function onClick() {
+          return _this3.handleDeleteItem(_this3.props.elementsUsed[_this3.props.focus]);
+        },
+        className: "btn btn-primary",
+        value: "Duplicate Element"
+      })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Click on an element to update it !")));
     }
   }]);
 
@@ -39528,6 +39781,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, stateProps) {
   return {
     deleteItem: function deleteItem(element) {
       dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["deleteItem"])(element));
+    },
+    updateElement: function updateElement(element, id) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["updateElement"])(element, id));
     }
   };
 };
@@ -39583,7 +39839,7 @@ var mapStateToProps = function mapStateToProps(state) {
 /*!****************************************************!*\
   !*** ./resources/js/modules/form/redux/actions.js ***!
   \****************************************************/
-/*! exports provided: addNewItem, deleteItem, addFocus */
+/*! exports provided: addNewItem, deleteItem, addFocus, updateElement */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -39591,6 +39847,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNewItem", function() { return addNewItem; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteItem", function() { return deleteItem; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addFocus", function() { return addFocus; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateElement", function() { return updateElement; });
 /* ===============================================
 * FUNCTIONS TO ADD
 =============================================== */
@@ -39610,6 +39867,13 @@ var addFocus = function addFocus(element) {
   return {
     type: "ADD_FOCUS",
     id: element.id
+  };
+};
+var updateElement = function updateElement(element, id) {
+  return {
+    type: "UPDATE_ELEMENT",
+    element: element,
+    id: id
   };
 };
 
@@ -39790,6 +40054,13 @@ function rootReducer() {
 
       return _objectSpread({}, state, {
         focus: -1,
+        elementsUsed: _toConsumableArray(newState.elementsUsed)
+      });
+
+    case "UPDATE_ELEMENT":
+      var newElement = Object.assign({}, payload.element);
+      newState.elementsUsed[payload.id] = newElement;
+      return _objectSpread({}, state, {
         elementsUsed: _toConsumableArray(newState.elementsUsed)
       });
 

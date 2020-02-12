@@ -17,4 +17,9 @@ export const addFocus = (element) => ({
     id: element.id
 });
 
+export const updateElement = (element, id) => ({
+    type: "UPDATE_ELEMENT",
+    element: element,
+    id: id
+});
 

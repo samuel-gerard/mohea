@@ -1,13 +1,114 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addNewItem } from "../redux/actions";
-import nextId from "react-id-generator";
+import { addNewItem, addFocus } from "../redux/actions";
 
 
 class FormContent extends Component {
 
-    handleAddItem = (id, element) => {
-        this.props.addNewItem(id, element)
+    renderSwitch(element)
+    {
+        switch(element.name)
+        {
+
+        case 'Text':
+            return (
+                <div>
+                    <label>{element.label}</label>
+                    <p>{element.content}</p>
+                </div>
+            )
+
+        case 'Title':
+
+            switch(element.tag){
+                case 'h1':
+                    return (
+                        <h1>{element.content}</h1>
+                    )
+                case 'h2':
+                    return (
+                        <h2>{element.content}</h2>
+                    )
+                case 'h3':
+                    return (
+                        <h3>{element.content}</h3>
+                    )
+                case 'h4':
+                    return (
+                        <h4>{element.content}</h4>
+                    )
+            }
+
+        case 'Submit':
+            return (
+                <div>
+                    <label>{element.label}</label>
+                    <input type="submit" value={element.value} />
+                </div>
+            )
+            
+        case 'Text Input':
+        case 'Date':
+        case 'Email':
+        case 'Link':
+        case 'Phone':
+        case 'Password':
+            return (
+                <div>
+                    <label>{element.label}</label>
+                    <input type={element.type} placeholder={element.placeholder} />
+                </div>
+            )
+
+        case 'Text Area':
+            return (
+                <div>
+                    <label>{element.label}</label>
+                    <textarea rows={element.rows} col={element.col} placeholder={element.placeholder} />
+                </div>
+            )
+
+        case 'Select':
+            return (
+                <div>
+                    <label>{element.label}</label>
+                    <select>
+                        {element.options.map((option, i) => {
+                            return <option key={i} value={option.value}>{option.content}</option>
+                        })}
+                    </select>
+                </div>
+            )
+
+        case 'Check Box':
+        case 'Radio Button':
+            return (
+            <div>
+                <label>{element.label}</label>
+                <div>
+                    {element.options.map((option, i) => {
+                        return (
+                            <div key={i}>
+                                <label>{option.label}</label>
+                                <input key={i} type={option.type} />
+                            </div>
+                        )
+                    })}
+                </div>
+            </div>
+            )   
+
+        }
+    
+    }
+
+    handleAddItem = (element) => {
+        this.props.addNewItem(element)
+    }
+
+    handleAddFocus = (element) =>
+    {
+        this.props.addFocus(element)
     }
 
     render(){
@@ -15,15 +116,17 @@ class FormContent extends Component {
             <h2>Add an Element</h2>
             <div className="elements-choices">
                 {this.props.elements.map((element, i) => (
-                    <input key={i} type="button" onClick={() => this.handleAddItem(nextId(), element)} className="btn btn-primary" value={element.name} />
+                    <input key={i} type="button" onClick={() => this.handleAddItem(element)} className="btn btn-primary" value={element.name} />
                 ))}
             </div>
-            <div className="form_box">
-                {this.props.elementsUsed.map((element, i) => (
-                    <div key={i}>
-                        <h3>{element.name}</h3>
-                    </div>
-                ))}
+            <div className="form_boox">
+                <form>
+                    {this.props.elementsUsed.map((element, i) => (
+                        <div key={i} onClick={() => this.handleAddFocus(element)}>
+                            {this.renderSwitch(element)}
+                        </div>
+                    ))}
+                </form>
             </div>
         </div>
     }
@@ -39,8 +142,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, stateProps) => {
     return {
-        addNewItem: (id, element) => {
-            dispatch(addNewItem(id, element))
+        addNewItem: (element) => {
+            dispatch(addNewItem(element))
+        },
+        addFocus: (element) => {
+            dispatch(addFocus(element))
         },
     }
 }

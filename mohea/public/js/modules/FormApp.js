@@ -32048,75 +32048,6 @@ if (false) {} else {
 
 /***/ }),
 
-/***/ "./node_modules/react-id-generator/lib/index.js":
-/*!******************************************************!*\
-  !*** ./node_modules/react-id-generator/lib/index.js ***!
-  \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, '__esModule', { value: true });
-
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
-
-var React = _interopDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var globalPrefix = "id";
-var lastId = 0;
-function nextId(localPrefix) {
-  lastId++;
-  return "".concat(localPrefix || globalPrefix).concat(lastId);
-}
-var resetId = function resetId() {
-  lastId = 0;
-};
-var setPrefix = function setPrefix(newPrefix) {
-  globalPrefix = newPrefix;
-};
-
-var getIds = function getIds(count, prefix) {
-  var ids = [];
-
-  for (var i = 0; i < count; i++) {
-    ids.push(nextId(prefix));
-  }
-
-  return ids;
-};
-
-function usePrevious(value) {
-  var ref = React.useRef();
-  React.useEffect(function () {
-    ref.current = value;
-  });
-  return ref.current;
-}
-
-function useId() {
-  var count = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-  var prefix = arguments.length > 1 ? arguments[1] : undefined;
-  var idsListRef = React.useRef([]);
-  var prevCount = usePrevious(count);
-  var prevPrefix = usePrevious(prefix);
-
-  if (count !== prevCount || prevPrefix !== prefix) {
-    idsListRef.current = getIds(count, prefix);
-  }
-
-  return idsListRef.current;
-}
-
-exports.default = nextId;
-exports.resetId = resetId;
-exports.setPrefix = setPrefix;
-exports.useId = useId;
-
-
-/***/ }),
-
 /***/ "./node_modules/react-is/cjs/react-is.development.js":
 /*!***********************************************************!*\
   !*** ./node_modules/react-is/cjs/react-is.development.js ***!
@@ -39335,8 +39266,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _redux_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../redux/actions */ "./resources/js/modules/form/redux/actions.js");
-/* harmony import */ var react_id_generator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-id-generator */ "./node_modules/react-id-generator/lib/index.js");
-/* harmony import */ var react_id_generator__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_id_generator__WEBPACK_IMPORTED_MODULE_3__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -39361,7 +39290,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-
 var FormContent =
 /*#__PURE__*/
 function (_Component) {
@@ -39380,14 +39308,84 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(FormContent)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
-    _defineProperty(_assertThisInitialized(_this), "handleAddItem", function (id, element) {
-      _this.props.addNewItem(id, element);
+    _defineProperty(_assertThisInitialized(_this), "handleAddItem", function (element) {
+      _this.props.addNewItem(element);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleAddFocus", function (element) {
+      _this.props.addFocus(element);
     });
 
     return _this;
   }
 
   _createClass(FormContent, [{
+    key: "renderSwitch",
+    value: function renderSwitch(element) {
+      switch (element.name) {
+        case 'Text':
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, element.label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, element.content));
+
+        case 'Title':
+          switch (element.tag) {
+            case 'h1':
+              return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, element.content);
+
+            case 'h2':
+              return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, element.content);
+
+            case 'h3':
+              return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, element.content);
+
+            case 'h4':
+              return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, element.content);
+          }
+
+        case 'Submit':
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, element.label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            type: "submit",
+            value: element.value
+          }));
+
+        case 'Text Input':
+        case 'Date':
+        case 'Email':
+        case 'Link':
+        case 'Phone':
+        case 'Password':
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, element.label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            type: element.type,
+            placeholder: element.placeholder
+          }));
+
+        case 'Text Area':
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, element.label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+            rows: element.rows,
+            col: element.col,
+            placeholder: element.placeholder
+          }));
+
+        case 'Select':
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, element.label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", null, element.options.map(function (option, i) {
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+              key: i,
+              value: option.value
+            }, option.content);
+          })));
+
+        case 'Check Box':
+        case 'Radio Button':
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, element.label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, element.options.map(function (option, i) {
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              key: i
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, option.label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+              key: i,
+              type: option.type
+            }));
+          })));
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -39401,18 +39399,21 @@ function (_Component) {
           key: i,
           type: "button",
           onClick: function onClick() {
-            return _this2.handleAddItem(react_id_generator__WEBPACK_IMPORTED_MODULE_3___default()(), element);
+            return _this2.handleAddItem(element);
           },
           className: "btn btn-primary",
           value: element.name
         });
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form_box"
-      }, this.props.elementsUsed.map(function (element, i) {
+        className: "form_boox"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, this.props.elementsUsed.map(function (element, i) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          key: i
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, element.name));
-      })));
+          key: i,
+          onClick: function onClick() {
+            return _this2.handleAddFocus(element);
+          }
+        }, _this2.renderSwitch(element));
+      }))));
     }
   }]);
 
@@ -39428,8 +39429,11 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch, stateProps) {
   return {
-    addNewItem: function addNewItem(id, element) {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["addNewItem"])(id, element));
+    addNewItem: function addNewItem(element) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["addNewItem"])(element));
+    },
+    addFocus: function addFocus(element) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["addFocus"])(element));
     }
   };
 };
@@ -39485,11 +39489,26 @@ function (_Component) {
   }
 
   _createClass(FormEdit, [{
+    key: "handleDeleteItem",
+    value: function handleDeleteItem(element) {
+      // console.log(element)
+      this.props.deleteItem(element);
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this = this;
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: ""
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Edit an Element"));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Edit an Element"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.focus > -1 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.props.elementsUsed[this.props.focus].name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "button",
+        onClick: function onClick() {
+          return _this.handleDeleteItem(_this.props.elementsUsed[_this.props.focus]);
+        },
+        className: "btn btn-primary",
+        value: "Delete Element"
+      })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Click on an element to update it")));
     }
   }]);
 
@@ -39499,14 +39518,16 @@ function (_Component) {
 var mapStateToProps = function mapStateToProps(state) {
   return {
     form: state.form,
-    elements: state.elementsChoices
+    elements: state.elementsChoices,
+    elementsUsed: state.elementsUsed,
+    focus: state.focus
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch, stateProps) {
   return {
-    addNewItem: function addNewItem(parent_idx) {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["addNewItem"])(parent_idx));
+    deleteItem: function deleteItem(element) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["deleteItem"])(element));
     }
   };
 };
@@ -39562,27 +39583,33 @@ var mapStateToProps = function mapStateToProps(state) {
 /*!****************************************************!*\
   !*** ./resources/js/modules/form/redux/actions.js ***!
   \****************************************************/
-/*! exports provided: addNewItem, deleteItem */
+/*! exports provided: addNewItem, deleteItem, addFocus */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNewItem", function() { return addNewItem; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteItem", function() { return deleteItem; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addFocus", function() { return addFocus; });
 /* ===============================================
 * FUNCTIONS TO ADD
 =============================================== */
-var addNewItem = function addNewItem(id, element) {
+var addNewItem = function addNewItem(element) {
   return {
     type: "ADD_ITEM",
-    id: id,
     element: element
   };
 };
-var deleteItem = function deleteItem(id) {
+var deleteItem = function deleteItem(element) {
   return {
     type: "DELETE_ITEM",
-    id: id
+    element: element
+  };
+};
+var addFocus = function addFocus(element) {
+  return {
+    type: "ADD_FOCUS",
+    id: element.id
   };
 };
 
@@ -39597,12 +39624,6 @@ var deleteItem = function deleteItem(id) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
@@ -39610,6 +39631,12 @@ function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread n
 function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var initState = {
   'title': 'Mon nouveau formulaire',
@@ -39725,7 +39752,8 @@ var initState = {
     required: "",
     placeholder: "My placeholder"
   }],
-  elementsUsed: []
+  elementsUsed: [],
+  focus: -1
 };
 
 function rootReducer() {
@@ -39735,18 +39763,35 @@ function rootReducer() {
 
   switch (payload.type) {
     case "ADD_ITEM":
-      var elem = payload.element;
-      elem.id = payload.id;
-
-      var elementsUsed = _toConsumableArray(state.elementsUsed);
-
-      elementsUsed.push(elem);
+      var elem = Object.assign({}, payload.element);
+      elem.id = newState.elementsUsed.length;
+      newState.elementsUsed.push(elem);
       return _objectSpread({}, state, {
-        elementsUsed: elementsUsed
+        elementsUsed: _toConsumableArray(newState.elementsUsed)
+      });
+
+    case "ADD_FOCUS":
+      return _objectSpread({}, state, {
+        focus: payload.id
       });
 
     case "DELETE_ITEM":
-      return 'deleted item';
+      var indexOfElement = newState.elementsUsed.indexOf(payload.element);
+      console.log('okok' + indexOfElement);
+
+      if (indexOfElement >= 0) {
+        newState.elementsUsed.splice(indexOfElement, 1);
+      } else {
+        var _newState$elementsUse;
+
+        (_newState$elementsUse = newState.elementsUsed).push.apply(_newState$elementsUse, [payload.element]);
+      } // newState.elementsUsed.splice(payload.element, 1)
+
+
+      return _objectSpread({}, state, {
+        focus: -1,
+        elementsUsed: _toConsumableArray(newState.elementsUsed)
+      });
 
     default:
       return state;

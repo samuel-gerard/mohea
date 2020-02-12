@@ -2,16 +2,19 @@
 * FUNCTIONS TO ADD
 =============================================== */
 
-export const addNewItem = (id, element) => ({
+export const addNewItem = (element) => ({
     type: "ADD_ITEM",
-    id: id,
     element: element
 });
 
-export const deleteItem = (id) => ({
+export const deleteItem = (element) => ({
     type: "DELETE_ITEM",
-    id: id
+    element: element
 });
 
+export const addFocus = (element) => ({
+    type: "ADD_FOCUS",
+    id: element.id
+});
 
 

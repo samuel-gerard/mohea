@@ -22,7 +22,8 @@ const initState = {
         { name: "Password", tag: "input", className:"moheaPassword", label:"My Password", type: "password", required: "", placeholder: "My placeholder" },
         { name: "Phone", tag: "input", className:"moheaPhone", label:"My Phone Number", type: "tel", pattern: "", required: "", placeholder: "My placeholder" }
     ],
-    elementsUsed: []
+    elementsUsed: [],
+    focus: -1,
 }
 
 
@@ -33,17 +34,41 @@ function rootReducer(state = initState, payload) {
     switch (payload.type) {
 
       case "ADD_ITEM":
-          let elem = payload.element
-          elem.id = payload.id
-          let elementsUsed = [...state.elementsUsed]
-          elementsUsed.push(elem)
+          let elem = Object.assign({}, payload.element);
+          elem.id = newState.elementsUsed.length
+          newState.elementsUsed.push(elem)
           return {
             ...state,
-            elementsUsed: elementsUsed
+            elementsUsed: [
+              ...newState.elementsUsed
+            ]
+          };
+          
+      case "ADD_FOCUS":
+          return {
+            ...state,
+            focus: payload.id
           };
 
       case "DELETE_ITEM":
-        return 'deleted item';
+
+        const indexOfElement = newState.elementsUsed.indexOf(payload.element);
+        console.log('okok' + indexOfElement)
+
+        if(indexOfElement >= 0) {
+          newState.elementsUsed.splice(indexOfElement, 1)
+        } else {
+          newState.elementsUsed.push(...[payload.element])
+        }
+
+        // newState.elementsUsed.splice(payload.element, 1)
+        return {
+          ...state,
+          focus: -1,
+          elementsUsed: [
+            ...newState.elementsUsed
+          ]
+        };
 
       default:
         return state;

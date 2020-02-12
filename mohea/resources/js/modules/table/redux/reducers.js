@@ -1,3 +1,5 @@
+import { clone } from "ramda";
+
 const defaultTab = {
   'head': [],
   'body': [],
@@ -20,6 +22,7 @@ const initState = {
 
 function rootReducer(state = initState, payload) {
   let newState = Object.assign({}, state);
+  const lastState = clone(state);
   switch (payload.type) {
     case "LOAD_TABLE":
 
@@ -30,9 +33,7 @@ function rootReducer(state = initState, payload) {
         'tableau': payload.tableau,
         'caption': payload.caption ? payload.caption : '',
         'name': payload.name ? payload.name : '',
-        'lastState': {
-          ...state
-        }
+        'lastState': lastState
       }
     case "DELETE_COL":
       const nbCol = state.nbCol;
@@ -45,7 +46,6 @@ function rootReducer(state = initState, payload) {
           let nbCol = 0
 
           for(var i = 0; i < el.length; i++) {
-            console.log('----------- new boucle -------------', i)
             let colspan = el[i].colspan
             let payloadCol = parseInt(payload.col, 10);
             if(colspan && (nbCol <= payloadCol && payloadCol < nbCol + colspan)) {
@@ -68,16 +68,14 @@ function rootReducer(state = initState, payload) {
 
       return {
         ...state,
-        'nbCol': state.nbCol - 1,
+        'nbCol': newState.nbCol - 1,
         'tableau': {
           ...state.tableau,
           'head': newState.tableau.head,
           'body': newState.tableau.body,
           'foot': newState.tableau.foot
         },
-        'lastState': {
-          ...state
-        }
+        'lastState': lastState
       }
     case "ADD_COL":
       for (let [key, value] of Object.entries(newState.tableau)) {
@@ -89,11 +87,9 @@ function rootReducer(state = initState, payload) {
 
       return {
         ...state,
-        'nbCol': state.nbCol + 1,
+        'nbCol': newState.nbCol + 1,
         'tableau': newState.tableau,
-        'lastState': {
-          ...state
-        }
+        'lastState': lastState
       }
     case "DELETE_ROW":
       newState.tableau[payload.typeTable].splice(payload.row, 1);
@@ -103,9 +99,7 @@ function rootReducer(state = initState, payload) {
           ...state.tableau,
           [payload.typeTable]: newState.tableau[payload.typeTable]
         },
-        'lastState': {
-          ...state
-        }
+        'lastState': lastState
       }
     case "ADD_ROW":
       const tab = []
@@ -120,17 +114,13 @@ function rootReducer(state = initState, payload) {
           ...state.tableau,
           [payload.typeTable]: newState.tableau[payload.typeTable]
         },
-        'lastState': {
-          ...state
-        }
+        'lastState': lastState
       }
     case "UPDATE_CAPTION":
       return {
         ...state,
         'caption': payload.caption,
-        'lastState': {
-          ...state
-        }
+        'lastState': lastState
       }
     case "UPDATE_NAME":
       return {
@@ -148,9 +138,7 @@ function rootReducer(state = initState, payload) {
           ...state.tableau,
           [payload.typeTable]: newState.tableau[payload.typeTable],
         },
-        'lastState': {
-          ...state
-        }
+        'lastState': lastState
       }
     case "RESET_TABLE":
       return {
@@ -165,17 +153,13 @@ function rootReducer(state = initState, payload) {
         'caption': '',
         'name': '',
         'inputSelected': {},
-        'lastState': {
-          ...state
-        }
+        'lastState': lastState
       }
     case "IMPORT_TABLE":
       return {
         ...state,
         'tableau': payload.data,
-        'lastState': {
-          ...state
-        }
+        'lastState': lastState
       }
     case "UPDATE_CLASSES":
       const indexOfClasse = newState.classes.indexOf(payload.classe);
@@ -192,17 +176,13 @@ function rootReducer(state = initState, payload) {
         'classes': [
           ...newState.classes,
         ],
-        'lastState': {
-          ...state
-        }
+        'lastState': lastState
       }
     case "UPDATE_NBCOL":
       return {
         ...state,
         'nbCol': payload.nbCol,
-        'lastState': {
-          ...state
-        }
+        'lastState': lastState
       }
     case "UPDATE_INPUT_SELECTED":
       if(! (payload.typeTable || payload.row || payload.col) ) {
@@ -232,9 +212,7 @@ function rootReducer(state = initState, payload) {
           ...state.tableau,
           [payload.typeTable]: newState.tableau[payload.typeTable],
         },
-        'lastState': {
-          ...state
-        }
+        'lastState': lastState
       }
     case "MERGE_ROW":
       const colNext = newState.tableau[payload.typeTable][payload.row][payload.col + 1].colspan
@@ -255,9 +233,7 @@ function rootReducer(state = initState, payload) {
           ...state.tableau,
           [payload.typeTable]: newState.tableau[payload.typeTable],
         },
-        'lastState': {
-          ...state
-        }
+        'lastState': lastState
       }
     case "UNMERGE_ROW":
       const colspan = newState.tableau[payload.typeTable][payload.row][payload.col].colspan
@@ -272,17 +248,13 @@ function rootReducer(state = initState, payload) {
           ...state.tableau,
           [payload.typeTable]: newState.tableau[payload.typeTable],
         },
-        'lastState': {
-          ...state
-        }
+        'lastState': lastState
       }
     case "CANCEL_LAST_ACTION":
-      return {
-        ...state.lastState,
-        'lastState': {
-          ...newState
-        }
+      if(Object.values(state.lastState).length > 0) {
+        return state.lastState
       }
+      else return newState
     default:
       return state;
   }

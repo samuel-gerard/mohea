@@ -10,6 +10,7 @@ import * as d3 from "d3";
 import { ImportFile } from "../../../components/ImportFile";
 import { SaveProject } from "../../../components/SaveProject";
 import CustomInput from "./CustomInput";
+import Canceller from "./Canceller";
 
 class Table extends Component {
   constructor(props) {
@@ -92,6 +93,7 @@ class Table extends Component {
   }
 
   handleClasses = (e) => {
+    console.log(e.target.checked);
     this.props.updateClasses(e.target.value);
   }
 
@@ -174,6 +176,7 @@ class Table extends Component {
         }
         <SaveProject content={this.props.tableau} classes={this.props.classes} caption={this.props.caption} nbCol={this.props.nbCol} name={this.props.name} type="table" />
         <CustomInput />
+        <Canceller />
         <div className="row">
           <div className="col-md-3">
             <div className="form-group">
@@ -191,27 +194,27 @@ class Table extends Component {
             <div className="form-group card p-2 bg-info text-white">
               <h4>Table global style</h4>
               <div className="form-check">
-                <input className="form-check-input" type="checkbox" id="class-style" onChange={this.handleClasses} value="table" />
+                <input className="form-check-input" type="checkbox" id="class-style" onChange={this.handleClasses} value="table" checked={this.props.classes.find(el => el === 'table') ? 'checked' : false}/>
                 <label className="form-check-label" htmlFor="class-style">With bootstrap initial style</label>
               </div>
               <div className="form-check">
-                <input className="form-check-input" type="checkbox" id="class-striped" onChange={this.handleClasses} value="table-striped" />
+                <input className="form-check-input" type="checkbox" id="class-striped" onChange={this.handleClasses} value="table-striped" checked={this.props.classes.find(el => el === 'table-striped') ? 'checked' : false}/>
                 <label className="form-check-label" htmlFor="class-striped">Striped</label>
               </div>
               <div className="form-check">
-                <input className="form-check-input" type="checkbox" id="class-dark" onChange={this.handleClasses} value="table-dark" />
+                <input className="form-check-input" type="checkbox" id="class-dark" onChange={this.handleClasses} value="table-dark" checked={this.props.classes.find(el => el === 'table-dark') ? 'checked' : false}/>
                 <label className="form-check-label" htmlFor="class-dark">Dark</label>
               </div>
               <div className="form-check">
-                <input className="form-check-input" type="checkbox" id="class-bordered" onChange={this.handleClasses} value="table-bordered" />
+                <input className="form-check-input" type="checkbox" id="class-bordered" onChange={this.handleClasses} value="table-bordered" checked={this.props.classes.find(el => el === 'table-bordered') ? 'checked' : false}/>
                 <label className="form-check-label" htmlFor="class-bordered">Bordered</label>
               </div>
               <div className="form-check">
-                <input className="form-check-input" type="checkbox" id="class-hover" onChange={this.handleClasses} value="table-hover" />
+                <input className="form-check-input" type="checkbox" id="class-hover" onChange={this.handleClasses} value="table-hover" checked={this.props.classes.find(el => el === 'table-hover') ? 'checked' : false}/>
                 <label className="form-check-label" htmlFor="class-hover">Hover</label>
               </div>
               <div className="form-check">
-                <input className="form-check-input" type="checkbox" id="class-responsive" onChange={this.handleClasses} value="table-responsive" />
+                <input className="form-check-input" type="checkbox" id="class-responsive" onChange={this.handleClasses} value="table-responsive" checked={this.props.classes.find(el => el === 'table-responsive') ? 'checked' : false}/>
                 <label className="form-check-label" htmlFor="class-responsive">Responsive</label>
               </div>
             </div>

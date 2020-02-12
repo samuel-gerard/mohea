@@ -7,7 +7,7 @@
 @section('main-content')
     <nav id="header" class="header">
         <ul class="d-flex jc-e ai-c">
-            <li><a class="button primary" href="{{ route('project.create') }}">Start a new project</a></li>
+            <li class="new"><a class="button primary" href="{{ route('project.create') }}">Start a new project</a></li>
             <li class="logo ml-auto mr-auto"><img src="images/logo_medium.png" alt="Logo of Mohea" draggable="false"></li>
             <li><a class="link primary" href="{{ route('register') }}">Create my account</a></li>
             <li><a class="link action" href="{{ route('login') }}">Log in</a></li>
@@ -21,6 +21,7 @@
                 <div class="home-screen-text">
                     <p class="headline">Breathe, smile.</p>
                     <h1><span class="mohea">Mohea</span> is here to help you create <strong>accessible tables</strong>, <strong>forms</strong> and <strong>menus</strong>.</h1>
+                    <a class="button primary only-mobile" href="{{ route('project.create') }}">Start a new project</a>
                     <a id="home-cta" class="button secondary home-cta">Learn more</a>
                 </div>
             </div>
@@ -56,6 +57,20 @@
             </div>
             <div class="circles">
                 <h2 class="ta-center"><span class="mohea">Mohea</span> can...</h2>
+                <div class="content">
+                    <div class="circle">
+                        <img src="images/time.png" alt="Time">
+                        <span>save you time</span>
+                    </div>
+                    <div class="circle">
+                        <img src="images/graph.png" alt="Graph">
+                        <span>optimize your SEO</span>
+                    </div>
+                    <div class="circle">
+                        <img src="images/coin.png" alt="Coin">
+                        <span>increase your revenues</span>
+                    </div>
+                </div>
                 <ul class="conversation">
                     <li class="from-mohea light">Well, I guess we've reached the end of the conversation, so if you're not convinced by the help I'm offering, there's nothing more I can do... 😭<svg class="spine" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56.12 60.72"><g><path d="M4.41,2.08c0,23.18,0,31.37-4.37,56.43C-.19,59.82.67,61,2,60.66c6.38-1.77,36.9-9.49,53.27-9.49,3.85,0-5.8-9.54-7-14.37C45.51,26.3,7.14-8.83,4.41,2.08Z" style="fill: #ff4757" /></g></svg></li>
                 </ul>
@@ -63,6 +78,12 @@
         </div>
     </main>
     <footer>
-        <img src="images/footer.svg" alt="Congratulations, you reached the paradise" draggable="false">
+        <img class="desktop" src="images/footer.svg" alt="Congratulations, you reached the paradise" draggable="false">
+        <img class="mobile" src="images/footer_mobile.svg" alt="Congratulations, you reached the paradise" draggable="false">
+        <div class="footer-links">
+            <a class="link" href="">I need help</a>
+            <a class="link" href="{{ route('privacy') }}">Terms of use</a>
+            <span>Copyright Mohea © 2020</span>
+        </div>
     </footer>
 @endsection

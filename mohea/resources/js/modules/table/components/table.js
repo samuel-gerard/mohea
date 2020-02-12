@@ -10,6 +10,7 @@ import * as d3 from "d3";
 import { ImportFile } from "../../../components/ImportFile";
 import { SaveProject } from "../../../components/SaveProject";
 import CustomInput from "./CustomInput";
+import Canceller from "./Canceller";
 
 class Table extends Component {
   constructor(props) {
@@ -174,6 +175,7 @@ class Table extends Component {
         }
         <SaveProject content={this.props.tableau} classes={this.props.classes} caption={this.props.caption} nbCol={this.props.nbCol} name={this.props.name} type="table" />
         <CustomInput />
+        <Canceller />
         <div className="row">
           <div className="col-md-3">
             <div className="form-group">

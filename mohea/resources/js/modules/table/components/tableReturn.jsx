@@ -48,10 +48,10 @@ const TableReturn = props => {
 
                         style += camelToKebab(key) + ':' + headEl.style[key] + ';'
                     })
-                    html += `           <th id="col-${idxBis}" style="${style}">${headEl.value}</th>
+                    html += `           <th id="col-${idxBis}" style="${style}"${headEl.colspan ? ' colspan="' + headEl.colspan + '"' : ''}>${headEl.value}</th>
 `
                 } else {
-                    html += `           <th id="col-${idxBis}">${headEl.value}</th>
+                    html += `           <th id="col-${idxBis}"${headEl.colspan ? ' colspan="' + headEl.colspan + '"' : ''}>${headEl.value}</th>
 `
                 }
             })

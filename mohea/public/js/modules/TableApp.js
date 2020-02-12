@@ -79411,6 +79411,49 @@ react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render(react__WEBPACK_IMPORTED_
 
 /***/ }),
 
+/***/ "./resources/js/modules/table/components/Canceller.js":
+/*!************************************************************!*\
+  !*** ./resources/js/modules/table/components/Canceller.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _redux_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../redux/actions */ "./resources/js/modules/table/redux/actions.js");
+
+
+
+
+var Canceller = function Canceller(props) {
+  var cancel = function cancel() {
+    props.cancelAction();
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    onClick: cancel
+  }, "Cancel last action"));
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {};
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch, stateProps) {
+  return {
+    cancelAction: function cancelAction() {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["cancelAction"])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(Canceller));
+
+/***/ }),
+
 /***/ "./resources/js/modules/table/components/CustomInput.js":
 /*!**************************************************************!*\
   !*** ./resources/js/modules/table/components/CustomInput.js ***!
@@ -79572,6 +79615,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_ImportFile__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../components/ImportFile */ "./resources/js/components/ImportFile.js");
 /* harmony import */ var _components_SaveProject__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../components/SaveProject */ "./resources/js/components/SaveProject.js");
 /* harmony import */ var _CustomInput__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./CustomInput */ "./resources/js/modules/table/components/CustomInput.js");
+/* harmony import */ var _Canceller__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./Canceller */ "./resources/js/modules/table/components/Canceller.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -79591,6 +79635,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -79803,7 +79848,7 @@ function (_Component) {
         nbCol: this.props.nbCol,
         name: this.props.name,
         type: "table"
-      }), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_CustomInput__WEBPACK_IMPORTED_MODULE_11__["default"], null), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
+      }), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_CustomInput__WEBPACK_IMPORTED_MODULE_11__["default"], null), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_Canceller__WEBPACK_IMPORTED_MODULE_12__["default"], null), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
         className: "col-md-3"
@@ -80026,9 +80071,9 @@ var TableReturn = function TableReturn(props) {
             if (!headEl.style[key]) return;
             style += camelToKebab(key) + ':' + headEl.style[key] + ';';
           });
-          html += "           <th id=\"col-".concat(idxBis, "\" style=\"").concat(style, "\">").concat(headEl.value, "</th>\n");
+          html += "           <th id=\"col-".concat(idxBis, "\" style=\"").concat(style, "\"").concat(headEl.colspan ? ' colspan="' + headEl.colspan + '"' : '', ">").concat(headEl.value, "</th>\n");
         } else {
-          html += "           <th id=\"col-".concat(idxBis, "\">").concat(headEl.value, "</th>\n");
+          html += "           <th id=\"col-".concat(idxBis, "\"").concat(headEl.colspan ? ' colspan="' + headEl.colspan + '"' : '', ">").concat(headEl.value, "</th>\n");
         }
       });
       html += "       </tr>\n";
@@ -80551,6 +80596,16 @@ function (_Component) {
       _this.props.updateInputSelected(null, null, null);
     });
 
+    _defineProperty(_assertThisInitialized(_this), "handleMergeCells", function (colspan, i, j) {
+      var nbCol = colspan ? colspan : 1;
+
+      _this.props.mergeRow('head', nbCol, i, j);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleUnMergeCells", function (i, j) {
+      _this.props.unMergeRow('head', i, j);
+    });
+
     return _this;
   }
 
@@ -80577,7 +80632,9 @@ function (_Component) {
           value: "Head +"
         })), Object.values(items).map(function (item, j) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
-            key: 'head' + j
+            key: 'head' + j,
+            colSpan: item.colspan,
+            className: "position-relative"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             type: "text",
             "data-id": i + '/' + j,
@@ -80587,7 +80644,15 @@ function (_Component) {
             value: item.value,
             className: "form-control",
             style: item.style
-          }));
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, item.colspan > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            onClick: function onClick() {
+              return _this2.handleUnMergeCells(i, j);
+            }
+          }, "Unmerge"), j < Object.values(items).length - 1 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            onClick: function onClick() {
+              return _this2.handleMergeCells(item.colspan, i, j);
+            }
+          }, "Merge")));
         }));
       }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "button",
@@ -80653,6 +80718,12 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, stateProps) {
     },
     updateInputSelected: function updateInputSelected(type, row, col) {
       dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["updateInputSelected"])(type, row, col));
+    },
+    mergeRow: function mergeRow(type, colspan, row, col) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["mergeRow"])(type, colspan, row, col));
+    },
+    unMergeRow: function unMergeRow(type, row, col) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["unMergeRow"])(type, row, col));
     }
   };
 };
@@ -80665,7 +80736,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, stateProps) {
 /*!*****************************************************!*\
   !*** ./resources/js/modules/table/redux/actions.js ***!
   \*****************************************************/
-/*! exports provided: deleteCol, deleteRow, resetTable, loadTable, addNewRow, addNewCol, importFile, updateValue, updateName, updateCaption, updateClasses, updateNbCol, updateInputSelected, updateInputStyle */
+/*! exports provided: deleteCol, deleteRow, resetTable, cancelAction, loadTable, addNewRow, addNewCol, importFile, updateValue, updateName, updateCaption, updateClasses, updateNbCol, updateInputSelected, updateInputStyle, mergeRow, unMergeRow */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -80673,6 +80744,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteCol", function() { return deleteCol; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteRow", function() { return deleteRow; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resetTable", function() { return resetTable; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cancelAction", function() { return cancelAction; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadTable", function() { return loadTable; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNewRow", function() { return addNewRow; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNewCol", function() { return addNewCol; });
@@ -80684,6 +80756,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateNbCol", function() { return updateNbCol; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateInputSelected", function() { return updateInputSelected; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateInputStyle", function() { return updateInputStyle; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mergeRow", function() { return mergeRow; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unMergeRow", function() { return unMergeRow; });
 /* ===============================================
 * FUNCTIONS TO DELETE
 =============================================== */
@@ -80703,6 +80777,11 @@ var deleteRow = function deleteRow(type, idx) {
 var resetTable = function resetTable() {
   return {
     type: "RESET_TABLE"
+  };
+};
+var cancelAction = function cancelAction() {
+  return {
+    type: "CANCEL_LAST_ACTION"
   };
 };
 /* ===============================================
@@ -80793,6 +80872,27 @@ var updateInputStyle = function updateInputStyle(type, cell, row, col) {
     col: col
   };
 };
+/* ===============================================
+ * ABOUT CELLS MERGING
+ =============================================== */
+
+var mergeRow = function mergeRow(type, colspan, row, col) {
+  return {
+    type: "MERGE_ROW",
+    typeTable: type,
+    colspan: colspan,
+    row: row,
+    col: col
+  };
+};
+var unMergeRow = function unMergeRow(type, row, col) {
+  return {
+    type: "UNMERGE_ROW",
+    typeTable: type,
+    row: row,
+    col: col
+  };
+};
 
 /***/ }),
 
@@ -80843,7 +80943,8 @@ var initState = {
   },
   'caption': '',
   'name': '',
-  'inputSelected': {}
+  'inputSelected': {},
+  'lastState': {}
 };
 
 function rootReducer() {
@@ -80858,7 +80959,8 @@ function rootReducer() {
         'nbCol': payload.nbCol ? payload.nbCol : 0,
         'tableau': payload.tableau,
         'caption': payload.caption ? payload.caption : '',
-        'name': payload.name ? payload.name : ''
+        'name': payload.name ? payload.name : '',
+        'lastState': _objectSpread({}, state)
       });
 
     case "DELETE_COL":
@@ -80874,17 +80976,49 @@ function rootReducer() {
             value = _Object$entries$_i[1];
 
         value.forEach(function (el) {
-          el.splice(payload.col, 1);
+          var nbCol = 0;
+          var cellsMerged = false;
+
+          for (var i = 0; i < el.length; i++) {
+            console.log('----------- new boucle -------------', i);
+            var _colspan = el[i].colspan;
+            var payloadCol = parseInt(payload.col, 10);
+
+            if (_colspan && nbCol <= payloadCol && payloadCol < nbCol + _colspan) {
+              cellsMerged = true;
+              el[i].colspan -= 1;
+              return;
+            }
+
+            if (nbCol === payloadCol) {
+              console.log('nbcol', nbCol);
+              console.log('paylo', payload.col);
+              console.log('el', el[i]);
+              el.splice(i, 1);
+              return;
+            }
+
+            nbCol += _colspan ? _colspan : 1;
+          }
+
+          console.log(cellsMerged);
+
+          if (!cellsMerged) {
+            console.log('hey');
+            console.log(nbCol);
+            console.log(payload.col);
+          }
         });
       }
 
       return _objectSpread({}, state, {
-        nbCol: state.nbCol - 1,
-        tableau: _objectSpread({}, state.tableau, {
-          head: newState.tableau.head,
-          body: newState.tableau.body,
-          foot: newState.tableau.foot
-        })
+        'nbCol': state.nbCol - 1,
+        'tableau': _objectSpread({}, state.tableau, {
+          'head': newState.tableau.head,
+          'body': newState.tableau.body,
+          'foot': newState.tableau.foot
+        }),
+        'lastState': _objectSpread({}, state)
       });
 
     case "ADD_COL":
@@ -80902,14 +81036,16 @@ function rootReducer() {
       }
 
       return _objectSpread({}, state, {
-        nbCol: state.nbCol + 1,
-        tableau: newState.tableau
+        'nbCol': state.nbCol + 1,
+        'tableau': newState.tableau,
+        'lastState': _objectSpread({}, state)
       });
 
     case "DELETE_ROW":
       newState.tableau[payload.typeTable].splice(payload.row, 1);
       return _objectSpread({}, state, {
-        tableau: _objectSpread({}, state.tableau, _defineProperty({}, payload.typeTable, newState.tableau[payload.typeTable]))
+        'tableau': _objectSpread({}, state.tableau, _defineProperty({}, payload.typeTable, newState.tableau[payload.typeTable])),
+        'lastState': _objectSpread({}, state)
       });
 
     case "ADD_ROW":
@@ -80923,23 +81059,27 @@ function rootReducer() {
 
       newState.tableau[payload.typeTable].splice(parseInt(payload.idx, 10) + 1, 0, tab);
       return _objectSpread({}, state, {
-        tableau: _objectSpread({}, state.tableau, _defineProperty({}, payload.typeTable, newState.tableau[payload.typeTable]))
+        'tableau': _objectSpread({}, state.tableau, _defineProperty({}, payload.typeTable, newState.tableau[payload.typeTable])),
+        'lastState': _objectSpread({}, state)
       });
 
     case "UPDATE_CAPTION":
       return _objectSpread({}, state, {
-        caption: payload.caption
+        'caption': payload.caption,
+        'lastState': _objectSpread({}, state)
       });
 
     case "UPDATE_NAME":
       return _objectSpread({}, state, {
-        name: payload.name
+        'name': payload.name,
+        'lastState': _objectSpread({}, state)
       });
 
     case "UPDATE_VALUE":
       newState.tableau[payload.typeTable][payload.row][payload.col].value = payload.value;
       return _objectSpread({}, state, {
-        tableau: _objectSpread({}, state.tableau, _defineProperty({}, payload.typeTable, newState.tableau[payload.typeTable]))
+        'tableau': _objectSpread({}, state.tableau, _defineProperty({}, payload.typeTable, newState.tableau[payload.typeTable])),
+        'lastState': _objectSpread({}, state)
       });
 
     case "RESET_TABLE":
@@ -80954,12 +81094,14 @@ function rootReducer() {
         'classes': [],
         'caption': '',
         'name': '',
-        'inputSelected': {}
+        'inputSelected': {},
+        'lastState': _objectSpread({}, state)
       };
 
     case "IMPORT_TABLE":
       return _objectSpread({}, state, {
-        tableau: payload.data
+        'tableau': payload.data,
+        'lastState': _objectSpread({}, state)
       });
 
     case "UPDATE_CLASSES":
@@ -80972,18 +81114,20 @@ function rootReducer() {
       }
 
       return _objectSpread({}, state, {
-        'classes': _toConsumableArray(newState.classes)
+        'classes': _toConsumableArray(newState.classes),
+        'lastState': _objectSpread({}, state)
       });
 
     case "UPDATE_NBCOL":
       return _objectSpread({}, state, {
-        nbCol: payload.nbCol
+        'nbCol': payload.nbCol,
+        'lastState': _objectSpread({}, state)
       });
 
     case "UPDATE_INPUT_SELECTED":
       if (!(payload.typeTable || payload.row || payload.col)) {
         return _objectSpread({}, state, {
-          inputSelected: {}
+          'inputSelected': {}
         });
       }
 
@@ -80997,10 +81141,45 @@ function rootReducer() {
 
     case "UPDATE_INPUT_STYLE":
       newState.tableau[payload.typeTable][payload.row][payload.col] = _objectSpread({}, newState.tableau[payload.typeTable][payload.row][payload.col], {
-        style: payload.cell
+        'style': payload.cell
       });
       return _objectSpread({}, state, {
-        tableau: _objectSpread({}, state.tableau, _defineProperty({}, payload.typeTable, newState.tableau[payload.typeTable]))
+        'tableau': _objectSpread({}, state.tableau, _defineProperty({}, payload.typeTable, newState.tableau[payload.typeTable])),
+        'lastState': _objectSpread({}, state)
+      });
+
+    case "MERGE_ROW":
+      var colNext = newState.tableau[payload.typeTable][payload.row][payload.col + 1].colspan;
+      newState.tableau[payload.typeTable][payload.row].splice(payload.col + 1, 1); // Check if next col is already merged
+
+      var colSpanNew = colNext ? colNext + payload.colspan : payload.colspan + 1; // Update colspan
+
+      newState.tableau[payload.typeTable][payload.row][payload.col] = _objectSpread({}, newState.tableau[payload.typeTable][payload.row][payload.col], {
+        'colspan': colSpanNew
+      });
+      return _objectSpread({}, state, {
+        'tableau': _objectSpread({}, state.tableau, _defineProperty({}, payload.typeTable, newState.tableau[payload.typeTable])),
+        'lastState': _objectSpread({}, state)
+      });
+
+    case "UNMERGE_ROW":
+      var colspan = newState.tableau[payload.typeTable][payload.row][payload.col].colspan;
+      delete newState.tableau[payload.typeTable][payload.row][payload.col].colspan;
+
+      for (var i = 1; i < colspan; i++) {
+        newState.tableau[payload.typeTable][payload.row].splice(parseInt(payload.col + 1, 10), 0, {
+          'value': ''
+        });
+      }
+
+      return _objectSpread({}, state, {
+        'tableau': _objectSpread({}, state.tableau, _defineProperty({}, payload.typeTable, newState.tableau[payload.typeTable])),
+        'lastState': _objectSpread({}, state)
+      });
+
+    case "CANCEL_LAST_ACTION":
+      return _objectSpread({}, state.lastState, {
+        'lastState': _objectSpread({}, newState)
       });
 
     default:

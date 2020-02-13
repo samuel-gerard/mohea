@@ -96653,6 +96653,61 @@ module.exports = function(originalModule) {
 
 /***/ }),
 
+/***/ "./resources/js/components/Canceller.js":
+/*!**********************************************!*\
+  !*** ./resources/js/components/Canceller.js ***!
+  \**********************************************/
+/*! exports provided: Canceller */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Canceller", function() { return Canceller; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+var Canceller = function Canceller(props) {
+  var fired = false;
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function (props) {
+    document.addEventListener("keydown", function (e) {
+      checkKeyDown(e);
+    }, false);
+    document.addEventListener('keyup', checkKeyUp, false);
+    return function () {
+      document.removeEventListener("keydown", function (e) {
+        checkKeyDown(e);
+      }, false);
+      document.removeEventListener('keyup', checkKeyUp, false);
+    };
+  }, [props]);
+
+  var checkKeyDown = function checkKeyDown(e) {
+    if (e.keyCode == 90 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
+      e.stopPropagation();
+      e.preventDefault();
+      fired = true;
+      return false;
+    }
+  };
+
+  var checkKeyUp = function checkKeyUp() {
+    if (fired) {
+      fired = false;
+      cancel();
+    }
+  };
+
+  var cancel = function cancel() {
+    props.cancelAction();
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    onClick: cancel
+  }, "Cancel last action"));
+};
+
+/***/ }),
+
 /***/ "./resources/js/components/ImportFile.js":
 /*!***********************************************!*\
   !*** ./resources/js/components/ImportFile.js ***!
@@ -96984,82 +97039,6 @@ react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render(react__WEBPACK_IMPORTED_
 
 /***/ }),
 
-/***/ "./resources/js/modules/table/components/Canceller.js":
-/*!************************************************************!*\
-  !*** ./resources/js/modules/table/components/Canceller.js ***!
-  \************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _redux_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../redux/actions */ "./resources/js/modules/table/redux/actions.js");
-
-
-
-
-var Canceller = function Canceller(props) {
-  var fired = false;
-  console.log('canceller - ', props.lastState);
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function (props) {
-    document.addEventListener("keydown", function (e) {
-      checkKeyDown(e);
-    }, false);
-    document.addEventListener('keyup', checkKeyUp, false);
-    return function () {
-      document.removeEventListener("keydown", function (e) {
-        checkKeyDown(e);
-      }, false);
-      document.removeEventListener('keyup', checkKeyUp, false);
-    };
-  }, [props]);
-
-  var checkKeyDown = function checkKeyDown(e) {
-    if (e.keyCode == 90 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
-      e.stopPropagation();
-      e.preventDefault();
-      fired = true;
-      return false;
-    }
-  };
-
-  var checkKeyUp = function checkKeyUp() {
-    if (fired) {
-      fired = false;
-      cancel();
-    }
-  };
-
-  var cancel = function cancel() {
-    props.cancelAction();
-  };
-
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    onClick: cancel
-  }, "Cancel last action"));
-};
-
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    'lastState': state.lastState
-  };
-};
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch, stateProps) {
-  return {
-    cancelAction: function cancelAction() {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["cancelAction"])());
-    }
-  };
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(Canceller));
-
-/***/ }),
-
 /***/ "./resources/js/modules/table/components/CustomInput.js":
 /*!**************************************************************!*\
   !*** ./resources/js/modules/table/components/CustomInput.js ***!
@@ -97220,8 +97199,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var d3__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! d3 */ "./node_modules/d3/index.js");
 /* harmony import */ var _components_ImportFile__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../components/ImportFile */ "./resources/js/components/ImportFile.js");
 /* harmony import */ var _components_SaveProject__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../components/SaveProject */ "./resources/js/components/SaveProject.js");
-/* harmony import */ var _CustomInput__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./CustomInput */ "./resources/js/modules/table/components/CustomInput.js");
-/* harmony import */ var _Canceller__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./Canceller */ "./resources/js/modules/table/components/Canceller.js");
+/* harmony import */ var _components_Canceller__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../components/Canceller */ "./resources/js/components/Canceller.js");
+/* harmony import */ var _CustomInput__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./CustomInput */ "./resources/js/modules/table/components/CustomInput.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -97456,7 +97435,9 @@ function (_Component) {
         nbCol: this.props.nbCol,
         name: this.props.name,
         type: "table"
-      }), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_CustomInput__WEBPACK_IMPORTED_MODULE_11__["default"], null), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_Canceller__WEBPACK_IMPORTED_MODULE_12__["default"], null), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
+      }), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_CustomInput__WEBPACK_IMPORTED_MODULE_12__["default"], null), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_components_Canceller__WEBPACK_IMPORTED_MODULE_11__["Canceller"], {
+        cancelAction: this.props.cancelAction
+      }), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
         className: "col-md-3"
@@ -97628,6 +97609,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     updateNbCol: function updateNbCol(number) {
       dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_7__["updateNbCol"])(number));
+    },
+    cancelAction: function cancelAction() {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_7__["cancelAction"])());
     }
   };
 };

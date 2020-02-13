@@ -1,11 +1,7 @@
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { cancelAction } from "../redux/actions";
 
-const Canceller = (props) => {
+export const Canceller = (props) => {
   let fired = false
-
-  console.log('canceller - ', props.lastState)
 
   useEffect(props => {
     document.addEventListener("keydown", e => { checkKeyDown(e) }, false);
@@ -43,19 +39,3 @@ const Canceller = (props) => {
     </div>
   )
 }
-
-const mapStateToProps = state => {
-  return {
-    'lastState': state.lastState
-  }
-}
-
-const mapDispatchToProps = (dispatch, stateProps) => {
-  return {
-    cancelAction: () => {
-      dispatch(cancelAction())
-    },
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Canceller);

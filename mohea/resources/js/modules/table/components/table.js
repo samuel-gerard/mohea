@@ -5,12 +5,12 @@ import React, {Component} from "react";
 import axios from 'axios';
 import { connect } from "react-redux";
 import TableReturn from "./tableReturn.jsx";
-import { loadTable, addNewRow, addNewCol, importFile, resetTable, updateCaption, updateName, updateClasses, updateNbCol } from "../redux/actions";
+import { loadTable, addNewRow, addNewCol, importFile, resetTable, cancelAction, updateCaption, updateName, updateClasses, updateNbCol } from "../redux/actions";
 import * as d3 from "d3";
 import { ImportFile } from "../../../components/ImportFile";
 import { SaveProject } from "../../../components/SaveProject";
+import { Canceller } from "../../../components/Canceller";
 import CustomInput from "./CustomInput";
-import Canceller from "./Canceller";
 
 class Table extends Component {
   constructor(props) {
@@ -176,7 +176,7 @@ class Table extends Component {
         }
         <SaveProject content={this.props.tableau} classes={this.props.classes} caption={this.props.caption} nbCol={this.props.nbCol} name={this.props.name} type="table" />
         <CustomInput />
-        <Canceller />
+        <Canceller cancelAction={this.props.cancelAction} />
         <div className="row">
           <div className="col-md-3">
             <div className="form-group">
@@ -278,6 +278,9 @@ const mapDispatchToProps = dispatch => {
     updateNbCol: (number) => {
       dispatch(updateNbCol(number))
     },
+    cancelAction: () => {
+      dispatch(cancelAction())
+    }
   }
 }
 

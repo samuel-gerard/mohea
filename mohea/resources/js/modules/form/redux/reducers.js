@@ -7,15 +7,15 @@ const initState = {
         { name: "Text Input", tag: "input", className:"moheaTextInput", type: "text", label:"My New Text Input", required: "", placeholder: "My placeholder" },
         { name: "Text Area", tag: "textarea", className:"moheaTextArea", label:"My New Text Area", rows: 3, col: 10, required: "", placeholder: "My placeholder" },
         { name: "Select", tag: "select", className:"moheaSelect", label:"My New Select", title: "Options", required: "", options: [
-          {tag: "option", value: "first", content: "My First Option"},
-          {tag: "option", value: "deux", content: "My Second Option"}
+          { id: 0, tag: "option", value: "first", content: "My First Option"},
+          { id: 1,tag: "option", value: "deux", content: "My Second Option"}
         ]},
         { name: "Date", tag: "input", className:"moheaDate", label:"My New Date", type: "date", required: "", placeholder: "12/02/2020" },
         { name: "Check Box", tag: "div", className:"moheaCheckbox", label:"My New Check Box", required: "", options:[
-          { tag: "input", type: "checkbox", label: "My first Option" }
+          { id: 0, tag: "input", type: "checkbox", label: "My first Option" }
         ]},
         { name: "Radio Button", tag: "div", className:"moheaRadiobutton", label:"My New Radio Button", required: "", options: [
-          { tag: "input", type: "radio", label: "My first Option" }
+          { id: 0, tag: "input", type: "radio", label: "My first Option" }
         ]},
         { name: "Email", tag: "input", className:"moheaEmail", label:"My Email", type: "email", pattern: "", required: "", placeholder: "My placeholder" },
         { name: "Link", tag: "input", className:"moheaLink", label:"My Link", type: "url", required: "", placeholder: "My placeholder" },

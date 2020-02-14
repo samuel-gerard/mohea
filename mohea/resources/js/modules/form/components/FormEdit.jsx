@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { deleteItem, updateElement, duplicateItem, moveDown, moveUp } from "../redux/actions";
+import { lab } from "color-convert";
 
 
 class FormEdit extends Component {
+
+    state = {selectedOption: null}
 
     handleDeleteItem(element)
     {
@@ -99,10 +102,39 @@ class FormEdit extends Component {
         this.props.updateElement(newElement, this.props.focus)
     }
 
-    handleSelectOption = (e) => {
-        return 'test'
+    handleSelectOption(option) {
+        this.setState({ selectedOption: option })
+    }
+    
+    handleUpdateOptionForCheckboxAndRadio = (e) => {
+        let newElement = this.props.elementsUsed[this.props.focus]
+        newElement.options[this.state.selectedOption.id].label = e.target.value
+        this.props.updateElement(newElement, this.props.focus)
     }
 
+    handleAddOptionForCheckboxAndRadio(){
+        let newElement = this.props.elementsUsed[this.props.focus]
+        let id = this.props.elementsUsed[this.props.focus].options.length
+        var newOption = { id: id, tag: "input", type: "radio", label: "My New Option" }
+        newElement.options.push(newOption)
+        this.props.updateElement(newElement, this.props.focus)
+    }
+    
+    handleAddOptionForSelect(){
+        let newElement = this.props.elementsUsed[this.props.focus]
+        let id = this.props.elementsUsed[this.props.focus].options.length
+        var newOption = { id: id, tag: "option", value: "My New Option", content: "My New Option"}
+        newElement.options.push(newOption)
+        this.props.updateElement(newElement, this.props.focus)
+    }
+
+    handleUpdateOptionForSelect = (e) => {
+        let newElement = this.props.elementsUsed[this.props.focus]
+        newElement.options[this.state.selectedOption.id].content = e.target.value
+        newElement.options[this.state.selectedOption.id].value = e.target.value
+        this.props.updateElement(newElement, this.props.focus)
+    }
+    
 
 
     renderSwitch(element)
@@ -166,8 +198,6 @@ class FormEdit extends Component {
                         <input type="text" name="placeholder" onChange={this.handleUpdateTextArea} value={element.placeholder} />
                         <label>Row</label>
                         <input type="number" name="rows" onChange={this.handleUpdateTextArea} value={element.rows} />
-                        {/* <label>Columns</label>
-                        <input type="number" name="col" onChange={this.handleUpdateTextArea} value={element.col} /> */}
                         <label>Required</label>
                         <input type="checkbox" name="required" onChange={this.handleUpdateTextArea} value={element.required} />
                     </div>
@@ -178,13 +208,20 @@ class FormEdit extends Component {
                     <div>
                         <label htmlFor="label">Label</label>
                         <input type="text" name="label" onChange={this.handleUpdateSelect} value={element.label} />
+                        <input type="button" name="newOption" onClick={() => this.handleAddOptionForSelect()} className="btn btn-primary" value="Add New Option" />
                         <label htmlFor="content">Edit options</label>
                         <select name="options">
                             {element.options.map((option, i) => {
-                                return <option key={i} onClick={this.handleSelectOption} value={option.value}>{option.content}</option>
+                                return <option key={i} onClick={() => this.handleSelectOption(option)} value={option.value}>{option.content}</option>
                             })}
                         </select>
-                        {/* si option selectionné => input modification */}
+
+                        {this.state.selectedOption !== null ? (
+                            <input type="text" value={this.state.selectedOption.content} onChange={this.handleUpdateOptionForSelect} />
+                        ) : (
+                            <h3>Choose an option to update</h3>
+                        )}
+
                         <label>Required</label>
                         <input type="checkbox" name="required" onChange={this.handleUpdateSelect} value={element.required} />
                     </div>
@@ -196,13 +233,18 @@ class FormEdit extends Component {
                     <div>
                         <label htmlFor="label">Label</label>
                         <input type="text" name="label" onChange={this.handleUpdateBoxAndRadio} value={element.label} />
+                        <input type="button" name="newOption" onClick={() => this.handleAddOptionForCheckboxAndRadio()} className="btn btn-primary" value="Add New Option" />
                         <label htmlFor="content">Edit options</label>
                         <select name="options">
                             {element.options.map((option, i) => {
-                                return <option key={i} onClick={this.handleSelectOption} value={option.label}>{option.label}</option>
+                                return <option key={i} onClick={() => this.handleSelectOption(option)} value={option.label}>{option.label}</option>
                             })}
                         </select>
-                        {/* si option selectionné => input modification */}
+                        {this.state.selectedOption !== null ? (
+                            <input type="text" value={this.state.selectedOption.label} onChange={this.handleUpdateOptionForCheckboxAndRadio} />
+                        ) : (
+                            <h3>Choose an option to update</h3>
+                        )}
                         <label>Required</label>
                         <input type="checkbox" name="required" onChange={this.handleUpdateBoxAndRadio} value={element.required} />
                     </div>
@@ -230,7 +272,6 @@ class FormEdit extends Component {
                         <input type="button" onClick={() => this.handleDuplicateItem(this.props.elementsUsed[this.props.focus])} className="btn btn-primary" value="Duplicate Element" />
                         <input type="button" onClick={() => this.handleMoveDown(this.props.elementsUsed[this.props.focus])} className="btn btn-primary" value="Down" />
                         <input type="button" onClick={() => this.handleMoveUp(this.props.elementsUsed[this.props.focus])} className="btn btn-primary" value="Up" />
-                        {/* Moove up/down element */}
                     </div>
                     ) : (
                     <p>Click on an element to update it !</p>

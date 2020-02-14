@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { deleteItem, updateElement, duplicateItem } from "../redux/actions";
+import { deleteItem, updateElement, duplicateItem, moveDown, moveUp } from "../redux/actions";
 
 
 class FormEdit extends Component {
@@ -13,6 +13,16 @@ class FormEdit extends Component {
     handleDuplicateItem(element)
     {
         this.props.duplicateItem(element)
+    }
+
+    handleMoveDown(element)
+    {
+        this.props.moveDown(element)
+    }
+
+    handleMoveUp(element)
+    {
+        this.props.moveUp(element)
     }
 
     handleUpdateText = (e) => {
@@ -218,6 +228,8 @@ class FormEdit extends Component {
                         {this.renderSwitch(this.props.elementsUsed[this.props.focus])}
                         <input type="button" onClick={() => this.handleDeleteItem(this.props.elementsUsed[this.props.focus])} className="btn btn-primary" value="Delete Element" />
                         <input type="button" onClick={() => this.handleDuplicateItem(this.props.elementsUsed[this.props.focus])} className="btn btn-primary" value="Duplicate Element" />
+                        <input type="button" onClick={() => this.handleMoveDown(this.props.elementsUsed[this.props.focus])} className="btn btn-primary" value="Down" />
+                        <input type="button" onClick={() => this.handleMoveUp(this.props.elementsUsed[this.props.focus])} className="btn btn-primary" value="Up" />
                         {/* Moove up/down element */}
                     </div>
                     ) : (
@@ -249,7 +261,13 @@ const mapDispatchToProps = (dispatch, stateProps) => {
         },
         updateElement: (element, id) => {
             dispatch(updateElement(element, id))
-        }
+        },
+        moveDown: (element) => {
+            dispatch(moveDown(element))
+        },
+        moveUp: (element) => {
+            dispatch(moveUp(element))
+        },
     }
 }
 

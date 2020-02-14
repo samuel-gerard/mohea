@@ -22,6 +22,16 @@ export const addFocus = (element) => ({
     id: element.id
 });
 
+export const moveDown = (element) => ({
+    type: "MOVE_DOWN",
+    element: element
+});
+
+export const moveUp = (element) => ({
+    type: "MOVE_UP",
+    element: element
+});
+
 export const updateElement = (element, id) => ({
     type: "UPDATE_ITEM",
     element: element,

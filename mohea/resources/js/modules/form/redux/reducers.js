@@ -98,6 +98,50 @@ function rootReducer(state = initState, payload) {
             ]
           };
 
+        case "MOVE_DOWN":
+          let elementToMoveDown = Object.assign({}, payload.element);
+          let elementToChange = newState.elementsUsed[elementToMoveDown.id - 1]
+          if(typeof(elementToChange) !== 'undefined')
+          {
+            newState.elementsUsed[elementToMoveDown.id] = elementToChange
+            newState.elementsUsed[elementToChange.id] = elementToMoveDown
+            elementToMoveDown.id = elementToChange.id
+            elementToChange.id = payload.element.id
+            return {
+              ...state,
+              focus: elementToMoveDown.id,
+              elementsUsed: [
+                ...newState.elementsUsed
+              ]
+            }
+          }else{
+            return {
+              ...state,
+            }
+          }
+
+        case "MOVE_UP":
+          let elementToMoveUp = Object.assign({}, payload.element);
+          let elementToChangeDown = newState.elementsUsed[elementToMoveUp.id + 1]
+          if(typeof(elementToChangeDown) !== 'undefined')
+          {
+            newState.elementsUsed[elementToMoveUp.id] = elementToChangeDown
+            newState.elementsUsed[elementToChangeDown.id] = elementToMoveUp
+            elementToMoveUp.id = elementToChangeDown.id
+            elementToChangeDown.id = payload.element.id
+            return {
+              ...state,
+              focus: elementToMoveUp.id,
+              elementsUsed: [
+                ...newState.elementsUsed
+              ]
+            }
+          }else{
+            return {
+              ...state,
+            }
+          }
+
       default:
         return state;
     }

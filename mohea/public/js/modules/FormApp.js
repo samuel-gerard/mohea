@@ -39242,7 +39242,7 @@ function (_React$Component) {
         value: "Display code"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "button",
-        className: "w-25 btn btn-primary",
+        className: "w-25 btn btn-danger",
         value: "Reset",
         onClick: function onClick() {
           return _this2.handleResetForm();
@@ -39634,6 +39634,16 @@ function (_Component) {
       this.props.duplicateItem(element);
     }
   }, {
+    key: "handleMoveDown",
+    value: function handleMoveDown(element) {
+      this.props.moveDown(element);
+    }
+  }, {
+    key: "handleMoveUp",
+    value: function handleMoveUp(element) {
+      this.props.moveUp(element);
+    }
+  }, {
     key: "renderSwitch",
     value: function renderSwitch(element) {
       var _this2 = this;
@@ -39797,6 +39807,20 @@ function (_Component) {
         },
         className: "btn btn-primary",
         value: "Duplicate Element"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "button",
+        onClick: function onClick() {
+          return _this3.handleMoveDown(_this3.props.elementsUsed[_this3.props.focus]);
+        },
+        className: "btn btn-primary",
+        value: "Down"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "button",
+        onClick: function onClick() {
+          return _this3.handleMoveUp(_this3.props.elementsUsed[_this3.props.focus]);
+        },
+        className: "btn btn-primary",
+        value: "Up"
       })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Click on an element to update it !")));
     }
   }]);
@@ -39823,6 +39847,12 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, stateProps) {
     },
     updateElement: function updateElement(element, id) {
       dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["updateElement"])(element, id));
+    },
+    moveDown: function moveDown(element) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["moveDown"])(element));
+    },
+    moveUp: function moveUp(element) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["moveUp"])(element));
     }
   };
 };
@@ -39878,7 +39908,7 @@ var mapStateToProps = function mapStateToProps(state) {
 /*!****************************************************!*\
   !*** ./resources/js/modules/form/redux/actions.js ***!
   \****************************************************/
-/*! exports provided: addNewItem, deleteItem, duplicateItem, addFocus, updateElement, resetForm */
+/*! exports provided: addNewItem, deleteItem, duplicateItem, addFocus, moveDown, moveUp, updateElement, resetForm */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -39887,6 +39917,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteItem", function() { return deleteItem; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "duplicateItem", function() { return duplicateItem; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addFocus", function() { return addFocus; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "moveDown", function() { return moveDown; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "moveUp", function() { return moveUp; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateElement", function() { return updateElement; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resetForm", function() { return resetForm; });
 /* ===============================================
@@ -39914,6 +39946,18 @@ var addFocus = function addFocus(element) {
   return {
     type: "ADD_FOCUS",
     id: element.id
+  };
+};
+var moveDown = function moveDown(element) {
+  return {
+    type: "MOVE_DOWN",
+    element: element
+  };
+};
+var moveUp = function moveUp(element) {
+  return {
+    type: "MOVE_UP",
+    element: element
   };
 };
 var updateElement = function updateElement(element, id) {
@@ -40129,6 +40173,40 @@ function rootReducer() {
       return _objectSpread({}, state, {
         elementsUsed: _toConsumableArray(newState.elementsUsed)
       });
+
+    case "MOVE_DOWN":
+      var elementToMoveDown = Object.assign({}, payload.element);
+      var elementToChange = newState.elementsUsed[elementToMoveDown.id - 1];
+
+      if (typeof elementToChange !== 'undefined') {
+        newState.elementsUsed[elementToMoveDown.id] = elementToChange;
+        newState.elementsUsed[elementToChange.id] = elementToMoveDown;
+        elementToMoveDown.id = elementToChange.id;
+        elementToChange.id = payload.element.id;
+        return _objectSpread({}, state, {
+          focus: elementToMoveDown.id,
+          elementsUsed: _toConsumableArray(newState.elementsUsed)
+        });
+      } else {
+        return _objectSpread({}, state);
+      }
+
+    case "MOVE_UP":
+      var elementToMoveUp = Object.assign({}, payload.element);
+      var elementToChangeDown = newState.elementsUsed[elementToMoveUp.id + 1];
+
+      if (typeof elementToChangeDown !== 'undefined') {
+        newState.elementsUsed[elementToMoveUp.id] = elementToChangeDown;
+        newState.elementsUsed[elementToChangeDown.id] = elementToMoveUp;
+        elementToMoveUp.id = elementToChangeDown.id;
+        elementToChangeDown.id = payload.element.id;
+        return _objectSpread({}, state, {
+          focus: elementToMoveUp.id,
+          elementsUsed: _toConsumableArray(newState.elementsUsed)
+        });
+      } else {
+        return _objectSpread({}, state);
+      }
 
     default:
       return state;

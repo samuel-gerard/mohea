@@ -39128,6 +39128,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _FormContent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FormContent */ "./resources/js/modules/form/components/FormContent.jsx");
 /* harmony import */ var _FormReturn__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./FormReturn */ "./resources/js/modules/form/components/FormReturn.jsx");
 /* harmony import */ var _FormEdit__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./FormEdit */ "./resources/js/modules/form/components/FormEdit.jsx");
+/* harmony import */ var _redux_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../redux/actions */ "./resources/js/modules/form/redux/actions.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -39138,19 +39139,22 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
 
- // import CustomInput from "./CustomInput";
+
+
+
 
 var Form =
 /*#__PURE__*/
@@ -39158,14 +39162,30 @@ function (_React$Component) {
   _inherits(Form, _React$Component);
 
   function Form() {
+    var _getPrototypeOf2;
+
+    var _this;
+
     _classCallCheck(this, Form);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Form).apply(this, arguments));
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Form)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_this), "handleResetForm", function () {
+      _this.props.resetForm();
+    });
+
+    return _this;
   }
 
   _createClass(Form, [{
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.props.name || 'New Form'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -39223,7 +39243,10 @@ function (_React$Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "button",
         className: "w-25 btn btn-primary",
-        value: "Reset"
+        value: "Reset",
+        onClick: function onClick() {
+          return _this2.handleResetForm();
+        }
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-9"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormContent__WEBPACK_IMPORTED_MODULE_2__["default"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -39249,7 +39272,15 @@ var mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(Form));
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    resetForm: function resetForm() {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_5__["resetForm"])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(Form));
 
 /***/ }),
 
@@ -39598,6 +39629,11 @@ function (_Component) {
       this.props.deleteItem(element);
     }
   }, {
+    key: "handleDuplicateItem",
+    value: function handleDuplicateItem(element) {
+      this.props.duplicateItem(element);
+    }
+  }, {
     key: "renderSwitch",
     value: function renderSwitch(element) {
       var _this2 = this;
@@ -39757,7 +39793,7 @@ function (_Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "button",
         onClick: function onClick() {
-          return _this3.handleDeleteItem(_this3.props.elementsUsed[_this3.props.focus]);
+          return _this3.handleDuplicateItem(_this3.props.elementsUsed[_this3.props.focus]);
         },
         className: "btn btn-primary",
         value: "Duplicate Element"
@@ -39781,6 +39817,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, stateProps) {
   return {
     deleteItem: function deleteItem(element) {
       dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["deleteItem"])(element));
+    },
+    duplicateItem: function duplicateItem(element) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["duplicateItem"])(element));
     },
     updateElement: function updateElement(element, id) {
       dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["updateElement"])(element, id));
@@ -39839,15 +39878,17 @@ var mapStateToProps = function mapStateToProps(state) {
 /*!****************************************************!*\
   !*** ./resources/js/modules/form/redux/actions.js ***!
   \****************************************************/
-/*! exports provided: addNewItem, deleteItem, addFocus, updateElement */
+/*! exports provided: addNewItem, deleteItem, duplicateItem, addFocus, updateElement, resetForm */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNewItem", function() { return addNewItem; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteItem", function() { return deleteItem; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "duplicateItem", function() { return duplicateItem; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addFocus", function() { return addFocus; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateElement", function() { return updateElement; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resetForm", function() { return resetForm; });
 /* ===============================================
 * FUNCTIONS TO ADD
 =============================================== */
@@ -39863,6 +39904,12 @@ var deleteItem = function deleteItem(element) {
     element: element
   };
 };
+var duplicateItem = function duplicateItem(element) {
+  return {
+    type: "DUPLICATE_ITEM",
+    element: element
+  };
+};
 var addFocus = function addFocus(element) {
   return {
     type: "ADD_FOCUS",
@@ -39871,9 +39918,14 @@ var addFocus = function addFocus(element) {
 };
 var updateElement = function updateElement(element, id) {
   return {
-    type: "UPDATE_ELEMENT",
+    type: "UPDATE_ITEM",
     element: element,
     id: id
+  };
+};
+var resetForm = function resetForm() {
+  return {
+    type: "RESET_FORM"
   };
 };
 
@@ -40039,6 +40091,12 @@ function rootReducer() {
         focus: payload.id
       });
 
+    case "RESET_FORM":
+      return _objectSpread({}, state, {
+        elementsUsed: [],
+        focus: -1
+      });
+
     case "DELETE_ITEM":
       var indexOfElement = newState.elementsUsed.indexOf(payload.element);
       console.log('okok' + indexOfElement);
@@ -40057,9 +40115,17 @@ function rootReducer() {
         elementsUsed: _toConsumableArray(newState.elementsUsed)
       });
 
-    case "UPDATE_ELEMENT":
+    case "UPDATE_ITEM":
       var newElement = Object.assign({}, payload.element);
       newState.elementsUsed[payload.id] = newElement;
+      return _objectSpread({}, state, {
+        elementsUsed: _toConsumableArray(newState.elementsUsed)
+      });
+
+    case "DUPLICATE_ITEM":
+      var duplicateElem = Object.assign({}, payload.element);
+      duplicateElem.id = newState.elementsUsed.length;
+      newState.elementsUsed.push(duplicateElem);
       return _objectSpread({}, state, {
         elementsUsed: _toConsumableArray(newState.elementsUsed)
       });

@@ -50,6 +50,13 @@ function rootReducer(state = initState, payload) {
             focus: payload.id
           };
 
+      case "RESET_FORM":
+          return {
+            ...state,
+            elementsUsed: [],
+            focus: -1
+          };
+
       case "DELETE_ITEM":
 
         const indexOfElement = newState.elementsUsed.indexOf(payload.element);
@@ -70,9 +77,20 @@ function rootReducer(state = initState, payload) {
           ]
         };
 
-        case "UPDATE_ELEMENT":
+        case "UPDATE_ITEM":
           let newElement = Object.assign({}, payload.element);
           newState.elementsUsed[payload.id] = newElement
+          return {
+            ...state,
+            elementsUsed: [
+              ...newState.elementsUsed
+            ]
+          };
+
+        case "DUPLICATE_ITEM":
+          let duplicateElem = Object.assign({}, payload.element);
+          duplicateElem.id = newState.elementsUsed.length
+          newState.elementsUsed.push(duplicateElem)
           return {
             ...state,
             elementsUsed: [

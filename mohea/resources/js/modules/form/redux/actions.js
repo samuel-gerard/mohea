@@ -12,14 +12,26 @@ export const deleteItem = (element) => ({
     element: element
 });
 
+export const duplicateItem = (element) => ({
+    type: "DUPLICATE_ITEM",
+    element: element
+});
+
 export const addFocus = (element) => ({
     type: "ADD_FOCUS",
     id: element.id
 });
 
 export const updateElement = (element, id) => ({
-    type: "UPDATE_ELEMENT",
+    type: "UPDATE_ITEM",
     element: element,
     id: id
 });
+
+export const resetForm = () => ({
+    type: "RESET_FORM",
+});
+
+
+
 

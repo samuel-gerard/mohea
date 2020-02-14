@@ -3,10 +3,17 @@ import { connect } from "react-redux";
 import FormContent from "./FormContent";
 import FormReturn from "./FormReturn";
 import FormEdit from "./FormEdit";
-// import CustomInput from "./CustomInput";
+
+import { resetForm } from "../redux/actions";
 
 
 class Form extends React.Component {
+
+
+  handleResetForm = () =>
+  {
+    this.props.resetForm()
+  }
 
   render() {
     return <section>
@@ -37,7 +44,7 @@ class Form extends React.Component {
             </div>
             <div className="form-group d-flex justify-content-between">
               <input type="button" className="btn btn-primary form-control mr-1" value="Display code" />
-              <input type="button" className="w-25 btn btn-primary" value="Reset" />
+              <input type="button" className="w-25 btn btn-primary" value="Reset" onClick={() => this.handleResetForm()} />
             </div>
           </div>
           <div className="col-md-9">
@@ -68,4 +75,12 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(Form);
+const mapDispatchToProps = dispatch => {
+  return {
+    resetForm: () => {
+      dispatch(resetForm())
+    },
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Form);

@@ -40776,7 +40776,7 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleUpdateText", function (e) {
-      var newElement = _this.props.elementsUsed[_this.props.focus];
+      var newElement = _this.props.focus;
 
       if (e.target.name == 'content') {
         newElement.content = e.target.value;
@@ -40786,7 +40786,7 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleUpdateTitle", function (e) {
-      var newElement = _this.props.elementsUsed[_this.props.focus];
+      var newElement = _this.props.focus;
 
       if (e.target.name == 'content') {
         newElement.content = e.target.value;
@@ -40798,7 +40798,7 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleUpdateSubmit", function (e) {
-      var newElement = _this.props.elementsUsed[_this.props.focus];
+      var newElement = _this.props.focus;
 
       if (e.target.name == 'value') {
         newElement.value = e.target.value;
@@ -40808,7 +40808,7 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleInputBasic", function (e) {
-      var newElement = _this.props.elementsUsed[_this.props.focus];
+      var newElement = _this.props.focus;
 
       if (e.target.name == 'label') {
         newElement.label = e.target.value;
@@ -40822,7 +40822,7 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleUpdateTextArea", function (e) {
-      var newElement = _this.props.elementsUsed[_this.props.focus];
+      var newElement = _this.props.focus;
 
       if (e.target.name == 'label') {
         newElement.label = e.target.value;
@@ -40840,7 +40840,7 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleUpdateSelect", function (e) {
-      var newElement = _this.props.elementsUsed[_this.props.focus];
+      var newElement = _this.props.focus;
 
       if (e.target.name == 'label') {
         newElement.label = e.target.value;
@@ -40852,7 +40852,7 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleUpdateBoxAndRadio", function (e) {
-      var newElement = _this.props.elementsUsed[_this.props.focus];
+      var newElement = _this.props.focus;
 
       if (e.target.name == 'label') {
         newElement.label = e.target.value;
@@ -40864,14 +40864,14 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleUpdateOptionForCheckboxAndRadio", function (e) {
-      var newElement = _this.props.elementsUsed[_this.props.focus];
+      var newElement = _this.props.focus;
       newElement.options[_this.state.selectedOption.id].label = e.target.value;
 
       _this.props.updateElement(newElement, _this.props.focus);
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleUpdateOptionForSelect", function (e) {
-      var newElement = _this.props.elementsUsed[_this.props.focus];
+      var newElement = _this.props.focus;
       newElement.options[_this.state.selectedOption.id].content = e.target.value;
       newElement.options[_this.state.selectedOption.id].value = e.target.value;
 
@@ -40911,8 +40911,8 @@ function (_Component) {
   }, {
     key: "handleAddOptionForCheckboxAndRadio",
     value: function handleAddOptionForCheckboxAndRadio() {
-      var newElement = this.props.elementsUsed[this.props.focus];
-      var id = this.props.elementsUsed[this.props.focus].options.length;
+      var newElement = this.props.focus;
+      var id = this.props.focus.options.length;
       var newOption = {
         id: id,
         tag: "input",
@@ -40925,8 +40925,8 @@ function (_Component) {
   }, {
     key: "handleAddOptionForSelect",
     value: function handleAddOptionForSelect() {
-      var newElement = this.props.elementsUsed[this.props.focus];
-      var id = this.props.elementsUsed[this.props.focus].options.length;
+      var newElement = this.props.focus;
+      var id = this.props.focus.options.length;
       var newOption = {
         id: id,
         tag: "option",
@@ -40962,6 +40962,7 @@ function (_Component) {
           }, "Title size"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
             type: "titleSize",
             name: "tag",
+            value: element.tag,
             onChange: this.handleUpdateTitle
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
             value: "h1"
@@ -41001,7 +41002,7 @@ function (_Component) {
             type: "checkbox",
             name: "required",
             onChange: this.handleInputBasic,
-            value: element.required
+            checked: element.required
           }));
 
         case 'Text Area':
@@ -41024,7 +41025,7 @@ function (_Component) {
             type: "checkbox",
             name: "required",
             onChange: this.handleUpdateTextArea,
-            value: element.required
+            checked: element.required
           }));
 
         case 'Select':
@@ -41063,7 +41064,7 @@ function (_Component) {
             type: "checkbox",
             name: "required",
             onChange: this.handleUpdateSelect,
-            value: element.required
+            checked: element.required
           }));
 
         case 'Check Box':
@@ -41103,9 +41104,20 @@ function (_Component) {
             type: "checkbox",
             name: "required",
             onChange: this.handleUpdateBoxAndRadio,
-            value: element.required
+            checked: element.required
           }));
       }
+    }
+  }, {
+    key: "getFocusById",
+    value: function getFocusById(id) {
+      var focus = -1;
+      this.props.elementsUsed.map(function (element, i) {
+        if (id == element.id) {
+          focus = element.id;
+        }
+      });
+      return focus;
     }
   }, {
     key: "render",
@@ -41114,31 +41126,31 @@ function (_Component) {
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: ""
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Edit an Element"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.focus > -1 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.elementsUsed[this.props.focus].label !== undefined ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.props.elementsUsed[this.props.focus].label) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.props.elementsUsed[this.props.focus].name), this.renderSwitch(this.props.elementsUsed[this.props.focus]), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Edit an Element"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.focus.id !== -1 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.focus.label !== undefined ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.props.focus.label) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.props.focus.name), this.renderSwitch(this.props.focus), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "button",
         onClick: function onClick() {
-          return _this3.handleDeleteItem(_this3.props.elementsUsed[_this3.props.focus]);
+          return _this3.handleDeleteItem(_this3.props.focus);
         },
         className: "btn btn-primary",
         value: "Delete Element"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "button",
         onClick: function onClick() {
-          return _this3.handleDuplicateItem(_this3.props.elementsUsed[_this3.props.focus]);
+          return _this3.handleDuplicateItem(_this3.props.focus);
         },
         className: "btn btn-primary",
         value: "Duplicate Element"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "button",
         onClick: function onClick() {
-          return _this3.handleMoveDown(_this3.props.elementsUsed[_this3.props.focus]);
+          return _this3.handleMoveDown(_this3.props.focus);
         },
         className: "btn btn-primary",
         value: "Down"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "button",
         onClick: function onClick() {
-          return _this3.handleMoveUp(_this3.props.elementsUsed[_this3.props.focus]);
+          return _this3.handleMoveUp(_this3.props.focus);
         },
         className: "btn btn-primary",
         value: "Up"
@@ -41229,19 +41241,19 @@ var mapStateToProps = function mapStateToProps(state) {
 /*!****************************************************!*\
   !*** ./resources/js/modules/form/redux/actions.js ***!
   \****************************************************/
-/*! exports provided: addNewItem, deleteItem, duplicateItem, addFocus, moveDown, moveUp, updateElement, resetForm */
+/*! exports provided: addNewItem, addFocus, deleteItem, resetForm, updateElement, duplicateItem, moveDown, moveUp */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNewItem", function() { return addNewItem; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteItem", function() { return deleteItem; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "duplicateItem", function() { return duplicateItem; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addFocus", function() { return addFocus; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteItem", function() { return deleteItem; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resetForm", function() { return resetForm; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateElement", function() { return updateElement; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "duplicateItem", function() { return duplicateItem; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "moveDown", function() { return moveDown; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "moveUp", function() { return moveUp; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateElement", function() { return updateElement; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resetForm", function() { return resetForm; });
 /* ===============================================
 * FUNCTIONS TO ADD
 =============================================== */
@@ -41251,22 +41263,42 @@ var addNewItem = function addNewItem(element) {
     element: element
   };
 };
+var addFocus = function addFocus(element) {
+  return {
+    type: "ADD_FOCUS",
+    element: element
+  };
+};
+/* ===============================================
+* FUNCTIONS TO DELETE
+=============================================== */
+
 var deleteItem = function deleteItem(element) {
   return {
     type: "DELETE_ITEM",
     element: element
   };
 };
+var resetForm = function resetForm() {
+  return {
+    type: "RESET_FORM"
+  };
+};
+/* ===============================================
+* FUNCTIONS TO UPDATE
+=============================================== */
+
+var updateElement = function updateElement(element, id) {
+  return {
+    type: "UPDATE_ITEM",
+    element: element,
+    id: id
+  };
+};
 var duplicateItem = function duplicateItem(element) {
   return {
     type: "DUPLICATE_ITEM",
     element: element
-  };
-};
-var addFocus = function addFocus(element) {
-  return {
-    type: "ADD_FOCUS",
-    id: element.id
   };
 };
 var moveDown = function moveDown(element) {
@@ -41279,18 +41311,6 @@ var moveUp = function moveUp(element) {
   return {
     type: "MOVE_UP",
     element: element
-  };
-};
-var updateElement = function updateElement(element, id) {
-  return {
-    type: "UPDATE_ITEM",
-    element: element,
-    id: id
-  };
-};
-var resetForm = function resetForm() {
-  return {
-    type: "RESET_FORM"
   };
 };
 
@@ -41341,7 +41361,7 @@ var initState = {
     className: "moheaTextInput",
     type: "text",
     label: "My New Text Input",
-    required: "",
+    required: false,
     placeholder: "My placeholder"
   }, {
     name: "Text Area",
@@ -41350,7 +41370,7 @@ var initState = {
     label: "My New Text Area",
     rows: 3,
     col: 10,
-    required: "",
+    required: false,
     placeholder: "My placeholder"
   }, {
     name: "Select",
@@ -41358,7 +41378,7 @@ var initState = {
     className: "moheaSelect",
     label: "My New Select",
     title: "Options",
-    required: "",
+    required: false,
     options: [{
       id: 0,
       tag: "option",
@@ -41376,14 +41396,14 @@ var initState = {
     className: "moheaDate",
     label: "My New Date",
     type: "date",
-    required: "",
+    required: false,
     placeholder: "12/02/2020"
   }, {
     name: "Check Box",
     tag: "div",
     className: "moheaCheckbox",
     label: "My New Check Box",
-    required: "",
+    required: false,
     options: [{
       id: 0,
       tag: "input",
@@ -41395,7 +41415,7 @@ var initState = {
     tag: "div",
     className: "moheaRadiobutton",
     label: "My New Radio Button",
-    required: "",
+    required: false,
     options: [{
       id: 0,
       tag: "input",
@@ -41409,7 +41429,7 @@ var initState = {
     label: "My Email",
     type: "email",
     pattern: "",
-    required: "",
+    required: false,
     placeholder: "My placeholder"
   }, {
     name: "Link",
@@ -41417,7 +41437,7 @@ var initState = {
     className: "moheaLink",
     label: "My Link",
     type: "url",
-    required: "",
+    required: false,
     placeholder: "My placeholder"
   }, {
     name: "Password",
@@ -41425,7 +41445,7 @@ var initState = {
     className: "moheaPassword",
     label: "My Password",
     type: "password",
-    required: "",
+    required: false,
     placeholder: "My placeholder"
   }, {
     name: "Phone",
@@ -41434,7 +41454,7 @@ var initState = {
     label: "My Phone Number",
     type: "tel",
     pattern: "",
-    required: "",
+    required: false,
     placeholder: "My placeholder"
   }],
   elementsUsed: [],
@@ -41452,12 +41472,13 @@ function rootReducer() {
       elem.id = newState.elementsUsed.length;
       newState.elementsUsed.push(elem);
       return _objectSpread({}, state, {
+        focus: -1,
         elementsUsed: _toConsumableArray(newState.elementsUsed)
       });
 
     case "ADD_FOCUS":
       return _objectSpread({}, state, {
-        focus: payload.id
+        focus: payload.element
       });
 
     case "RESET_FORM":
@@ -41468,7 +41489,6 @@ function rootReducer() {
 
     case "DELETE_ITEM":
       var indexOfElement = newState.elementsUsed.indexOf(payload.element);
-      console.log('okok' + indexOfElement);
 
       if (indexOfElement >= 0) {
         newState.elementsUsed.splice(indexOfElement, 1);
@@ -41476,8 +41496,7 @@ function rootReducer() {
         var _newState$elementsUse;
 
         (_newState$elementsUse = newState.elementsUsed).push.apply(_newState$elementsUse, [payload.element]);
-      } // newState.elementsUsed.splice(payload.element, 1)
-
+      }
 
       return _objectSpread({}, state, {
         focus: -1,

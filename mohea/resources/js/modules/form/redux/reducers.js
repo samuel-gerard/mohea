@@ -4,23 +4,23 @@ const initState = {
         { name: "Text", tag: "p", content: "My New Text" },
         { name: "Title", tag: "h1", content: "My New Title" },
         { name: "Submit", tag: "input", className:"moheaSubmit", type: "submit", value: "Send my new Form" },
-        { name: "Text Input", tag: "input", className:"moheaTextInput", type: "text", label:"My New Text Input", required: "", placeholder: "My placeholder" },
-        { name: "Text Area", tag: "textarea", className:"moheaTextArea", label:"My New Text Area", rows: 3, col: 10, required: "", placeholder: "My placeholder" },
-        { name: "Select", tag: "select", className:"moheaSelect", label:"My New Select", title: "Options", required: "", options: [
+        { name: "Text Input", tag: "input", className:"moheaTextInput", type: "text", label:"My New Text Input", required: false, placeholder: "My placeholder" },
+        { name: "Text Area", tag: "textarea", className:"moheaTextArea", label:"My New Text Area", rows: 3, col: 10, required: false, placeholder: "My placeholder" },
+        { name: "Select", tag: "select", className:"moheaSelect", label:"My New Select", title: "Options", required: false, options: [
           { id: 0, tag: "option", value: "first", content: "My First Option"},
           { id: 1,tag: "option", value: "deux", content: "My Second Option"}
         ]},
-        { name: "Date", tag: "input", className:"moheaDate", label:"My New Date", type: "date", required: "", placeholder: "12/02/2020" },
-        { name: "Check Box", tag: "div", className:"moheaCheckbox", label:"My New Check Box", required: "", options:[
+        { name: "Date", tag: "input", className:"moheaDate", label:"My New Date", type: "date", required: false, placeholder: "12/02/2020" },
+        { name: "Check Box", tag: "div", className:"moheaCheckbox", label:"My New Check Box", required: false, options:[
           { id: 0, tag: "input", type: "checkbox", label: "My first Option" }
         ]},
-        { name: "Radio Button", tag: "div", className:"moheaRadiobutton", label:"My New Radio Button", required: "", options: [
+        { name: "Radio Button", tag: "div", className:"moheaRadiobutton", label:"My New Radio Button", required: false, options: [
           { id: 0, tag: "input", type: "radio", label: "My first Option" }
         ]},
-        { name: "Email", tag: "input", className:"moheaEmail", label:"My Email", type: "email", pattern: "", required: "", placeholder: "My placeholder" },
-        { name: "Link", tag: "input", className:"moheaLink", label:"My Link", type: "url", required: "", placeholder: "My placeholder" },
-        { name: "Password", tag: "input", className:"moheaPassword", label:"My Password", type: "password", required: "", placeholder: "My placeholder" },
-        { name: "Phone", tag: "input", className:"moheaPhone", label:"My Phone Number", type: "tel", pattern: "", required: "", placeholder: "My placeholder" }
+        { name: "Email", tag: "input", className:"moheaEmail", label:"My Email", type: "email", pattern: "", required: false, placeholder: "My placeholder" },
+        { name: "Link", tag: "input", className:"moheaLink", label:"My Link", type: "url", required: false, placeholder: "My placeholder" },
+        { name: "Password", tag: "input", className:"moheaPassword", label:"My Password", type: "password", required: false, placeholder: "My placeholder" },
+        { name: "Phone", tag: "input", className:"moheaPhone", label:"My Phone Number", type: "tel", pattern: "", required: false, placeholder: "My placeholder" }
     ],
     elementsUsed: [],
     focus: -1,
@@ -39,6 +39,7 @@ function rootReducer(state = initState, payload) {
           newState.elementsUsed.push(elem)
           return {
             ...state,
+            focus: -1,
             elementsUsed: [
               ...newState.elementsUsed
             ]
@@ -47,7 +48,7 @@ function rootReducer(state = initState, payload) {
       case "ADD_FOCUS":
           return {
             ...state,
-            focus: payload.id
+            focus: payload.element
           };
 
       case "RESET_FORM":
@@ -60,15 +61,12 @@ function rootReducer(state = initState, payload) {
       case "DELETE_ITEM":
 
         const indexOfElement = newState.elementsUsed.indexOf(payload.element);
-        console.log('okok' + indexOfElement)
 
         if(indexOfElement >= 0) {
           newState.elementsUsed.splice(indexOfElement, 1)
         } else {
           newState.elementsUsed.push(...[payload.element])
         }
-
-        // newState.elementsUsed.splice(payload.element, 1)
         return {
           ...state,
           focus: -1,

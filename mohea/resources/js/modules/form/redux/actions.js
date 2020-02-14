@@ -7,19 +7,37 @@ export const addNewItem = (element) => ({
     element: element
 });
 
+export const addFocus = (element) => ({
+    type: "ADD_FOCUS",
+    element: element
+});
+
+/* ===============================================
+* FUNCTIONS TO DELETE
+=============================================== */
+
 export const deleteItem = (element) => ({
     type: "DELETE_ITEM",
     element: element
 });
 
+export const resetForm = () => ({
+    type: "RESET_FORM",
+});
+
+/* ===============================================
+* FUNCTIONS TO UPDATE
+=============================================== */
+
+export const updateElement = (element, id) => ({
+    type: "UPDATE_ITEM",
+    element: element,
+    id: id
+});
+
 export const duplicateItem = (element) => ({
     type: "DUPLICATE_ITEM",
     element: element
-});
-
-export const addFocus = (element) => ({
-    type: "ADD_FOCUS",
-    id: element.id
 });
 
 export const moveDown = (element) => ({
@@ -30,16 +48,6 @@ export const moveDown = (element) => ({
 export const moveUp = (element) => ({
     type: "MOVE_UP",
     element: element
-});
-
-export const updateElement = (element, id) => ({
-    type: "UPDATE_ITEM",
-    element: element,
-    id: id
-});
-
-export const resetForm = () => ({
-    type: "RESET_FORM",
 });
 
 

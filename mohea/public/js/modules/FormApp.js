@@ -41528,7 +41528,7 @@ function rootReducer() {
         elementToMoveDown.id = elementToChange.id;
         elementToChange.id = payload.element.id;
         return _objectSpread({}, state, {
-          focus: elementToMoveDown.id,
+          focus: elementToMoveDown,
           elementsUsed: _toConsumableArray(newState.elementsUsed)
         });
       } else {
@@ -41545,7 +41545,7 @@ function rootReducer() {
         elementToMoveUp.id = elementToChangeDown.id;
         elementToChangeDown.id = payload.element.id;
         return _objectSpread({}, state, {
-          focus: elementToMoveUp.id,
+          focus: elementToMoveUp,
           elementsUsed: _toConsumableArray(newState.elementsUsed)
         });
       } else {

@@ -107,7 +107,7 @@ function rootReducer(state = initState, payload) {
             elementToChange.id = payload.element.id
             return {
               ...state,
-              focus: elementToMoveDown.id,
+              focus: elementToMoveDown,
               elementsUsed: [
                 ...newState.elementsUsed
               ]
@@ -129,7 +129,7 @@ function rootReducer(state = initState, payload) {
             elementToChangeDown.id = payload.element.id
             return {
               ...state,
-              focus: elementToMoveUp.id,
+              focus: elementToMoveUp,
               elementsUsed: [
                 ...newState.elementsUsed
               ]

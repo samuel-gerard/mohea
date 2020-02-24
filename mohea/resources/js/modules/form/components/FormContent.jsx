@@ -87,10 +87,13 @@ class FormContent extends Component {
                 <label>{element.label}</label>
                 <div>
                     {element.options.map((option, i) => {
+                        var name = "radio_"+element.id
+                        var id = "id_"+i
+                        var value = "val_"+i  
                         return (
                             <div key={i}>
-                                <label>{option.label}</label>
-                                <input key={i} type={option.type} />
+                                <input key={i} name={name} type={option.type} value={value} id={id} />
+                                <label htmlFor={id}>{option.label}</label>
                             </div>
                         )
                     })}

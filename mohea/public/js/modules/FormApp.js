@@ -40647,12 +40647,20 @@ function (_Component) {
         case 'Check Box':
         case 'Radio Button':
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, element.label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, element.options.map(function (option, i) {
+            var name = "radio_" + element.id;
+            var id = "id_" + i;
+            var value = "val_" + i;
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               key: i
-            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, option.label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
               key: i,
-              type: option.type
-            }));
+              name: name,
+              type: option.type,
+              value: value,
+              id: id
+            }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+              htmlFor: id
+            }, option.label));
           })));
       }
     }
@@ -40909,8 +40917,22 @@ function (_Component) {
       });
     }
   }, {
-    key: "handleAddOptionForCheckboxAndRadio",
-    value: function handleAddOptionForCheckboxAndRadio() {
+    key: "handleAddOptionCheckbox",
+    value: function handleAddOptionCheckbox() {
+      var newElement = this.props.focus;
+      var id = this.props.focus.options.length;
+      var newOption = {
+        id: id,
+        tag: "input",
+        type: "checkbox",
+        label: "My New Option"
+      };
+      newElement.options.push(newOption);
+      this.props.updateElement(newElement, this.props.focus);
+    }
+  }, {
+    key: "handleAddOptionRadio",
+    value: function handleAddOptionRadio() {
       var newElement = this.props.focus;
       var id = this.props.focus.options.length;
       var newOption = {
@@ -41068,6 +41090,44 @@ function (_Component) {
           }));
 
         case 'Check Box':
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+            htmlFor: "label"
+          }, "Label"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            type: "text",
+            name: "label",
+            onChange: this.handleUpdateBoxAndRadio,
+            value: element.label
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            type: "button",
+            name: "newOption",
+            onClick: function onClick() {
+              return _this2.handleAddOptionCheckbox();
+            },
+            className: "btn btn-primary",
+            value: "Add New Option"
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+            htmlFor: "content"
+          }, "Edit options"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+            name: "options"
+          }, element.options.map(function (option, i) {
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+              key: i,
+              onClick: function onClick() {
+                return _this2.handleSelectOption(option);
+              },
+              value: option.label
+            }, option.label);
+          })), this.state.selectedOption !== null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            type: "text",
+            value: this.state.selectedOption.label,
+            onChange: this.handleUpdateOptionForCheckboxAndRadio
+          }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Choose an option to update"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Required"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            type: "checkbox",
+            name: "required",
+            onChange: this.handleUpdateBoxAndRadio,
+            checked: element.required
+          }));
+
         case 'Radio Button':
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
             htmlFor: "label"
@@ -41080,7 +41140,7 @@ function (_Component) {
             type: "button",
             name: "newOption",
             onClick: function onClick() {
-              return _this2.handleAddOptionForCheckboxAndRadio();
+              return _this2.handleAddOptionRadio();
             },
             className: "btn btn-primary",
             value: "Add New Option"
@@ -41126,12 +41186,12 @@ function (_Component) {
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: ""
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Edit an Element"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.focus.id !== -1 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.focus.label !== undefined ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.props.focus.label) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.props.focus.name), this.renderSwitch(this.props.focus), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Edit an Element"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.focus.id > -1 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.focus.label !== undefined ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.props.focus.label) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.props.focus.name), this.renderSwitch(this.props.focus), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "button",
         onClick: function onClick() {
           return _this3.handleDeleteItem(_this3.props.focus);
         },
-        className: "btn btn-primary",
+        className: "btn btn-danger",
         value: "Delete Element"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "button",
@@ -41472,7 +41532,7 @@ function rootReducer() {
       elem.id = newState.elementsUsed.length;
       newState.elementsUsed.push(elem);
       return _objectSpread({}, state, {
-        focus: -1,
+        focus: elem,
         elementsUsed: _toConsumableArray(newState.elementsUsed)
       });
 

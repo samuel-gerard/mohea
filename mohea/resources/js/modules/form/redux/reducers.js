@@ -39,7 +39,7 @@ function rootReducer(state = initState, payload) {
           newState.elementsUsed.push(elem)
           return {
             ...state,
-            focus: -1,
+            focus: elem,
             elementsUsed: [
               ...newState.elementsUsed
             ]

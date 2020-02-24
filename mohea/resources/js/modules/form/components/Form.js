@@ -9,6 +9,30 @@ import { resetForm } from "../redux/actions";
 
 class Form extends React.Component {
 
+  /* componentDidMount() {
+    const href = window.location.href;
+    const id = href.substring(href.lastIndexOf('/') + 1)
+
+    if( ! parseInt(id, 10) ) {
+      return;
+    }
+    
+    axios({
+        method: 'GET',
+        url: window.location.origin + '/project/' + id,
+      })
+      .then(res => {
+        if(res.status === 200) {
+          const data = res.data;
+          const menu = JSON.parse(data.content);
+          this.props.loadMenu(id, menu.classes, menu.content, data.name);
+        }
+      })
+      .catch(err => {
+        window.location.replace(window.location.origin + '/error');
+      })
+  } */
+
 
   handleResetForm = () =>
   {

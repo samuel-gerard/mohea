@@ -12,10 +12,9 @@ class FormContent extends Component {
 
         case 'Text':
             return (
-                <div>
-                    <label>{element.label}</label>
+                <div  className="form-group">
                     <p>{element.content}</p>
-                </div>
+                </div>                    
             )
 
         case 'Title':
@@ -23,27 +22,35 @@ class FormContent extends Component {
             switch(element.tag){
                 case 'h1':
                     return (
-                        <h1>{element.content}</h1>
+                        <div className="form-group">
+                            <h1>{element.content}</h1>
+                        </div>
                     )
                 case 'h2':
                     return (
-                        <h2>{element.content}</h2>
+                        <div className="form-group">
+                            <h2>{element.content}</h2>
+                        </div>
                     )
                 case 'h3':
                     return (
-                        <h3>{element.content}</h3>
+                        <div className="form-group">
+                            <h3>{element.content}</h3>
+                        </div>
                     )
                 case 'h4':
                     return (
-                        <h4>{element.content}</h4>
+                        <div className="form-group">
+                            <h4>{element.content}</h4>
+                        </div>
                     )
             }
 
         case 'Submit':
             return (
-                <div>
+                <div className="form-group">
                     <label>{element.label}</label>
-                    <input type="submit" value={element.value} />
+                    <input type="submit" className="form-control" value={element.value} />
                 </div>
             )
             
@@ -54,25 +61,27 @@ class FormContent extends Component {
         case 'Phone':
         case 'Password':
             return (
-                <div>
+                <div className="form-group">
                     <label>{element.label}</label>
-                    <input type={element.type} placeholder={element.placeholder} />
+                    <input type={element.type} className="form-control" placeholder={element.placeholder} />
                 </div>
             )
 
         case 'Text Area':
+            var textAreaId = "textAreaInput"+element.id
             return (
-                <div>
-                    <label>{element.label}</label>
-                    <textarea rows={element.rows} col={element.col} placeholder={element.placeholder} />
+                <div className="form-group">
+                    <label htmlFor={textAreaId}>{element.label}</label>
+                    <textarea rows={element.rows} id={textAreaId} className="form-control" col={element.col} placeholder={element.placeholder} />
                 </div>
             )
 
         case 'Select':
+            var selectId = "salectInput"+element.id
             return (
-                <div>
-                    <label>{element.label}</label>
-                    <select>
+                <div className="form-group">
+                    <label htmlFor={selectId}>{element.label}</label>
+                    <select className="form-control" id={selectId}>
                         {element.options.map((option, i) => {
                             return <option key={i} value={option.value}>{option.content}</option>
                         })}
@@ -83,21 +92,19 @@ class FormContent extends Component {
         case 'Check Box':
         case 'Radio Button':
             return (
-            <div>
-                <label>{element.label}</label>
-                <div>
-                    {element.options.map((option, i) => {
-                        var name = "radio_"+element.id
-                        var id = "id_"+i
-                        var value = "val_"+i  
-                        return (
-                            <div key={i}>
-                                <input key={i} name={name} type={option.type} value={value} id={id} />
-                                <label htmlFor={id}>{option.label}</label>
-                            </div>
-                        )
-                    })}
-                </div>
+            <div className="form-group">
+                <label className="col-form-label">{element.label}</label>
+                {element.options.map((option, i) => {
+                    var name = "radio_"+element.id
+                    var id = "id_"+i
+                    var value = "val_"+i  
+                    return (
+                        <div className="form-check" key={i}>
+                            <input className="form-check-input" key={i} name={name} type={option.type} value={value} id={id} />
+                            <label className="form-check-label" htmlFor={id}>{option.label}</label>
+                        </div>
+                    )
+                })}
             </div>
             )  
             

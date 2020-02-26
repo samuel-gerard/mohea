@@ -7,7 +7,11 @@ const FormReturn = props => {
 
     new ClipboardJS('#button-to-copy');
 
-    let html = '<h1>ICI => le code du formulaire !</h1>'
+    let html = '<form>'
+
+    html += ''
+
+    html += '</form>'
 
     return (
         <div>
@@ -27,6 +31,11 @@ const FormReturn = props => {
 
 }
 
-const mapStateToProps = state => state;
+const mapStateToProps = state => {
+    return {
+        elementsUsed: state.elementsUsed,
+        elements: state.elementsChoices
+    }
+}
 
 export default connect(mapStateToProps)(FormReturn);

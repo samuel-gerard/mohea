@@ -2,7 +2,7 @@
 
 @section('main-content')
 <div class="main-container">
-    <img class="main-logo" src="/images/logo_medium.png" alt="Logo of Mohea" draggable="false">
+    <a href="/"><img class="main-logo" src="/images/logo_medium.png" alt="Logo of Mohea" draggable="false"></a>
     <div class="register">
         <h1>Create an account</h1>
         <form method="POST" action="{{ route('register') }}">

@@ -12,7 +12,7 @@
             @else
                 <li class="new"><a class="button primary" href="{{ route('register') }}">Start a new project</a></li>
             @endif
-            <li class="logo ml-auto mr-auto"><img src="images/logo_medium.png" alt="Logo of Mohea" draggable="false"></li>
+            <li class="logo ml-auto mr-auto"><a href="/"><img src="images/logo_medium.png" alt="Logo of Mohea" draggable="false"></a></li>
             @if (Auth::check())
                 <li><a class="link primary" href="{{ route('dashboard') }}">Your dashboard</a></li>
             @else

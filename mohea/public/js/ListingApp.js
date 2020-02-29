@@ -43335,7 +43335,8 @@ var Listing = function Listing() {
     });
   }, []);
 
-  var handleDelete = function handleDelete(id) {
+  var handleDelete = function handleDelete(id, event) {
+    event.stopImmediatePropagation();
     axios__WEBPACK_IMPORTED_MODULE_2___default()({
       method: 'DELETE',
       url: url + '/project/' + id
@@ -43344,39 +43345,39 @@ var Listing = function Listing() {
         setListing(res.data);
         _crystallize_react_growl__WEBPACK_IMPORTED_MODULE_1___default()({
           type: 'success',
-          message: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Deleted with success")
+          message: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Your project has been deleted")
         });
       }
     });
   };
 
   var handleUpdate = function handleUpdate(id, type) {
-    window.location.replace(url + '/project/' + type + '/' + id);
+    window.location.href = url + '/project/' + type + '/' + id;
     return;
   };
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_crystallize_react_growl__WEBPACK_IMPORTED_MODULE_1__["GrowlComponent"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "filter"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "link",
+    className: "all-link",
     onClick: function onClick() {
       return setSortBy('');
     },
     tabIndex: "0"
   }, "All projects"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "link",
+    className: "table-link",
     onClick: function onClick() {
       return setSortBy('table');
     },
     tabIndex: "0"
   }, "Tables"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "link",
+    className: "form-link",
     onClick: function onClick() {
       return setSortBy('form');
     },
     tabIndex: "0"
   }, "Forms"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    className: "link",
+    className: "menu-link",
     onClick: function onClick() {
       return setSortBy('menu');
     },
@@ -43386,22 +43387,20 @@ var Listing = function Listing() {
       return;
     }
 
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       key: 'listing-' + idx,
-      className: "d-flex"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, item.name ? item.name : 'New ' + item.type), item.caption && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, item.caption), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, item.type), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-      type: "button",
-      onClick: function onClick() {
-        return handleDelete(item.id);
-      },
-      value: "Delete"
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-      type: "button",
       onClick: function onClick() {
         return handleUpdate(item.id, item.type);
       },
-      value: "Update"
-    }));
+      className: item.type + "-item"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, item.name ? item.name : 'New ' + item.type), item.caption && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, item.caption), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      type: "button",
+      className: "button",
+      onClick: function onClick() {
+        return handleDelete(item.id);
+      },
+      tabIndex: "0"
+    }, "Delete"));
   }));
 };
 

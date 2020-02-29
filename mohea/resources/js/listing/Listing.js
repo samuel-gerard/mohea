@@ -21,7 +21,8 @@ const Listing = () => {
 
   }, [])
 
-  const handleDelete = (id) => {
+  const handleDelete = (id, event) => {
+    event.stopImmediatePropagation();
     axios({
       method: 'DELETE',
       url: url + '/project/' + id,
@@ -31,14 +32,14 @@ const Listing = () => {
           setListing(res.data)
           growl({
             type: 'success',
-            message: <b>Deleted with success</b>
+            message: <b>Your project has been deleted</b>
           })
         }
       })
   }
 
   const handleUpdate = (id, type) => {
-    window.location.replace(url + '/project/' + type + '/' + id);
+    window.location.href = url + '/project/' + type + '/' + id;
     return;
   }
 
@@ -46,10 +47,10 @@ const Listing = () => {
     <div>
       <GrowlComponent />
       <div className="filter">
-        <a className="link" onClick={() => setSortBy('')} tabIndex="0">All projects</a>
-        <a className="link" onClick={() => setSortBy('table')} tabIndex="0">Tables</a>
-        <a className="link" onClick={() => setSortBy('form')} tabIndex="0">Forms</a>
-        <a className="link" onClick={() => setSortBy('menu')} tabIndex="0">Menus</a>
+        <a className="all-link" onClick={() => setSortBy('')} tabIndex="0">All projects</a>
+        <a className="table-link" onClick={() => setSortBy('table')} tabIndex="0">Tables</a>
+        <a className="form-link" onClick={() => setSortBy('form')} tabIndex="0">Forms</a>
+        <a className="menu-link" onClick={() => setSortBy('menu')} tabIndex="0">Menus</a>
       </div>
       {listing.map((item, idx) => {
 
@@ -58,15 +59,13 @@ const Listing = () => {
         }
 
         return (
-          <div key={'listing-' + idx} className="d-flex">
+          <button key={'listing-' + idx} onClick={() => handleUpdate(item.id, item.type)} className={item.type + "-item"}>
             <h4>{item.name ? item.name : 'New ' + item.type}</h4>
             {item.caption &&
               <p>{item.caption}</p>
             }
-            <span>{item.type}</span>
-            <input type="button" onClick={() => handleDelete(item.id)} value="Delete" />
-            <input type="button" onClick={() => handleUpdate(item.id, item.type)} value="Update" />
-          </div>
+            <span type="button" className="button" onClick={() => handleDelete(item.id)} tabIndex="0">Delete</span>
+          </button>
         )
       })}
     </div>

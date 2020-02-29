@@ -43355,33 +43355,33 @@ var Listing = function Listing() {
     return;
   };
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_crystallize_react_growl__WEBPACK_IMPORTED_MODULE_1__["GrowlComponent"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Listing"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "button",
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_crystallize_react_growl__WEBPACK_IMPORTED_MODULE_1__["GrowlComponent"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "filter"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    className: "link",
     onClick: function onClick() {
       return setSortBy('');
     },
-    value: "All"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "button",
-    onClick: function onClick() {
-      return setSortBy('menu');
-    },
-    value: "Menu"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "button",
+    tabIndex: "0"
+  }, "All projects"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    className: "link",
     onClick: function onClick() {
       return setSortBy('table');
     },
-    value: "Table"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "button",
+    tabIndex: "0"
+  }, "Tables"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    className: "link",
     onClick: function onClick() {
       return setSortBy('form');
     },
-    value: "Form"
-  })), listing.map(function (item, idx) {
+    tabIndex: "0"
+  }, "Forms"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    className: "link",
+    onClick: function onClick() {
+      return setSortBy('menu');
+    },
+    tabIndex: "0"
+  }, "Menus")), listing.map(function (item, idx) {
     if (sortBy && item.type !== sortBy) {
       return;
     }

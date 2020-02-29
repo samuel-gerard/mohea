@@ -8,16 +8,16 @@ const Listing = () => {
   const [listing, setListing] = useState([]);
   const [sortBy, setSortBy] = useState('');
 
-  useEffect( () => {
+  useEffect(() => {
     axios({
       method: 'GET',
       url: url + '/project/',
     })
-    .then(res => {
-      if(res.status === 200) {
-        setListing(res.data)
-      }
-    })
+      .then(res => {
+        if (res.status === 200) {
+          setListing(res.data)
+        }
+      })
 
   }, [])
 
@@ -26,15 +26,15 @@ const Listing = () => {
       method: 'DELETE',
       url: url + '/project/' + id,
     })
-    .then(res => {
-      if(res.status === 200) {
-        setListing(res.data)
-        growl({
-          type: 'success',
-          message: <b>Deleted with success</b>
-        })
-      }
-    })
+      .then(res => {
+        if (res.status === 200) {
+          setListing(res.data)
+          growl({
+            type: 'success',
+            message: <b>Deleted with success</b>
+          })
+        }
+      })
   }
 
   const handleUpdate = (id, type) => {
@@ -45,16 +45,15 @@ const Listing = () => {
   return (
     <div>
       <GrowlComponent />
-      <h1>Listing</h1>
-      <div className="d-flex">
-        <input type="button" onClick={() => setSortBy('')} value="All" />
-        <input type="button" onClick={() => setSortBy('menu')} value="Menu" />
-        <input type="button" onClick={() => setSortBy('table')} value="Table" />
-        <input type="button" onClick={() => setSortBy('form')} value="Form" />
+      <div className="filter">
+        <a className="link" onClick={() => setSortBy('')} tabIndex="0">All projects</a>
+        <a className="link" onClick={() => setSortBy('table')} tabIndex="0">Tables</a>
+        <a className="link" onClick={() => setSortBy('form')} tabIndex="0">Forms</a>
+        <a className="link" onClick={() => setSortBy('menu')} tabIndex="0">Menus</a>
       </div>
       {listing.map((item, idx) => {
 
-        if(sortBy && item.type !== sortBy) {
+        if (sortBy && item.type !== sortBy) {
           return;
         }
 

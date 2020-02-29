@@ -1,7 +1,7 @@
 @extends('base')
 
 @section('title')
-    Mohea
+    Mohea, your accessibility assistant
 @endsection
 
 @section('main-content')
@@ -9,8 +9,12 @@
         <ul class="d-flex jc-e ai-c">
             <li class="new"><a class="button primary" href="{{ route('project.create') }}">Start a new project</a></li>
             <li class="logo ml-auto mr-auto"><img src="images/logo_medium.png" alt="Logo of Mohea" draggable="false"></li>
-            <li><a class="link primary" href="{{ route('register') }}">Create my account</a></li>
-            <li><a class="link action" href="{{ route('login') }}">Log in</a></li>
+            @if (Auth::check())
+                <li><a class="link primary" href="{{ route('dashboard') }}">Your dashboard</a></li>
+            @else
+                <li><a class="link primary" href="{{ route('register') }}">Create a new account</a></li>
+                <li><a class="link action" href="{{ route('login') }}">Log in</a></li>
+            @endif
         </ul>
     </nav>
     <main>

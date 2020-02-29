@@ -10817,7 +10817,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: url(/images/blotch1.svg?9835d558daa8d6941a0f14db9e8853f8) right 90px/auto 65% no-repeat, url(/images/blotch2.svg?5f54e0caa470c2ab68df1308bc62ac6f) left bottom/50% auto no-repeat;
+  background: url(/images/blotch1.svg?c729c86dd9b5ed3faffec9df60807b31) right 90px/auto 65% no-repeat, url(/images/blotch2.svg?c536553882cc1ea0d4997cb789712eb2) left bottom/50% auto no-repeat;
 }
 
 @media (max-width: 600px) {
@@ -10923,7 +10923,7 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url(/images/annotation.png?24e85ee1041dc112e57d6fd6382fe77e) center center/auto 100% no-repeat, url(/images/blotch3.svg?6e5043e3d163964904fa9838f0f5fd19) right center/auto 90% no-repeat;
+  background: url(/images/annotation.png?24e85ee1041dc112e57d6fd6382fe77e) center center/auto 100% no-repeat, url(/images/blotch3.svg?f313addde2cc22e0b8ae6258ec2d588c) right center/auto 90% no-repeat;
 }
 
 .home-presentation .attractive-button .button {
@@ -10943,7 +10943,7 @@ h2 {
 .home-presentation .text-blotch {
   margin: 20px 0px;
   padding: 40px 10px;
-  background: url(/images/blotch4.svg?f6e33e517564b4415ca20ade50a24b35) center center/auto 100% no-repeat;
+  background: url(/images/blotch4.svg?61a2409e90dcdc5e62981fe0cb086a6e) center center/auto 100% no-repeat;
 }
 
 .home-presentation .text-blotch .content {
@@ -11007,7 +11007,7 @@ h2 {
 
 .home-presentation .circles {
   margin: 40px 0px;
-  background: url(/images/blotch5.svg?a8764c3e22c4918c4b6d383c00ff4ce5) left bottom/auto 75% no-repeat;
+  background: url(/images/blotch5.svg?866090696078337086f73c73732550af) left bottom/auto 75% no-repeat;
 }
 
 .home-presentation .circles .content {
@@ -11083,7 +11083,7 @@ h2 {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  background: url(/images/blotch1.svg?9835d558daa8d6941a0f14db9e8853f8) right 90px/auto 65% no-repeat, url(/images/blotch2.svg?5f54e0caa470c2ab68df1308bc62ac6f) left bottom 10px/50% auto no-repeat;
+  background: url(/images/blotch1.svg?c729c86dd9b5ed3faffec9df60807b31) right 90px/auto 65% no-repeat, url(/images/blotch2.svg?c536553882cc1ea0d4997cb789712eb2) left bottom 10px/50% auto no-repeat;
 }
 
 .dashboard h1,
@@ -11302,15 +11302,15 @@ h2 {
 }
 
 .dashboard .content .list button.table-item::before {
-  background-image: url(/images/table.svg?8dcf6137d4f4b8a1e7c6ace81fbc2dfa);
+  background-image: url(/images/table.svg?f61e9f0f2e1371998ba2be8e07c27131);
 }
 
 .dashboard .content .list button.form-item::before {
-  background-image: url(/images/form.svg?0184f331b1b6991c778b417c51eb43fe);
+  background-image: url(/images/form.svg?845d3ddca1cbb9bc9f1078ecaf27244e);
 }
 
 .dashboard .content .list button.menu-item::before {
-  background-image: url(/images/menu.svg?3baa6fb59367a9f66ec92358e5fa49fa);
+  background-image: url(/images/menu.svg?c5bf97ce8b127b3bee1c2c5597371e3d);
 }
 
 .dashboard .content .list button span {
@@ -11393,7 +11393,7 @@ footer .footer-links span {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: url(/images/blotch1.svg?9835d558daa8d6941a0f14db9e8853f8) right 90px/auto 65% no-repeat, url(/images/blotch2.svg?5f54e0caa470c2ab68df1308bc62ac6f) left bottom/50% auto no-repeat;
+  background: url(/images/blotch1.svg?c729c86dd9b5ed3faffec9df60807b31) right 90px/auto 65% no-repeat, url(/images/blotch2.svg?c536553882cc1ea0d4997cb789712eb2) left bottom/50% auto no-repeat;
 }
 
 .main-container .main-logo {
@@ -11718,7 +11718,7 @@ a:focus {
   padding: 3px 25px 8px;
   font-family: "Neue Plak Narrow Regular", sans-serif;
   font-size: 15pt;
-  background-image: url(/images/arrow.svg?25555e3722557ff316228503f9bf732e);
+  background-image: url(/images/arrow.svg?7d9bc22f85e131c7be2112b6a76606b8);
   background-size: 25px 25px;
   background-position: calc(100% - 20px) center;
   background-repeat: no-repeat;

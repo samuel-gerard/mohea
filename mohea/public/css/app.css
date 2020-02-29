@@ -11215,6 +11215,29 @@ footer .footer-links span {
   align-items: center;
 }
 
+.main-container .create h1 {
+  text-align: center;
+  font-family: "Keep Calm", sans-serif;
+}
+
+.main-container .create .select {
+  margin-top: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-container .create .select .button {
+  margin: 0px 5px;
+  display: flex;
+  align-items: center;
+}
+
+.main-container .create .select .button svg {
+  height: 20px;
+  margin-right: 10px;
+}
+
 .mohea {
   position: relative;
   font-family: "Keep Calm", sans-serif;

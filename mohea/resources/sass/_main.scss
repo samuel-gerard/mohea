@@ -469,7 +469,8 @@ footer {
         margin-bottom: 40px;
     }
 
-    .login, .register {
+    .login,
+    .register {
         width: 100%;
         max-width: 600px;
         padding: 25px;
@@ -516,7 +517,7 @@ footer {
             display: flex;
             justify-content: center;
             align-items: center;
-            
+
             .form-check-input {
                 position: unset;
                 margin-left: 0px;
@@ -537,6 +538,31 @@ footer {
                 display: flex;
                 justify-content: center;
                 align-items: center;
+            }
+        }
+    }
+
+    .create {
+        h1 {
+            text-align: center;
+            font-family: "Keep Calm", sans-serif;
+        }
+
+        .select {
+            margin-top: 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .button {
+                margin: 0px 5px;
+                display: flex;
+                align-items: center;
+
+                svg {
+                    height: 20px;
+                    margin-right: 10px;
+                }
             }
         }
     }

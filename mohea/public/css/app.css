@@ -11152,7 +11152,26 @@ h2 {
   font-size: 30pt;
 }
 
-.dashboard .content .filter {
+.dashboard .content .create {
+  margin: 30px 0px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dashboard .content .create .button {
+  margin: 0px 5px;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.dashboard .content .create .button svg {
+  height: 20px;
+  margin-right: 10px;
+}
+
+.dashboard .content #filter {
   height: 50px;
   margin-bottom: 10px;
   display: flex;
@@ -11160,13 +11179,53 @@ h2 {
   align-items: center;
 }
 
-.dashboard .content .filter a {
+.dashboard .content #filter:not(.table):not(.form):not(.menu) .all-link {
+  padding-bottom: 4px;
+}
+
+.dashboard .content #filter:not(.table):not(.form):not(.menu) .all-link::after {
+  width: 100%;
+  margin-top: 2px;
+  background: #000000;
+}
+
+.dashboard .content #filter.table .table-link {
+  padding-bottom: 4px;
+}
+
+.dashboard .content #filter.table .table-link::after {
+  width: 100%;
+  margin-top: 2px;
+  background: #FF931E;
+}
+
+.dashboard .content #filter.form .form-link {
+  padding-bottom: 4px;
+}
+
+.dashboard .content #filter.form .form-link::after {
+  width: 100%;
+  margin-top: 2px;
+  background: #7AC943;
+}
+
+.dashboard .content #filter.menu .menu-link {
+  padding-bottom: 4px;
+}
+
+.dashboard .content #filter.menu .menu-link::after {
+  width: 100%;
+  margin-top: 2px;
+  background: #3FA9F5;
+}
+
+.dashboard .content #filter a {
   margin: 0px 10px;
   display: inline-block;
   transition: padding 0.2s;
 }
 
-.dashboard .content .filter a::after {
+.dashboard .content #filter a::after {
   content: "";
   display: block;
   height: 2px;
@@ -11175,30 +11234,30 @@ h2 {
   transition: width 0.2s, background-color 0.2s, margin 0.2s;
 }
 
-.dashboard .content .filter a:hover,
-.dashboard .content .filter a:focus {
+.dashboard .content #filter a:hover,
+.dashboard .content #filter a:focus {
   padding-bottom: 4px;
 }
 
-.dashboard .content .filter a:hover::after,
-.dashboard .content .filter a:focus::after {
+.dashboard .content #filter a:hover::after,
+.dashboard .content #filter a:focus::after {
   width: 100%;
   margin-top: 2px;
   background: #000000;
 }
 
-.dashboard .content .filter a:hover.table-link::after,
-.dashboard .content .filter a:focus.table-link::after {
+.dashboard .content #filter a:hover.table-link::after,
+.dashboard .content #filter a:focus.table-link::after {
   background: #FF931E;
 }
 
-.dashboard .content .filter a:hover.form-link::after,
-.dashboard .content .filter a:focus.form-link::after {
+.dashboard .content #filter a:hover.form-link::after,
+.dashboard .content #filter a:focus.form-link::after {
   background: #7AC943;
 }
 
-.dashboard .content .filter a:hover.menu-link::after,
-.dashboard .content .filter a:focus.menu-link::after {
+.dashboard .content #filter a:hover.menu-link::after,
+.dashboard .content #filter a:focus.menu-link::after {
   background: #3FA9F5;
 }
 
@@ -11258,6 +11317,10 @@ h2 {
   margin-left: auto;
   opacity: 0;
   transition: opacity 0.2s;
+}
+
+.dashboard .content .list button span:focus {
+  outline: 0;
 }
 
 footer {

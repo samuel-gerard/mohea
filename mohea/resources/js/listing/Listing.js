@@ -7,6 +7,7 @@ const Listing = () => {
   const url = window.location.origin;
   const [listing, setListing] = useState([]);
   const [sortBy, setSortBy] = useState('');
+  let isDeleting = false;
 
   useEffect(() => {
     axios({
@@ -15,38 +16,48 @@ const Listing = () => {
     })
       .then(res => {
         if (res.status === 200) {
-          setListing(res.data)
+          setListing(res.data);
         }
       })
-
   }, [])
 
-  const handleDelete = (id, event) => {
-    event.stopImmediatePropagation();
+  const handleDelete = (id) => {
+    isDeleting = true;
     axios({
       method: 'DELETE',
       url: url + '/project/' + id,
     })
       .then(res => {
         if (res.status === 200) {
-          setListing(res.data)
           growl({
             type: 'success',
             message: <b>Your project has been deleted</b>
+          });
+          axios({
+            method: 'GET',
+            url: url + '/project/',
           })
+            .then(res => {
+              if (res.status === 200) {
+                setListing(res.data);
+              }
+            })
+          isDeleting = false;
         }
       })
   }
 
   const handleUpdate = (id, type) => {
-    window.location.href = url + '/project/' + type + '/' + id;
+    if (!isDeleting) {
+      window.location.href = url + '/project/' + type + '/' + id;
+    }
     return;
   }
 
   return (
     <div>
       <GrowlComponent />
-      <div className="filter">
+      <div id="filter" className={sortBy}>
         <a className="all-link" onClick={() => setSortBy('')} tabIndex="0">All projects</a>
         <a className="table-link" onClick={() => setSortBy('table')} tabIndex="0">Tables</a>
         <a className="form-link" onClick={() => setSortBy('form')} tabIndex="0">Forms</a>
@@ -64,7 +75,7 @@ const Listing = () => {
             {item.caption &&
               <p>{item.caption}</p>
             }
-            <span type="button" className="button" onClick={() => handleDelete(item.id)} tabIndex="0">Delete</span>
+            <span className="button" onClick={() => handleDelete(item.id)} tabIndex="0">Delete</span>
           </button>
         )
       })}

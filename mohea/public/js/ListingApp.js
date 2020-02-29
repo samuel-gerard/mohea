@@ -43324,6 +43324,7 @@ var Listing = function Listing() {
       sortBy = _useState4[0],
       setSortBy = _useState4[1];
 
+  var isDeleting = false;
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     axios__WEBPACK_IMPORTED_MODULE_2___default()({
       method: 'GET',
@@ -43335,29 +43336,41 @@ var Listing = function Listing() {
     });
   }, []);
 
-  var handleDelete = function handleDelete(id, event) {
-    event.stopImmediatePropagation();
+  var handleDelete = function handleDelete(id) {
+    isDeleting = true;
     axios__WEBPACK_IMPORTED_MODULE_2___default()({
       method: 'DELETE',
       url: url + '/project/' + id
     }).then(function (res) {
       if (res.status === 200) {
-        setListing(res.data);
         _crystallize_react_growl__WEBPACK_IMPORTED_MODULE_1___default()({
           type: 'success',
           message: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Your project has been deleted")
         });
+        axios__WEBPACK_IMPORTED_MODULE_2___default()({
+          method: 'GET',
+          url: url + '/project/'
+        }).then(function (res) {
+          if (res.status === 200) {
+            setListing(res.data);
+          }
+        });
+        isDeleting = false;
       }
     });
   };
 
   var handleUpdate = function handleUpdate(id, type) {
-    window.location.href = url + '/project/' + type + '/' + id;
+    if (!isDeleting) {
+      window.location.href = url + '/project/' + type + '/' + id;
+    }
+
     return;
   };
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_crystallize_react_growl__WEBPACK_IMPORTED_MODULE_1__["GrowlComponent"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "filter"
+    id: "filter",
+    className: sortBy
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     className: "all-link",
     onClick: function onClick() {
@@ -43394,7 +43407,6 @@ var Listing = function Listing() {
       },
       className: item.type + "-item"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, item.name ? item.name : 'New ' + item.type), item.caption && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, item.caption), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-      type: "button",
       className: "button",
       onClick: function onClick() {
         return handleDelete(item.id);

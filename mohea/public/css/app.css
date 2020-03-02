@@ -11338,14 +11338,27 @@ footer img.mobile {
 
 footer img + .footer-links {
   position: absolute;
-  bottom: 20px;
+  bottom: 0px;
   width: 100%;
+  padding: 20px 0px;
   display: flex;
   justify-content: center;
   align-items: flex-end;
   font-size: 10pt;
   text-align: center;
   color: #ffffff;
+  transition: background-color 0.2s;
+}
+
+footer img + .footer-links:hover,
+footer img + .footer-links:focus,
+footer img + .footer-links:focus-within {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+footer img + .footer-links .link:hover::after,
+footer img + .footer-links .link:focus::after {
+  background: #ffffff;
 }
 
 footer img + .footer-links a,
@@ -11581,7 +11594,7 @@ a:focus {
   text-align: center;
   background-color: #F2F2F2;
   color: #000000 !important;
-  border: none;
+  border: 3px solid #ffffff;
   border-radius: 30px;
 }
 

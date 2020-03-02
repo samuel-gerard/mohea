@@ -32,7 +32,7 @@ class Tfoot extends Component {
     const col = split[1];
     this.props.updateInputSelected('foot', row, col)
   }
-
+  
   render() {
     const group = Object.values(this.props.tableau.foot)
     const groupList = group.length > 0 ? (

@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
-import { addNewRow, addNewCol, deleteCol, deleteRow, updateValue, updateInputSelected } from "../redux/actions";
+import { addNewRow, addNewCol, deleteCol, deleteRow, updateValue, updateInputSelected, mergeRow, unMergeRow } from "../redux/actions";
 
 class Thead extends Component {
   handleUpdateValue = (e) => {
@@ -33,6 +33,15 @@ class Thead extends Component {
     this.props.updateInputSelected('head', row, col)
   }
 
+  handleMergeCells = (colspan, i, j) => {
+    const nbCol = colspan ? colspan : 1;
+    this.props.mergeRow('head', nbCol, i, j)
+  }
+
+  handleUnMergeCells = (i, j) => {
+    this.props.unMergeRow('head', i, j);
+  }
+
   render() {
     const group = Object.values(this.props.tableau.head)
     const groupList = group.length > 0 ? (
@@ -45,7 +54,7 @@ class Thead extends Component {
           </th>
           {Object.values(items).map((item, j) => {
             return (
-              <th key={'head' + j}>
+              <th key={'head' + j} colSpan={item.colspan} className="position-relative">
                 <input type='text'
                   data-id={i + '/' + j}
                   onFocus={this.handleInputSelected}
@@ -53,6 +62,14 @@ class Thead extends Component {
                   value={item.value}
                   className="form-control"
                   style={item.style} />
+                  <p>
+                    {item.colspan > 1 &&
+                      <span onClick={() => this.handleUnMergeCells(i, j)}>Unmerge</span>
+                    }
+                    {j < Object.values(items).length - 1 &&
+                      <span onClick={() => this.handleMergeCells(item.colspan, i, j)}>Merge</span>
+                    }
+                  </p>
               </th>
             );
           })}
@@ -117,10 +134,16 @@ const mapDispatchToProps = (dispatch, stateProps) => {
       dispatch(deleteRow(type, idx))
     },
     updateValue: (type, val, row, col) => {
-      dispatch(updateValue(type, val, row, col));
+      dispatch(updateValue(type, val, row, col))
     },
     updateInputSelected: (type, row, col) => {
       dispatch(updateInputSelected(type, row, col))
+    },
+    mergeRow: (type, colspan, row, col) => {
+      dispatch(mergeRow(type, colspan, row, col))
+    },
+    unMergeRow: (type, row, col) => {
+      dispatch(unMergeRow(type, row, col))
     }
   }
 }

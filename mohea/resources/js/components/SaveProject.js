@@ -1,16 +1,44 @@
-import React from "react"
+import React, { useEffect } from "react"
 import axios from "axios";
 import growl from '@crystallize/react-growl';
 
 export const SaveProject = props => {
-  const url = window.location.origin;
-  const href = window.location.href;
+  const url = window.location.origin
+  const href = window.location.href
   const id = href.substring(href.lastIndexOf('/') + 1)
+
+  let fired = false
+
+  useEffect(props => {
+    document.addEventListener("keydown", e => { checkKeyDown(e) }, false);
+    document.addEventListener('keyup', checkKeyUp, false);
+
+    return () => {
+      document.removeEventListener("keydown", e => { checkKeyDown(e) }, false);
+      document.removeEventListener('keyup', checkKeyUp, false);
+    }
+  }, [props]);
+
+  const checkKeyDown = e => {
+    if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey))      {
+      e.stopPropagation()
+      e.preventDefault()
+      fired = true
+      return false
+    }
+  }
+
+  const checkKeyUp = () => {
+    if(fired) {
+      fired = false
+      save()
+    }
+  }
 
   const save = () => {
     if (!parseInt(id, 10)) {
       saveNew()
-      return;
+      return
     }
 
     update();

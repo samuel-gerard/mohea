@@ -17,6 +17,10 @@ export const resetTable = () => ({
   type: "RESET_TABLE"
 })
 
+export const cancelAction = () => ({
+  type: "CANCEL_LAST_ACTION"
+})
+
 /* ===============================================
 * FUNCTIONS TO ADD
 =============================================== */
@@ -45,10 +49,10 @@ export const importFile = (data) => ({
   type: "IMPORT_TABLE",
   data,
 })
+
 /* ===============================================
 * FUNCTIONS TO UPDATE
 =============================================== */
-
 export const updateValue = (type, val, row, col) => ({
   type: "UPDATE_VALUE",
   typeTable: type,
@@ -91,3 +95,21 @@ export const updateInputStyle = (type, cell, row, col) => ({
   row: row,
   col: col,
 });
+
+/* ===============================================
+ * ABOUT CELLS MERGING
+ =============================================== */
+export const mergeRow = (type, colspan, row, col) => ({
+  type: "MERGE_ROW",
+  typeTable: type,
+  colspan,
+  row,
+  col
+})
+
+export const unMergeRow = (type, row, col) => ({
+  type: "UNMERGE_ROW",
+  typeTable: type,
+  row,
+  col
+})

@@ -43324,6 +43324,7 @@ var Listing = function Listing() {
       sortBy = _useState4[0],
       setSortBy = _useState4[1];
 
+  var isDeleting = false;
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     axios__WEBPACK_IMPORTED_MODULE_2___default()({
       method: 'GET',
@@ -43336,72 +43337,82 @@ var Listing = function Listing() {
   }, []);
 
   var handleDelete = function handleDelete(id) {
+    isDeleting = true;
     axios__WEBPACK_IMPORTED_MODULE_2___default()({
       method: 'DELETE',
       url: url + '/project/' + id
     }).then(function (res) {
       if (res.status === 200) {
-        setListing(res.data);
         _crystallize_react_growl__WEBPACK_IMPORTED_MODULE_1___default()({
           type: 'success',
-          message: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Deleted with success")
+          message: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Your project has been deleted")
         });
+        axios__WEBPACK_IMPORTED_MODULE_2___default()({
+          method: 'GET',
+          url: url + '/project/'
+        }).then(function (res) {
+          if (res.status === 200) {
+            setListing(res.data);
+          }
+        });
+        isDeleting = false;
       }
     });
   };
 
   var handleUpdate = function handleUpdate(id, type) {
-    window.location.replace(url + '/project/' + type + '/' + id);
+    if (!isDeleting) {
+      window.location.href = url + '/project/' + type + '/' + id;
+    }
+
     return;
   };
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_crystallize_react_growl__WEBPACK_IMPORTED_MODULE_1__["GrowlComponent"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Listing"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "button",
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_crystallize_react_growl__WEBPACK_IMPORTED_MODULE_1__["GrowlComponent"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "filter",
+    className: sortBy
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    className: "all-link",
     onClick: function onClick() {
       return setSortBy('');
     },
-    value: "All"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "button",
-    onClick: function onClick() {
-      return setSortBy('menu');
-    },
-    value: "Menu"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "button",
+    tabIndex: "0"
+  }, "All projects"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    className: "table-link",
     onClick: function onClick() {
       return setSortBy('table');
     },
-    value: "Table"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "button",
+    tabIndex: "0"
+  }, "Tables"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    className: "form-link",
     onClick: function onClick() {
       return setSortBy('form');
     },
-    value: "Form"
-  })), listing.map(function (item, idx) {
+    tabIndex: "0"
+  }, "Forms"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    className: "menu-link",
+    onClick: function onClick() {
+      return setSortBy('menu');
+    },
+    tabIndex: "0"
+  }, "Menus")), listing.map(function (item, idx) {
     if (sortBy && item.type !== sortBy) {
       return;
     }
 
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       key: 'listing-' + idx,
-      className: "d-flex"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, item.name ? item.name : 'New ' + item.type), item.caption && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, item.caption), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, item.type), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-      type: "button",
-      onClick: function onClick() {
-        return handleDelete(item.id);
-      },
-      value: "Delete"
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-      type: "button",
       onClick: function onClick() {
         return handleUpdate(item.id, item.type);
       },
-      value: "Update"
-    }));
+      className: item.type + "-item"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, item.name ? item.name : 'New ' + item.type), item.caption && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, item.caption), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: "button",
+      onClick: function onClick() {
+        return handleDelete(item.id);
+      },
+      tabIndex: "0"
+    }, "Delete"));
   }));
 };
 

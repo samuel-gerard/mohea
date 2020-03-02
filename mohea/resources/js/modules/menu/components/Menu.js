@@ -122,6 +122,9 @@ const mapDispatchToProps = dispatch => {
     },
     resetMenu: () => {
       dispatch(resetMenu())
+    },
+    cancelAction: () => {
+      dispatch(cancelAction())
     }
   }
 }

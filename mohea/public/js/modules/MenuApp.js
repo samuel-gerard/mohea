@@ -68434,6 +68434,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     resetMenu: function resetMenu() {
       dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_4__["resetMenu"])());
+    },
+    cancelAction: function cancelAction() {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_4__["cancelAction"])());
     }
   };
 };

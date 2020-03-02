@@ -49,7 +49,6 @@ class FormContent extends Component {
         case 'Submit':
             return (
                 <div className="form-group">
-                    <label>{element.label}</label>
                     <input type="submit" className="form-control" value={element.value} />
                 </div>
             )

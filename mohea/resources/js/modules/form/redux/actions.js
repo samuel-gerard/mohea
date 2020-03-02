@@ -52,4 +52,3 @@ export const moveUp = (element) => ({
 
 
 
-

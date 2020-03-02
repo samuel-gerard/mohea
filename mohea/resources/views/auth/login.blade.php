@@ -4,7 +4,7 @@
 <div class="main-container">
     <a href="/"><img class="main-logo" src="/images/logo_medium.png" alt="Logo of Mohea" draggable="false"></a>
     <div class="login">
-        <h1>Log in</h1>
+        <h1>Log in and keep up your projects</h1>
         <form method="POST" action="{{ route('login') }}">
             @csrf
             <div class="social">
@@ -44,7 +44,7 @@
             </div>
             <div class="submit-block">
                 <button type="submit" class="button primary">
-                    {{ __('Log in and keep up your projects') }}
+                    {{ __('Log in') }}
                 </button>
                 @if (Route::has('password.request'))
                     <div class="forgot">
@@ -56,5 +56,6 @@
             </div>
         </form>
     </div>
+    <a href="{{ route('register') }}" class="link">I don't have an account yet</a>
 </div>
 @endsection

@@ -35,6 +35,11 @@ export const updateElement = (element, id) => ({
     id: id
 });
 
+export const updateName = (name) => ({
+    type: "UPDATE_NAME",
+    name: name,
+});
+
 export const duplicateItem = (element) => ({
     type: "DUPLICATE_ITEM",
     element: element
@@ -51,4 +56,12 @@ export const moveUp = (element) => ({
 });
 
 
+/* ===============================================
+* FUNCTIONS ABOUT PROJECTS
+=============================================== */
 
+export const loadForm = (form, name) => ({
+    type: "LOAD_FORM",
+    form: form,
+    name: name
+});

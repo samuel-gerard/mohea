@@ -1,5 +1,6 @@
 const initState = {
-    'title': 'Mon nouveau formulaire',
+    'title': '',
+    name: '',
     elementsChoices: [
         { name: "Text", tag: "p", content: "My New Text" },
         { name: "Title", tag: "h1", content: "My New Title" },
@@ -44,6 +45,19 @@ function rootReducer(state = initState, payload) {
               ...newState.elementsUsed
             ]
           };
+
+      case "UPDATE_NAME":
+        return {
+          ...state,
+          name: payload.name ? payload.name : '',
+        }
+
+      case "LOAD_FORM":
+        return {
+          ...state,
+          elementsUsed: payload.form,
+          name: payload.name ? payload.name : '',
+        }
           
       case "ADD_FOCUS":
           return {

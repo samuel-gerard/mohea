@@ -1,15 +1,17 @@
 import React, {Component} from "react";
+import axios from 'axios';
 import { connect } from "react-redux";
 import FormContent from "./FormContent";
 import FormReturn from "./FormReturn";
 import FormEdit from "./FormEdit";
+import { SaveProject } from "../../../components/SaveProject";
 
-import { resetForm } from "../redux/actions";
+import { resetForm, loadForm, updateName } from "../redux/actions";
 
 
 class Form extends React.Component {
 
-  /* componentDidMount() {
+  componentDidMount() {
     const href = window.location.href;
     const id = href.substring(href.lastIndexOf('/') + 1)
 
@@ -24,16 +26,19 @@ class Form extends React.Component {
       .then(res => {
         if(res.status === 200) {
           const data = res.data;
-          const menu = JSON.parse(data.content);
-          this.props.loadMenu(id, menu.classes, menu.content, data.name);
+          const form = JSON.parse(data.content);
+          this.props.loadForm(form.content, data.name);
         }
       })
       .catch(err => {
         window.location.replace(window.location.origin + '/error');
       })
 
-  } */
+  }
 
+  handleUpdateName = (e) => {
+    this.props.updateName(e.target.value)
+  }
 
   handleResetForm = () =>
   {
@@ -43,13 +48,14 @@ class Form extends React.Component {
   render() {
     return <section>
         <h1>{this.props.name || 'New Form'}</h1>
+        <SaveProject content={this.props.form} classes={null} name={this.props.name} type="form" />
         <div className="row">
           <div className="col-md-3">
             <div className="form-group">
               <label htmlFor="menu-name">
                 Name for this Form
               </label>
-              <input type="text" className="form-control" name="name" id="menu-name" value={this.props.name} />
+              <input type="text" className="form-control" name="name" onChange={this.handleUpdateName} id="menu-name" value={this.props.name} />
             </div>
             <div className="form-group card p-2 bg-info text-white">
               <div className="col-md-12">
@@ -80,7 +86,8 @@ const mapStateToProps = state => {
   return {
     form: state.elementsUsed,
     elements: state.elementsChoices,
-    title: state.title
+    title: state.title,
+    name: state.name
   }
 }
 
@@ -88,6 +95,12 @@ const mapDispatchToProps = dispatch => {
   return {
     resetForm: () => {
       dispatch(resetForm())
+    },
+    loadForm: (form, name) => {
+      dispatch(loadForm(form, name))
+    },
+    updateName: (name) => {
+      dispatch(updateName(name))
     },
   }
 }

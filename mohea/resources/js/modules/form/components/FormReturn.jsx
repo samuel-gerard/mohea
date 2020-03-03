@@ -96,7 +96,7 @@ const FormReturn = props => {
                             var id = "id_"+i
                             var value = "val_"+i  
                             html += '       <div class="form-check">\n'
-                                        +'          <input class="form-check-input" name='+name+' type='+option.type+' value='+value+' id='+id+' />\n'
+                                        +'          <input class="form-check-input" name='+name+' type='+option.type+' value='+value+' id='+id+' >\n'
                                         +'          <label class="form-check-label" for='+id+'>'+option.label+'</label>\n'
                                     +'      </div>\n'
                         })

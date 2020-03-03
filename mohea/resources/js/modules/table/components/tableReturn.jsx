@@ -2,113 +2,159 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { PrismCode } from "../../../components/PrismCode";
 import "../../../../sass/input.scss";
+import ClipboardJS from 'clipboard';
 
 
 const TableReturn = props => {
 
-        const caption = props.caption;
-        const { head, body, foot } = props.tableau;
-        let html = '';
+    const caption = props.caption;
+    const { head, body, foot } = props.tableau;
+    const tableClasses = props.classes.join(' ');
 
-        const handleStart = () => {
-            if (caption.length <= 0) {
-                html += `<table>
-`
-            } else {
-                html += `<table summary="${caption}">
-`
-            }
+    // Init clipboard button
+    new ClipboardJS('#button-to-copy');
+    let html = '';
 
+    const handleStart = () => {
+        if (caption.length <= 0) {
+            html += `<table class="${tableClasses}">
+`
+        } else {
+            html += `<table summary="${caption}" class="${tableClasses}">
+`
         }
 
-        const handleHeader = () => {
-            if (head.length <= 0) {
-                return '';
-            }
+    }
 
-            html += `   <thead>
+    const camelToKebab = string => {
+        return string.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase();
+    }
+
+    const handleHeader = () => {
+        if (head.length <= 0) {
+            return '';
+        }
+
+        html += `   <thead>
 `
-            head.forEach(headRow => {
-                html += `       <tr>
+        head.forEach(headRow => {
+            html += `       <tr>
 `
-                headRow.map((headEl, idxBis) => {
-                    html += `           <th id="col-${idxBis}">${headEl}</th>
+            headRow.map((headEl, idxBis) => {
+                if(headEl.style) {
+                    let style = '';
+                    Object.keys(headEl.style).map(key => {
+                        if(!headEl.style[key]) return
+
+                        style += camelToKebab(key) + ':' + headEl.style[key] + ';'
+                    })
+                    html += `           <th id="col-${idxBis}" style="${style}"${headEl.colspan ? ' colspan="' + headEl.colspan + '"' : ''}>${headEl.value}</th>
 `
-                })
-                html += `       </tr>
+                } else {
+                    html += `           <th id="col-${idxBis}"${headEl.colspan ? ' colspan="' + headEl.colspan + '"' : ''}>${headEl.value}</th>
 `
+                }
             })
-            html += `   </thead>
+            html += `       </tr>
+`
+        })
+        html += `   </thead>
 `
 
-            return html;
+        return html;
+    }
+
+    const handleBody = () => {
+        if (body.length <= 0) {
+            return '';
         }
 
-        const handleBody = () => {
-            if (body.length <= 0) {
-                return '';
-            }
-
-            html += `   <tbody>
+        html += `   <tbody>
 `
-            body.forEach((bodyRow, idx) => {
-                html += `       <tr id="bodyRow-${idx}">
+        body.forEach((bodyRow, idx) => {
+            html += `       <tr id="bodyRow-${idx}">
 `
-                bodyRow.map((bodyEl, idxBis) => {
-                    html += `           <td headers="col-${idxBis} bodyRow-${idx}">${bodyEl}</td>
+            bodyRow.map((bodyEl, idxBis) => {
+                if(bodyEl.style) {
+                    let style = '';
+                    Object.keys(bodyEl.style).map(key => {
+                        if(!bodyEl.style[key]) return
+                        
+                        style += camelToKebab(key) + ':' + bodyEl.style[key] + ';'
+                    })
+                    html += `           <td headers="col-${idxBis} bodyRow-${idx}" style="${style}">${bodyEl.value}</td>
 `
-                })
-                html += `       </tr>
+                } else {
+                    html += `           <td headers="col-${idxBis} bodyRow-${idx}">${bodyEl.value}</td>
 `
+                }
             })
-            html += `   </tbody>
+            html += `       </tr>
+`
+        })
+        html += `   </tbody>
 `
 
-            return html;
+        return html;
+    }
+
+    const handleFooter = () => {
+        if (foot.length <= 0) {
+            return '';
         }
 
-        const handleFooter = () => {
-            if (foot.length <= 0) {
-                return '';
-            }
-
-            html += `   <tfoot>
+        html += `   <tfoot>
 `
-            foot.forEach((footRow, idx) => {
-                html += `       <tr id="footRow-${idx}">
+        foot.forEach((footRow, idx) => {
+            html += `       <tr id="footRow-${idx}">
 `
-                footRow.map((footEl, idxBis) => {
-                    html += `           <td headers="col-${idxBis} footRow-${idx}">${footEl}</td>
+            footRow.map((footEl, idxBis) => {
+                if(footEl.style) {
+                    let style = '';
+                    Object.keys(footEl.style).map(key => {
+                        if(!footEl.style[key]) return
+                        
+                        style += camelToKebab(key) + ':' + footEl.style[key] + ';'
+                    })
+                    html += `           <td headers="col-${idxBis} footRow-${idx}" style="${style}">${footEl.value}</td>
 `
-                })
-                html += `       </tr>
+                } else {
+                    html += `           <td headers="col-${idxBis} footRow-${idx}">${footEl.value}</td>
 `
+                }
+                
             })
-            html += `   </tfoot>
+            html += `       </tr>
+`
+        })
+        html += `   </tfoot>
 `
 
-            return html;
-        }
+        return html;
+    }
 
-        handleStart()
-        handleHeader()
-        handleBody()
-        handleFooter()
+    handleStart()
+    handleHeader()
+    handleBody()
+    handleFooter()
 
-        html += `</table>`;
+    html += `</table>`;
 
-        return (
-            <div>
-                <h1>Your HTML code</h1>
-                <div className="w-50 mx-auto">
-                    <PrismCode
-                        code={html}
-                        language="html"
-                        plugins={["line-numbers", "normalize-whitespace", "copy-to-clipboard"]}
-                    />
-                </div>
+    return (
+        <div>
+            <h1>Your HTML code</h1>
+            <div className="w-50 mx-auto">
+                <PrismCode
+                    code={html}
+                    language="html"
+                    plugins={["line-numbers", "normalize-whitespace"]}
+                />
+                <button id="button-to-copy" data-clipboard-text={html}>
+                    Copy to clipboard
+                </button>
             </div>
-        )
+        </div>
+    )
 }
 
 const mapStateToProps = state => state;

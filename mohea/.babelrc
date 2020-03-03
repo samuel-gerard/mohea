@@ -3,7 +3,7 @@
         "@babel/plugin-proposal-class-properties",
         ["prismjs", {
             "languages": ["javascript", "css", "html"],
-            "plugins": ["line-numbers", "show-language", "copy-to-clipboard", "normalize-whitespace"],
+            "plugins": ["line-numbers", "show-language", "normalize-whitespace"],
             "theme": "okaidia",
             "css": true
         }]

@@ -1,12 +1,5 @@
 {{--  Ici on modifie le compte du user, pareil en popup ou page séparée  --}}
 
-@extends('base')
-
-@section('title')
-Edit Account
-@endsection
-
-@section('main-content')
 <h1>Edit account</h1>
 
 <div class="container">
@@ -143,5 +136,3 @@ Edit Account
         </div>
     </div>
 </div>
-
-@endsection

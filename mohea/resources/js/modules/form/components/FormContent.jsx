@@ -111,10 +111,6 @@ class FormContent extends Component {
     
     }
 
-    handleAddItem = (element) => {
-        this.props.addNewItem(element)
-    }
-
     handleAddFocus = (element) =>
     {
         this.props.addFocus(element)
@@ -122,12 +118,6 @@ class FormContent extends Component {
 
     render(){
         return <div className="section-form">
-            <h2>Add an Element</h2>
-            <div className="elements-choices">
-                {this.props.elements.map((element, i) => (
-                    <input key={i} type="button" onClick={() => this.handleAddItem(element)} className="btn btn-primary" value={element.name} />
-                ))}
-            </div>
             <div className="form_boox">
                 <form>
                     {this.props.elementsUsed.map((element, i) => (
@@ -145,15 +135,11 @@ class FormContent extends Component {
 const mapStateToProps = state => {
     return {
         elementsUsed: state.elementsUsed,
-        elements: state.elementsChoices
     }
 }
 
 const mapDispatchToProps = (dispatch, stateProps) => {
     return {
-        addNewItem: (element) => {
-            dispatch(addNewItem(element))
-        },
         addFocus: (element) => {
             dispatch(addFocus(element))
         },

@@ -51343,9 +51343,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _FormContent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./FormContent */ "./resources/js/modules/form/components/FormContent.jsx");
 /* harmony import */ var _FormReturn__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./FormReturn */ "./resources/js/modules/form/components/FormReturn.jsx");
-/* harmony import */ var _FormEdit__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./FormEdit */ "./resources/js/modules/form/components/FormEdit.jsx");
-/* harmony import */ var _components_SaveProject__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../components/SaveProject */ "./resources/js/components/SaveProject.js");
-/* harmony import */ var _redux_actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../redux/actions */ "./resources/js/modules/form/redux/actions.js");
+/* harmony import */ var _FormChoices__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./FormChoices */ "./resources/js/modules/form/components/FormChoices.jsx");
+/* harmony import */ var _FormEdit__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./FormEdit */ "./resources/js/modules/form/components/FormEdit.jsx");
+/* harmony import */ var _components_SaveProject__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../components/SaveProject */ "./resources/js/components/SaveProject.js");
+/* harmony import */ var _redux_actions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../redux/actions */ "./resources/js/modules/form/redux/actions.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -51365,6 +51366,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -51435,15 +51437,12 @@ function (_React$Component) {
     value: function render() {
       var _this3 = this;
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.props.name || 'New Form'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SaveProject__WEBPACK_IMPORTED_MODULE_6__["SaveProject"], {
-        content: this.props.form,
-        classes: null,
-        name: this.props.name,
-        type: "form"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        "class": "container-fluid"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.props.name || 'New Form'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        "class": "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-3"
+        "class": "col-md-3"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -51455,11 +51454,20 @@ function (_React$Component) {
         onChange: this.handleUpdateName,
         id: "menu-name",
         value: this.props.name
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SaveProject__WEBPACK_IMPORTED_MODULE_7__["SaveProject"], {
+        content: this.props.form,
+        classes: null,
+        name: this.props.name,
+        type: "form"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormChoices__WEBPACK_IMPORTED_MODULE_5__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        "class": "col-md-6"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormContent__WEBPACK_IMPORTED_MODULE_3__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        "class": "col-md-3"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group card p-2 bg-info text-white"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-12"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormEdit__WEBPACK_IMPORTED_MODULE_5__["default"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormEdit__WEBPACK_IMPORTED_MODULE_6__["default"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group d-flex justify-content-between"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "button",
@@ -51472,11 +51480,7 @@ function (_React$Component) {
         onClick: function onClick() {
           return _this3.handleResetForm();
         }
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-9"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormContent__WEBPACK_IMPORTED_MODULE_3__["default"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-12"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormReturn__WEBPACK_IMPORTED_MODULE_4__["default"], null))));
     }
@@ -51497,18 +51501,119 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     resetForm: function resetForm() {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_7__["resetForm"])());
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_8__["resetForm"])());
     },
     loadForm: function loadForm(form, name) {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_7__["loadForm"])(form, name));
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_8__["loadForm"])(form, name));
     },
     updateName: function updateName(name) {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_7__["updateName"])(name));
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_8__["updateName"])(name));
     }
   };
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Form));
+
+/***/ }),
+
+/***/ "./resources/js/modules/form/components/FormChoices.jsx":
+/*!**************************************************************!*\
+  !*** ./resources/js/modules/form/components/FormChoices.jsx ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _redux_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../redux/actions */ "./resources/js/modules/form/redux/actions.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+var FormChoices =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(FormChoices, _Component);
+
+  function FormChoices() {
+    var _getPrototypeOf2;
+
+    var _this;
+
+    _classCallCheck(this, FormChoices);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(FormChoices)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_this), "handleAddItem", function (element) {
+      _this.props.addNewItem(element);
+    });
+
+    return _this;
+  }
+
+  _createClass(FormChoices, [{
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "section-form"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Add an Element"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "elements-choices"
+      }, this.props.elements.map(function (element, i) {
+        return (// <input key={i} type="button" onClick={() => this.handleAddItem(element)} className="btn btn-primary" value={element.name} />
+          // <img src="public/images/Form/svg/checkbox.svg"></img>
+          react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+            src: "/var/www/html/LpWeb/Mohea/mohea.bach.mmi-unistra.fr/mohea/public/images/Form/svg/checkbox.svg"
+          })
+        );
+      })));
+    }
+  }]);
+
+  return FormChoices;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    elements: state.elementsChoices
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch, stateProps) {
+  return {
+    addNewItem: function addNewItem(element) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["addNewItem"])(element));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(FormChoices));
 
 /***/ }),
 
@@ -51566,10 +51671,6 @@ function (_Component) {
     }
 
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(FormContent)).call.apply(_getPrototypeOf2, [this].concat(args)));
-
-    _defineProperty(_assertThisInitialized(_this), "handleAddItem", function (element) {
-      _this.props.addNewItem(element);
-    });
 
     _defineProperty(_assertThisInitialized(_this), "handleAddFocus", function (element) {
       _this.props.addFocus(element);
@@ -51697,19 +51798,7 @@ function (_Component) {
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "section-form"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Add an Element"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "elements-choices"
-      }, this.props.elements.map(function (element, i) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          key: i,
-          type: "button",
-          onClick: function onClick() {
-            return _this2.handleAddItem(element);
-          },
-          className: "btn btn-primary",
-          value: element.name
-        });
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form_boox"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, this.props.elementsUsed.map(function (element, i) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -51727,16 +51816,12 @@ function (_Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    elementsUsed: state.elementsUsed,
-    elements: state.elementsChoices
+    elementsUsed: state.elementsUsed
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch, stateProps) {
   return {
-    addNewItem: function addNewItem(element) {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["addNewItem"])(element));
-    },
     addFocus: function addFocus(element) {
       dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["addFocus"])(element));
     }
@@ -52475,7 +52560,7 @@ var FormReturn = function FormReturn(props) {
         break;
 
       case 'Submit':
-        html += '  <div class="form-group">\n' + '      <label>' + element.value + '</label>\n' + '      <input type="submit" class="form-control" value=' + element.value + ' >\n' + '  </div>\n';
+        html += '  <div class="form-group">\n' + '      <label>' + element.value + '</label>\n' + '      <input type="submit" class="form-control" value="' + element.value + '" >\n' + '  </div>\n';
         break;
 
       case 'Text Input':
@@ -52484,19 +52569,19 @@ var FormReturn = function FormReturn(props) {
       case 'Link':
       case 'Phone':
       case 'Password':
-        html += '  <div class="form-group">\n' + '      <label>' + element.label + '</label>\n' + '      <input type=' + element.type + ' class="form-control" placeholder=' + element.placeholder + ' >\n' + '  </div>\n';
+        html += '  <div class="form-group">\n' + '      <label>' + element.label + '</label>\n' + '      <input type="' + element.type + '" class="form-control" placeholder="' + element.placeholder + '" >\n' + '  </div>\n';
         break;
 
       case 'Text Area':
         var textAreaId = "textAreaInput" + element.id;
-        html += '  <div class="form-group">\n' + '      <label for=' + textAreaId + '>' + element.label + '</label>\n' + '      <textarea rows=' + element.rows + ' id=' + textAreaId + ' class="form-control" col=' + element.col + ' placeholder=' + element.placeholder + ' >\n' + '  </div>\n';
+        html += '  <div class="form-group">\n' + '      <label for="' + textAreaId + '">' + element.label + '</label>\n' + '      <textarea rows="' + element.rows + '" id="' + textAreaId + '" class="form-control" col="' + element.col + '" placeholder="' + element.placeholder + '" >\n' + '  </div>\n';
         break;
 
       case 'Select':
         var selectId = "salectInput" + element.id;
-        html += '  <div class="form-group">\n' + '      <label for=' + selectId + '>' + element.label + '</label>\n' + '      <select class="form-control" id=' + selectId + '>\n';
+        html += '  <div class="form-group">\n' + '      <label for="' + selectId + '">' + element.label + '</label>\n' + '      <select class="form-control" id="' + selectId + '">\n';
         element.options.forEach(function (option) {
-          html += '            <option value=' + option.value + '>' + option.content + '</option>\n';
+          html += '            <option value="' + option.value + '">' + option.content + '</option>\n';
         });
         html += '        </select>\n' + '  </div>\n';
         break;
@@ -52508,7 +52593,7 @@ var FormReturn = function FormReturn(props) {
           var name = "radio_" + element.id;
           var id = "id_" + i;
           var value = "val_" + i;
-          html += '       <div class="form-check">\n' + '          <input class="form-check-input" name=' + name + ' type=' + option.type + ' value=' + value + ' id=' + id + ' >\n' + '          <label class="form-check-label" for=' + id + '>' + option.label + '</label>\n' + '      </div>\n';
+          html += '       <div class="form-check">\n' + '          <input class="form-check-input" name="' + name + '" type="' + option.type + '" value="' + value + '" id="' + id + '" >\n' + '          <label class="form-check-label" for="' + id + '">' + option.label + '</label>\n' + '      </div>\n';
         });
         html += '   </div>\n';
         break;

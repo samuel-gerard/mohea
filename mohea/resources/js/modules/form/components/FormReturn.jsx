@@ -51,7 +51,7 @@ const FormReturn = props => {
             case 'Submit':
                 html  += '  <div class="form-group">\n'
                         +'      <label>'+element.value+'</label>\n'
-                        +'      <input type="submit" class="form-control" value='+element.value+' >\n'
+                        +'      <input type="submit" class="form-control" value="'+element.value+'" >\n'
                         +'  </div>\n'
                 break;
                 
@@ -63,25 +63,25 @@ const FormReturn = props => {
             case 'Password':
                 html  += '  <div class="form-group">\n'
                         +'      <label>'+element.label+'</label>\n'
-                        +'      <input type='+element.type+' class="form-control" placeholder='+element.placeholder+' >\n'
+                        +'      <input type="'+element.type+'" class="form-control" placeholder="'+element.placeholder+'" >\n'
                         +'  </div>\n'
                 break;
 
             case 'Text Area':
                 var textAreaId = "textAreaInput"+element.id
                 html  += '  <div class="form-group">\n'
-                        +'      <label for='+textAreaId+'>'+element.label+'</label>\n'
-                        +'      <textarea rows='+element.rows+' id='+textAreaId+' class="form-control" col='+element.col+' placeholder='+element.placeholder+' >\n'
+                        +'      <label for="'+textAreaId+'">'+element.label+'</label>\n'
+                        +'      <textarea rows="'+element.rows+'" id="'+textAreaId+'" class="form-control" col="'+element.col+'" placeholder="'+element.placeholder+'" >\n'
                         +'  </div>\n'
                 break;
 
             case 'Select':
                 var selectId = "salectInput"+element.id
                 html  += '  <div class="form-group">\n'
-                        +'      <label for='+selectId+'>'+element.label+'</label>\n'
-                        +'      <select class="form-control" id='+selectId+'>\n'
+                        +'      <label for="'+selectId+'">'+element.label+'</label>\n'
+                        +'      <select class="form-control" id="'+selectId+'">\n'
                             element.options.forEach(option => {
-                                html +='            <option value='+option.value+'>'+option.content+'</option>\n'
+                                html +='            <option value="'+option.value+'">'+option.content+'</option>\n'
                             })
                         html +='        </select>\n'
                     +'  </div>\n'
@@ -96,8 +96,8 @@ const FormReturn = props => {
                             var id = "id_"+i
                             var value = "val_"+i  
                             html += '       <div class="form-check">\n'
-                                        +'          <input class="form-check-input" name='+name+' type='+option.type+' value='+value+' id='+id+' >\n'
-                                        +'          <label class="form-check-label" for='+id+'>'+option.label+'</label>\n'
+                                        +'          <input class="form-check-input" name="'+name+'" type="'+option.type+'" value="'+value+'" id="'+id+'" >\n'
+                                        +'          <label class="form-check-label" for="'+id+'">'+option.label+'</label>\n'
                                     +'      </div>\n'
                         })
                     html += '   </div>\n'

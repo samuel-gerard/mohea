@@ -3,6 +3,7 @@ import axios from 'axios';
 import { connect } from "react-redux";
 import FormContent from "./FormContent";
 import FormReturn from "./FormReturn";
+import FormChoices from "./FormChoices";
 import FormEdit from "./FormEdit";
 import { SaveProject } from "../../../components/SaveProject";
 
@@ -47,7 +48,7 @@ class Form extends React.Component {
 
   render() {
     return <section>
-        <h1>{this.props.name || 'New Form'}</h1>
+        {/* <h1>{this.props.name || 'New Form'}</h1>
         <SaveProject content={this.props.form} classes={null} name={this.props.name} type="form" />
         <div className="row">
           <div className="col-md-3">
@@ -75,7 +76,45 @@ class Form extends React.Component {
           <div className="col-md-12">
             <FormReturn />
           </div>
+        </div> */}
+
+        
+
+
+
+        <div class="container-fluid">
+          <h1>{this.props.name || 'New Form'}</h1>
+          <div class="row">
+            <div class="col-md-3">
+              <div className="form-group">
+                <label htmlFor="menu-name">
+                  Name for this Form
+                </label>
+                <input type="text" className="form-control" name="name" onChange={this.handleUpdateName} id="menu-name" value={this.props.name} />
+                <SaveProject content={this.props.form} classes={null} name={this.props.name} type="form" />
+              </div>
+              <FormChoices />
+            </div>
+            <div class="col-md-6">
+              <FormContent />
+            </div>
+            <div class="col-md-3">
+              <div className="form-group card p-2 bg-info text-white">
+                <div className="col-md-12">
+                  <FormEdit />
+                </div>
+              </div>
+              <div className="form-group d-flex justify-content-between">
+                <input type="button" className="btn btn-primary form-control mr-1" value="Display code" />
+                <input type="button" className="w-25 btn btn-danger" value="Reset" onClick={() => this.handleResetForm()} />
+              </div>            
+            </div>
+          </div>
+          <div className="col-md-12">
+            <FormReturn />
+          </div>
         </div>
+
       </section>
   }
 

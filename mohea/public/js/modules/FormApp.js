@@ -51594,7 +51594,7 @@ function (_Component) {
           onClick: function onClick() {
             return _this2.handleAddItem(element);
           },
-          className: "btn btn-primary",
+          className: "btn btn-primary element-choice",
           value: element.name
         });
       })));
@@ -51687,38 +51687,44 @@ function (_Component) {
   _createClass(FormContent, [{
     key: "renderSwitch",
     value: function renderSwitch(element) {
+      var classe = 'form-group form-element';
+
+      if (this.props.focus.id == element.id) {
+        classe = 'form-group form-element focus';
+      }
+
       switch (element.name) {
         case 'Text':
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "form-group"
+            className: classe
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, element.content));
 
         case 'Title':
           switch (element.tag) {
             case 'h1':
               return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-                className: "form-group"
+                className: classe
               }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, element.content));
 
             case 'h2':
               return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-                className: "form-group"
+                className: classe
               }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, element.content));
 
             case 'h3':
               return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-                className: "form-group"
+                className: classe
               }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, element.content));
 
             case 'h4':
               return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-                className: "form-group"
+                className: classe
               }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, element.content));
           }
 
         case 'Submit':
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "form-group"
+            className: classe
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
             className: "btn btn-primary"
           }, element.value));
@@ -51731,7 +51737,7 @@ function (_Component) {
         case 'Password':
           var input_id = "input_" + element.id;
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "form-group"
+            className: classe
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
             htmlFor: input_id
           }, element.label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -51744,7 +51750,7 @@ function (_Component) {
         case 'Text Area':
           var textAreaId = "textAreaInput" + element.id;
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "form-group"
+            className: classe
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
             htmlFor: textAreaId
           }, element.label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
@@ -51758,7 +51764,7 @@ function (_Component) {
         case 'Select':
           var selectId = "select_" + element.id + "_id_" + element.id;
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "form-group"
+            className: classe
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
             htmlFor: selectId
           }, element.label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
@@ -51774,7 +51780,7 @@ function (_Component) {
         case 'Check Box':
         case 'Radio Button':
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "form-group"
+            className: classe
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
             className: "col-form-label"
           }, element.label), element.options.map(function (option, i) {
@@ -51823,7 +51829,8 @@ function (_Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    elementsUsed: state.elementsUsed
+    elementsUsed: state.elementsUsed,
+    focus: state.focus
   };
 };
 
@@ -51941,10 +51948,10 @@ function (_Component) {
       } else if (e.target.name == 'placeholder') {
         newElement.placeholder = e.target.value;
       } else if (e.target.name == 'required') {
-        if (newElement.required == true) {
-          newElement.required = false;
+        if (newElement.required == 'required') {
+          newElement.required = '';
         } else {
-          newElement.required = true;
+          newElement.required = 'required';
         }
       }
 
@@ -51959,10 +51966,10 @@ function (_Component) {
       } else if (e.target.name == 'placeholder') {
         newElement.placeholder = e.target.value;
       } else if (e.target.name == 'required') {
-        if (newElement.required == true) {
-          newElement.required = false;
+        if (newElement.required == 'required') {
+          newElement.required = '';
         } else {
-          newElement.required = true;
+          newElement.required = 'required';
         }
       } else if (e.target.name == 'rows') {
         newElement.rows = e.target.value;
@@ -51979,10 +51986,10 @@ function (_Component) {
       if (e.target.name == 'label') {
         newElement.label = e.target.value;
       } else if (e.target.name == 'required') {
-        if (newElement.required == true) {
-          newElement.required = false;
+        if (newElement.required == 'required') {
+          newElement.required = '';
         } else {
-          newElement.required = true;
+          newElement.required = 'required';
         }
       }
 
@@ -51995,10 +52002,10 @@ function (_Component) {
       if (e.target.name == 'label') {
         newElement.label = e.target.value;
       } else if (e.target.name == 'required') {
-        if (newElement.required == true) {
-          newElement.required = false;
+        if (newElement.required == 'required') {
+          newElement.required = '';
         } else {
-          newElement.required = true;
+          newElement.required = 'required';
         }
       }
 
@@ -52616,17 +52623,17 @@ var FormReturn = function FormReturn(props) {
       case 'Link':
       case 'Phone':
       case 'Password':
-        html += '  <div class="form-group">\n' + '      <label>' + element.label + '</label>\n' + '      <input type="' + element.type + '" class="form-control" placeholder="' + element.placeholder + '" >\n' + '  </div>\n';
+        html += '  <div class="form-group">\n' + '      <label>' + element.label + '</label>\n' + '      <input type="' + element.type + '" class="form-control" ' + element.required + ' placeholder="' + element.placeholder + '" >\n' + '  </div>\n';
         break;
 
       case 'Text Area':
         var textAreaId = "textAreaInput" + element.id;
-        html += '  <div class="form-group">\n' + '      <label for="' + textAreaId + '">' + element.label + '</label>\n' + '      <textarea rows="' + element.rows + '" id="' + textAreaId + '" class="form-control" col="' + element.col + '" placeholder="' + element.placeholder + '" >\n' + '  </div>\n';
+        html += '  <div class="form-group">\n' + '      <label for="' + textAreaId + '">' + element.label + '</label>\n' + '      <textarea rows="' + element.rows + '" id="' + textAreaId + '" ' + element.required + ' class="form-control" col="' + element.col + '" placeholder="' + element.placeholder + '" >\n' + '  </div>\n';
         break;
 
       case 'Select':
         var selectId = "salectInput" + element.id;
-        html += '  <div class="form-group">\n' + '      <label for="' + selectId + '">' + element.label + '</label>\n' + '      <select class="form-control" id="' + selectId + '">\n';
+        html += '  <div class="form-group">\n' + '      <label for="' + selectId + '">' + element.label + '</label>\n' + '      <select class="form-control" ' + element.required + ' id="' + selectId + '">\n';
         element.options.forEach(function (option) {
           html += '            <option value="' + option.value + '">' + option.content + '</option>\n';
         });
@@ -52640,7 +52647,7 @@ var FormReturn = function FormReturn(props) {
           var name = "radio_" + element.id;
           var id = "id_" + element.id;
           var value = "val_" + element.id;
-          html += '       <div class="form-check">\n' + '          <input class="form-check-input" name="' + name + '" type="' + option.type + '" value="' + value + '" id="' + id + '" >\n' + '          <label class="form-check-label" for="' + id + '">' + option.label + '</label>\n' + '      </div>\n';
+          html += '       <div class="form-check">\n' + '          <input class="form-check-input" ' + element.required + ' name="' + name + '" type="' + option.type + '" value="' + value + '" id="' + id + '" >\n' + '          <label class="form-check-label" for="' + id + '">' + option.label + '</label>\n' + '      </div>\n';
         });
         html += '   </div>\n';
         break;
@@ -52810,7 +52817,7 @@ var initState = {
     className: "moheaTextInput",
     type: "text",
     label: "My New Text Input",
-    required: false,
+    required: "required",
     placeholder: "My placeholder"
   }, {
     name: "Text Area",
@@ -52819,7 +52826,7 @@ var initState = {
     label: "My New Text Area",
     rows: 3,
     col: 10,
-    required: false,
+    required: "required",
     placeholder: "My placeholder"
   }, {
     name: "Select",
@@ -52827,7 +52834,7 @@ var initState = {
     className: "moheaSelect",
     label: "My New Select",
     title: "Options",
-    required: false,
+    required: "required",
     options: [{
       id: 0,
       tag: "option",
@@ -52845,14 +52852,14 @@ var initState = {
     className: "moheaDate",
     label: "My New Date",
     type: "date",
-    required: false,
+    required: "required",
     placeholder: "12/02/2020"
   }, {
     name: "Check Box",
     tag: "div",
     className: "moheaCheckbox",
     label: "My New Check Box",
-    required: false,
+    required: "required",
     options: [{
       id: 0,
       tag: "input",
@@ -52864,7 +52871,7 @@ var initState = {
     tag: "div",
     className: "moheaRadiobutton",
     label: "My New Radio Button",
-    required: false,
+    required: "required",
     options: [{
       id: 0,
       tag: "input",
@@ -52878,7 +52885,7 @@ var initState = {
     label: "My Email",
     type: "email",
     pattern: "",
-    required: false,
+    required: "required",
     placeholder: "My placeholder"
   }, {
     name: "Link",
@@ -52886,7 +52893,7 @@ var initState = {
     className: "moheaLink",
     label: "My Link",
     type: "url",
-    required: false,
+    required: "required",
     placeholder: "My placeholder"
   }, {
     name: "Password",
@@ -52894,7 +52901,7 @@ var initState = {
     className: "moheaPassword",
     label: "My Password",
     type: "password",
-    required: false,
+    required: "required",
     placeholder: "My placeholder"
   }, {
     name: "Phone",
@@ -52903,7 +52910,7 @@ var initState = {
     label: "My Phone Number",
     type: "tel",
     pattern: "",
-    required: false,
+    required: "required",
     placeholder: "My placeholder"
   }],
   elementsUsed: [],
@@ -52964,9 +52971,8 @@ function rootReducer() {
       });
 
     case "UPDATE_ITEM":
-      var newElement = Object.assign({}, payload.element); // newState.elementsUsed[payload.element.id] = newElement
-
-      newState.elementsUsed.push(newElement);
+      var newElement = Object.assign({}, payload.element);
+      newState.elementsUsed[payload.element.id] = newElement;
       return _objectSpread({}, state, {
         elementsUsed: _toConsumableArray(newState.elementsUsed)
       });

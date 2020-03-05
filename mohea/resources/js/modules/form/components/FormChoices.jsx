@@ -14,7 +14,7 @@ class FormChoices extends Component {
             <h2>Add an Element</h2>
             <div className="elements-choices">
                 {this.props.elements.map((element, i) => (
-                    <input key={i} type="button" onClick={() => this.handleAddItem(element)} className="btn btn-primary" value={element.name} />
+                    <input key={i} type="button" onClick={() => this.handleAddItem(element)} className="btn btn-primary element-choice" value={element.name} />
                 ))}
             </div>
         </div>

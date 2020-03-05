@@ -7,12 +7,17 @@ class FormContent extends Component {
 
     renderSwitch(element)
     {
+        var classe = 'form-group form-element'
+        if(this.props.focus.id == element.id){
+            classe = 'form-group form-element focus'
+        }
+
         switch(element.name)
         {
 
         case 'Text':
             return (
-                <div className="form-group">
+                <div className={classe}>
                     <p>{element.content}</p>
                 </div>                    
             )
@@ -22,25 +27,25 @@ class FormContent extends Component {
             switch(element.tag){
                 case 'h1':
                     return (
-                        <div className="form-group">
+                        <div className={classe}>
                             <h1>{element.content}</h1>
                         </div>
                     )
                 case 'h2':
                     return (
-                        <div className="form-group">
+                        <div className={classe}>
                             <h2>{element.content}</h2>
                         </div>
                     )
                 case 'h3':
                     return (
-                        <div className="form-group">
+                        <div className={classe}>
                             <h3>{element.content}</h3>
                         </div>
                     )
                 case 'h4':
                     return (
-                        <div className="form-group">
+                        <div className={classe}>
                             <h4>{element.content}</h4>
                         </div>
                     )
@@ -48,7 +53,7 @@ class FormContent extends Component {
 
         case 'Submit':
             return (
-                <div className="form-group">
+                <div className={classe}>
                     <button className="btn btn-primary">{element.value}</button>
                 </div>
             )
@@ -61,7 +66,7 @@ class FormContent extends Component {
         case 'Password':
             var input_id = "input_"+element.id
             return (
-                <div className="form-group">
+                <div className={classe}>
                     <label htmlFor={input_id}>{element.label}</label>
                     <input type={element.type} id={input_id} className="form-control" placeholder={element.placeholder} />
                 </div>
@@ -70,7 +75,7 @@ class FormContent extends Component {
         case 'Text Area':
             var textAreaId = "textAreaInput"+element.id
             return (
-                <div className="form-group">
+                <div className={classe}>
                     <label htmlFor={textAreaId}>{element.label}</label>
                     <textarea rows={element.rows} id={textAreaId} className="form-control" col={element.col} placeholder={element.placeholder} />
                 </div>
@@ -79,7 +84,7 @@ class FormContent extends Component {
         case 'Select':
             var selectId = "select_"+element.id+"_id_"+element.id
             return (
-                <div className="form-group">
+                <div className={classe}>
                     <label htmlFor={selectId}>{element.label}</label>
                     <select className="form-control" id={selectId}>
                         {element.options.map((option, i) => {
@@ -92,7 +97,7 @@ class FormContent extends Component {
         case 'Check Box':
         case 'Radio Button':
             return (
-            <div className="form-group">
+            <div className={classe}>
                 <label className="col-form-label">{element.label}</label>
                 {element.options.map((option, i) => {
                     var name = "radio_"+element.id
@@ -136,6 +141,7 @@ class FormContent extends Component {
 const mapStateToProps = state => {
     return {
         elementsUsed: state.elementsUsed,
+        focus: state.focus
     }
 }
 

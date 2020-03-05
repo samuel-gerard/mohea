@@ -4,23 +4,23 @@ const initState = {
         { name: "Text", tag: "p", content: "My New Text" },
         { name: "Title", tag: "h1", content: "My New Title" },
         { name: "Submit", tag: "input", className:"moheaSubmit", type: "submit", value: "Send my new Form" },
-        { name: "Text Input", tag: "input", className:"moheaTextInput", type: "text", label:"My New Text Input", required: false, placeholder: "My placeholder" },
-        { name: "Text Area", tag: "textarea", className:"moheaTextArea", label:"My New Text Area", rows: 3, col: 10, required: false, placeholder: "My placeholder" },
-        { name: "Select", tag: "select", className:"moheaSelect", label:"My New Select", title: "Options", required: false, options: [
+        { name: "Text Input", tag: "input", className:"moheaTextInput", type: "text", label:"My New Text Input", required: "required", placeholder: "My placeholder" },
+        { name: "Text Area", tag: "textarea", className:"moheaTextArea", label:"My New Text Area", rows: 3, col: 10, required: "required", placeholder: "My placeholder" },
+        { name: "Select", tag: "select", className:"moheaSelect", label:"My New Select", title: "Options", required: "required", options: [
           { id: 0, tag: "option", value: "first", content: "My First Option"},
           { id: 1,tag: "option", value: "deux", content: "My Second Option"}
         ]},
-        { name: "Date", tag: "input", className:"moheaDate", label:"My New Date", type: "date", required: false, placeholder: "12/02/2020" },
-        { name: "Check Box", tag: "div", className:"moheaCheckbox", label:"My New Check Box", required: false, options:[
+        { name: "Date", tag: "input", className:"moheaDate", label:"My New Date", type: "date", required: "required", placeholder: "12/02/2020" },
+        { name: "Check Box", tag: "div", className:"moheaCheckbox", label:"My New Check Box", required: "required", options:[
           { id: 0, tag: "input", type: "checkbox", label: "My first Option" }
         ]},
-        { name: "Radio Button", tag: "div", className:"moheaRadiobutton", label:"My New Radio Button", required: false, options: [
+        { name: "Radio Button", tag: "div", className:"moheaRadiobutton", label:"My New Radio Button", required: "required", options: [
           { id: 0, tag: "input", type: "radio", label: "My first Option" }
         ]},
-        { name: "Email", tag: "input", className:"moheaEmail", label:"My Email", type: "email", pattern: "", required: false, placeholder: "My placeholder" },
-        { name: "Link", tag: "input", className:"moheaLink", label:"My Link", type: "url", required: false, placeholder: "My placeholder" },
-        { name: "Password", tag: "input", className:"moheaPassword", label:"My Password", type: "password", required: false, placeholder: "My placeholder" },
-        { name: "Phone", tag: "input", className:"moheaPhone", label:"My Phone Number", type: "tel", pattern: "", required: false, placeholder: "My placeholder" }
+        { name: "Email", tag: "input", className:"moheaEmail", label:"My Email", type: "email", pattern: "", required: "required", placeholder: "My placeholder" },
+        { name: "Link", tag: "input", className:"moheaLink", label:"My Link", type: "url", required: "required", placeholder: "My placeholder" },
+        { name: "Password", tag: "input", className:"moheaPassword", label:"My Password", type: "password", required: "required", placeholder: "My placeholder" },
+        { name: "Phone", tag: "input", className:"moheaPhone", label:"My Phone Number", type: "tel", pattern: "", required: "required", placeholder: "My placeholder" }
     ],
     elementsUsed: [],
     focus: -1,

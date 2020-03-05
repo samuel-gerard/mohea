@@ -113,3 +113,18 @@ fieldset {
 .form_box label {
   width: 100%;
 }
+
+.focus {
+  background-color: #e3e3e3;
+}
+
+.form-element {
+  padding: 15px;
+  border-radius: 5px;
+  border: dashed black 1px;
+  cursor: pointer;
+}
+
+.element-choice {
+  width: 40%;
+}

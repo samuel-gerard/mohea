@@ -61,10 +61,10 @@ class FormEdit extends Component {
         }else if(e.target.name == 'placeholder'){
             newElement.placeholder = e.target.value
         }else if(e.target.name == 'required'){
-            if(newElement.required == true){
-                newElement.required = false
+            if(newElement.required == 'required'){
+                newElement.required = ''
             }else{
-                newElement.required = true
+                newElement.required = 'required'
             }
         }
         this.props.updateElement(newElement, this.props.focus)
@@ -77,10 +77,10 @@ class FormEdit extends Component {
         }else if(e.target.name == 'placeholder'){
             newElement.placeholder = e.target.value
         }else if(e.target.name == 'required'){
-            if(newElement.required == true){
-                newElement.required = false
+            if(newElement.required == 'required'){
+                newElement.required = ''
             }else{
-                newElement.required = true
+                newElement.required = 'required'
             }
         }else if(e.target.name == 'rows'){
             newElement.rows = e.target.value
@@ -95,10 +95,10 @@ class FormEdit extends Component {
         if(e.target.name == 'label'){
             newElement.label = e.target.value
         }else if(e.target.name == 'required'){
-            if(newElement.required == true){
-                newElement.required = false
+            if(newElement.required == 'required'){
+                newElement.required = ''
             }else{
-                newElement.required = true
+                newElement.required = 'required'
             }
         }
         this.props.updateElement(newElement, this.props.focus)
@@ -109,10 +109,10 @@ class FormEdit extends Component {
         if(e.target.name == 'label'){
             newElement.label = e.target.value
         }else if(e.target.name == 'required'){
-            if(newElement.required == true){
-                newElement.required = false
+            if(newElement.required == 'required'){
+                newElement.required = ''
             }else{
-                newElement.required = true
+                newElement.required = 'required'
             }
         }
         this.props.updateElement(newElement, this.props.focus)

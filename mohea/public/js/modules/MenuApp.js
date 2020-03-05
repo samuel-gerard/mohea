@@ -67655,7 +67655,7 @@ var SaveProject = function SaveProject(props) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_menu__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/menu */ "./resources/js/modules/menu/components/menu.js");
+/* harmony import */ var _components_Menu__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/Menu */ "./resources/js/modules/menu/components/Menu.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
@@ -67675,7 +67675,7 @@ __webpack_require__.r(__webpack_exports__);
 var store = Object(redux__WEBPACK_IMPORTED_MODULE_3__["createStore"])(_redux_reducers__WEBPACK_IMPORTED_MODULE_5__["default"]);
 react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_4__["Provider"], {
   store: store
-}, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_crystallize_react_growl__WEBPACK_IMPORTED_MODULE_6__["GrowlComponent"], null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_menu__WEBPACK_IMPORTED_MODULE_0__["default"], null)), document.getElementById('app-menu'));
+}, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_crystallize_react_growl__WEBPACK_IMPORTED_MODULE_6__["GrowlComponent"], null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Menu__WEBPACK_IMPORTED_MODULE_0__["default"], null)), document.getElementById('app-menu'));
 
 /***/ }),
 
@@ -67860,6 +67860,251 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, stateProps) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(CustomInput));
+
+/***/ }),
+
+/***/ "./resources/js/modules/menu/components/Menu.js":
+/*!******************************************************!*\
+  !*** ./resources/js/modules/menu/components/Menu.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _MenuReturn_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./MenuReturn.jsx */ "./resources/js/modules/menu/components/MenuReturn.jsx");
+/* harmony import */ var _redux_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../redux/actions */ "./resources/js/modules/menu/redux/actions.js");
+/* harmony import */ var _MenuContent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./MenuContent */ "./resources/js/modules/menu/components/MenuContent.jsx");
+/* harmony import */ var _CustomInput__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./CustomInput */ "./resources/js/modules/menu/components/CustomInput.js");
+/* harmony import */ var _components_Canceller__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../components/Canceller */ "./resources/js/components/Canceller.js");
+/* harmony import */ var _components_SaveProject__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../components/SaveProject */ "./resources/js/components/SaveProject.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+
+
+
+
+
+var Menu =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(Menu, _Component);
+
+  function Menu() {
+    var _getPrototypeOf2;
+
+    var _this;
+
+    _classCallCheck(this, Menu);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Menu)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_this), "handleReset", function () {
+      _this.props.resetMenu();
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleName", function (e) {
+      _this.props.updateName(e.target.value);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleClasses", function (e) {
+      if (e.target.name) {
+        _this.props.updateClasses(document.querySelector("input[name=" + e.target.name + "]:not(:checked").value);
+      }
+
+      _this.props.updateClasses(e.target.value);
+    });
+
+    return _this;
+  }
+
+  _createClass(Menu, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      var href = window.location.href;
+      var id = href.substring(href.lastIndexOf('/') + 1);
+
+      if (!parseInt(id, 10)) {
+        return;
+      }
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default()({
+        method: 'GET',
+        url: window.location.origin + '/project/' + id
+      }).then(function (res) {
+        if (res.status === 200) {
+          var data = res.data;
+          var menu = JSON.parse(data.content);
+
+          _this2.props.loadMenu(id, menu.classes, menu.content, data.name);
+        }
+      })["catch"](function (err) {
+        window.location.replace(window.location.origin + '/error');
+      });
+    }
+    /* ===============================================
+    * DELETE FUNCTIONS
+    =============================================== */
+    // Delete all the menu
+
+  }, {
+    key: "render",
+
+    /* ===============================================
+    * DISPLAY COMPONENT
+    =============================================== */
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.props.name || 'New Menu'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SaveProject__WEBPACK_IMPORTED_MODULE_8__["SaveProject"], {
+        content: this.props.menu,
+        classes: this.props.classes,
+        name: this.props.name,
+        type: "menu"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CustomInput__WEBPACK_IMPORTED_MODULE_6__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Canceller__WEBPACK_IMPORTED_MODULE_7__["Canceller"], {
+        cancelAction: this.props.cancelAction
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-3"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "menu-name"
+      }, "Name for this menu"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        className: "form-control",
+        name: "name",
+        id: "menu-name",
+        onChange: this.handleName,
+        value: this.props.name
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group card p-2 bg-info text-white"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Menu global style"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-check"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-check-input",
+        type: "checkbox",
+        id: "class-style",
+        onChange: this.handleClasses,
+        value: "navbar",
+        checked: this.props.classes.find(function (el) {
+          return el === 'navbar';
+        }) ? 'checked' : 'false'
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "form-check-label",
+        htmlFor: "class-style"
+      }, "With bootstrap initial style")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-radio"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-radio-input",
+        name: "bg-color",
+        type: "radio",
+        id: "class-light",
+        onChange: this.handleClasses,
+        value: "navbar-light bg-light",
+        checked: this.props.classes.find(function (el) {
+          return el === 'navbar-light bg-light';
+        }) ? 'checked' : false
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "form-radio-label",
+        htmlFor: "class-light"
+      }, "Light")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-radio"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-radio-input",
+        name: "bg-color",
+        type: "radio",
+        id: "class-dark",
+        onChange: this.handleClasses,
+        value: "navbar-dark bg-dark",
+        checked: this.props.classes.find(function (el) {
+          return el === 'navbar-dark bg-dark';
+        }) ? 'checked' : false
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "form-radio-label",
+        htmlFor: "class-dark"
+      }, "Dark"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group d-flex justify-content-between"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "button",
+        className: "w-25 btn btn-primary",
+        value: "Reset",
+        onClick: this.handleReset
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-9"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MenuContent__WEBPACK_IMPORTED_MODULE_5__["default"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MenuReturn_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null))));
+    }
+  }]);
+
+  return Menu;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    menu: state.menu,
+    name: state.name,
+    classes: state.classes
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    loadMenu: function loadMenu(id, classes, menu, name) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_4__["loadMenu"])(id, classes, menu, name));
+    },
+    updateName: function updateName(name) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_4__["updateName"])(name));
+    },
+    updateClasses: function updateClasses(classe) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_4__["updateClasses"])(classe));
+    },
+    resetMenu: function resetMenu() {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_4__["resetMenu"])());
+    },
+    cancelAction: function cancelAction() {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_4__["cancelAction"])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Menu));
 
 /***/ }),
 
@@ -68197,251 +68442,6 @@ var mapStateToProps = function mapStateToProps(state) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(MenuReturn));
-
-/***/ }),
-
-/***/ "./resources/js/modules/menu/components/menu.js":
-/*!******************************************************!*\
-  !*** ./resources/js/modules/menu/components/menu.js ***!
-  \******************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _MenuReturn_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./MenuReturn.jsx */ "./resources/js/modules/menu/components/MenuReturn.jsx");
-/* harmony import */ var _redux_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../redux/actions */ "./resources/js/modules/menu/redux/actions.js");
-/* harmony import */ var _MenuContent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./MenuContent */ "./resources/js/modules/menu/components/MenuContent.jsx");
-/* harmony import */ var _CustomInput__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./CustomInput */ "./resources/js/modules/menu/components/CustomInput.js");
-/* harmony import */ var _components_Canceller__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../components/Canceller */ "./resources/js/components/Canceller.js");
-/* harmony import */ var _components_SaveProject__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../components/SaveProject */ "./resources/js/components/SaveProject.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
-
-
-
-
-
-
-
-
-var Menu =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(Menu, _Component);
-
-  function Menu() {
-    var _getPrototypeOf2;
-
-    var _this;
-
-    _classCallCheck(this, Menu);
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Menu)).call.apply(_getPrototypeOf2, [this].concat(args)));
-
-    _defineProperty(_assertThisInitialized(_this), "handleReset", function () {
-      _this.props.resetMenu();
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "handleName", function (e) {
-      _this.props.updateName(e.target.value);
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "handleClasses", function (e) {
-      if (e.target.name) {
-        _this.props.updateClasses(document.querySelector("input[name=" + e.target.name + "]:not(:checked").value);
-      }
-
-      _this.props.updateClasses(e.target.value);
-    });
-
-    return _this;
-  }
-
-  _createClass(Menu, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      var href = window.location.href;
-      var id = href.substring(href.lastIndexOf('/') + 1);
-
-      if (!parseInt(id, 10)) {
-        return;
-      }
-
-      axios__WEBPACK_IMPORTED_MODULE_1___default()({
-        method: 'GET',
-        url: window.location.origin + '/project/' + id
-      }).then(function (res) {
-        if (res.status === 200) {
-          var data = res.data;
-          var menu = JSON.parse(data.content);
-
-          _this2.props.loadMenu(id, menu.classes, menu.content, data.name);
-        }
-      })["catch"](function (err) {
-        window.location.replace(window.location.origin + '/error');
-      });
-    }
-    /* ===============================================
-    * DELETE FUNCTIONS
-    =============================================== */
-    // Delete all the menu
-
-  }, {
-    key: "render",
-
-    /* ===============================================
-    * DISPLAY COMPONENT
-    =============================================== */
-    value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.props.name || 'New Menu'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SaveProject__WEBPACK_IMPORTED_MODULE_8__["SaveProject"], {
-        content: this.props.menu,
-        classes: this.props.classes,
-        name: this.props.name,
-        type: "menu"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CustomInput__WEBPACK_IMPORTED_MODULE_6__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Canceller__WEBPACK_IMPORTED_MODULE_7__["Canceller"], {
-        cancelAction: this.props.cancelAction
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-3"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "menu-name"
-      }, "Name for this menu"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
-        className: "form-control",
-        name: "name",
-        id: "menu-name",
-        onChange: this.handleName,
-        value: this.props.name
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group card p-2 bg-info text-white"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Menu global style"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-check"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        className: "form-check-input",
-        type: "checkbox",
-        id: "class-style",
-        onChange: this.handleClasses,
-        value: "navbar",
-        checked: this.props.classes.find(function (el) {
-          return el === 'navbar';
-        }) ? 'checked' : 'false'
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "form-check-label",
-        htmlFor: "class-style"
-      }, "With bootstrap initial style")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-radio"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        className: "form-radio-input",
-        name: "bg-color",
-        type: "radio",
-        id: "class-light",
-        onChange: this.handleClasses,
-        value: "navbar-light bg-light",
-        checked: this.props.classes.find(function (el) {
-          return el === 'navbar-light bg-light';
-        }) ? 'checked' : false
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "form-radio-label",
-        htmlFor: "class-light"
-      }, "Light")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-radio"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        className: "form-radio-input",
-        name: "bg-color",
-        type: "radio",
-        id: "class-dark",
-        onChange: this.handleClasses,
-        value: "navbar-dark bg-dark",
-        checked: this.props.classes.find(function (el) {
-          return el === 'navbar-dark bg-dark';
-        }) ? 'checked' : false
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "form-radio-label",
-        htmlFor: "class-dark"
-      }, "Dark"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group d-flex justify-content-between"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "button",
-        className: "w-25 btn btn-primary",
-        value: "Reset",
-        onClick: this.handleReset
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-9"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MenuContent__WEBPACK_IMPORTED_MODULE_5__["default"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-12"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MenuReturn_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null))));
-    }
-  }]);
-
-  return Menu;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
-
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    menu: state.menu,
-    name: state.name,
-    classes: state.classes
-  };
-};
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    loadMenu: function loadMenu(id, classes, menu, name) {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_4__["loadMenu"])(id, classes, menu, name));
-    },
-    updateName: function updateName(name) {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_4__["updateName"])(name));
-    },
-    updateClasses: function updateClasses(classe) {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_4__["updateClasses"])(classe));
-    },
-    resetMenu: function resetMenu() {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_4__["resetMenu"])());
-    },
-    cancelAction: function cancelAction() {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_4__["cancelAction"])());
-    }
-  };
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Menu));
 
 /***/ }),
 

@@ -16,6 +16,7 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/privacy', 'HomeController@privacy')->name('privacy');
+Route::get('/help', 'HomeController@help')->name('help');
 
 Route::middleware(['auth'])->group(function() {
 
@@ -32,12 +33,15 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/project/{type}/{id}', 'ProjectController@create')->where('type', 'menu|table|form')->where('id', '[0-9]+');
 
     // Routes of user update 
+    Route::get('/user', 'UserController@index')->name('user.info');
     Route::post('/user/info', 'UserController@updateInfo')->name('user.update.info');
     Route::post('/user/password', 'UserController@updatePassword')->name('user.update.password');
     Route::post('/user/delete', 'UserController@destroy')->name('user.delete');    
+    Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+
+    Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 });
 
-Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

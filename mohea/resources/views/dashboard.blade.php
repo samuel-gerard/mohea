@@ -20,7 +20,7 @@
             <img class="avatar" src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->name }}'s profile picture">
             <p class="name">{{ Auth::user()->name }}</p>
             <p class="email">{{ Auth::user()->email }}</p>
-            <a class="button" href="">Edit your account</a>
+            <a class="button" href="{{ route('user.info') }}">Edit your account</a>
         </div>
     </div>
     <div class="content">
@@ -36,7 +36,7 @@
 </main>
 <footer>
     <div class="footer-links">
-        <a class="link action" href="">I need help</a>
+        <a class="link action" href="{{ route('help') }}">I need help</a>
         <a class="link info" href="{{ route('privacy') }}">Terms of use</a>
         <span>Copyright Mohea © 2020</span>
     </div>

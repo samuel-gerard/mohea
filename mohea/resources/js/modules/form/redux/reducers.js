@@ -1,5 +1,4 @@
 const initState = {
-    'title': '',
     name: '',
     elementsChoices: [
         { name: "Text", tag: "p", content: "My New Text" },
@@ -91,7 +90,7 @@ function rootReducer(state = initState, payload) {
 
         case "UPDATE_ITEM":
           let newElement = Object.assign({}, payload.element);
-          newState.elementsUsed[payload.id] = newElement
+          newState.elementsUsed[payload.element.id] = newElement
           return {
             ...state,
             elementsUsed: [

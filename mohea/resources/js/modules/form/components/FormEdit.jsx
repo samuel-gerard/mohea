@@ -182,15 +182,19 @@ class FormEdit extends Component {
                 var selectId = "select_"+element.id
                 return (
                     <div className="form-group">
-                        <label htmlFor={contentId}>{element.name}</label>
-                        <input className="form-control" id={contentId} type="text" name="content" value={element.content} onChange={this.handleUpdateTitle} />
-                        <label htmlFor={selectId}>Title size</label>
-                        <select className="form-control" id={selectId} type="titleSize" name="tag" value={element.tag} onChange={this.handleUpdateTitle}>
-                            <option value="h1">H1</option>
-                            <option value="h2">H2</option>
-                            <option value="h3">H3</option>
-                            <option value="h4">H4</option>
-                        </select>
+                        <div className="form-group">
+                            <label htmlFor={contentId}>{element.name}</label>
+                            <input className="form-control" id={contentId} type="text" name="content" value={element.content} onChange={this.handleUpdateTitle} />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor={selectId}>Title size</label>
+                            <select className="form-control" id={selectId} type="titleSize" name="tag" value={element.tag} onChange={this.handleUpdateTitle}>
+                                <option value="h1">H1</option>
+                                <option value="h2">H2</option>
+                                <option value="h3">H3</option>
+                                <option value="h4">H4</option>
+                            </select>
+                        </div>
                     </div>
                 )
             
@@ -213,10 +217,14 @@ class FormEdit extends Component {
                 var placeholderId = "placeholder_"+element.id
                 return (
                     <div className="form-group">
-                        <label htmlFor={labelId}>Label</label>
-                        <input className="form-control" id={labelId} type="text" name="label" onChange={this.handleInputBasic} value={element.label} />
-                        <label htmlFor={placeholderId}>Place Holder</label>
-                        <input className="form-control" id={placeholderId} type="text" name="placeholder" onChange={this.handleInputBasic} value={element.placeholder} />
+                        <div className="form-group">
+                            <label htmlFor={labelId}>Label</label>
+                            <input className="form-control" id={labelId} type="text" name="label" onChange={this.handleInputBasic} value={element.label} />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor={placeholderId}>Place Holder</label>
+                            <input className="form-control" id={placeholderId} type="text" name="placeholder" onChange={this.handleInputBasic} value={element.placeholder} />
+                        </div>
                         <div className="form-check">
                             <input className="form-check-input" type="checkbox" id={requiredId} onChange={this.handleInputBasic} name="required" checked={element.required} />
                             <label className="form-check-label" htmlFor={requiredId}>Required</label>
@@ -230,12 +238,18 @@ class FormEdit extends Component {
                 var rowId = "row_"+element.id
                 return (
                     <div className="form-group">
-                        <label htmlFor={labelTextAreaId}>Label</label>
-                        <input className="form-control" id={labelTextAreaId} type="text" name="label" onChange={this.handleUpdateTextArea} value={element.label} />
-                        <label htmlFor={placeholderTextareaId}>Place Holder</label>
-                        <input className="form-control" id={placeholderTextareaId} type="text" name="placeholder" onChange={this.handleUpdateTextArea} value={element.placeholder} />
-                        <label htmlFor={rowId}>Row</label>
-                        <input className="form-control" id={rowId} type="number" name="rows" onChange={this.handleUpdateTextArea} value={element.rows} />
+                        <div className="form-group">
+                            <label htmlFor={labelTextAreaId}>Label</label>
+                            <input className="form-control" id={labelTextAreaId} type="text" name="label" onChange={this.handleUpdateTextArea} value={element.label} />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor={placeholderTextareaId}>Place Holder</label>
+                            <input className="form-control" id={placeholderTextareaId} type="text" name="placeholder" onChange={this.handleUpdateTextArea} value={element.placeholder} />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor={rowId}>Row</label>
+                            <input className="form-control" id={rowId} type="number" name="rows" onChange={this.handleUpdateTextArea} value={element.rows} />
+                        </div>
                         <div className="form-check">
                             <input className="form-check-input" type="checkbox" id={requiredId} onChange={this.handleUpdateTextArea} name="required" checked={element.required} />
                             <label className="form-check-label" htmlFor={requiredId}>Required</label>
@@ -249,24 +263,27 @@ class FormEdit extends Component {
                 var updateOptionId = "update_option_"+element.id
                 return (
                     <div className="form-group">
-                        <label htmlFor={labelSelectId}>Label</label>
-                        <input className="form-control" id={labelSelectId} type="text" name="label" onChange={this.handleUpdateSelect} value={element.label} />
-                        <input className="form-control" type="button" name="newOption" onClick={() => this.handleAddOptionForSelect()} className="btn btn-primary" value="Add New Option" />
-                        <label htmlFor={selectContentId}>Edit options</label>
-                        <select className="custom-select" id={selectContentId} name="options">
-                            {element.options.map((option, i) => {
-                                return <option key={i} onClick={() => this.handleSelectOption(option)} value={option.value}>{option.content}</option>
-                            })}
-                        </select>
-
+                        <div className="form-group">
+                            <label htmlFor={labelSelectId}>Label</label>
+                            <input className="form-control" id={labelSelectId} type="text" name="label" onChange={this.handleUpdateSelect} value={element.label} />
+                        </div>
+                        <div className="form-group">
+                            <input className="form-control" type="button" name="newOption" onClick={() => this.handleAddOptionForSelect()} className="btn btn-primary" value="Add New Option" />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor={selectContentId}>Edit options</label>
+                            <select className="custom-select" id={selectContentId} name="options">
+                                {element.options.map((option, i) => {
+                                    return <option key={i} onClick={() => this.handleSelectOption(option)} value={option.value}>{option.content}</option>
+                                })}
+                            </select>
+                        </div>
                         {this.state.selectedOption !== null ? (
-                            <div>
+                            <div className="form-group">
                                 <label htmlFor={updateOptionId}>Update option</label>
                                 <input className="form-control" id={updateOptionId} type="text" value={this.state.selectedOption.content} onChange={this.handleUpdateOptionForSelect} />
                             </div>
-                        ) : (
-                            <h3>Choose an option to update</h3>
-                        )}
+                        ) : null}
                         <div className="form-check">
                             <input className="form-check-input" type="checkbox" id={requiredId} onChange={this.handleUpdateSelect} name="required" checked={element.required} />
                             <label className="form-check-label" htmlFor={requiredId}>Required</label>
@@ -280,23 +297,27 @@ class FormEdit extends Component {
                 var updateOptionId = "update_option_checkbox_"+element.id
                 return (
                     <div className="form-group">
-                        <label htmlFor={labelCheckId}>Label</label>
-                        <input className="form-control" id={labelCheckId} type="text" name="label" onChange={this.handleUpdateBoxAndRadio} value={element.label} />
-                        <input className="form-control" type="button" name="newOption" onClick={() => this.handleAddOptionCheckbox()} className="btn btn-primary" value="Add New Option" />
+                        <div className="form-group">
+                            <label htmlFor={labelCheckId}>Label</label>
+                            <input className="form-control" id={labelCheckId} type="text" name="label" onChange={this.handleUpdateBoxAndRadio} value={element.label} />
+                        </div>
+                        <div className="form-group">
+                            <input className="form-control" type="button" name="newOption" onClick={() => this.handleAddOptionCheckbox()} className="btn btn-primary" value="Add New Option" />
+                        </div>
                         <label htmlFor={optionCheckId}>Edit options</label>
-                        <select className="form-control" id={optionCheckId} name="options">
-                            {element.options.map((option, i) => {
-                                return <option key={i} onClick={() => this.handleSelectOption(option)} value={option.label}>{option.label}</option>
-                            })}
-                        </select>
+                        <div className="form-group">
+                            <select className="form-control" id={optionCheckId} name="options">
+                                {element.options.map((option, i) => {
+                                    return <option key={i} onClick={() => this.handleSelectOption(option)} value={option.label}>{option.label}</option>
+                                })}
+                            </select>
+                        </div>
                         {this.state.selectedOption !== null ? (
-                            <div>
+                            <div className="form-group">
                                 <label htmlFor={updateOptionId}>Update option</label>
                                 <input className="form-control" id={updateOptionId} type="text" value={this.state.selectedOption.label} onChange={this.handleUpdateOptionForCheckboxAndRadio} />
                             </div>
-                        ) : (
-                            <h3>Choose an option to update</h3>
-                        )}
+                        ) : null}
                         <div className="form-check">
                             <input className="form-check-input" type="checkbox" id={requiredId} onChange={this.handleUpdateBoxAndRadio} name="required" checked={element.required} />
                             <label className="form-check-label" htmlFor={requiredId}>Required</label>
@@ -310,23 +331,29 @@ class FormEdit extends Component {
                 var updateOptionId = "udpate_option_radiobutton_"+element.id
                 return (
                     <div className="form-group">
-                        <label htmlFor={labelRadioId}>Label</label>
-                        <input className="form-control" id={labelRadioId} type="text" name="label" onChange={this.handleUpdateBoxAndRadio} value={element.label} />
-                        <input className="form-control" type="button" name="newOption" onClick={() => this.handleAddOptionRadio()} className="btn btn-primary" value="Add New Option" />
-                        <label htmlFor={optionsId}>Edit options</label>
-                        <select className="form-control" id={optionsId} name="options">
-                            {element.options.map((option, i) => {
-                                return <option key={i} onClick={() => this.handleSelectOption(option)} value={option.label}>{option.label}</option>
-                            })}
-                        </select>
-                        {this.state.selectedOption !== null ? (
-                            <div>
-                                <label htmlFor={updateOptionId}>Update option</label>
-                                <input className="form-control" id={updateOptionId} type="text" value={this.state.selectedOption.label} onChange={this.handleUpdateOptionForCheckboxAndRadio} />
+                        <div className="form-group">
+                            <label htmlFor={labelRadioId}>Label</label>
+                            <input className="form-control" id={labelRadioId} type="text" name="label" onChange={this.handleUpdateBoxAndRadio} value={element.label} />
+                        </div>
+                        <div className="form-group">
+                            <input className="form-control" type="button" name="newOption" onClick={() => this.handleAddOptionRadio()} className="btn btn-primary" value="Add New Option" />
+                        </div>
+                        <div className="form-group">
+                            <div className="form-group">
+                                <label htmlFor={optionsId}>Choose an option to edit</label>
+                                <select className="form-control" id={optionsId} name="options">
+                                    {element.options.map((option, i) => {
+                                        return <option key={i} onClick={() => this.handleSelectOption(option)} value={option.label}>{option.label}</option>
+                                    })}
+                                </select>
                             </div>
-                        ) : (
-                            <h3>Choose an option to update</h3>
-                        )}
+                            {this.state.selectedOption !== null ?
+                                <div className="form-group">
+                                    <label htmlFor={updateOptionId}>Edit option</label>
+                                    <input className="form-control" id={updateOptionId} type="text" value={this.state.selectedOption.label} onChange={this.handleUpdateOptionForCheckboxAndRadio} />
+                                </div>
+                             : null}
+                        </div>
                         <div className="form-check">
                             <input className="form-check-input" type="checkbox" id={requiredId} onChange={this.handleUpdateBoxAndRadio} name="required" checked={element.required} />
                             <label className="form-check-label" htmlFor={requiredId}>Required</label>
@@ -364,8 +391,8 @@ class FormEdit extends Component {
                         <form>
                             {this.renderSwitch(this.props.focus)}
                         </form>
-                        <input type="button" onClick={() => this.handleMoveUp(this.props.focus)} className="btn btn-primary" value="Up" />
-                        <input type="button" onClick={() => this.handleMoveDown(this.props.focus)} className="btn btn-primary" value="Down" />
+                        <input type="button" onClick={() => this.handleMoveUp(this.props.focus)} className="btn btn-primary" value="Down" />
+                        <input type="button" onClick={() => this.handleMoveDown(this.props.focus)} className="btn btn-primary" value="Up" />
                         <input type="button" onClick={() => this.handleDuplicateItem(this.props.focus)} className="btn btn-primary" value="Duplicate" />
                         <input type="button" onClick={() => this.handleDeleteItem(this.props.focus)} className="btn btn-danger" value="Delete" />
                     </div>

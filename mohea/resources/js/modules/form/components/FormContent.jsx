@@ -12,7 +12,7 @@ class FormContent extends Component {
 
         case 'Text':
             return (
-                <div  className="form-group">
+                <div className="form-group">
                     <p>{element.content}</p>
                 </div>                    
             )
@@ -49,7 +49,7 @@ class FormContent extends Component {
         case 'Submit':
             return (
                 <div className="form-group">
-                    <input type="submit" className="form-control" value={element.value} />
+                    <button className="btn btn-primary">{element.value}</button>
                 </div>
             )
             
@@ -59,10 +59,11 @@ class FormContent extends Component {
         case 'Link':
         case 'Phone':
         case 'Password':
+            var input_id = "input_"+element.id
             return (
                 <div className="form-group">
-                    <label>{element.label}</label>
-                    <input type={element.type} className="form-control" placeholder={element.placeholder} />
+                    <label htmlFor={input_id}>{element.label}</label>
+                    <input type={element.type} id={input_id} className="form-control" placeholder={element.placeholder} />
                 </div>
             )
 
@@ -76,7 +77,7 @@ class FormContent extends Component {
             )
 
         case 'Select':
-            var selectId = "salectInput"+element.id
+            var selectId = "select_"+element.id+"_id_"+element.id
             return (
                 <div className="form-group">
                     <label htmlFor={selectId}>{element.label}</label>
@@ -95,8 +96,8 @@ class FormContent extends Component {
                 <label className="col-form-label">{element.label}</label>
                 {element.options.map((option, i) => {
                     var name = "radio_"+element.id
-                    var id = "id_"+i
-                    var value = "val_"+i  
+                    var id = "check_radio"+element.id+"_id_"+option.id
+                    var value = "val_"+option.id
                     return (
                         <div className="form-check" key={i}>
                             <input className="form-check-input" key={i} name={name} type={option.type} value={value} id={id} />

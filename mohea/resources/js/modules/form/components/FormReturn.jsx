@@ -9,8 +9,6 @@ const FormReturn = props => {
 
     const { elementsUsed } = props
 
-
-    
     let html = '<form>\n'
     
     elementsUsed.forEach(element => {
@@ -93,8 +91,8 @@ const FormReturn = props => {
                         +'      <label class="col-form-label">'+element.label+'</label>\n'
                         element.options.forEach((option, i) => {
                             var name = "radio_"+element.id
-                            var id = "id_"+i
-                            var value = "val_"+i  
+                            var id = "id_"+element.id
+                            var value = "val_"+element.id
                             html += '       <div class="form-check">\n'
                                         +'          <input class="form-check-input" name="'+name+'" type="'+option.type+'" value="'+value+'" id="'+id+'" >\n'
                                         +'          <label class="form-check-label" for="'+id+'">'+option.label+'</label>\n'
@@ -110,7 +108,6 @@ const FormReturn = props => {
 
     return (
         <div>
-            <h1>Your HTML code</h1>
             <div className="w-50 mx-auto">
                 <PrismCode
                     code={html}

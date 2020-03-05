@@ -51581,17 +51581,22 @@ function (_Component) {
   _createClass(FormChoices, [{
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "section-form"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Add an Element"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "elements-choices"
       }, this.props.elements.map(function (element, i) {
-        return (// <input key={i} type="button" onClick={() => this.handleAddItem(element)} className="btn btn-primary" value={element.name} />
-          // <img src="public/images/Form/svg/checkbox.svg"></img>
-          react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-            src: "/var/www/html/LpWeb/Mohea/mohea.bach.mmi-unistra.fr/mohea/public/images/Form/svg/checkbox.svg"
-          })
-        );
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          key: i,
+          type: "button",
+          onClick: function onClick() {
+            return _this2.handleAddItem(element);
+          },
+          className: "btn btn-primary",
+          value: element.name
+        });
       })));
     }
   }]);
@@ -51714,11 +51719,9 @@ function (_Component) {
         case 'Submit':
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "form-group"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-            type: "submit",
-            className: "form-control",
-            value: element.value
-          }));
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+            className: "btn btn-primary"
+          }, element.value));
 
         case 'Text Input':
         case 'Date':
@@ -51726,10 +51729,14 @@ function (_Component) {
         case 'Link':
         case 'Phone':
         case 'Password':
+          var input_id = "input_" + element.id;
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "form-group"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, element.label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+            htmlFor: input_id
+          }, element.label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             type: element.type,
+            id: input_id,
             className: "form-control",
             placeholder: element.placeholder
           }));
@@ -51749,7 +51756,7 @@ function (_Component) {
           }));
 
         case 'Select':
-          var selectId = "salectInput" + element.id;
+          var selectId = "select_" + element.id + "_id_" + element.id;
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "form-group"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -51772,8 +51779,8 @@ function (_Component) {
             className: "col-form-label"
           }, element.label), element.options.map(function (option, i) {
             var name = "radio_" + element.id;
-            var id = "id_" + i;
-            var value = "val_" + i;
+            var id = "check_radio" + element.id + "_id_" + option.id;
+            var value = "val_" + option.id;
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               className: "form-check",
               key: i
@@ -52115,6 +52122,8 @@ function (_Component) {
           var selectId = "select_" + element.id;
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "form-group"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "form-group"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
             htmlFor: contentId
           }, element.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -52124,7 +52133,9 @@ function (_Component) {
             name: "content",
             value: element.content,
             onChange: this.handleUpdateTitle
-          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "form-group"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
             htmlFor: selectId
           }, "Title size"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
             className: "form-control",
@@ -52141,7 +52152,7 @@ function (_Component) {
             value: "h3"
           }, "H3"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
             value: "h4"
-          }, "H4")));
+          }, "H4"))));
 
         case 'Submit':
           var submitId = "submit_" + element.id;
@@ -52168,6 +52179,8 @@ function (_Component) {
           var placeholderId = "placeholder_" + element.id;
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "form-group"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "form-group"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
             htmlFor: labelId
           }, "Label"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -52177,7 +52190,9 @@ function (_Component) {
             name: "label",
             onChange: this.handleInputBasic,
             value: element.label
-          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "form-group"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
             htmlFor: placeholderId
           }, "Place Holder"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             className: "form-control",
@@ -52186,7 +52201,7 @@ function (_Component) {
             name: "placeholder",
             onChange: this.handleInputBasic,
             value: element.placeholder
-          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "form-check"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             className: "form-check-input",
@@ -52206,6 +52221,8 @@ function (_Component) {
           var rowId = "row_" + element.id;
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "form-group"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "form-group"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
             htmlFor: labelTextAreaId
           }, "Label"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -52215,7 +52232,9 @@ function (_Component) {
             name: "label",
             onChange: this.handleUpdateTextArea,
             value: element.label
-          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "form-group"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
             htmlFor: placeholderTextareaId
           }, "Place Holder"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             className: "form-control",
@@ -52224,7 +52243,9 @@ function (_Component) {
             name: "placeholder",
             onChange: this.handleUpdateTextArea,
             value: element.placeholder
-          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "form-group"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
             htmlFor: rowId
           }, "Row"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             className: "form-control",
@@ -52233,7 +52254,7 @@ function (_Component) {
             name: "rows",
             onChange: this.handleUpdateTextArea,
             value: element.rows
-          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "form-check"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             className: "form-check-input",
@@ -52253,6 +52274,8 @@ function (_Component) {
           var updateOptionId = "update_option_" + element.id;
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "form-group"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "form-group"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
             htmlFor: labelSelectId
           }, "Label"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -52262,14 +52285,18 @@ function (_Component) {
             name: "label",
             onChange: this.handleUpdateSelect,
             value: element.label
-          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", (_React$createElement = {
+          })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "form-group"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", (_React$createElement = {
             className: "form-control",
             type: "button",
             name: "newOption",
             onClick: function onClick() {
               return _this2.handleAddOptionForSelect();
             }
-          }, _defineProperty(_React$createElement, "className", "btn btn-primary"), _defineProperty(_React$createElement, "value", "Add New Option"), _React$createElement)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          }, _defineProperty(_React$createElement, "className", "btn btn-primary"), _defineProperty(_React$createElement, "value", "Add New Option"), _React$createElement))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "form-group"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
             htmlFor: selectContentId
           }, "Edit options"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
             className: "custom-select",
@@ -52283,7 +52310,9 @@ function (_Component) {
               },
               value: option.value
             }, option.content);
-          })), this.state.selectedOption !== null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          }))), this.state.selectedOption !== null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "form-group"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
             htmlFor: updateOptionId
           }, "Update option"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             className: "form-control",
@@ -52291,7 +52320,7 @@ function (_Component) {
             type: "text",
             value: this.state.selectedOption.content,
             onChange: this.handleUpdateOptionForSelect
-          })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Choose an option to update"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          })) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "form-check"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             className: "form-check-input",
@@ -52311,6 +52340,8 @@ function (_Component) {
           var updateOptionId = "update_option_checkbox_" + element.id;
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "form-group"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "form-group"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
             htmlFor: labelCheckId
           }, "Label"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -52320,16 +52351,20 @@ function (_Component) {
             name: "label",
             onChange: this.handleUpdateBoxAndRadio,
             value: element.label
-          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", (_React$createElement2 = {
+          })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "form-group"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", (_React$createElement2 = {
             className: "form-control",
             type: "button",
             name: "newOption",
             onClick: function onClick() {
               return _this2.handleAddOptionCheckbox();
             }
-          }, _defineProperty(_React$createElement2, "className", "btn btn-primary"), _defineProperty(_React$createElement2, "value", "Add New Option"), _React$createElement2)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          }, _defineProperty(_React$createElement2, "className", "btn btn-primary"), _defineProperty(_React$createElement2, "value", "Add New Option"), _React$createElement2))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
             htmlFor: optionCheckId
-          }, "Edit options"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+          }, "Edit options"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "form-group"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
             className: "form-control",
             id: optionCheckId,
             name: "options"
@@ -52341,7 +52376,9 @@ function (_Component) {
               },
               value: option.label
             }, option.label);
-          })), this.state.selectedOption !== null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          }))), this.state.selectedOption !== null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "form-group"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
             htmlFor: updateOptionId
           }, "Update option"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             className: "form-control",
@@ -52349,7 +52386,7 @@ function (_Component) {
             type: "text",
             value: this.state.selectedOption.label,
             onChange: this.handleUpdateOptionForCheckboxAndRadio
-          })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Choose an option to update"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          })) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "form-check"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             className: "form-check-input",
@@ -52369,6 +52406,8 @@ function (_Component) {
           var updateOptionId = "udpate_option_radiobutton_" + element.id;
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "form-group"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "form-group"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
             htmlFor: labelRadioId
           }, "Label"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -52378,16 +52417,22 @@ function (_Component) {
             name: "label",
             onChange: this.handleUpdateBoxAndRadio,
             value: element.label
-          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", (_React$createElement3 = {
+          })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "form-group"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", (_React$createElement3 = {
             className: "form-control",
             type: "button",
             name: "newOption",
             onClick: function onClick() {
               return _this2.handleAddOptionRadio();
             }
-          }, _defineProperty(_React$createElement3, "className", "btn btn-primary"), _defineProperty(_React$createElement3, "value", "Add New Option"), _React$createElement3)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          }, _defineProperty(_React$createElement3, "className", "btn btn-primary"), _defineProperty(_React$createElement3, "value", "Add New Option"), _React$createElement3))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "form-group"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "form-group"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
             htmlFor: optionsId
-          }, "Edit options"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+          }, "Choose an option to edit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
             className: "form-control",
             id: optionsId,
             name: "options"
@@ -52399,15 +52444,17 @@ function (_Component) {
               },
               value: option.label
             }, option.label);
-          })), this.state.selectedOption !== null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          }))), this.state.selectedOption !== null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "form-group"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
             htmlFor: updateOptionId
-          }, "Update option"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          }, "Edit option"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             className: "form-control",
             id: updateOptionId,
             type: "text",
             value: this.state.selectedOption.label,
             onChange: this.handleUpdateOptionForCheckboxAndRadio
-          })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Choose an option to update"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          })) : null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "form-check"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             className: "form-check-input",
@@ -52446,14 +52493,14 @@ function (_Component) {
           return _this3.handleMoveUp(_this3.props.focus);
         },
         className: "btn btn-primary",
-        value: "Up"
+        value: "Down"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "button",
         onClick: function onClick() {
           return _this3.handleMoveDown(_this3.props.focus);
         },
         className: "btn btn-primary",
-        value: "Down"
+        value: "Up"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "button",
         onClick: function onClick() {
@@ -52591,8 +52638,8 @@ var FormReturn = function FormReturn(props) {
         html += '  <div class="form-group">\n' + '      <label class="col-form-label">' + element.label + '</label>\n';
         element.options.forEach(function (option, i) {
           var name = "radio_" + element.id;
-          var id = "id_" + i;
-          var value = "val_" + i;
+          var id = "id_" + element.id;
+          var value = "val_" + element.id;
           html += '       <div class="form-check">\n' + '          <input class="form-check-input" name="' + name + '" type="' + option.type + '" value="' + value + '" id="' + id + '" >\n' + '          <label class="form-check-label" for="' + id + '">' + option.label + '</label>\n' + '      </div>\n';
         });
         html += '   </div>\n';
@@ -52600,7 +52647,7 @@ var FormReturn = function FormReturn(props) {
     }
   });
   html += '</form>\n';
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Your HTML code"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "w-50 mx-auto"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PrismCode__WEBPACK_IMPORTED_MODULE_2__["PrismCode"], {
     code: html,
@@ -52742,7 +52789,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var initState = {
-  'title': '',
   name: '',
   elementsChoices: [{
     name: "Text",
@@ -52918,8 +52964,9 @@ function rootReducer() {
       });
 
     case "UPDATE_ITEM":
-      var newElement = Object.assign({}, payload.element);
-      newState.elementsUsed[payload.id] = newElement;
+      var newElement = Object.assign({}, payload.element); // newState.elementsUsed[payload.element.id] = newElement
+
+      newState.elementsUsed.push(newElement);
       return _objectSpread({}, state, {
         elementsUsed: _toConsumableArray(newState.elementsUsed)
       });

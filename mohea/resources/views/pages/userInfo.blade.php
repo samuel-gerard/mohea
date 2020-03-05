@@ -10,6 +10,7 @@
         <li class="new"><a class="button primary" href="{{ route('project.create') }}">New project</a></li>
         <li class="logo ml-auto mr-auto"><a href="/"><img src="images/logo_medium.png" alt="Logo of Mohea" draggable="false"></a></li>
         @if (Auth::check())
+            <li><a class="link primary" href="{{ route('dashboard') }}">Your dashboard</a></li>
             <li><a class="link action" href="{{ route('logout') }}">Log out</a></li>
         @endif
     </ul>

@@ -4,7 +4,7 @@
 <div class="main-container">
     <a href="/"><img class="main-logo" src="/images/logo_medium.png" alt="Logo of Mohea" draggable="false"></a>
     <div class="register">
-        <h1>Create an account</h1>
+        <h1>Register and start creating cool stuff</h1>
         <form method="POST" action="{{ route('register') }}">
             <div class="social">
                 <a href="{{ url('/login/google') }}" class="btn btn-google"><i class="fa fa-google"></i>Google</a>
@@ -61,10 +61,11 @@
             </div>
             <div class="submit-block">
                 <button type="submit" class="button primary">
-                    {{ __('Register and start creating cool stuff') }}
+                    {{ __('Create an account') }}
                 </button>
             </div>
         </form>
     </div>
+    <a href="{{ route('login') }}" class="link">I already have an account</a>
 </div>
 @endsection

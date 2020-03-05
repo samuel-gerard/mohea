@@ -5,7 +5,7 @@
 @endsection
 
 @section('main-content')
-    <nav id="header" class="header">
+    <nav id="header" class="header animated">
         <ul class="d-flex jc-e ai-c">
             @if (Auth::check())
                 <li class="new"><a class="button primary" href="{{ route('project.create') }}">Start a new project</a></li>
@@ -29,8 +29,8 @@
                 <div class="home-screen-text">
                     <p class="headline">Breathe, smile.</p>
                     <h1><span class="mohea">Mohea</span> is here to help you create <strong>accessible tables</strong>, <strong>forms</strong> and <strong>menus</strong>.</h1>
-                    <a class="button primary only-mobile" href="{{ route('project.create') }}">Start a new project</a>
-                    <a id="home-cta" class="button secondary home-cta">Learn more</a>
+                    <button class="button primary only-mobile" href="{{ route('project.create') }}">Start a new project</button>
+                    <button id="home-cta" class="button secondary home-cta">Learn more</button>
                 </div>
             </div>
         </div>

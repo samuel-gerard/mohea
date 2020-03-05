@@ -20,7 +20,7 @@
             <img class="avatar" src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->name }}'s profile picture">
             <p class="name">{{ Auth::user()->name }}</p>
             <p class="email">{{ Auth::user()->email }}</p>
-            <a class="button" href="">Edit your account</a>
+            <a class="button" href="{{ route('user.info') }}">Edit your account</a>
         </div>
     </div>
     <div class="content">
@@ -34,7 +34,6 @@
         <div id="app-listing" class="list"></div>
     </div>
 </main>
-{{-- @include('components.editUser') --}}
 <footer>
     <div class="footer-links">
         <a class="link action" href="">I need help</a>

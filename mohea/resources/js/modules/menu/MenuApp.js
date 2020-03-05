@@ -1,4 +1,4 @@
-import Menu from './components/menu';
+import Menu from './components/Menu';
 import React from 'react';
 import ReactDOM from 'react-dom';
 

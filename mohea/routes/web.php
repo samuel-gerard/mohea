@@ -16,6 +16,7 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/privacy', 'HomeController@privacy')->name('privacy');
+Route::get('/help', 'HomeController@help')->name('help');
 
 Route::middleware(['auth'])->group(function() {
 
@@ -37,6 +38,8 @@ Route::middleware(['auth'])->group(function() {
     Route::post('/user/password', 'UserController@updatePassword')->name('user.update.password');
     Route::post('/user/delete', 'UserController@destroy')->name('user.delete');    
     Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+
+    Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 });
 
 Auth::routes();

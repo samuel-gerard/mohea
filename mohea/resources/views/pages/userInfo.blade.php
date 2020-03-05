@@ -144,7 +144,7 @@
 </main>
 <footer>
     <div class="footer-links">
-        <a class="link action" href="">I need help</a>
+        <a class="link action" href="{{ route('help') }}">I need help</a>
         <a class="link info" href="{{ route('privacy') }}">Terms of use</a>
         <span>Copyright Mohea © 2020</span>
     </div>

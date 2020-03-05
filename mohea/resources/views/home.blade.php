@@ -5,7 +5,7 @@
 @endsection
 
 @section('main-content')
-    <nav id="header" class="header">
+    <nav id="header" class="header animated">
         <ul class="d-flex jc-e ai-c">
             @if (Auth::check())
                 <li class="new"><a class="button primary" href="{{ route('project.create') }}">Start a new project</a></li>

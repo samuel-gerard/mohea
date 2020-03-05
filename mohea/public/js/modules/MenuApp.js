@@ -68770,7 +68770,7 @@ function rootReducer() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\coral\Desktop\IUT\LP_MI\mohea\mohea.bach.mmi-unistra.fr\mohea\resources\js\modules\menu\MenuApp */"./resources/js/modules/menu/MenuApp.js");
+module.exports = __webpack_require__(/*! C:\wamp64\www\mohea.bach.mmi-unistra.fr\mohea\resources\js\modules\menu\MenuApp */"./resources/js/modules/menu/MenuApp.js");
 
 
 /***/ })

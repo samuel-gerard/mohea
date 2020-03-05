@@ -10766,6 +10766,9 @@ body {
   overflow: hidden;
   transition: background-color 0.2s, padding 0.2s, box-shadow 0.3s;
   z-index: 10;
+}
+
+.header.animated {
   -webkit-animation: header 2s;
           animation: header 2s;
 }
@@ -11268,6 +11271,7 @@ h2 {
 }
 
 .dashboard .content .list button {
+  position: relative;
   width: 100%;
   margin: 10px 0px;
   padding: 15px;
@@ -11280,6 +11284,7 @@ h2 {
   transition: background-color 0.2s;
   -webkit-filter: drop-shadow(0 6px 10px rgba(51, 51, 51, 0.15));
           filter: drop-shadow(0 6px 10px rgba(51, 51, 51, 0.15));
+  overflow: hidden;
 }
 
 .dashboard .content .list button:hover,
@@ -11327,6 +11332,29 @@ h2 {
 
 .dashboard .content .list button span:focus {
   outline: 0;
+}
+
+.dashboard .content .list button::after {
+  content: "";
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  display: block;
+  width: 0%;
+  height: 3px;
+  border-radius: 3px;
+  background-color: #ffffff;
+  transition: 1s;
+}
+
+.dashboard .content .list button.deleting {
+  background-color: #ff4757;
+  color: #ffffff;
+}
+
+.dashboard .content .list button.deleting::after {
+  width: 100%;
+  transition: all 5s linear;
 }
 
 footer {

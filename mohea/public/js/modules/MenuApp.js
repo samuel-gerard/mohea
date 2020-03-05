@@ -68358,6 +68358,13 @@ __webpack_require__.r(__webpack_exports__);
 
 var MenuReturn = function MenuReturn(props) {
   var menu = props.menu;
+
+  if (-1 === props.classes.findIndex(function (e) {
+    return e === 'navbar-expand-md';
+  })) {
+    props.classes.push('navbar-expand-md');
+  }
+
   var menuClasses = props.classes.join(' '); // Init clipboard button
 
   new clipboard__WEBPACK_IMPORTED_MODULE_3___default.a('#button-to-copy');

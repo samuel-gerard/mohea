@@ -17,11 +17,13 @@
 <main class="dashboard">
     <div class="profile">
         <div class="my-card">
-            @if ( file_exists(public_path(Auth::user()->avatar)) )
+
+            @if ( file_exists(public_path(asset('storage/' . Auth::user()->avatar))) )
                 <img class="avatar" src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->name }}'s profile picture">
-            @else
+            @elseif ( Auth::user()->avatar !== null )
                 <img class="avatar" src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}'s profile picture">
             @endif
+
             <p class="name">{{ Auth::user()->name }}</p>
             <p class="email">{{ Auth::user()->email }}</p>
             <a class="button" href="{{ route('user.info') }}">Edit your account</a>

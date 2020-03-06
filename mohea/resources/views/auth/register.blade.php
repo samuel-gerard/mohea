@@ -54,7 +54,7 @@
             </div>
             <div class="form-group row">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="privacy" id="privacy">
+                    <input required class="form-check-input" type="checkbox" name="privacy" id="privacy">
                     <label class="form-check-label" for="privacy">
                         Have you read and agree to the <a class="link secondary" href="/privacy">privacy policy</a>?
                     </label>

@@ -1,7 +1,7 @@
 @extends('base')
 
 @section('title')
-    My dashboard | Mohea
+    Edit Account | Mohea
 @endsection
 
 @section('main-content')
@@ -117,10 +117,10 @@
                                 @enderror
                             </div>
 
-                            @if ( file_exists(public_path(Auth::user()->avatar)) )
+                            @if ( file_exists(public_path(asset('storage/' . Auth::user()->avatar))) )
                                 <img class="img-thumbnail" id="your-image" src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->name }}'s profile picture" width="200px">
-                            @else
-                                <img class="img-thumbnail" id="your-image" src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}'s profile picture" width="200px">
+                            @elseif ( Auth::user()->avatar !== null )
+                                <img class="img-thumbnail" id="your-image" src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}'s profile picture" width="200px">                            
                             @endif
 
                             <div class="form-group row mb-0">
@@ -169,6 +169,8 @@
                         </form>
                     </div>
                 </div>
+                
+                
 
             </div>
         </div>

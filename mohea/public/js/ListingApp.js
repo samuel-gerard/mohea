@@ -43396,6 +43396,13 @@ var Listing = function Listing() {
         return handleDelete(item.id, idx);
       },
       tabIndex: "0"
+    }, "Copy"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: "button",
+      id: 'button-' + idx,
+      onClick: function onClick() {
+        return handleDelete(item.id, idx);
+      },
+      tabIndex: "0"
     }, "Delete"));
   }));
 };

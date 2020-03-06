@@ -36,6 +36,7 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/user', 'UserController@index')->name('user.info');
     Route::post('/user/info', 'UserController@updateInfo')->name('user.update.info');
     Route::post('/user/password', 'UserController@updatePassword')->name('user.update.password');
+    Route::post('/user/picture', 'UserController@updatePicture')->name('user.update.picture');
     Route::post('/user/delete', 'UserController@destroy')->name('user.delete');    
     Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 

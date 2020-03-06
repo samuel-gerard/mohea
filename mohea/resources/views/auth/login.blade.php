@@ -4,7 +4,7 @@
 <div class="main-container">
     <a href="/"><img class="main-logo" src="/images/logo_medium.png" alt="Logo of Mohea" draggable="false"></a>
     <div class="login">
-        <h1>Log in and keep up your projects</h1>
+        <h1>Sign in</h1>
         <form method="POST" action="{{ route('login') }}">
             @csrf
             <div class="social">

@@ -15,8 +15,7 @@
     </ul>
 </nav>
 
-<main class="dashboard">
-    <h1>Edit account</h1>
+<main class="mb-4">
     <div class="container">
         <div class="row justify-content-center">            
             <div class="col-md-8">
@@ -102,6 +101,39 @@
                         </form>
                     </div>
                 </div>
+
+
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <form method="POST" name="edit_user_image" action="{{ route('user.update.picture') }}" enctype="multipart/form-data">
+                        @csrf    
+                        <label for="user_picture">Change your profile picture</label>
+
+                            <div class="mb-3 custom-file">
+                                <input required type="file" class="custom-file-input form-control-file @error('avatar') is-invalid @enderror" id="validatedCustomFile" name ="avatar" >
+                                <label class="custom-file-label" for="validatedCustomFile">Upload your profile picture</label>
+                                @error('avatar')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            @if ( file_exists(public_path(Auth::user()->avatar)) )
+                                <img class="img-thumbnail" id="your-image" src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->name }}'s profile picture" width="200px">
+                            @else
+                                <img class="img-thumbnail" id="your-image" src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}'s profile picture" width="200px">
+                            @endif
+
+                            <div class="form-group row mb-0">
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit" value="avatar" class="btn btn-primary">
+                                        {{ __('Save picture') }}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
                 <div class="card mt-4">
                     <div class="card-body">
                         <form method="POST" name="delete_account" action="{{ route('user.delete') }}">
@@ -111,7 +143,7 @@
                                     <h3>Permanently delete account</h3>
                                 </div>
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary mr-4" data-toggle="modal" data-target="#deleteModal">
+                                <button type="button" class="btn btn-danger mr-4" data-toggle="modal" data-target="#deleteModal">
                                     Delete account
                                 </button>
                                 <!-- Modal -->

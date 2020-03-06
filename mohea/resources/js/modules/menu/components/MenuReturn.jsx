@@ -7,6 +7,10 @@ import ClipboardJS from 'clipboard';
 const MenuReturn = props => {
 
     const { menu } = props;
+
+    if(-1 === props.classes.findIndex(e => e === 'navbar-expand-md')) {
+        props.classes.push('navbar-expand-md');
+    }
     const menuClasses = props.classes.join(' ');
 
     // Init clipboard button

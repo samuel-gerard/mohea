@@ -97,7 +97,7 @@ export const SaveProject = props => {
 
   return (
     <div>
-      <input type="button" onClick={save} value={'Save this ' + props.type} />
+      <input type="button" class="btn btn-success" onClick={save} value={'Save this ' + props.type} />
     </div>
   )
 }

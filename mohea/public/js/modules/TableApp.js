@@ -97038,6 +97038,7 @@ var SaveProject = function SaveProject(props) {
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "button",
+    "class": "btn btn-success",
     onClick: save,
     value: 'Save this ' + props.type
   }));

@@ -35,6 +35,19 @@ export const updateElement = (element, id) => ({
     id: id
 });
 
+export const addOption = (element, option) => ({
+    type: "ADD_OPTION",
+    element: element,
+    option: option
+});
+
+export const updateOption = (element, option, value) => ({
+    type: "UPDATE_OPTION",
+    element: element,
+    option: option,
+    value: value
+});
+
 export const updateName = (name) => ({
     type: "UPDATE_NAME",
     name: name,

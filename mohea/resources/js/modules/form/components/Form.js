@@ -71,8 +71,7 @@ class Form extends React.Component {
                 </div>
               </div>
               <div className="form-group d-flex justify-content-between">
-                <input type="button" className="btn btn-primary form-control mr-1" value="Display code" />
-                <input type="button" className="w-25 btn btn-danger" value="Reset" onClick={() => this.handleResetForm()} />
+                <input type="button" className="w-25 btn btn-danger" value="Reset Form" onClick={() => this.handleResetForm()} />
               </div>            
             </div>
           </div>

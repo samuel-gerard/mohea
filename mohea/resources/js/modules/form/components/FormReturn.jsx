@@ -49,7 +49,7 @@ const FormReturn = props => {
             case 'Submit':
                 html  += '  <div class="form-group">\n'
                         +'      <label>'+element.value+'</label>\n'
-                        +'      <input type="submit" class="form-control" value="'+element.value+'" >\n'
+                        +'      <input type="submit" class="form-control" aria-describedby="submitButton" value="'+element.value+'" >\n'
                         +'  </div>\n'
                 break;
                 
@@ -61,7 +61,7 @@ const FormReturn = props => {
             case 'Password':
                 html  += '  <div class="form-group">\n'
                         +'      <label>'+element.label+'</label>\n'
-                        +'      <input type="'+element.type+'" class="form-control" '+element.required+' placeholder="'+element.placeholder+'" >\n'
+                        +'      <input type="'+element.type+'" class="form-control" '+element.required+' aria-describedby="input'+element.type+'" placeholder="'+element.placeholder+'" >\n'
                         +'  </div>\n'
                 break;
 
@@ -69,13 +69,13 @@ const FormReturn = props => {
                 var textAreaId = "textAreaInput"+element.id
                 html  += '  <div class="form-group">\n'
                         +'      <label for="'+textAreaId+'">'+element.label+'</label>\n'
-                        +'      <textarea rows="'+element.rows+'" id="'+textAreaId+'" '+element.required+' class="form-control" col="'+element.col+'" placeholder="'+element.placeholder+'" >\n'
+                        +'      <textarea rows="'+element.rows+'" id="'+textAreaId+'" '+element.required+' aria-describedby="textAreaInput" class="form-control" col="'+element.col+'" placeholder="'+element.placeholder+'" >\n'
                         +'  </div>\n'
                 break;
 
             case 'Select':
                 var selectId = "salectInput"+element.id
-                html  += '  <div class="form-group">\n'
+                html  += '  <div class="form-group" aria-describedby="selectInput">\n'
                         +'      <label for="'+selectId+'">'+element.label+'</label>\n'
                         +'      <select class="form-control" '+element.required+' id="'+selectId+'">\n'
                             element.options.forEach(option => {
@@ -87,12 +87,12 @@ const FormReturn = props => {
 
             case 'Check Box':
             case 'Radio Button':
-                html  += '  <div class="form-group">\n'
+                html  += '  <div class="form-group" >\n'
                         +'      <label class="col-form-label">'+element.label+'</label>\n'
                         element.options.forEach((option, i) => {
                             var name = "radio_"+element.id
-                            var id = "id_"+element.id
-                            var value = "val_"+element.id
+                            var id = "check_radio"+element.id+"_id_"+option.id
+                            var value = "val_"+option.id
                             html += '       <div class="form-check">\n'
                                         +'          <input class="form-check-input" '+element.required+' name="'+name+'" type="'+option.type+'" value="'+value+'" id="'+id+'" >\n'
                                         +'          <label class="form-check-label" for="'+id+'">'+option.label+'</label>\n'

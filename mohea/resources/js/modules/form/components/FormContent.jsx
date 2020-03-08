@@ -127,7 +127,7 @@ class FormContent extends Component {
             <div className="form_boox">
                 <form>
                     {this.props.elementsUsed.map((element, i) => (
-                        <div key={i} onClick={() => this.handleAddFocus(element)}>
+                        <div key={i} tabIndex={i} onClick={() => this.handleAddFocus(element)}>
                             {this.renderSwitch(element)}
                         </div>
                     ))}

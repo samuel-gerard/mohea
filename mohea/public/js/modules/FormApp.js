@@ -51290,6 +51290,7 @@ var SaveProject = function SaveProject(props) {
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "button",
+    "class": "btn btn-success",
     onClick: save,
     value: 'Save this ' + props.type
   }));
@@ -51471,12 +51472,8 @@ function (_React$Component) {
         className: "form-group d-flex justify-content-between"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "button",
-        className: "btn btn-primary form-control mr-1",
-        value: "Display code"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "button",
         className: "w-25 btn btn-danger",
-        value: "Reset",
+        value: "Reset Form",
         onClick: function onClick() {
           return _this3.handleResetForm();
         }
@@ -51816,6 +51813,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, this.props.elementsUsed.map(function (element, i) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: i,
+          tabIndex: i,
           onClick: function onClick() {
             return _this2.handleAddFocus(element);
           }
@@ -52012,19 +52010,32 @@ function (_Component) {
       _this.props.updateElement(newElement, _this.props.focus);
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleUpdateOptionForCheckboxAndRadio", function (e) {
-      var newElement = _this.props.focus;
-      newElement.options[_this.state.selectedOption.id].label = e.target.value;
+    _defineProperty(_assertThisInitialized(_this), "handleUpdateOption", function (e) {
+      var newOptionEdit = _this.state.selectedOption;
 
-      _this.props.updateElement(newElement, _this.props.focus);
-    });
+      switch (e.target.name) {
+        case "update_radio":
+          newOptionEdit.label = e.target.value;
+          break;
 
-    _defineProperty(_assertThisInitialized(_this), "handleUpdateOptionForSelect", function (e) {
-      var newElement = _this.props.focus;
-      newElement.options[_this.state.selectedOption.id].content = e.target.value;
-      newElement.options[_this.state.selectedOption.id].value = e.target.value;
+        case "update_checkbox":
+          newOptionEdit.label = e.target.value;
+          break;
 
-      _this.props.updateElement(newElement, _this.props.focus);
+        case "update_select":
+          newOptionEdit.content = e.target.value;
+          newOptionEdit.value = e.target.value;
+          break;
+
+        default:
+          break;
+      }
+
+      _this.setState({
+        selectedOption: newOptionEdit
+      });
+
+      _this.props.updateOption(_this.props.focus, _this.state.selectedOption, e.target.value);
     });
 
     return _this;
@@ -52060,7 +52071,6 @@ function (_Component) {
   }, {
     key: "handleAddOptionCheckbox",
     value: function handleAddOptionCheckbox() {
-      var newElement = this.props.focus;
       var id = this.props.focus.options.length;
       var newOption = {
         id: id,
@@ -52068,13 +52078,11 @@ function (_Component) {
         type: "checkbox",
         label: "My New Option"
       };
-      newElement.options.push(newOption);
-      this.props.updateElement(newElement, this.props.focus);
+      this.props.addOption(this.props.focus, newOption);
     }
   }, {
     key: "handleAddOptionRadio",
     value: function handleAddOptionRadio() {
-      var newElement = this.props.focus;
       var id = this.props.focus.options.length;
       var newOption = {
         id: id,
@@ -52082,22 +52090,20 @@ function (_Component) {
         type: "radio",
         label: "My New Option"
       };
-      newElement.options.push(newOption);
-      this.props.updateElement(newElement, this.props.focus);
+      this.props.addOption(this.props.focus, newOption);
     }
   }, {
     key: "handleAddOptionForSelect",
     value: function handleAddOptionForSelect() {
-      var newElement = this.props.focus;
       var id = this.props.focus.options.length;
       var newOption = {
         id: id,
         tag: "option",
+        type: "select",
         value: "My New Option",
         content: "My New Option"
       };
-      newElement.options.push(newOption);
-      this.props.updateElement(newElement, this.props.focus);
+      this.props.addOption(this.props.focus, newOption);
     }
   }, {
     key: "renderSwitch",
@@ -52317,17 +52323,18 @@ function (_Component) {
               },
               value: option.value
             }, option.content);
-          }))), this.state.selectedOption !== null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          }))), this.state.selectedOption !== null ? this.state.selectedOption.type == 'select' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "form-group"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
             htmlFor: updateOptionId
           }, "Update option"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             className: "form-control",
             id: updateOptionId,
+            name: "update_select",
             type: "text",
             value: this.state.selectedOption.content,
-            onChange: this.handleUpdateOptionForSelect
-          })) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            onChange: this.handleUpdateOption
+          })) : null : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "form-check"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             className: "form-check-input",
@@ -52383,17 +52390,18 @@ function (_Component) {
               },
               value: option.label
             }, option.label);
-          }))), this.state.selectedOption !== null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          }))), this.state.selectedOption !== null ? this.state.selectedOption.type == 'checkbox' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "form-group"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
             htmlFor: updateOptionId
           }, "Update option"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             className: "form-control",
             id: updateOptionId,
+            name: "update_checkbox",
             type: "text",
             value: this.state.selectedOption.label,
-            onChange: this.handleUpdateOptionForCheckboxAndRadio
-          })) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            onChange: this.handleUpdateOption
+          })) : null : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "form-check"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             className: "form-check-input",
@@ -52451,17 +52459,18 @@ function (_Component) {
               },
               value: option.label
             }, option.label);
-          }))), this.state.selectedOption !== null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          }))), this.state.selectedOption !== null ? this.state.selectedOption.type == 'radio' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "form-group"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
             htmlFor: updateOptionId
           }, "Edit option"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             className: "form-control",
+            name: "update_radio",
             id: updateOptionId,
             type: "text",
             value: this.state.selectedOption.label,
-            onChange: this.handleUpdateOptionForCheckboxAndRadio
-          })) : null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            onChange: this.handleUpdateOption
+          })) : null : null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "form-check"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             className: "form-check-input",
@@ -52554,6 +52563,12 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, stateProps) {
     },
     moveUp: function moveUp(element) {
       dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["moveUp"])(element));
+    },
+    addOption: function addOption(element, option) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["addOption"])(element, option));
+    },
+    updateOption: function updateOption(element, option, value) {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_2__["updateOption"])(element, option, value));
     }
   };
 };
@@ -52614,7 +52629,7 @@ var FormReturn = function FormReturn(props) {
         break;
 
       case 'Submit':
-        html += '  <div class="form-group">\n' + '      <label>' + element.value + '</label>\n' + '      <input type="submit" class="form-control" value="' + element.value + '" >\n' + '  </div>\n';
+        html += '  <div class="form-group">\n' + '      <label>' + element.value + '</label>\n' + '      <input type="submit" class="form-control" aria-describedby="submitButton" value="' + element.value + '" >\n' + '  </div>\n';
         break;
 
       case 'Text Input':
@@ -52623,17 +52638,17 @@ var FormReturn = function FormReturn(props) {
       case 'Link':
       case 'Phone':
       case 'Password':
-        html += '  <div class="form-group">\n' + '      <label>' + element.label + '</label>\n' + '      <input type="' + element.type + '" class="form-control" ' + element.required + ' placeholder="' + element.placeholder + '" >\n' + '  </div>\n';
+        html += '  <div class="form-group">\n' + '      <label>' + element.label + '</label>\n' + '      <input type="' + element.type + '" class="form-control" ' + element.required + ' aria-describedby="input' + element.type + '" placeholder="' + element.placeholder + '" >\n' + '  </div>\n';
         break;
 
       case 'Text Area':
         var textAreaId = "textAreaInput" + element.id;
-        html += '  <div class="form-group">\n' + '      <label for="' + textAreaId + '">' + element.label + '</label>\n' + '      <textarea rows="' + element.rows + '" id="' + textAreaId + '" ' + element.required + ' class="form-control" col="' + element.col + '" placeholder="' + element.placeholder + '" >\n' + '  </div>\n';
+        html += '  <div class="form-group">\n' + '      <label for="' + textAreaId + '">' + element.label + '</label>\n' + '      <textarea rows="' + element.rows + '" id="' + textAreaId + '" ' + element.required + ' aria-describedby="textAreaInput" class="form-control" col="' + element.col + '" placeholder="' + element.placeholder + '" >\n' + '  </div>\n';
         break;
 
       case 'Select':
         var selectId = "salectInput" + element.id;
-        html += '  <div class="form-group">\n' + '      <label for="' + selectId + '">' + element.label + '</label>\n' + '      <select class="form-control" ' + element.required + ' id="' + selectId + '">\n';
+        html += '  <div class="form-group" aria-describedby="selectInput">\n' + '      <label for="' + selectId + '">' + element.label + '</label>\n' + '      <select class="form-control" ' + element.required + ' id="' + selectId + '">\n';
         element.options.forEach(function (option) {
           html += '            <option value="' + option.value + '">' + option.content + '</option>\n';
         });
@@ -52642,11 +52657,11 @@ var FormReturn = function FormReturn(props) {
 
       case 'Check Box':
       case 'Radio Button':
-        html += '  <div class="form-group">\n' + '      <label class="col-form-label">' + element.label + '</label>\n';
+        html += '  <div class="form-group" >\n' + '      <label class="col-form-label">' + element.label + '</label>\n';
         element.options.forEach(function (option, i) {
           var name = "radio_" + element.id;
-          var id = "id_" + element.id;
-          var value = "val_" + element.id;
+          var id = "check_radio" + element.id + "_id_" + option.id;
+          var value = "val_" + option.id;
           html += '       <div class="form-check">\n' + '          <input class="form-check-input" ' + element.required + ' name="' + name + '" type="' + option.type + '" value="' + value + '" id="' + id + '" >\n' + '          <label class="form-check-label" for="' + id + '">' + option.label + '</label>\n' + '      </div>\n';
         });
         html += '   </div>\n';
@@ -52678,7 +52693,7 @@ var mapStateToProps = function mapStateToProps(state) {
 /*!****************************************************!*\
   !*** ./resources/js/modules/form/redux/actions.js ***!
   \****************************************************/
-/*! exports provided: addNewItem, addFocus, deleteItem, resetForm, updateElement, updateName, duplicateItem, moveDown, moveUp, loadForm */
+/*! exports provided: addNewItem, addFocus, deleteItem, resetForm, updateElement, addOption, updateOption, updateName, duplicateItem, moveDown, moveUp, loadForm */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -52688,6 +52703,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteItem", function() { return deleteItem; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resetForm", function() { return resetForm; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateElement", function() { return updateElement; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addOption", function() { return addOption; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateOption", function() { return updateOption; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateName", function() { return updateName; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "duplicateItem", function() { return duplicateItem; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "moveDown", function() { return moveDown; });
@@ -52732,6 +52749,21 @@ var updateElement = function updateElement(element, id) {
     type: "UPDATE_ITEM",
     element: element,
     id: id
+  };
+};
+var addOption = function addOption(element, option) {
+  return {
+    type: "ADD_OPTION",
+    element: element,
+    option: option
+  };
+};
+var updateOption = function updateOption(element, option, value) {
+  return {
+    type: "UPDATE_OPTION",
+    element: element,
+    option: option,
+    value: value
   };
 };
 var updateName = function updateName(name) {
@@ -52835,17 +52867,7 @@ var initState = {
     label: "My New Select",
     title: "Options",
     required: "required",
-    options: [{
-      id: 0,
-      tag: "option",
-      value: "first",
-      content: "My First Option"
-    }, {
-      id: 1,
-      tag: "option",
-      value: "deux",
-      content: "My Second Option"
-    }]
+    options: []
   }, {
     name: "Date",
     tag: "input",
@@ -52859,25 +52881,15 @@ var initState = {
     tag: "div",
     className: "moheaCheckbox",
     label: "My New Check Box",
-    required: "required",
-    options: [{
-      id: 0,
-      tag: "input",
-      type: "checkbox",
-      label: "My first Option"
-    }]
+    required: "",
+    options: []
   }, {
     name: "Radio Button",
     tag: "div",
     className: "moheaRadiobutton",
     label: "My New Radio Button",
     required: "required",
-    options: [{
-      id: 0,
-      tag: "input",
-      type: "radio",
-      label: "My first Option"
-    }]
+    options: []
   }, {
     name: "Email",
     tag: "input",
@@ -52973,6 +52985,25 @@ function rootReducer() {
     case "UPDATE_ITEM":
       var newElement = Object.assign({}, payload.element);
       newState.elementsUsed[payload.element.id] = newElement;
+      return _objectSpread({}, state, {
+        elementsUsed: _toConsumableArray(newState.elementsUsed)
+      });
+
+    case "ADD_OPTION":
+      var option = Object.assign({}, payload.option);
+      var options = payload.element.options.slice();
+      options.push(option);
+      newState.elementsUsed[payload.element.id].options = options;
+      return _objectSpread({}, state, {
+        elementsUsed: _toConsumableArray(newState.elementsUsed)
+      });
+
+    case "UPDATE_OPTION":
+      var optionToUpdate = Object.assign({}, payload.option);
+      var optionsToUpdate = payload.element.options.slice();
+      optionToUpdate.label = payload.value;
+      optionsToUpdate[payload.option.id] = optionToUpdate;
+      newState.elementsUsed[payload.element.id].options = optionsToUpdate;
       return _objectSpread({}, state, {
         elementsUsed: _toConsumableArray(newState.elementsUsed)
       });

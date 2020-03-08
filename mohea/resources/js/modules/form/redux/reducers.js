@@ -7,15 +7,11 @@ const initState = {
         { name: "Text Input", tag: "input", className:"moheaTextInput", type: "text", label:"My New Text Input", required: "required", placeholder: "My placeholder" },
         { name: "Text Area", tag: "textarea", className:"moheaTextArea", label:"My New Text Area", rows: 3, col: 10, required: "required", placeholder: "My placeholder" },
         { name: "Select", tag: "select", className:"moheaSelect", label:"My New Select", title: "Options", required: "required", options: [
-          { id: 0, tag: "option", value: "first", content: "My First Option"},
-          { id: 1,tag: "option", value: "deux", content: "My Second Option"}
         ]},
         { name: "Date", tag: "input", className:"moheaDate", label:"My New Date", type: "date", required: "required", placeholder: "12/02/2020" },
-        { name: "Check Box", tag: "div", className:"moheaCheckbox", label:"My New Check Box", required: "required", options:[
-          { id: 0, tag: "input", type: "checkbox", label: "My first Option" }
+        { name: "Check Box", tag: "div", className:"moheaCheckbox", label:"My New Check Box", required: "", options:[
         ]},
         { name: "Radio Button", tag: "div", className:"moheaRadiobutton", label:"My New Radio Button", required: "required", options: [
-          { id: 0, tag: "input", type: "radio", label: "My first Option" }
         ]},
         { name: "Email", tag: "input", className:"moheaEmail", label:"My Email", type: "email", pattern: "", required: "required", placeholder: "My placeholder" },
         { name: "Link", tag: "input", className:"moheaLink", label:"My Link", type: "url", required: "required", placeholder: "My placeholder" },
@@ -96,6 +92,31 @@ function rootReducer(state = initState, payload) {
             elementsUsed: [
               ...newState.elementsUsed
             ]
+          };
+          
+        case "ADD_OPTION":
+          let option = Object.assign({}, payload.option)
+          let options = payload.element.options.slice()
+          options.push(option)
+          newState.elementsUsed[payload.element.id].options = options
+          return {
+            ...state,
+            elementsUsed: [
+              ...newState.elementsUsed
+            ],
+          };
+
+        case "UPDATE_OPTION":
+          let optionToUpdate = Object.assign({}, payload.option)
+          let optionsToUpdate = payload.element.options.slice()
+          optionToUpdate.label = payload.value
+          optionsToUpdate[payload.option.id] = optionToUpdate
+          newState.elementsUsed[payload.element.id].options = optionsToUpdate
+          return {
+            ...state,
+            elementsUsed: [
+              ...newState.elementsUsed
+            ],
           };
 
         case "DUPLICATE_ITEM":

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { deleteItem, updateElement, duplicateItem, moveDown, moveUp } from "../redux/actions";
+import { deleteItem, updateElement, duplicateItem, moveDown, moveUp, addOption, updateOption } from "../redux/actions";
 import { lab } from "color-convert";
 
 
@@ -121,42 +121,46 @@ class FormEdit extends Component {
     handleSelectOption(option) {
         this.setState({ selectedOption: option })
     }
-    
-    handleUpdateOptionForCheckboxAndRadio = (e) => {
-        let newElement = this.props.focus
-        newElement.options[this.state.selectedOption.id].label = e.target.value
-        this.props.updateElement(newElement, this.props.focus)
-    }
 
     handleAddOptionCheckbox(){
-        let newElement = this.props.focus
         let id = this.props.focus.options.length
         var newOption = { id: id, tag: "input", type: "checkbox", label: "My New Option" }
-        newElement.options.push(newOption)
-        this.props.updateElement(newElement, this.props.focus)
+        this.props.addOption(this.props.focus, newOption)
     }
 
     handleAddOptionRadio(){
-        let newElement = this.props.focus
         let id = this.props.focus.options.length
         var newOption = { id: id, tag: "input", type: "radio", label: "My New Option" }
-        newElement.options.push(newOption)
-        this.props.updateElement(newElement, this.props.focus)
+        this.props.addOption(this.props.focus, newOption)
     }
     
     handleAddOptionForSelect(){
-        let newElement = this.props.focus
         let id = this.props.focus.options.length
-        var newOption = { id: id, tag: "option", value: "My New Option", content: "My New Option"}
-        newElement.options.push(newOption)
-        this.props.updateElement(newElement, this.props.focus)
+        var newOption = { id: id, tag: "option", type: "select", value: "My New Option", content: "My New Option"}
+        this.props.addOption(this.props.focus, newOption)
     }
 
-    handleUpdateOptionForSelect = (e) => {
-        let newElement = this.props.focus
-        newElement.options[this.state.selectedOption.id].content = e.target.value
-        newElement.options[this.state.selectedOption.id].value = e.target.value
-        this.props.updateElement(newElement, this.props.focus)
+    handleUpdateOption = (e) => {
+        let newOptionEdit = this.state.selectedOption
+
+        switch (e.target.name) {
+            case "update_radio":
+                    newOptionEdit.label = e.target.value
+                break;
+            case "update_checkbox":
+                    newOptionEdit.label = e.target.value
+                break;
+            case "update_select":
+                    newOptionEdit.content = e.target.value
+                    newOptionEdit.value = e.target.value
+                break;
+        
+            default:
+                break;
+        }
+
+        this.setState({ selectedOption: newOptionEdit})
+        this.props.updateOption(this.props.focus, this.state.selectedOption, e.target.value)
     }
     
 
@@ -278,12 +282,17 @@ class FormEdit extends Component {
                                 })}
                             </select>
                         </div>
-                        {this.state.selectedOption !== null ? (
-                            <div className="form-group">
-                                <label htmlFor={updateOptionId}>Update option</label>
-                                <input className="form-control" id={updateOptionId} type="text" value={this.state.selectedOption.content} onChange={this.handleUpdateOptionForSelect} />
-                            </div>
-                        ) : null}
+
+                        {this.state.selectedOption !== null ? 
+                            this.state.selectedOption.type == 'select' ? 
+                            (
+                                <div className="form-group">
+                                    <label htmlFor={updateOptionId}>Update option</label>
+                                    <input className="form-control" id={updateOptionId} name="update_select" type="text" value={this.state.selectedOption.content} onChange={this.handleUpdateOption} />
+                                </div>
+                            ) : null
+                        : null}
+
                         <div className="form-check">
                             <input className="form-check-input" type="checkbox" id={requiredId} onChange={this.handleUpdateSelect} name="required" checked={element.required} />
                             <label className="form-check-label" htmlFor={requiredId}>Required</label>
@@ -312,12 +321,15 @@ class FormEdit extends Component {
                                 })}
                             </select>
                         </div>
-                        {this.state.selectedOption !== null ? (
-                            <div className="form-group">
-                                <label htmlFor={updateOptionId}>Update option</label>
-                                <input className="form-control" id={updateOptionId} type="text" value={this.state.selectedOption.label} onChange={this.handleUpdateOptionForCheckboxAndRadio} />
-                            </div>
-                        ) : null}
+                        {this.state.selectedOption !== null ? 
+                            this.state.selectedOption.type == 'checkbox' ? 
+                            (
+                                <div className="form-group">
+                                    <label htmlFor={updateOptionId}>Update option</label>
+                                    <input className="form-control" id={updateOptionId} name="update_checkbox" type="text" value={this.state.selectedOption.label} onChange={this.handleUpdateOption} />
+                                </div>
+                            ) : null
+                        : null}
                         <div className="form-check">
                             <input className="form-check-input" type="checkbox" id={requiredId} onChange={this.handleUpdateBoxAndRadio} name="required" checked={element.required} />
                             <label className="form-check-label" htmlFor={requiredId}>Required</label>
@@ -348,10 +360,13 @@ class FormEdit extends Component {
                                 </select>
                             </div>
                             {this.state.selectedOption !== null ?
+                                this.state.selectedOption.type == 'radio' ? 
+                                (
                                 <div className="form-group">
                                     <label htmlFor={updateOptionId}>Edit option</label>
-                                    <input className="form-control" id={updateOptionId} type="text" value={this.state.selectedOption.label} onChange={this.handleUpdateOptionForCheckboxAndRadio} />
+                                    <input className="form-control" name="update_radio" id={updateOptionId} type="text" value={this.state.selectedOption.label} onChange={this.handleUpdateOption} />
                                 </div>
+                                ) : null
                              : null}
                         </div>
                         <div className="form-check">
@@ -431,6 +446,12 @@ const mapDispatchToProps = (dispatch, stateProps) => {
         },
         moveUp: (element) => {
             dispatch(moveUp(element))
+        },
+        addOption: (element, option) => {
+            dispatch(addOption(element, option))
+        },
+        updateOption: (element, option, value) => {
+            dispatch(updateOption(element, option, value))
         },
     }
 }

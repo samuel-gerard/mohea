@@ -14,8 +14,8 @@ Install php dependencies
 ``` composer install ```  
 Install javascript dependencies (inclued react)  
 ``` npm install ```  
-Link storage folder to public
-``` php artisan storage:link ```
+Link storage folder to public  
+``` php artisan storage:link ```  
 Make migrations of the database (in case there is no database provided)  
 ``` php artisan migrate ```  
   

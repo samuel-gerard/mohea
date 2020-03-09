@@ -3,6 +3,7 @@ import axios from 'axios';
 import { connect } from "react-redux";
 import FormContent from "./FormContent";
 import FormReturn from "./FormReturn";
+import BootstrapReturn from "./BootstrapReturn";
 import FormChoices from "./FormChoices";
 import FormEdit from "./FormEdit";
 import { SaveProject } from "../../../components/SaveProject";
@@ -74,6 +75,9 @@ class Form extends React.Component {
                 <input type="button" className="w-25 btn btn-danger" value="Reset Form" onClick={() => this.handleResetForm()} />
               </div>            
             </div>
+          </div>
+          <div className="col-md-12">
+            <BootstrapReturn />
           </div>
           <div className="col-md-12">
             <FormReturn />

@@ -51328,6 +51328,52 @@ react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render(react__WEBPACK_IMPORTED_
 
 /***/ }),
 
+/***/ "./resources/js/modules/form/components/BootstrapReturn.jsx":
+/*!******************************************************************!*\
+  !*** ./resources/js/modules/form/components/BootstrapReturn.jsx ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _components_PrismCode__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../components/PrismCode */ "./resources/js/components/PrismCode.js");
+/* harmony import */ var clipboard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! clipboard */ "./node_modules/clipboard/dist/clipboard.js");
+/* harmony import */ var clipboard__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(clipboard__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+
+var BootstrapReturn = function BootstrapReturn(props) {
+  new clipboard__WEBPACK_IMPORTED_MODULE_3___default.a('#button-to-copy');
+  var html = '<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">\n';
+  html += '<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>\n';
+  html += '<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>\n';
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "w-50 mx-auto"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    id: "button-to-copy",
+    "class": "btn btn-dark",
+    "data-clipboard-text": html
+  }, "Copy Bootstrap Sources"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PrismCode__WEBPACK_IMPORTED_MODULE_2__["PrismCode"], {
+    code: html,
+    language: "html",
+    plugins: ["line-numbers", "normalize-whitespace"]
+  })));
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  return state;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(BootstrapReturn));
+
+/***/ }),
+
 /***/ "./resources/js/modules/form/components/Form.js":
 /*!******************************************************!*\
   !*** ./resources/js/modules/form/components/Form.js ***!
@@ -51344,10 +51390,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _FormContent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./FormContent */ "./resources/js/modules/form/components/FormContent.jsx");
 /* harmony import */ var _FormReturn__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./FormReturn */ "./resources/js/modules/form/components/FormReturn.jsx");
-/* harmony import */ var _FormChoices__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./FormChoices */ "./resources/js/modules/form/components/FormChoices.jsx");
-/* harmony import */ var _FormEdit__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./FormEdit */ "./resources/js/modules/form/components/FormEdit.jsx");
-/* harmony import */ var _components_SaveProject__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../components/SaveProject */ "./resources/js/components/SaveProject.js");
-/* harmony import */ var _redux_actions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../redux/actions */ "./resources/js/modules/form/redux/actions.js");
+/* harmony import */ var _BootstrapReturn__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./BootstrapReturn */ "./resources/js/modules/form/components/BootstrapReturn.jsx");
+/* harmony import */ var _FormChoices__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./FormChoices */ "./resources/js/modules/form/components/FormChoices.jsx");
+/* harmony import */ var _FormEdit__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./FormEdit */ "./resources/js/modules/form/components/FormEdit.jsx");
+/* harmony import */ var _components_SaveProject__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../components/SaveProject */ "./resources/js/components/SaveProject.js");
+/* harmony import */ var _redux_actions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../redux/actions */ "./resources/js/modules/form/redux/actions.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -51367,6 +51414,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -51455,12 +51503,12 @@ function (_React$Component) {
         onChange: this.handleUpdateName,
         id: "menu-name",
         value: this.props.name
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SaveProject__WEBPACK_IMPORTED_MODULE_7__["SaveProject"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SaveProject__WEBPACK_IMPORTED_MODULE_8__["SaveProject"], {
         content: this.props.form,
         classes: null,
         name: this.props.name,
         type: "form"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormChoices__WEBPACK_IMPORTED_MODULE_5__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormChoices__WEBPACK_IMPORTED_MODULE_6__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         "class": "col-md-6"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormContent__WEBPACK_IMPORTED_MODULE_3__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         "class": "col-md-3"
@@ -51468,7 +51516,7 @@ function (_React$Component) {
         className: "form-group card p-2 bg-info text-white"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-12"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormEdit__WEBPACK_IMPORTED_MODULE_6__["default"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormEdit__WEBPACK_IMPORTED_MODULE_7__["default"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group d-flex justify-content-between"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "button",
@@ -51478,6 +51526,8 @@ function (_React$Component) {
           return _this3.handleResetForm();
         }
       })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_BootstrapReturn__WEBPACK_IMPORTED_MODULE_10__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-12"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormReturn__WEBPACK_IMPORTED_MODULE_4__["default"], null))));
     }
@@ -51498,13 +51548,13 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     resetForm: function resetForm() {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_8__["resetForm"])());
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_9__["resetForm"])());
     },
     loadForm: function loadForm(form, name) {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_8__["loadForm"])(form, name));
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_9__["loadForm"])(form, name));
     },
     updateName: function updateName(name) {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_8__["updateName"])(name));
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_9__["updateName"])(name));
     }
   };
 };
@@ -52675,7 +52725,7 @@ var FormReturn = function FormReturn(props) {
     id: "button-to-copy",
     "class": "btn btn-dark",
     "data-clipboard-text": html
-  }, "Copy to clipboard"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PrismCode__WEBPACK_IMPORTED_MODULE_2__["PrismCode"], {
+  }, "Copy to Clipboard"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PrismCode__WEBPACK_IMPORTED_MODULE_2__["PrismCode"], {
     code: html,
     language: "html",
     plugins: ["line-numbers", "normalize-whitespace"]

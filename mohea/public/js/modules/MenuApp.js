@@ -67719,6 +67719,52 @@ react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render(react__WEBPACK_IMPORTED_
 
 /***/ }),
 
+/***/ "./resources/js/modules/menu/components/BootstrapReturn.jsx":
+/*!******************************************************************!*\
+  !*** ./resources/js/modules/menu/components/BootstrapReturn.jsx ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _components_PrismCode__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../components/PrismCode */ "./resources/js/components/PrismCode.js");
+/* harmony import */ var clipboard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! clipboard */ "./node_modules/clipboard/dist/clipboard.js");
+/* harmony import */ var clipboard__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(clipboard__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+
+var BootstrapReturn = function BootstrapReturn(props) {
+  new clipboard__WEBPACK_IMPORTED_MODULE_3___default.a('#button-to-copy');
+  var html = '<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">\n';
+  html += '<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>\n';
+  html += '<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>\n';
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "w-50 mx-auto"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    id: "button-to-copy",
+    "class": "btn btn-dark",
+    "data-clipboard-text": html
+  }, "Copy Bootstrap Sources"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PrismCode__WEBPACK_IMPORTED_MODULE_2__["PrismCode"], {
+    code: html,
+    language: "html",
+    plugins: ["line-numbers", "normalize-whitespace"]
+  })));
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  return state;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(BootstrapReturn));
+
+/***/ }),
+
 /***/ "./resources/js/modules/menu/components/CustomInput.js":
 /*!*************************************************************!*\
   !*** ./resources/js/modules/menu/components/CustomInput.js ***!
@@ -67918,11 +67964,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _MenuReturn_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./MenuReturn.jsx */ "./resources/js/modules/menu/components/MenuReturn.jsx");
-/* harmony import */ var _redux_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../redux/actions */ "./resources/js/modules/menu/redux/actions.js");
-/* harmony import */ var _MenuContent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./MenuContent */ "./resources/js/modules/menu/components/MenuContent.jsx");
-/* harmony import */ var _CustomInput__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./CustomInput */ "./resources/js/modules/menu/components/CustomInput.js");
-/* harmony import */ var _components_Canceller__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../components/Canceller */ "./resources/js/components/Canceller.js");
-/* harmony import */ var _components_SaveProject__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../components/SaveProject */ "./resources/js/components/SaveProject.js");
+/* harmony import */ var _BootstrapReturn__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./BootstrapReturn */ "./resources/js/modules/menu/components/BootstrapReturn.jsx");
+/* harmony import */ var _redux_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../redux/actions */ "./resources/js/modules/menu/redux/actions.js");
+/* harmony import */ var _MenuContent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./MenuContent */ "./resources/js/modules/menu/components/MenuContent.jsx");
+/* harmony import */ var _CustomInput__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./CustomInput */ "./resources/js/modules/menu/components/CustomInput.js");
+/* harmony import */ var _components_Canceller__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../components/Canceller */ "./resources/js/components/Canceller.js");
+/* harmony import */ var _components_SaveProject__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../components/SaveProject */ "./resources/js/components/SaveProject.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -67942,6 +67989,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -68028,12 +68076,12 @@ function (_Component) {
     * DISPLAY COMPONENT
     =============================================== */
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.props.name || 'New Menu'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SaveProject__WEBPACK_IMPORTED_MODULE_8__["SaveProject"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.props.name || 'New Menu'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SaveProject__WEBPACK_IMPORTED_MODULE_9__["SaveProject"], {
         content: this.props.menu,
         classes: this.props.classes,
         name: this.props.name,
         type: "menu"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CustomInput__WEBPACK_IMPORTED_MODULE_6__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Canceller__WEBPACK_IMPORTED_MODULE_7__["Canceller"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CustomInput__WEBPACK_IMPORTED_MODULE_7__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Canceller__WEBPACK_IMPORTED_MODULE_8__["Canceller"], {
         cancelAction: this.props.cancelAction
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
@@ -68105,7 +68153,9 @@ function (_Component) {
         onClick: this.handleReset
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-9"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MenuContent__WEBPACK_IMPORTED_MODULE_5__["default"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MenuContent__WEBPACK_IMPORTED_MODULE_6__["default"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_BootstrapReturn__WEBPACK_IMPORTED_MODULE_4__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-12"
@@ -68127,19 +68177,19 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     loadMenu: function loadMenu(id, classes, menu, name) {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_4__["loadMenu"])(id, classes, menu, name));
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_5__["loadMenu"])(id, classes, menu, name));
     },
     updateName: function updateName(name) {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_4__["updateName"])(name));
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_5__["updateName"])(name));
     },
     updateClasses: function updateClasses(classe) {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_4__["updateClasses"])(classe));
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_5__["updateClasses"])(classe));
     },
     resetMenu: function resetMenu() {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_4__["resetMenu"])());
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_5__["resetMenu"])());
     },
     cancelAction: function cancelAction() {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_4__["cancelAction"])());
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_5__["cancelAction"])());
     }
   };
 };

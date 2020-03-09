@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import axios from 'axios';
 import { connect } from "react-redux";
 import MenuReturn from "./MenuReturn.jsx";
+import BootstrapReturn from "./BootstrapReturn";
 import { loadMenu, resetMenu, updateName, updateClasses, cancelAction } from "../redux/actions";
 import MenuContent from "./MenuContent";
 import CustomInput from "./CustomInput";
@@ -92,6 +93,9 @@ class Menu extends Component {
             <MenuContent />
           </div>
         </div>
+        <div className="col-md-12">
+            <BootstrapReturn />
+          </div>
         <div className="row">
           <div className="col-md-12">
             <MenuReturn />

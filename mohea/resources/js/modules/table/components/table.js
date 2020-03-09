@@ -5,6 +5,7 @@ import React, {Component} from "react";
 import axios from 'axios';
 import { connect } from "react-redux";
 import TableReturn from "./tableReturn.jsx";
+import BootstrapReturn from "./BootstrapReturn";
 import { loadTable, addNewRow, addNewCol, importFile, resetTable, cancelAction, updateCaption, updateName, updateClasses, updateNbCol } from "../redux/actions";
 import * as d3 from "d3";
 import { ImportFile } from "../../../components/ImportFile";
@@ -229,6 +230,9 @@ class Table extends Component {
                 <Tfoot />
             </table>
           </div>
+        </div>
+        <div className="col-md-12">
+          <BootstrapReturn />
         </div>
         <div className="row">
           <div className="col-md-12">

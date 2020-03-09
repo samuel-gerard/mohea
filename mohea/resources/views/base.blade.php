@@ -17,4 +17,17 @@
         <script src="{{ mix('/js/app.js') }}"></script>
         @yield('scripts-end')
     </body>
+    
+    <script type="text/javascript">
+        var el = document.createElement('script');
+        el.setAttribute('src', 'https://static.axept.io/sdk.js');
+        el.setAttribute('type', 'text/javascript');
+        el.setAttribute('async', true);
+        el.setAttribute('data-id', '5dc19565fc14082a1ffe44df');
+        el.setAttribute('data-cookies-version', 'mohea unistra-base');
+        
+        if (document.body !== null) {
+        document.body.appendChild(el);
+        }
+    </script>
 </html>

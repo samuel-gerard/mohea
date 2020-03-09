@@ -21,7 +21,7 @@ Route::get('/help', 'HomeController@help')->name('help');
 Route::middleware(['auth'])->group(function() {
 
     // Route Home & Dashboard
-    // Route::redirect('/', '/dashboard');
+    Route::redirect('/', '/dashboard');
     
     // Routes of each modules
     Route::resource('project', 'ProjectController')->except(['create']);
@@ -46,9 +46,6 @@ Route::middleware(['auth'])->group(function() {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-// Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
-// Route::get('/callback/{provider}', 'SocialController@callback');
 
 Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('login/{provider}/callback','Auth\LoginController@handleProviderCallback');

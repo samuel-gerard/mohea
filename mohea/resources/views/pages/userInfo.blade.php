@@ -117,7 +117,7 @@
                                 @enderror
                             </div>
 
-                            @if ( file_exists(public_path(asset('storage/' . Auth::user()->avatar))) )
+                            @if ( strpos(Auth::user()->avatar, 'http') === 0 )
                                 <img class="img-thumbnail" id="your-image" src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->name }}'s profile picture" width="200px">
                             @elseif ( Auth::user()->avatar !== null )
                                 <img class="img-thumbnail" id="your-image" src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}'s profile picture" width="200px">                            

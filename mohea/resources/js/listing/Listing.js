@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import growl, { GrowlComponent } from '@crystallize/react-growl';
 
 import axios from "axios";
+import { updateItemValue } from "../modules/menu/redux/actions";
 
 const Listing = () => {
   const url = window.location.origin;
@@ -88,6 +89,29 @@ const Listing = () => {
     return;
   }
 
+  const getItemUpdated = updatedDate => {
+    let date = Date.parse(updatedDate);
+    let currentTime = Date.parse(new Date()) - ( 3600 * 1000);
+
+    const diff = (currentTime - date) / 1000;
+
+    if (diff < 60) {
+      return 'Il y a quelques secondes';
+    } else if (diff < 3600) {
+      const time = parseInt(diff / 60);
+      const unit = time > 1 ? 'minutes' : 'minute';
+      return time + ' ' + unit + ' ago';
+    } else if (diff < 3600 * 24) {
+      const time = parseInt(diff / 3600)
+      const unit = time > 1 ? 'hours' : 'hour';
+      return time + ' ' + unit + ' ago';
+    } else {
+      const time = parseInt(diff / (24 * 3600))
+      const unit = time > 1 ? 'days' : 'day';
+      return time + ' ' + unit + ' ago';
+    }
+  }
+
   return (
     <div>
       <GrowlComponent />
@@ -105,7 +129,8 @@ const Listing = () => {
 
         return (
           <button key={'listing-' + idx} id={'listing-' + idx} onClick={() => handleUpdate(item.id, item.type)} className={item.type + "-item"}>
-            <h4>{item.name ? item.name : 'New ' + item.type}</h4>
+            <h4 className="mb-0">{item.name ? item.name : 'New ' + item.type}</h4>
+            <p className="small mb-0 ml-2">• {getItemUpdated(item.updated_at)}</p>
             {item.caption &&
               <p>{item.caption}</p>
             }

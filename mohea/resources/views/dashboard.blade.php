@@ -18,7 +18,7 @@
     <div class="profile">
         <div class="my-card">
 
-            @if ( file_exists(public_path(asset('storage/' . Auth::user()->avatar))) )
+            @if ( strpos(Auth::user()->avatar, 'http') === 0 )
                 <img class="avatar" src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->name }}'s profile picture">
             @elseif ( Auth::user()->avatar !== null )
                 <img class="avatar" src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}'s profile picture">

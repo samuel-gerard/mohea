@@ -91,7 +91,7 @@ const Listing = () => {
 
   const getItemUpdated = updatedDate => {
     let date = Date.parse(updatedDate);
-    let currentTime = Date.parse(new Date());
+    let currentTime = Date.parse(new Date()) - ( 3600 * 1000);
 
     const diff = (currentTime - date) / 1000;
 

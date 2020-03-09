@@ -43406,7 +43406,7 @@ var Listing = function Listing() {
 
   var getItemUpdated = function getItemUpdated(updatedDate) {
     var date = Date.parse(updatedDate);
-    var currentTime = Date.parse(new Date());
+    var currentTime = Date.parse(new Date()) - 3600 * 1000;
     var diff = (currentTime - date) / 1000;
 
     if (diff < 60) {

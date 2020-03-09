@@ -38,7 +38,7 @@
                 <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
                 <div class="col-md-6">
                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-                    <small id="passwordHelp" class="form-text text-muted">Password must be at least 6 characters long.</small>
+                    <small id="passwordHelp" class="form-text text-muted">Password must be at least 8 characters long.</small>
                     @error('password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -56,7 +56,7 @@
                 <div class="form-check">
                     <input required class="form-check-input" type="checkbox" name="privacy" id="privacy">
                     <label class="form-check-label" for="privacy">
-                        Have you read and agree to the <a class="link secondary" href="/privacy">privacy policy</a>?
+                        I have read and accepted the <a class="link secondary" href="/privacy">privacy policy</a>?
                     </label>
                 </div>
             </div>

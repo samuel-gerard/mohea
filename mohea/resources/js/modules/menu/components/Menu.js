@@ -94,8 +94,8 @@ class Menu extends Component {
           </div>
         </div>
         <div className="col-md-12">
-            <BootstrapReturn />
-          </div>
+          <BootstrapReturn />
+        </div>
         <div className="row">
           <div className="col-md-12">
             <MenuReturn />

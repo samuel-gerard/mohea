@@ -17,7 +17,13 @@
 <main class="dashboard">
     <div class="profile">
         <div class="my-card">
-            <img class="avatar" src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->name }}'s profile picture">
+
+            @if ( strpos(Auth::user()->avatar, 'http') === 0 )
+                <img class="avatar" src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->name }}'s profile picture">
+            @elseif ( Auth::user()->avatar !== null )
+                <img class="avatar" src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}'s profile picture">
+            @endif
+
             <p class="name">{{ Auth::user()->name }}</p>
             <p class="email">{{ Auth::user()->email }}</p>
             <a class="button" href="{{ route('user.info') }}">Edit your account</a>

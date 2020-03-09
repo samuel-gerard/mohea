@@ -96999,6 +96999,7 @@ var SaveProject = function SaveProject(props) {
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "button",
+    "class": "btn btn-success",
     onClick: save,
     value: 'Save this ' + props.type
   }));
@@ -97036,6 +97037,52 @@ var store = Object(redux__WEBPACK_IMPORTED_MODULE_3__["createStore"])(_redux_red
 react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_4__["Provider"], {
   store: store
 }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_crystallize_react_growl__WEBPACK_IMPORTED_MODULE_6__["GrowlComponent"], null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_table__WEBPACK_IMPORTED_MODULE_0__["default"], null)), document.getElementById('app-table'));
+
+/***/ }),
+
+/***/ "./resources/js/modules/table/components/BootstrapReturn.jsx":
+/*!*******************************************************************!*\
+  !*** ./resources/js/modules/table/components/BootstrapReturn.jsx ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _components_PrismCode__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../components/PrismCode */ "./resources/js/components/PrismCode.js");
+/* harmony import */ var clipboard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! clipboard */ "./node_modules/clipboard/dist/clipboard.js");
+/* harmony import */ var clipboard__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(clipboard__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+
+var BootstrapReturn = function BootstrapReturn(props) {
+  new clipboard__WEBPACK_IMPORTED_MODULE_3___default.a('#button-to-copy');
+  var html = '<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">\n';
+  html += '<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>\n';
+  html += '<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>\n';
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "w-50 mx-auto"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    id: "button-to-copy",
+    "class": "btn btn-dark",
+    "data-clipboard-text": html
+  }, "Copy Bootstrap Sources"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PrismCode__WEBPACK_IMPORTED_MODULE_2__["PrismCode"], {
+    code: html,
+    language: "html",
+    plugins: ["line-numbers", "normalize-whitespace"]
+  })));
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  return state;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(BootstrapReturn));
 
 /***/ }),
 
@@ -97195,12 +97242,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _tableReturn_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./tableReturn.jsx */ "./resources/js/modules/table/components/tableReturn.jsx");
-/* harmony import */ var _redux_actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../redux/actions */ "./resources/js/modules/table/redux/actions.js");
-/* harmony import */ var d3__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! d3 */ "./node_modules/d3/index.js");
-/* harmony import */ var _components_ImportFile__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../components/ImportFile */ "./resources/js/components/ImportFile.js");
-/* harmony import */ var _components_SaveProject__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../components/SaveProject */ "./resources/js/components/SaveProject.js");
-/* harmony import */ var _components_Canceller__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../components/Canceller */ "./resources/js/components/Canceller.js");
-/* harmony import */ var _CustomInput__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./CustomInput */ "./resources/js/modules/table/components/CustomInput.js");
+/* harmony import */ var _BootstrapReturn__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./BootstrapReturn */ "./resources/js/modules/table/components/BootstrapReturn.jsx");
+/* harmony import */ var _redux_actions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../redux/actions */ "./resources/js/modules/table/redux/actions.js");
+/* harmony import */ var d3__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! d3 */ "./node_modules/d3/index.js");
+/* harmony import */ var _components_ImportFile__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../components/ImportFile */ "./resources/js/components/ImportFile.js");
+/* harmony import */ var _components_SaveProject__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../components/SaveProject */ "./resources/js/components/SaveProject.js");
+/* harmony import */ var _components_Canceller__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../components/Canceller */ "./resources/js/components/Canceller.js");
+/* harmony import */ var _CustomInput__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./CustomInput */ "./resources/js/modules/table/components/CustomInput.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -97220,6 +97268,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -97310,7 +97359,7 @@ function (_Component) {
 
         switch (typeFileSelected.value) {
           case "CSV":
-            data = d3__WEBPACK_IMPORTED_MODULE_8__["dsvFormat"](';').parse(reader.result);
+            data = d3__WEBPACK_IMPORTED_MODULE_9__["dsvFormat"](';').parse(reader.result);
             break;
 
           case "JSON":
@@ -97425,17 +97474,17 @@ function (_Component) {
       })), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input", {
         type: "submit",
         value: "Generate table"
-      }))), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_components_ImportFile__WEBPACK_IMPORTED_MODULE_9__["ImportFile"], {
+      }))), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_components_ImportFile__WEBPACK_IMPORTED_MODULE_10__["ImportFile"], {
         func: this.importFile,
         className: "col-md-6"
-      }))), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_components_SaveProject__WEBPACK_IMPORTED_MODULE_10__["SaveProject"], {
+      }))), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_components_SaveProject__WEBPACK_IMPORTED_MODULE_11__["SaveProject"], {
         content: this.props.tableau,
         classes: this.props.classes,
         caption: this.props.caption,
         nbCol: this.props.nbCol,
         name: this.props.name,
         type: "table"
-      }), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_CustomInput__WEBPACK_IMPORTED_MODULE_12__["default"], null), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_components_Canceller__WEBPACK_IMPORTED_MODULE_11__["Canceller"], {
+      }), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_CustomInput__WEBPACK_IMPORTED_MODULE_13__["default"], null), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_components_Canceller__WEBPACK_IMPORTED_MODULE_12__["Canceller"], {
         cancelAction: this.props.cancelAction
       }), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
         className: "row"
@@ -97561,6 +97610,8 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("table", {
         className: tableClasses
       }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_thead_jsx__WEBPACK_IMPORTED_MODULE_0__["default"], null), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_tbody_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_tfoot_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null)))), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
+        className: "col-md-12"
+      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_BootstrapReturn__WEBPACK_IMPORTED_MODULE_7__["default"], null)), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
         className: "col-md-12"
@@ -97584,34 +97635,34 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     loadTable: function loadTable(id, classes, nbCol, tableau, caption, name) {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_7__["loadTable"])(id, classes, nbCol, tableau, caption, name));
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_8__["loadTable"])(id, classes, nbCol, tableau, caption, name));
     },
     updateCaption: function updateCaption(caption) {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_7__["updateCaption"])(caption));
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_8__["updateCaption"])(caption));
     },
     updateName: function updateName(name) {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_7__["updateName"])(name));
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_8__["updateName"])(name));
     },
     updateClasses: function updateClasses(classe) {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_7__["updateClasses"])(classe));
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_8__["updateClasses"])(classe));
     },
     resetTable: function resetTable() {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_7__["resetTable"])());
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_8__["resetTable"])());
     },
     addRow: function addRow(type, idx) {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_7__["addNewRow"])(type, idx));
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_8__["addNewRow"])(type, idx));
     },
     addCol: function addCol(idx) {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_7__["addNewCol"])(idx));
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_8__["addNewCol"])(idx));
     },
     importFile: function importFile(data) {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_7__["importFile"])(data));
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_8__["importFile"])(data));
     },
     updateNbCol: function updateNbCol(number) {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_7__["updateNbCol"])(number));
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_8__["updateNbCol"])(number));
     },
     cancelAction: function cancelAction() {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_7__["cancelAction"])());
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_8__["cancelAction"])());
     }
   };
 };

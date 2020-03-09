@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use Storage;
 use App\User;
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -59,7 +60,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        echo 'ok';
+        //
     }
 
     /**
@@ -86,7 +87,33 @@ class UserController extends Controller
         $data = $request->validated($user);
         $user->fill($data);
         $user->save();
-        return redirect()->route('dashboard')->with('message', 'Informations modified successfully !');
+        return redirect()->route('user.info')->with('message', 'Informations modified successfully !');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function updatePicture(\App\Http\Requests\UserPictureRequest $request)
+    {
+        // ajout base
+        $user = Auth::user();
+        $data = $request->validated($user);
+        $user->fill($data);
+        $user->save();
+
+        // store the picture
+        if(request('avatar')){
+            $user->update([
+                'avatar' => request('avatar')->store('avatars', 'public')
+            ]);
+        }
+
+        // return view whit confirmation
+        return redirect()->route('user.info')->with('message', 'Profile picture modified successfully !');
     }
 
     /**
@@ -98,14 +125,13 @@ class UserController extends Controller
      */
     public function updatePassword(\App\Http\Requests\UserPasswordRequest $request)
     {
-        // si oui -> hash password
         $user = Auth::user();
         $data = $request->validated($user);        
         $passwordHash = Hash::make($data['password']);
         $data['password'] = $passwordHash;
         $user->fill($data);
         $user->save();
-        return redirect()->route('dashboard')->with('message', 'Password modified successfully !');
+        return redirect()->route('user.info')->with('message', 'Password modified successfully !');
     }
 
     /**

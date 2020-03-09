@@ -11,17 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
-
+// Base routes
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/privacy', 'HomeController@privacy')->name('privacy');
 Route::get('/help', 'HomeController@help')->name('help');
 
-Route::middleware(['auth'])->group(function() {
-
-    // Route Home & Dashboard
-    // Route::redirect('/', '/dashboard');
+Route::middleware('auth')->group(function() {
     
     // Routes of each modules
     Route::resource('project', 'ProjectController')->except(['create']);
@@ -29,6 +24,7 @@ Route::middleware(['auth'])->group(function() {
         return view('pages.create');
     })->name('project.create');
 
+    // Route for list of projects
     Route::get('/create/{type}', 'ProjectController@create')->where('type', 'menu|table|form');;
     Route::get('/project/{type}/{id}', 'ProjectController@create')->where('type', 'menu|table|form')->where('id', '[0-9]+');
 
@@ -36,19 +32,17 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/user', 'UserController@index')->name('user.info');
     Route::post('/user/info', 'UserController@updateInfo')->name('user.update.info');
     Route::post('/user/password', 'UserController@updatePassword')->name('user.update.password');
+    Route::post('/user/picture', 'UserController@updatePicture')->name('user.update.picture');
     Route::post('/user/delete', 'UserController@destroy')->name('user.delete');    
-    Route::get('/dashboard', 'HomeController@index')->name('dashboard');
-
+    Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
     Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
 });
 
+// Generate routes of authentication Laravel
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-// Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
-// Route::get('/callback/{provider}', 'SocialController@callback');
-
+// Connexion with Google/Facebook/Github
 Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('login/{provider}/callback','Auth\LoginController@handleProviderCallback');
 

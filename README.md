@@ -12,8 +12,10 @@ Set the key application to encrypte the data users
 ``` php artisan key:generate ```  
 Install php dependencies   
 ``` composer install ```  
-install javascript dependencies (inclued react)  
+Install javascript dependencies (inclued react)  
 ``` npm install ```  
+Link storage folder to public
+``` php artisan storage:link ```
 Make migrations of the database (in case there is no database provided)  
 ``` php artisan migrate ```  
   

@@ -51390,7 +51390,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _FormContent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./FormContent */ "./resources/js/modules/form/components/FormContent.jsx");
 /* harmony import */ var _FormReturn__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./FormReturn */ "./resources/js/modules/form/components/FormReturn.jsx");
-/* harmony import */ var _BootstrapReturn__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./BootstrapReturn */ "./resources/js/modules/form/components/BootstrapReturn.jsx");
+/* harmony import */ var _BootstrapReturn__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./BootstrapReturn */ "./resources/js/modules/form/components/BootstrapReturn.jsx");
 /* harmony import */ var _FormChoices__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./FormChoices */ "./resources/js/modules/form/components/FormChoices.jsx");
 /* harmony import */ var _FormEdit__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./FormEdit */ "./resources/js/modules/form/components/FormEdit.jsx");
 /* harmony import */ var _components_SaveProject__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../components/SaveProject */ "./resources/js/components/SaveProject.js");
@@ -51527,7 +51527,7 @@ function (_React$Component) {
         }
       })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-12"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_BootstrapReturn__WEBPACK_IMPORTED_MODULE_10__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_BootstrapReturn__WEBPACK_IMPORTED_MODULE_5__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-12"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormReturn__WEBPACK_IMPORTED_MODULE_4__["default"], null))));
     }

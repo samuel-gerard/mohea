@@ -1,6 +1,5 @@
 import React from "react";
-import { connect } from "react-redux";
-import { PrismCode } from "../../../components/PrismCode";
+import { PrismCode } from "./PrismCode";
 import ClipboardJS from 'clipboard';
 
 const BootstrapReturn = props => {
@@ -30,6 +29,4 @@ const BootstrapReturn = props => {
 
 }
 
-const mapStateToProps = state => state;
-
-export default connect(mapStateToProps)(BootstrapReturn);
+export default BootstrapReturn;

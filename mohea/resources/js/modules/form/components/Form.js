@@ -3,7 +3,7 @@ import axios from 'axios';
 import { connect } from "react-redux";
 import FormContent from "./FormContent";
 import FormReturn from "./FormReturn";
-import BootstrapReturn from "./BootstrapReturn";
+import BootstrapReturn from "../../../components/BootstrapReturn";
 import FormChoices from "./FormChoices";
 import FormEdit from "./FormEdit";
 import { SaveProject } from "../../../components/SaveProject";

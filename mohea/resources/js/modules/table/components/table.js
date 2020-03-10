@@ -5,7 +5,7 @@ import React, {Component} from "react";
 import axios from 'axios';
 import { connect } from "react-redux";
 import TableReturn from "./tableReturn.jsx";
-import BootstrapReturn from "./BootstrapReturn";
+import BootstrapReturn from "../../../components/BootstrapReturn";
 import { loadTable, addNewRow, addNewCol, importFile, resetTable, cancelAction, updateCaption, updateName, updateClasses, updateNbCol } from "../redux/actions";
 import * as d3 from "d3";
 import { ImportFile } from "../../../components/ImportFile";

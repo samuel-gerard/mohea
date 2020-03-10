@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import axios from 'axios';
 import { connect } from "react-redux";
 import MenuReturn from "./MenuReturn.jsx";
-import BootstrapReturn from "./BootstrapReturn";
+import BootstrapReturn from "../../../components/BootstrapReturn";
 import { loadMenu, resetMenu, updateName, updateClasses, cancelAction } from "../redux/actions";
 import MenuContent from "./MenuContent";
 import CustomInput from "./CustomInput";

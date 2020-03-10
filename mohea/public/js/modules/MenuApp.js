@@ -67375,7 +67375,7 @@ var BootstrapReturn = function BootstrapReturn(props) {
     className: "w-50 mx-auto"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     id: "button-to-copy",
-    "class": "btn btn-dark",
+    className: "btn btn-dark",
     "data-clipboard-text": html
   }, "Copy Bootstrap Sources"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PrismCode__WEBPACK_IMPORTED_MODULE_1__["PrismCode"], {
     code: html,
@@ -67402,7 +67402,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
 var Canceller = function Canceller(props) {
-  var fired = false;
+  var firedUndo = false;
+  var firedRedo = false;
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function (props) {
     document.addEventListener("keydown", function (e) {
       checkKeyDown(e);
@@ -67420,25 +67421,44 @@ var Canceller = function Canceller(props) {
     if (e.keyCode == 90 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
       e.stopPropagation();
       e.preventDefault();
-      fired = true;
+      firedUndo = true;
+      return false;
+    }
+
+    if (e.keyCode == 89 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
+      e.stopPropagation();
+      e.preventDefault();
+      firedRedo = true;
       return false;
     }
   };
 
   var checkKeyUp = function checkKeyUp() {
-    if (fired) {
-      fired = false;
-      cancel();
+    if (firedUndo) {
+      firedUndo = false;
+      undo();
+      return;
+    }
+
+    if (firedRedo) {
+      firedRedo = false;
+      redo();
     }
   };
 
-  var cancel = function cancel() {
-    props.cancelAction();
+  var undo = function undo() {
+    props.undoAction();
+  };
+
+  var redo = function redo() {
+    props.redoAction();
   };
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    onClick: cancel
-  }, "Cancel last action"));
+    onClick: undo
+  }, "Undo last action"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    onClick: redo
+  }, "Redo last action"));
 };
 
 /***/ }),
@@ -67671,7 +67691,7 @@ var SaveProject = function SaveProject(props) {
         window.location.replace(url + '/project/' + props.type + '/' + res.data.id);
         _crystallize_react_growl__WEBPACK_IMPORTED_MODULE_2___default()({
           type: 'success',
-          message: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Saved with success")
+          message: 'Saved with success'
         });
       }
     });
@@ -67679,7 +67699,7 @@ var SaveProject = function SaveProject(props) {
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "button",
-    "class": "btn btn-success",
+    className: "btn btn-success",
     onClick: save,
     value: 'Save this ' + props.type
   }));
@@ -68037,7 +68057,8 @@ function (_Component) {
         name: this.props.name,
         type: "menu"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CustomInput__WEBPACK_IMPORTED_MODULE_7__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Canceller__WEBPACK_IMPORTED_MODULE_8__["Canceller"], {
-        cancelAction: this.props.cancelAction
+        undoAction: this.props.undoAction,
+        redoAction: this.props.redoAction
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -68143,8 +68164,11 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     resetMenu: function resetMenu() {
       dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_5__["resetMenu"])());
     },
-    cancelAction: function cancelAction() {
-      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_5__["cancelAction"])());
+    undoAction: function undoAction() {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_5__["undoAction"])());
+    },
+    redoAction: function redoAction() {
+      dispatch(Object(_redux_actions__WEBPACK_IMPORTED_MODULE_5__["redoAction"])());
     }
   };
 };
@@ -68501,14 +68525,15 @@ var mapStateToProps = function mapStateToProps(state) {
 /*!****************************************************!*\
   !*** ./resources/js/modules/menu/redux/actions.js ***!
   \****************************************************/
-/*! exports provided: deleteItem, resetMenu, cancelAction, loadMenu, addNewItem, saveMenu, updateItemValue, updateName, updateClasses, updateInputSelected, updateInputStyle, updateInputOptions */
+/*! exports provided: deleteItem, resetMenu, undoAction, redoAction, loadMenu, addNewItem, saveMenu, updateItemValue, updateName, updateClasses, updateInputSelected, updateInputStyle, updateInputOptions */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteItem", function() { return deleteItem; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resetMenu", function() { return resetMenu; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cancelAction", function() { return cancelAction; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "undoAction", function() { return undoAction; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "redoAction", function() { return redoAction; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadMenu", function() { return loadMenu; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNewItem", function() { return addNewItem; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "saveMenu", function() { return saveMenu; });
@@ -68533,9 +68558,14 @@ var resetMenu = function resetMenu() {
     type: "RESET_MENU"
   };
 };
-var cancelAction = function cancelAction() {
+var undoAction = function undoAction() {
   return {
-    type: "CANCEL_LAST_ACTION"
+    type: "UNDO_ACTION"
+  };
+};
+var redoAction = function redoAction() {
+  return {
+    type: "REDO_ACTION"
   };
 };
 /* ===============================================
@@ -68666,7 +68696,8 @@ function rootReducer() {
         'classes': payload.classes ? payload.classes : [],
         'menu': payload.menu,
         'name': payload.name ? payload.name : '',
-        'lastState': lastState
+        'lastState': lastState,
+        'nextState': {}
       });
 
     case "DELETE_ITEM":
@@ -68681,7 +68712,8 @@ function rootReducer() {
       return _objectSpread({}, state, {
         inputSelected: {},
         menu: _toConsumableArray(newState.menu),
-        'lastState': lastState
+        'lastState': lastState,
+        'nextState': {}
       });
 
     case "ADD_ITEM":
@@ -68690,7 +68722,8 @@ function rootReducer() {
       if (payload.parent_idx < 0) {
         return _objectSpread({}, state, {
           menu: [].concat(_toConsumableArray(state.menu), [item]),
-          'lastState': lastState
+          'lastState': lastState,
+          'nextState': {}
         });
       } // If second level
 
@@ -68699,13 +68732,15 @@ function rootReducer() {
         menu: [].concat(_toConsumableArray(state.menu.slice(0, payload.parent_idx)), [_objectSpread({}, state.menu[payload.parent_idx], {
           children: [].concat(_toConsumableArray(newState.menu[payload.parent_idx].children), [item])
         })], _toConsumableArray(state.menu.slice(payload.parent_idx + 1))),
-        'lastState': lastState
+        'lastState': lastState,
+        'nextState': {}
       });
 
     case "UPDATE_NAME":
       return _objectSpread({}, state, {
         name: payload.name,
-        'lastState': lastState
+        'lastState': lastState,
+        'nextState': {}
       });
 
     case "UPDATE_ITEM_VALUE":
@@ -68719,7 +68754,8 @@ function rootReducer() {
 
       return _objectSpread({}, state, {
         menu: _toConsumableArray(newState.menu),
-        'lastState': lastState
+        'lastState': lastState,
+        'nextState': {}
       });
 
     case "RESET_MENU":
@@ -68728,7 +68764,8 @@ function rootReducer() {
         'menu': [],
         'name': '',
         'inputSelected': {},
-        'lastState': lastState
+        'lastState': lastState,
+        'nextState': {}
       };
 
     case "UPDATE_CLASSES":
@@ -68744,20 +68781,23 @@ function rootReducer() {
 
       return _objectSpread({}, state, {
         'classes': _toConsumableArray(newState.classes),
-        'lastState': lastState
+        'lastState': lastState,
+        'nextState': {}
       });
 
     case "UPDATE_NBCOL":
       return _objectSpread({}, state, {
         nbCol: payload.nbCol,
-        'lastState': lastState
+        'lastState': lastState,
+        'nextState': {}
       });
 
     case "UPDATE_INPUT_SELECTED":
       if (!(payload.idx || payload.parent_idx)) {
         return _objectSpread({}, state, {
           inputSelected: {},
-          'lastState': lastState
+          'lastState': lastState,
+          'nextState': {}
         });
       }
 
@@ -68766,7 +68806,8 @@ function rootReducer() {
           idx: payload.idx,
           parent_idx: payload.parent_idx
         },
-        'lastState': lastState
+        'lastState': lastState,
+        'nextState': {}
       });
 
     case "UPDATE_INPUT_STYLE":
@@ -68784,7 +68825,8 @@ function rootReducer() {
 
       return _objectSpread({}, state, {
         menu: _toConsumableArray(newState.menu),
-        'lastState': lastState
+        'lastState': lastState,
+        'nextState': {}
       });
 
     case "UDPATE_INPUT_OPTIONS":
@@ -68798,12 +68840,24 @@ function rootReducer() {
 
       return _objectSpread({}, newState, {
         menu: _toConsumableArray(newState.menu),
-        'lastState': lastState
+        'lastState': lastState,
+        'nextState': {}
       });
 
-    case "CANCEL_LAST_ACTION":
-      if (Object.values(state.lastState).length > 0) {
-        return state.lastState;
+    case "UNDO_ACTION":
+      if (state.lastState && Object.values(state.lastState).length > 0) {
+        return _objectSpread({}, state.lastState, {
+          'nextState': state
+        });
+      } else return newState;
+
+    case "REDO_ACTION":
+      if (state.nextState && Object.values(state.nextState).length > 0) {
+        if (state.nextState.nextState && Object.values(state.nextState.nextState).length > 0) {
+          return _objectSpread({}, state.nextState, {
+            'nextState': state.nextState.nextState
+          });
+        } else return state.nextState;
       } else return newState;
 
     default:

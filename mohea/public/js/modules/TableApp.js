@@ -97378,8 +97378,6 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleClasses", function (e) {
-      console.log(e.target.checked);
-
       _this.props.updateClasses(e.target.value);
     });
 

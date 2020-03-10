@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import growl, { GrowlComponent } from '@crystallize/react-growl';
 
 import axios from "axios";
-import { updateItemValue } from "../modules/menu/redux/actions";
 
 const Listing = () => {
   const url = window.location.origin;
@@ -59,7 +58,7 @@ const Listing = () => {
                 isDeleting = false;
               }
             })
-        }, 5000);
+        }, 3000);
       }
       else {
         clearTimeout(deleteTimeout);
@@ -116,7 +115,7 @@ const Listing = () => {
     }
   }
 
-  const handleDuplicate = (item) => {
+  const handleDuplicate = (e, item) => {
     axios({
       method: 'post',
       url: url + '/project',
@@ -128,8 +127,20 @@ const Listing = () => {
       }
     })
     .then(res => {
-      if (res.data && res.data.id) {
-        window.location.replace(url + '/dashboard');
+      if (res.status === 200) {
+        growl({
+          type: 'success',
+          message: item.name+' has been duplicated'
+        });
+        axios({
+          method: 'GET',
+          url: url + '/project/',
+        })
+          .then(res => {
+            if (res.status === 200) {
+              setListing(res.data);
+            }
+          })
       }
     })
   }
@@ -156,8 +167,10 @@ const Listing = () => {
             {item.caption &&
               <p>{item.caption}</p>
             }
-            <span className="button" id={'copy-' + idx} onClick={() => handleDuplicate(item)} tabIndex="0">Duplicate</span>
-            <span className="button" id={'button-' + idx} onClick={() => handleDelete(item.id, idx)} tabIndex="0">Delete</span>
+            <span>
+              <span className="button" id={'button-' + idx} onClick={() => handleDelete(item.id, idx)} tabIndex="0">Delete</span>
+              <span className="button" id={'copy-' + idx} onClick={() => handleDuplicate(item)} tabIndex="0">Duplicate</span>
+            </span>
           </button>
         )
       })}

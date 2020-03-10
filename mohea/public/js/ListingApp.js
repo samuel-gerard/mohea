@@ -43247,7 +43247,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _crystallize_react_growl__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_crystallize_react_growl__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _modules_menu_redux_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../modules/menu/redux/actions */ "./resources/js/modules/menu/redux/actions.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -43255,7 +43254,6 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 
 
 
@@ -43323,7 +43321,7 @@ var Listing = function Listing() {
               isDeleting = false;
             }
           });
-        }, 5000);
+        }, 3000);
       } else {
         clearTimeout(deleteTimeout);
         document.getElementById('button-' + idx).innerHTML = "Delete";
@@ -43382,7 +43380,7 @@ var Listing = function Listing() {
     }
   };
 
-  var handleDuplicate = function handleDuplicate(item) {
+  var handleDuplicate = function handleDuplicate(e, item) {
     axios__WEBPACK_IMPORTED_MODULE_2___default()({
       method: 'post',
       url: url + '/project',
@@ -43393,11 +43391,18 @@ var Listing = function Listing() {
         type: item.type
       }
     }).then(function (res) {
-      if (res.data && res.data.id) {
-        window.location.replace(url + '/dashboard');
+      if (res.status === 200) {
         _crystallize_react_growl__WEBPACK_IMPORTED_MODULE_1___default()({
           type: 'success',
-          message: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, item.name, " duplicate with success")
+          message: item.name + ' has been duplicated'
+        });
+        axios__WEBPACK_IMPORTED_MODULE_2___default()({
+          method: 'GET',
+          url: url + '/project/'
+        }).then(function (res) {
+          if (res.status === 200) {
+            setListing(res.data);
+          }
         });
       }
     });
@@ -43446,21 +43451,21 @@ var Listing = function Listing() {
       className: "mb-0"
     }, item.name ? item.name : 'New ' + item.type), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "small mb-0 ml-2"
-    }, getItemUpdated(item.updated_at)), item.caption && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, item.caption), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-      className: "button",
-      id: 'copy-' + idx,
-      onClick: function onClick() {
-        return handleDuplicate(item);
-      },
-      tabIndex: "0"
-    }, "Duplicate"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    }, getItemUpdated(item.updated_at)), item.caption && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, item.caption), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: "button",
       id: 'button-' + idx,
       onClick: function onClick() {
         return handleDelete(item.id, idx);
       },
       tabIndex: "0"
-    }, "Delete"));
+    }, "Delete"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: "button",
+      id: 'copy-' + idx,
+      onClick: function onClick() {
+        return handleDuplicate(item);
+      },
+      tabIndex: "0"
+    }, "Duplicate")));
   }));
 };
 
@@ -43486,122 +43491,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Listing__WEBPACK_IMPORTED_MODULE_0__["default"], null), document.getElementById('app-listing'));
-
-/***/ }),
-
-/***/ "./resources/js/modules/menu/redux/actions.js":
-/*!****************************************************!*\
-  !*** ./resources/js/modules/menu/redux/actions.js ***!
-  \****************************************************/
-/*! exports provided: deleteItem, resetMenu, cancelAction, loadMenu, addNewItem, saveMenu, updateItemValue, updateName, updateClasses, updateInputSelected, updateInputStyle, updateInputOptions */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteItem", function() { return deleteItem; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resetMenu", function() { return resetMenu; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cancelAction", function() { return cancelAction; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadMenu", function() { return loadMenu; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNewItem", function() { return addNewItem; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "saveMenu", function() { return saveMenu; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateItemValue", function() { return updateItemValue; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateName", function() { return updateName; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateClasses", function() { return updateClasses; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateInputSelected", function() { return updateInputSelected; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateInputStyle", function() { return updateInputStyle; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateInputOptions", function() { return updateInputOptions; });
-/* ===============================================
-* FUNCTIONS TO DELETE
-=============================================== */
-var deleteItem = function deleteItem(parent_idx, idx) {
-  return {
-    type: "DELETE_ITEM",
-    parent_idx: parent_idx,
-    idx: idx
-  };
-};
-var resetMenu = function resetMenu() {
-  return {
-    type: "RESET_MENU"
-  };
-};
-var cancelAction = function cancelAction() {
-  return {
-    type: "CANCEL_LAST_ACTION"
-  };
-};
-/* ===============================================
-* FUNCTIONS TO ADD
-=============================================== */
-
-var loadMenu = function loadMenu(id, classes, menu, name) {
-  return {
-    type: "LOAD_MENU",
-    id: id,
-    classes: classes,
-    menu: menu,
-    name: name
-  };
-};
-var addNewItem = function addNewItem(parent_idx) {
-  return {
-    type: "ADD_ITEM",
-    parent_idx: parent_idx
-  };
-};
-var saveMenu = function saveMenu() {
-  return {
-    type: "SAVE_MENU"
-  };
-};
-/* ===============================================
-* FUNCTIONS TO UPDATE
-=============================================== */
-
-var updateItemValue = function updateItemValue(val, parent_idx, idx) {
-  return {
-    type: "UPDATE_ITEM_VALUE",
-    value: val,
-    parent_idx: parent_idx,
-    idx: idx
-  };
-};
-var updateName = function updateName(val) {
-  return {
-    type: "UPDATE_NAME",
-    name: val
-  };
-};
-var updateClasses = function updateClasses(data) {
-  return {
-    type: "UPDATE_CLASSES",
-    classe: data
-  };
-};
-var updateInputSelected = function updateInputSelected(parent_idx, idx) {
-  return {
-    type: "UPDATE_INPUT_SELECTED",
-    parent_idx: parent_idx,
-    idx: idx
-  };
-};
-var updateInputStyle = function updateInputStyle(cell, parent_idx, idx) {
-  return {
-    type: "UPDATE_INPUT_STYLE",
-    cell: cell,
-    parent_idx: parent_idx,
-    idx: idx
-  };
-};
-var updateInputOptions = function updateInputOptions(type, value, parent_idx, idx) {
-  return {
-    type: "UDPATE_INPUT_OPTIONS",
-    key: type,
-    value: value,
-    parent_idx: parent_idx,
-    idx: idx
-  };
-};
 
 /***/ }),
 

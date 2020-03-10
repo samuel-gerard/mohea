@@ -12062,8 +12062,8 @@ h2 {
 
 .dashboard .content .list button.deleting::after {
   width: 100%;
-  -webkit-transition: all 5s linear;
-  transition: all 5s linear;
+  -webkit-transition: all 3s linear;
+  transition: all 3s linear;
 }
 
 footer {

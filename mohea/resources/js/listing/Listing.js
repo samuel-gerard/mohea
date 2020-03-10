@@ -44,14 +44,14 @@ const Listing = () => {
               if (res.status === 200) {
                 growl({
                   type: 'success',
-                  message: <b>Your project has been deleted</b>
+                  message: 'Your project has been deleted'
                 });
                 axios({
                   method: 'GET',
                   url: url + '/project/',
                 })
                   .then(res => {
-                    if (res.status === 200) {
+                    if (res.status === D200) {
                       setListing(res.data);
                     }
                   })

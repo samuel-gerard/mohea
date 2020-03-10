@@ -25,6 +25,14 @@ export const resetForm = () => ({
     type: "RESET_FORM",
 });
 
+export const undoAction = () => ({
+    type: "UNDO_ACTION"
+})
+
+export const redoAction = () => ({
+    type: "REDO_ACTION"
+})
+
 /* ===============================================
 * FUNCTIONS TO UPDATE
 =============================================== */

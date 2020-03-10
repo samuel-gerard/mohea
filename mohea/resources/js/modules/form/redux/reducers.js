@@ -1,3 +1,5 @@
+import { clone } from "ramda";
+
 const initState = {
     name: '',
     elementsChoices: [
@@ -20,12 +22,14 @@ const initState = {
     ],
     elementsUsed: [],
     focus: -1,
+    lastState: {},
+    nextState: {},
 }
 
 
 function rootReducer(state = initState, payload) {
-
     let newState = Object.assign({}, state);
+    const lastState = clone(state);
 
     switch (payload.type) {
 
@@ -38,13 +42,17 @@ function rootReducer(state = initState, payload) {
             focus: elem,
             elementsUsed: [
               ...newState.elementsUsed
-            ]
+            ],
+            lastState: lastState,
+              nextState: {}
           };
 
       case "UPDATE_NAME":
         return {
           ...state,
           name: payload.name ? payload.name : '',
+          lastState: lastState,
+              nextState: {}
         }
 
       case "LOAD_FORM":
@@ -52,19 +60,25 @@ function rootReducer(state = initState, payload) {
           ...state,
           elementsUsed: payload.form,
           name: payload.name ? payload.name : '',
+          lastState: lastState,
+              nextState: {}
         }
           
       case "ADD_FOCUS":
           return {
             ...state,
-            focus: payload.element
+            focus: payload.element,
+            lastState: lastState,
+              nextState: {}
           };
 
       case "RESET_FORM":
           return {
             ...state,
             elementsUsed: [],
-            focus: -1
+            focus: -1,
+            lastState: lastState,
+              nextState: {}
           };
 
       case "DELETE_ITEM":
@@ -81,7 +95,9 @@ function rootReducer(state = initState, payload) {
           focus: -1,
           elementsUsed: [
             ...newState.elementsUsed
-          ]
+          ],
+          lastState: lastState,
+              nextState: {}
         };
 
         case "UPDATE_ITEM":
@@ -91,7 +107,9 @@ function rootReducer(state = initState, payload) {
             ...state,
             elementsUsed: [
               ...newState.elementsUsed
-            ]
+            ],
+            lastState: lastState,
+              nextState: {}
           };
           
         case "ADD_OPTION":
@@ -104,6 +122,8 @@ function rootReducer(state = initState, payload) {
             elementsUsed: [
               ...newState.elementsUsed
             ],
+            lastState: lastState,
+              nextState: {}
           };
 
         case "UPDATE_OPTION":
@@ -117,6 +137,8 @@ function rootReducer(state = initState, payload) {
             elementsUsed: [
               ...newState.elementsUsed
             ],
+            lastState: lastState,
+              nextState: {}
           };
 
         case "DUPLICATE_ITEM":
@@ -127,7 +149,9 @@ function rootReducer(state = initState, payload) {
             ...state,
             elementsUsed: [
               ...newState.elementsUsed
-            ]
+            ],
+            lastState: lastState,
+              nextState: {}
           };
 
         case "MOVE_DOWN":
@@ -144,11 +168,15 @@ function rootReducer(state = initState, payload) {
               focus: elementToMoveDown,
               elementsUsed: [
                 ...newState.elementsUsed
-              ]
+              ],
+              lastState: lastState,
+              nextState: {}
             }
           }else{
             return {
               ...state,
+              lastState: lastState,
+              nextState: {}
             }
           }
 
@@ -166,14 +194,35 @@ function rootReducer(state = initState, payload) {
               focus: elementToMoveUp,
               elementsUsed: [
                 ...newState.elementsUsed
-              ]
+              ],
+              lastState: lastState,
+              nextState: {}
             }
           }else{
             return {
               ...state,
+              lastState: lastState,
+              nextState: {}
             }
           }
 
+          case "UNDO_ACTION":
+            if(state.lastState && Object.values(state.lastState).length > 0) {
+              return {
+                ...state.lastState,
+                nextState: state
+              }
+            } else return newState
+
+          case "REDO_ACTION":
+            if(state.nextState && Object.values(state.nextState).length > 0) {
+              if(state.nextState.nextState && Object.values(state.nextState.nextState).length > 0) {
+                return {
+                  ...state.nextState,
+                  nextState: state.nextState.nextState,
+                }
+              } else return state.nextState
+            } else return newState
       default:
         return state;
     }

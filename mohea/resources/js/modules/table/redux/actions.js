@@ -17,8 +17,12 @@ export const resetTable = () => ({
   type: "RESET_TABLE"
 })
 
-export const cancelAction = () => ({
-  type: "CANCEL_LAST_ACTION"
+export const undoAction = () => ({
+  type: "UNDO_ACTION"
+})
+
+export const redoAction = () => ({
+  type: "REDO_ACTION"
 })
 
 /* ===============================================

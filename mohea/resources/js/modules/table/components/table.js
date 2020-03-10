@@ -94,7 +94,6 @@ class Table extends Component {
   }
 
   handleClasses = (e) => {
-    console.log(e.target.checked);
     this.props.updateClasses(e.target.value);
   }
 

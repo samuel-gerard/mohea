@@ -112,6 +112,24 @@ const Listing = () => {
     }
   }
 
+  const handleDuplicate = (item) => {
+    axios({
+      method: 'post',
+      url: url + '/project',
+      data: {
+        name: item.name + ' - copy',
+        caption: item.caption,
+        content: item.content,
+        type: item.type
+      }
+    })
+    .then(res => {
+      if (res.data && res.data.id) {
+        window.location.replace(url + '/dashboard');
+      }
+    })
+  }
+
   return (
     <div>
       <GrowlComponent />
@@ -134,6 +152,7 @@ const Listing = () => {
             {item.caption &&
               <p>{item.caption}</p>
             }
+            <span className="button" id={'copy-' + idx} onClick={() => handleDuplicate(item)} tabIndex="0">Duplicate</span>
             <span className="button" id={'button-' + idx} onClick={() => handleDelete(item.id, idx)} tabIndex="0">Delete</span>
           </button>
         )

@@ -1,7 +1,7 @@
 @extends('base')
 
 @section('title')
-My dashboard | Mohea
+    How to use Mohea
 @endsection
 
 @section('main-content')

@@ -51,9 +51,9 @@ export const Canceller = (props) => {
   }
 
   return (
-    <div>
-      <button onClick={undo}>Undo last action</button>
-      <button onClick={redo}>Redo last action</button>
-    </div>
+    <span className="merged-buttons">
+      <button className="button" onClick={undo} title="Undo"><i className="fas fa-undo"></i></button>
+      <button className="button" onClick={redo} title="Redo"><i className="fas fa-redo"></i></button>
+    </span>
   )
 }

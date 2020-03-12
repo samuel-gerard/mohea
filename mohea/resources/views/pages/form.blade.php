@@ -1,7 +1,7 @@
 @extends('base')
 
 @section('title')
-    Mohea - Create Form
+    Create a form | Mohea
 @endsection
 
 @section('style')
@@ -10,6 +10,13 @@
 
 @section('main-content')
     <div id="app-form"></div>
+    <footer>
+        <div class="footer-links">
+            <a class="link action" href="{{ route('help') }}">I need help</a>
+            <a class="link info" href="{{ route('privacy') }}">Terms of use</a>
+            <span>Original creation of the Mohea team. 2020</span>
+        </div>
+    </footer>
 @endsection
 
 @section('scripts-end')

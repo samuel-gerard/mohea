@@ -60,7 +60,6 @@
 }
 
 .container_app {
-  display: -webkit-box;
   display: flex;
   flex-wrap: wrap;
 }

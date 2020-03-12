@@ -95,7 +95,7 @@
         <div class="footer-links">
             <a class="link" href="{{ route('help') }}">I need help</a>
             <a class="link" href="{{ route('privacy') }}">Terms of use</a>
-            <span>Copyright Mohea © 2020</span>
+            <span>Original creation of the Mohea team. 2020</span>
         </div>
     </footer>
 @endsection

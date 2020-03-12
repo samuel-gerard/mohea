@@ -96759,11 +96759,21 @@ var Canceller = function Canceller(props) {
     props.redoAction();
   };
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    onClick: undo
-  }, "Undo last action"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    onClick: redo
-  }, "Redo last action"));
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "merged-buttons"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "button",
+    onClick: undo,
+    title: "Undo"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fas fa-undo"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "button",
+    onClick: redo,
+    title: "Redo"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fas fa-redo"
+  })));
 };
 
 /***/ }),
@@ -97057,12 +97067,10 @@ var SaveProject = function SaveProject(props) {
     });
   };
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "button",
-    className: "btn btn-success",
-    onClick: save,
-    value: 'Save this ' + props.type
-  }));
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "button secondary",
+    onClick: save
+  }, "Save");
 };
 
 /***/ }),
@@ -98916,7 +98924,7 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\coral\Desktop\IUT\LP_MI\mohea\mohea.bach.mmi-unistra.fr\mohea\resources\js\modules\table\TableApp */"./resources/js/modules/table/TableApp.js");
+module.exports = __webpack_require__(/*! C:\wamp64\www\mohea.bach.mmi-unistra.fr\mohea\resources\js\modules\table\TableApp */"./resources/js/modules/table/TableApp.js");
 
 
 /***/ })

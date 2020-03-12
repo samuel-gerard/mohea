@@ -67454,11 +67454,21 @@ var Canceller = function Canceller(props) {
     props.redoAction();
   };
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    onClick: undo
-  }, "Undo last action"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    onClick: redo
-  }, "Redo last action"));
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "merged-buttons"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "button",
+    onClick: undo,
+    title: "Undo"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fas fa-undo"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "button",
+    onClick: redo,
+    title: "Redo"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fas fa-redo"
+  })));
 };
 
 /***/ }),
@@ -67697,12 +67707,10 @@ var SaveProject = function SaveProject(props) {
     });
   };
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "button",
-    className: "btn btn-success",
-    onClick: save,
-    value: 'Save this ' + props.type
-  }));
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "button secondary",
+    onClick: save
+  }, "Save");
 };
 
 /***/ }),
@@ -67793,7 +67801,11 @@ var CustomInput = function CustomInput(props) {
   };
 
   if (details.idx) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Style"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      id: "context-menu"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      "class": "row"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Style"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       htmlFor: "color-text"
     }, "Text color"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "color",
@@ -67835,53 +67847,55 @@ var CustomInput = function CustomInput(props) {
       value: cell.fontSize ? cell.fontSize : '14',
       "data-key": "fontSize"
     })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      "class": "row"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "from-group"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      htmlFor: "text-decoration"
-    }, "Underline"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "checkbox",
       id: "text-decoration",
       onChange: handleStyle,
       value: "underline",
       checked: cell.textDecoration ? true : false,
       "data-key": "textDecoration"
-    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      htmlFor: "text-decoration"
+    }, "Underlined")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "from-group"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      htmlFor: "font-style"
-    }, "Italic"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "checkbox",
       id: "font-style",
       onChange: handleStyle,
       value: "italic",
       checked: cell.fontStyle ? true : false,
       "data-key": "fontStyle"
-    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      htmlFor: "font-style"
+    }, "Italic")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "from-group"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      htmlFor: "font-weight"
-    }, "Bold"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "checkbox",
       id: "font-weight",
       onChange: handleStyle,
       value: "bold",
       checked: cell.fontWeight ? true : false,
       "data-key": "fontWeight"
-    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Options"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      htmlFor: "font-weight"
+    }, "Bold")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Options"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "from-group"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      htmlFor: "option-target"
-    }, "Open in a new tab"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "checkbox",
       onChange: handleTarget,
       value: "_blank",
       id: "option-target",
       checked: item.target === '_blank' ? true : false
-    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      htmlFor: "option-target"
+    }, "Open link in a new tab")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "from-group"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       htmlFor: "option-link"
-    }, "URL"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }, "Link (URL)"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "text",
       onChange: handleLink,
       placeholder: "http:// or https://",
@@ -67896,7 +67910,7 @@ var CustomInput = function CustomInput(props) {
       onChange: handleTitle,
       id: "option-title",
       value: item.title
-    })));
+    })))));
   } else {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Select an item to customize."));
   }
@@ -68051,23 +68065,43 @@ function (_Component) {
     * DISPLAY COMPONENT
     =============================================== */
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.props.name || 'New Menu'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SaveProject__WEBPACK_IMPORTED_MODULE_9__["SaveProject"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
+        id: "header",
+        className: "header min show-logo"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "d-flex jc-e ai-c"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "new"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SaveProject__WEBPACK_IMPORTED_MODULE_9__["SaveProject"], {
         content: this.props.menu,
         classes: this.props.classes,
         name: this.props.name,
         type: "menu"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CustomInput__WEBPACK_IMPORTED_MODULE_7__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Canceller__WEBPACK_IMPORTED_MODULE_8__["Canceller"], {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "no-padding"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Canceller__WEBPACK_IMPORTED_MODULE_8__["Canceller"], {
         undoAction: this.props.undoAction,
         redoAction: this.props.redoAction
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-3"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "logo ml-auto mr-auto"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "/"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: "/images/logo_medium.png",
+        alt: "Logo of Mohea",
+        draggable: "false"
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "link primary",
+        href: "/dashboard"
+      }, "Your dashboard")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
+        className: "padding-bottom"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        className: "bold"
+      }, this.props.name || 'New menu'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CustomInput__WEBPACK_IMPORTED_MODULE_7__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "menu-name"
-      }, "Name for this menu"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "Name of the menu"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         className: "form-control",
         name: "name",
@@ -68090,7 +68124,7 @@ function (_Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "form-check-label",
         htmlFor: "class-style"
-      }, "With bootstrap initial style")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "With Bootstrap initial style")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-radio"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "form-radio-input",
@@ -68127,15 +68161,7 @@ function (_Component) {
         className: "w-25 btn btn-primary",
         value: "Reset",
         onClick: this.handleReset
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-9"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MenuContent__WEBPACK_IMPORTED_MODULE_6__["default"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-12"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_BootstrapReturn__WEBPACK_IMPORTED_MODULE_4__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-12"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MenuReturn_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null))));
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MenuContent__WEBPACK_IMPORTED_MODULE_6__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MenuReturn_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null)));
     }
   }]);
 
@@ -68300,15 +68326,17 @@ function (_Component) {
             onClick: function onClick() {
               return _this2.handleDeleteItem(-1, idx);
             },
-            className: "btn btn-secondary d-inline-block",
-            value: "-"
+            className: "button round",
+            value: "-",
+            title: "Remove the menu item"
           }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             type: "button",
             onClick: function onClick() {
               return _this2.handleAddItem(idx);
             },
-            className: "btn btn-primary",
-            value: "+"
+            className: "button round",
+            value: "+",
+            title: "Add a sub-menu"
           }));
         }
 
@@ -68331,15 +68359,17 @@ function (_Component) {
           onClick: function onClick() {
             return _this2.handleDeleteItem(-1, idx);
           },
-          className: "btn btn-secondary d-inline-block",
-          value: "-"
+          className: "button round",
+          value: "-",
+          title: "Remove the menu item"
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "button",
           onClick: function onClick() {
             return _this2.handleAddItem(idx);
           },
-          className: "btn btn-primary",
-          value: "+"
+          className: "button round",
+          value: "+",
+          title: "Add a sub-menu"
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "dropdown-menu show",
           "aria-labelledby": item.title + '-' + idx
@@ -68359,8 +68389,9 @@ function (_Component) {
             onClick: function onClick() {
               return _this2.handleDeleteItem(idx, child_idx);
             },
-            className: "btn btn-secondary d-inline-block",
-            value: "-"
+            className: "button round",
+            value: "-",
+            title: "Remove the sub-menu"
           }));
         })));
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -68368,8 +68399,9 @@ function (_Component) {
         onClick: function onClick() {
           return _this2.handleAddItem(-1);
         },
-        className: "btn btn-primary",
-        value: "+"
+        className: "button primary round big",
+        value: "+",
+        title: "Add a menu entry"
       }))));
     }
   }]);
@@ -68876,7 +68908,7 @@ function rootReducer() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\coral\Desktop\IUT\LP_MI\mohea\mohea.bach.mmi-unistra.fr\mohea\resources\js\modules\menu\MenuApp */"./resources/js/modules/menu/MenuApp.js");
+module.exports = __webpack_require__(/*! C:\wamp64\www\mohea.bach.mmi-unistra.fr\mohea\resources\js\modules\menu\MenuApp */"./resources/js/modules/menu/MenuApp.js");
 
 
 /***/ })

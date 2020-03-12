@@ -1,7 +1,7 @@
 @extends('base')
 
 @section('title')
-    Create a new project
+    Create a new project | Mohea
 @endsection
 
 @section('main-content')

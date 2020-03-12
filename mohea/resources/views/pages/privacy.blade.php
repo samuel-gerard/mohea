@@ -1,7 +1,11 @@
 @extends('base')
 
 @section('title')
-    Mohea | Privacy
+    Privacy stuff | Mohea
+@endsection
+
+@section('style')
+<link rel="stylesheet" href="{{ mix('/css/form.css') }}">
 @endsection
 
 @section('main-content')

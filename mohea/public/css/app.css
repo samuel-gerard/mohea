@@ -10913,15 +10913,21 @@ main.padding-bottom {
   }
 }
 
-h1 {
+h1,
+.h1 {
   margin: 0px;
   font-weight: normal;
   font-size: 20pt;
 }
 
-h1.bold {
+h1.bold,
+.h1.bold {
   text-align: center;
   font-family: "Keep Calm", sans-serif;
+}
+
+.h1 {
+  margin-bottom: 20px;
 }
 
 h2 {
@@ -11425,9 +11431,9 @@ h2 {
 #context-menu {
   position: fixed;
   bottom: 10px;
-  left: 10px;
-  width: calc(100% - 50px);
-  height: 150px;
+  right: 10px;
+  min-width: 400px;
+  height: 180px;
   padding: 15px;
   box-sizing: content-box;
   border-radius: 10px;
@@ -11438,13 +11444,28 @@ h2 {
   z-index: 1001;
 }
 
-#context-menu > .row > div {
-  margin: 0px 30px;
+#context-menu > .group-row > div {
+  padding: 0px 30px;
+  box-sizing: border-box;
 }
 
 #context-menu input,
 #context-menu select {
   margin: 0px 5px;
+}
+
+#context-menu h3 {
+  margin-bottom: 18px;
+  font-weight: bold;
+}
+
+#context-menu .form-group {
+  margin: 5px;
+}
+
+#context-menu .form-control {
+  display: inline-block;
+  width: auto;
 }
 
 footer {
@@ -11649,7 +11670,7 @@ footer .footer-links span {
 .main-container .login + .link,
 .main-container .register + .link,
 .main-container .user + .link {
-  margin-top: 20px;
+  margin-top: -20px;
 }
 
 .main-container .login .avatar,
@@ -11809,10 +11830,11 @@ a:focus {
   width: 30px;
   height: 30px;
   margin: 5px;
-  padding: 0px 0px 4px;
+  padding: 0px;
   display: inline-flex !important;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
   border: none;
   border-radius: 50%;
   font-weight: bolder;
@@ -12161,6 +12183,106 @@ a:focus {
   }
 }
 
+.sandbox {
+  margin: 50px;
+}
+
+.sandbox nav,
+.sandbox table {
+  margin: 0px auto;
+  border: 3px solid rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  overflow: visible;
+}
+
+.sandbox table thead th,
+.sandbox table tbody td,
+.sandbox table tfoot td {
+  vertical-align: top !important;
+}
+
+.sandbox table thead th.position-relative .button,
+.sandbox table tbody td.position-relative .button,
+.sandbox table tfoot td.position-relative .button {
+  position: absolute;
+  top: 0px;
+  right: -15px;
+}
+
+.sandbox table thead th.position-relative .button.left,
+.sandbox table tbody td.position-relative .button.left,
+.sandbox table tfoot td.position-relative .button.left {
+  right: 20px;
+}
+
+.sandbox table tr td:first-child,
+.sandbox table tr th:first-child {
+  text-align: right;
+}
+
+.sandbox table thead tr:first-child td {
+  text-align: center;
+}
+
+.nav-item.dropdown,
+.dropdown-item {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.form-group.title {
+  width: 500px;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.form-control-with-margin {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.form-control-with-big-margin {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.group-row {
+  display: flex;
+  margin: 0px;
+}
+
+.navbar-nav {
+  flex-wrap: wrap;
+}
+
+.navbar-nav .nav-item {
+  height: 60px;
+}
+
+.card-content {
+  margin: 50px;
+  padding: 25px;
+  border-radius: 10px;
+  background-color: #F2F2F2;
+  -webkit-filter: drop-shadow(0 6px 10px rgba(51, 51, 51, 0.15));
+          filter: drop-shadow(0 6px 10px rgba(51, 51, 51, 0.15));
+}
+
+.card-content .card-title {
+  font-weight: bold;
+}
+
+.card-content .row > div {
+  width: 50%;
+  padding: 20px;
+}
+
+.card-content .row > div:not(:last-child) {
+  border-right: 1px solid #000000;
+}
+
 strong {
   font-family: "Neue Plak Bold", sans-serif;
 }
@@ -12249,9 +12371,36 @@ strong {
   text-align: right;
 }
 
-.row {
-  align-items: center;
-  margin: 0px;
+.mt-10 {
+  margin-top: 10px;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+.ml-10 {
+  margin-left: 10px;
+}
+
+.mr-10 {
+  margin-right: 10px;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.ml-20 {
+  margin-left: 20px;
+}
+
+.mr-20 {
+  margin-right: 20px;
 }
 
 @-webkit-keyframes squeeze {

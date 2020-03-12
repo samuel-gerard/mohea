@@ -67,31 +67,29 @@ class Menu extends Component {
         </ul>
       </nav>
       <main className="padding-bottom">
-        <h1 className="bold">{this.props.name || 'New menu'}</h1>
-        <CustomInput />
-        <div className="form-group">
+        <div className="form-group title">
           <label htmlFor="menu-name">Name of the menu</label>
-          <input type="text" className="form-control" name="name" id="menu-name" onChange={this.handleName} value={this.props.name} />
+          <input type="text" className="form-control form-control-lg h1 bold" name="name" id="menu-name" onChange={this.handleName} value={this.props.name || 'New menu'} />
         </div>
-        <div className="form-group card p-2 bg-info text-white">
-          <h4>Menu global style</h4>
-          <div className="form-check">
-            <input className="form-check-input" type="checkbox" id="class-style" onChange={this.handleClasses} value="navbar" checked={this.props.classes.find(el => el === 'navbar') ? 'checked' : 'false'} />
-            <label className="form-check-label" htmlFor="class-style">With Bootstrap initial style</label>
+        <div className="form-group title ta-center">
+          <div className="custom-control custom-switch form-control-with-margin">
+            <input className="custom-control-input" type="checkbox" id="class-style" onChange={this.handleClasses} value="navbar" checked={this.props.classes.find(el => el === 'navbar') ? 'checked' : false} />
+            <label className="custom-control-label" htmlFor="class-style">With Bootstrap initial style</label>
           </div>
-          <div className="form-radio">
-            <input className="form-radio-input" name="bg-color" type="radio" id="class-light" onChange={this.handleClasses} value="navbar-light bg-light" checked={this.props.classes.find(el => el === 'navbar-light bg-light') ? 'checked' : false} />
-            <label className="form-radio-label" htmlFor="class-light">Light</label>
+          <div className="form-check form-check-inline form-control-with-margin">
+            <input className="form-check-input" name="bg-color" type="radio" id="class-light" onChange={this.handleClasses} value="navbar-light bg-light" checked={this.props.classes.find(el => el === 'navbar-light bg-light') ? 'checked' : false} />
+            <label className="form-check-label" htmlFor="class-light">Light theme</label>
           </div>
-          <div className="form-radio">
-            <input className="form-radio-input" name="bg-color" type="radio" id="class-dark" onChange={this.handleClasses} value="navbar-dark bg-dark" checked={this.props.classes.find(el => el === 'navbar-dark bg-dark') ? 'checked' : false} />
-            <label className="form-radio-label" htmlFor="class-dark">Dark</label>
+          <div className="form-check form-check-inline form-control-with-margin">
+            <input className="form-check-input" name="bg-color" type="radio" id="class-dark" onChange={this.handleClasses} value="navbar-dark bg-dark" checked={this.props.classes.find(el => el === 'navbar-dark bg-dark') ? 'checked' : false} />
+            <label className="form-check-label" htmlFor="class-dark">Dark skin</label>
           </div>
         </div>
-        <div className="form-group d-flex justify-content-between">
-          <input type="button" className="w-25 btn btn-primary" value="Reset" onClick={this.handleReset} />
+        <CustomInput />
+        <div className="sandbox">
+          <h2 className="h1 bold ta-center">Sandbox</h2>
+          <MenuContent />
         </div>
-        <MenuContent />
         <MenuReturn />
       </main>
     </section>

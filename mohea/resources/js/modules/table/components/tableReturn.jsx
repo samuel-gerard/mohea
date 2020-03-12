@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { PrismCode } from "../../../components/PrismCode";
 import "../../../../sass/input.scss";
 import ClipboardJS from 'clipboard';
-
+import BootstrapReturn from "../../../components/BootstrapReturn";
 
 const TableReturn = props => {
 
@@ -141,17 +141,18 @@ const TableReturn = props => {
     html += `</table>`;
 
     return (
-        <div>
-            <h1>Your HTML code</h1>
+        <div className="ta-center">
+            <h1 className="h1 bold">Your HTML code</h1>
+            <BootstrapReturn />
+            <button id="button-to-copy" className="button primary" data-clipboard-text={html}>
+                Copy to clipboard
+            </button>
             <div className="w-50 mx-auto">
                 <PrismCode
                     code={html}
                     language="html"
                     plugins={["line-numbers", "normalize-whitespace"]}
                 />
-                <button id="button-to-copy" data-clipboard-text={html}>
-                    Copy to clipboard
-                </button>
             </div>
         </div>
     )

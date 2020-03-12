@@ -8,20 +8,20 @@ export const ImportFile = (props) => {
     }
     return (
         <div>
-            <h4 className="card-title">Import a CSV or a JSON</h4>
+            <h3 className="card-title">Import a CSV or a JSON</h3>
             <form onSubmit={handleFile}>
                 <div className="form-group">
-                <div className="group-check">
-                    <input type="radio" name="type-imported" id="type-json" value="JSON" />
-                    <label htmlFor="type-json">JSON</label>
-                </div>
-                <div className="group-check">
-                    <input type="radio" name="type-imported" id="type-csv" value="CSV" />
-                    <label htmlFor="type-csv">CSV</label>
-                </div>
+                    <div className="form-check form-check-inline">
+                        <input className="form-check-input" type="radio" name="type-imported" id="type-json" value="JSON" />
+                        <label className="form-check-label" htmlFor="type-json">JSON</label>
+                    </div>
+                    <div className="form-check form-check-inline">
+                        <input className="form-check-input" type="radio" name="type-imported" id="type-csv" value="CSV" />
+                        <label className="form-check-label" htmlFor="type-csv">CSV</label>
+                    </div>
                 </div>
                 <input type="file" id="import-file" accept=".csv, .json" />
-                <input type="submit" value="Import" />
+                <button type="submit" className="button secondary form-control-with-big-margin d-block">Import</button>
             </form>
         </div>
     )

@@ -98,7 +98,7 @@ const Listing = () => {
     const diff = (currentTime - date) / 1000;
 
     if (!diff) {
-      return '';
+      return '• Just now';
     }
 
     if (diff < 60) {

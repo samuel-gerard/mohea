@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'provider', 'provider_id'
+        'name', 'email', 'avatar', 'password', 'provider', 'provider_id'
     ];
 
     /**
@@ -36,4 +36,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Indicate that a user has many Social Identities
+     */
+    public function identities() {
+        return $this->hasMany('App\SocialIdentity');
+     }
+
+    /**
+     * Indicate that a user has many Projects
+     */
+    public function projects() {
+        return $this->hasMany('App\Project');
+    }
 }

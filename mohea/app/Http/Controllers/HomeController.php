@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
+
 
 class HomeController extends Controller
 {
@@ -13,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -21,8 +23,26 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(\App\User $user)
+    {
+        if(\Auth::check()){
+            return redirect()->route('dashboard');
+        }
+        return view('home');
+    }
+
+    public function dashboard()
     {
         return view('dashboard');
+    }
+
+    public function privacy()
+    {
+        return view('pages.privacy');
+    }
+
+    public function help()
+    {
+        return view('pages.help');
     }
 }

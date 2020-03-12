@@ -15,10 +15,11 @@ class CreateSocialIdentitiesTable extends Migration
     {
         Schema::create('social_identities', function (Blueprint $table) {
             $table->increments('id');
-            $table->bigInteger('user_id');           
+            $table->unsignedBigInteger('user_id');      
             $table->string('provider_name')->nullable();
             $table->string('provider_id')->unique()->nullable();          
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

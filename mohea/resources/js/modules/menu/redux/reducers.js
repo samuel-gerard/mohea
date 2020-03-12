@@ -27,7 +27,8 @@ function rootReducer(state = initState, payload) {
         'classes': payload.classes ? payload.classes : [],
         'menu': payload.menu,
         'name': payload.name ? payload.name : '',
-        'lastState': lastState
+        'lastState': lastState,
+        'nextState': {}
       }
     case "DELETE_ITEM":
       if(payload.parent_idx < 0) {
@@ -45,7 +46,8 @@ function rootReducer(state = initState, payload) {
         menu: [
           ...newState.menu
         ],
-        'lastState': lastState
+        'lastState': lastState,
+        'nextState': {}
       }
     case "ADD_ITEM":
       const item = Object.assign({}, initItem);
@@ -58,7 +60,8 @@ function rootReducer(state = initState, payload) {
             ...state.menu,
             item
           ],
-          'lastState': lastState
+          'lastState': lastState,
+          'nextState': {}
         }
       }
 
@@ -76,13 +79,15 @@ function rootReducer(state = initState, payload) {
           },
           ...state.menu.slice(payload.parent_idx + 1)
         ],
-        'lastState': lastState
+        'lastState': lastState,
+        'nextState': {}
       }
     case "UPDATE_NAME":
       return {
         ...state,
         name: payload.name,
-        'lastState': lastState
+        'lastState': lastState,
+        'nextState': {}
       }
     case "UPDATE_ITEM_VALUE":
       if(payload.parent_idx < 0) {
@@ -99,7 +104,8 @@ function rootReducer(state = initState, payload) {
         menu: [
           ...newState.menu,
         ],
-        'lastState': lastState
+        'lastState': lastState,
+        'nextState': {}
       }
     case "RESET_MENU":
       return {
@@ -107,7 +113,8 @@ function rootReducer(state = initState, payload) {
         'menu': [],
         'name': '',
         'inputSelected': {},
-        'lastState': lastState
+        'lastState': lastState,
+        'nextState': {}
       }
     case "UPDATE_CLASSES":
       const indexOfClasse = newState.classes.indexOf(payload.classe);
@@ -124,20 +131,23 @@ function rootReducer(state = initState, payload) {
         'classes': [
           ...newState.classes,
         ],
-        'lastState': lastState
+        'lastState': lastState,
+        'nextState': {}
       }
     case "UPDATE_NBCOL":
       return {
         ...state,
         nbCol: payload.nbCol,
-        'lastState': lastState
+        'lastState': lastState,
+        'nextState': {}
       }
     case "UPDATE_INPUT_SELECTED":
       if(!(payload.idx || payload.parent_idx)) {
         return {
           ...state,
           inputSelected: {},
-          'lastState': lastState
+          'lastState': lastState,
+          'nextState': {}
         }
       }
       return {
@@ -146,7 +156,8 @@ function rootReducer(state = initState, payload) {
           idx: payload.idx,
           parent_idx: payload.parent_idx,
         },
-        'lastState': lastState
+        'lastState': lastState,
+        'nextState': {}
       }
     case "UPDATE_INPUT_STYLE":
       if(payload.parent_idx < 0) {
@@ -168,7 +179,8 @@ function rootReducer(state = initState, payload) {
         menu: [
           ...newState.menu
         ],
-        'lastState': lastState
+        'lastState': lastState,
+        'nextState': {}
       }
     case "UDPATE_INPUT_OPTIONS":
       if(payload.parent_idx < 0) {
@@ -190,13 +202,25 @@ function rootReducer(state = initState, payload) {
         menu: [
           ...newState.menu
         ],
-        'lastState': lastState
+        'lastState': lastState,
+        'nextState': {}
       }
-    case "CANCEL_LAST_ACTION":
-      if(Object.values(state.lastState).length > 0) {
-        return state.lastState
-      }
-      else return newState
+    case "UNDO_ACTION":
+      if(state.lastState && Object.values(state.lastState).length > 0) {
+        return {
+          ...state.lastState,
+          'nextState': state
+        }
+      } else return newState
+    case "REDO_ACTION":
+      if(state.nextState && Object.values(state.nextState).length > 0) {
+        if(state.nextState.nextState && Object.values(state.nextState.nextState).length > 0) {
+          return {
+            ...state.nextState,
+            'nextState': state.nextState.nextState,
+          }
+        } else return state.nextState
+      } else return newState
     default:
       return state;
   }

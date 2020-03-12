@@ -44,21 +44,21 @@ const Listing = () => {
               if (res.status === 200) {
                 growl({
                   type: 'success',
-                  message: <b>Your project has been deleted</b>
+                  message: 'Your project has been deleted'
                 });
                 axios({
                   method: 'GET',
                   url: url + '/project/',
                 })
                   .then(res => {
-                    if (res.status === 200) {
+                    if (res.status === D200) {
                       setListing(res.data);
                     }
                   })
                 isDeleting = false;
               }
             })
-        }, 5000);
+        }, 3000);
       }
       else {
         clearTimeout(deleteTimeout);
@@ -88,6 +88,63 @@ const Listing = () => {
     return;
   }
 
+  const getItemUpdated = updatedDate => {
+    let date = Date.parse(updatedDate);
+    let currentTime = Date.parse(new Date()) - ( 3600 * 1000);
+
+    const diff = (currentTime - date) / 1000;
+
+    if(!diff) {
+      return '';
+    }
+    
+    if (diff < 60) {
+      return '• A few seconds ago';
+    } else if (diff < 3600) {
+      const time = parseInt(diff / 60);
+      const unit = time > 1 ? 'minutes' : 'minute';
+      return '• ' + time + ' ' + unit + ' ago';
+    } else if (diff < 3600 * 24) {
+      const time = parseInt(diff / 3600)
+      const unit = time > 1 ? 'hours' : 'hour';
+      return '• ' + time + ' ' + unit + ' ago';
+    } else {
+      const time = parseInt(diff / (24 * 3600))
+      const unit = time > 1 ? 'days' : 'day';
+      return '• ' + time + ' ' + unit + ' ago';
+    }
+  }
+
+  const handleDuplicate = (e, item) => {
+    axios({
+      method: 'post',
+      url: url + '/project',
+      data: {
+        name: item.name + ' - copy',
+        caption: item.caption,
+        content: item.content,
+        type: item.type
+      }
+    })
+    .then(res => {
+      if (res.status === 200) {
+        growl({
+          type: 'success',
+          message: item.name+' has been duplicated'
+        });
+        axios({
+          method: 'GET',
+          url: url + '/project/',
+        })
+          .then(res => {
+            if (res.status === 200) {
+              setListing(res.data);
+            }
+          })
+      }
+    })
+  }
+
   return (
     <div>
       <GrowlComponent />
@@ -105,11 +162,15 @@ const Listing = () => {
 
         return (
           <button key={'listing-' + idx} id={'listing-' + idx} onClick={() => handleUpdate(item.id, item.type)} className={item.type + "-item"}>
-            <h4>{item.name ? item.name : 'New ' + item.type}</h4>
+            <h4 className="mb-0">{item.name ? item.name : 'New ' + item.type}</h4>
+            <p className="small mb-0 ml-2">{getItemUpdated(item.updated_at)}</p>
             {item.caption &&
               <p>{item.caption}</p>
             }
-            <span className="button" id={'button-' + idx} onClick={() => handleDelete(item.id, idx)} tabIndex="0">Delete</span>
+            <span>
+              <span className="button" id={'button-' + idx} onClick={() => handleDelete(item.id, idx)} tabIndex="0">Delete</span>
+              <span className="button" id={'copy-' + idx} onClick={() => handleDuplicate(item)} tabIndex="0">Duplicate</span>
+            </span>
           </button>
         )
       })}

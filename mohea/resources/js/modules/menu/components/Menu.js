@@ -2,8 +2,8 @@ import React, {Component} from "react";
 import axios from 'axios';
 import { connect } from "react-redux";
 import MenuReturn from "./MenuReturn.jsx";
-import BootstrapReturn from "./BootstrapReturn";
-import { loadMenu, resetMenu, updateName, updateClasses, cancelAction } from "../redux/actions";
+import BootstrapReturn from "../../../components/BootstrapReturn";
+import { loadMenu, resetMenu, updateName, updateClasses, undoAction, redoAction } from "../redux/actions";
 import MenuContent from "./MenuContent";
 import CustomInput from "./CustomInput";
 import { Canceller } from "../../../components/Canceller";
@@ -61,7 +61,7 @@ class Menu extends Component {
         <h1>{this.props.name || 'New Menu'}</h1>
         <SaveProject content={this.props.menu} classes={this.props.classes} name={this.props.name} type="menu" />
         <CustomInput />
-        <Canceller cancelAction={this.props.cancelAction} />
+        <Canceller undoAction={this.props.undoAction} redoAction={this.props.redoAction} />
         <div className="row">
           <div className="col-md-3">
             <div className="form-group">
@@ -127,8 +127,11 @@ const mapDispatchToProps = dispatch => {
     resetMenu: () => {
       dispatch(resetMenu())
     },
-    cancelAction: () => {
-      dispatch(cancelAction())
+    undoAction: () => {
+      dispatch(undoAction())
+    },
+    redoAction: () => {
+      dispatch(redoAction())
     }
   }
 }

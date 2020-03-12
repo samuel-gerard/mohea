@@ -3,12 +3,13 @@ import axios from 'axios';
 import { connect } from "react-redux";
 import FormContent from "./FormContent";
 import FormReturn from "./FormReturn";
-import BootstrapReturn from "./BootstrapReturn";
+import BootstrapReturn from "../../../components/BootstrapReturn";
 import FormChoices from "./FormChoices";
 import FormEdit from "./FormEdit";
 import { SaveProject } from "../../../components/SaveProject";
+import { Canceller } from "../../../components/Canceller";
 
-import { resetForm, loadForm, updateName } from "../redux/actions";
+import { resetForm, loadForm, updateName, undoAction, redoAction } from "../redux/actions";
 
 
 class Form extends React.Component {
@@ -49,23 +50,24 @@ class Form extends React.Component {
 
   render() {
     return <section>
-        <div class="container-fluid">
+        <div className="container-fluid">
           <h1>{this.props.name || 'New Form'}</h1>
-          <div class="row">
-            <div class="col-md-3">
+          <div className="row">
+            <div className="col-md-3">
               <div className="form-group">
                 <label htmlFor="menu-name">
                   Name for this Form
                 </label>
                 <input type="text" className="form-control" name="name" onChange={this.handleUpdateName} id="menu-name" value={this.props.name} />
                 <SaveProject content={this.props.form} classes={null} name={this.props.name} type="form" />
+                <Canceller undoAction={this.props.undoAction} redoAction={this.props.redoAction} />
               </div>
               <FormChoices />
             </div>
-            <div class="col-md-6">
+            <div className="col-md-6">
               <FormContent />
             </div>
-            <div class="col-md-3">
+            <div className="col-md-3">
               <div className="form-group card p-2 bg-info text-white">
                 <div className="col-md-12">
                   <FormEdit />
@@ -109,6 +111,12 @@ const mapDispatchToProps = dispatch => {
     updateName: (name) => {
       dispatch(updateName(name))
     },
+    undoAction: () => {
+      dispatch(undoAction())
+    },
+    redoAction: () => {
+      dispatch(redoAction())
+    }
   }
 }
 

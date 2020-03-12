@@ -5,8 +5,8 @@ import React, {Component} from "react";
 import axios from 'axios';
 import { connect } from "react-redux";
 import TableReturn from "./tableReturn.jsx";
-import BootstrapReturn from "./BootstrapReturn";
-import { loadTable, addNewRow, addNewCol, importFile, resetTable, cancelAction, updateCaption, updateName, updateClasses, updateNbCol } from "../redux/actions";
+import BootstrapReturn from "../../../components/BootstrapReturn";
+import { loadTable, addNewRow, addNewCol, importFile, resetTable, undoAction, redoAction, updateCaption, updateName, updateClasses, updateNbCol } from "../redux/actions";
 import * as d3 from "d3";
 import { ImportFile } from "../../../components/ImportFile";
 import { SaveProject } from "../../../components/SaveProject";
@@ -94,7 +94,6 @@ class Table extends Component {
   }
 
   handleClasses = (e) => {
-    console.log(e.target.checked);
     this.props.updateClasses(e.target.value);
   }
 
@@ -177,7 +176,7 @@ class Table extends Component {
         }
         <SaveProject content={this.props.tableau} classes={this.props.classes} caption={this.props.caption} nbCol={this.props.nbCol} name={this.props.name} type="table" />
         <CustomInput />
-        <Canceller cancelAction={this.props.cancelAction} />
+        <Canceller undoAction={this.props.undoAction} redoAction={this.props.redoAction} />
         <div className="row">
           <div className="col-md-3">
             <div className="form-group">
@@ -282,8 +281,11 @@ const mapDispatchToProps = dispatch => {
     updateNbCol: (number) => {
       dispatch(updateNbCol(number))
     },
-    cancelAction: () => {
-      dispatch(cancelAction())
+    undoAction: () => {
+      dispatch(undoAction())
+    },
+    redoAction: () => {
+      dispatch(redoAction())
     }
   }
 }

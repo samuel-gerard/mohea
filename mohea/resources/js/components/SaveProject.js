@@ -89,7 +89,7 @@ export const SaveProject = props => {
           window.location.replace(url + '/project/' + props.type + '/' + res.data.id);
           growl({
             type: 'success',
-            message: <b>Saved with success</b>
+            message: 'Saved with success'
           })
         }
       })
@@ -97,7 +97,7 @@ export const SaveProject = props => {
 
   return (
     <div>
-      <input type="button" class="btn btn-success" onClick={save} value={'Save this ' + props.type} />
+      <input type="button" className="btn btn-success" onClick={save} value={'Save this ' + props.type} />
     </div>
   )
 }

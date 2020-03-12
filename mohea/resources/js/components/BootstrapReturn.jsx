@@ -1,6 +1,5 @@
 import React from "react";
-import { connect } from "react-redux";
-import { PrismCode } from "../../../components/PrismCode";
+import { PrismCode } from "./PrismCode";
 import ClipboardJS from 'clipboard';
 
 const BootstrapReturn = props => {
@@ -16,7 +15,7 @@ const BootstrapReturn = props => {
     return (
         <div>
             <div className="w-50 mx-auto">
-                <button id="button-to-copy" class="btn btn-dark" data-clipboard-text={html}>
+                <button id="button-to-copy" className="btn btn-dark" data-clipboard-text={html}>
                     Copy Bootstrap Sources
                 </button>
                 <PrismCode
@@ -30,6 +29,4 @@ const BootstrapReturn = props => {
 
 }
 
-const mapStateToProps = state => state;
-
-export default connect(mapStateToProps)(BootstrapReturn);
+export default BootstrapReturn;

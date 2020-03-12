@@ -109,7 +109,7 @@ const FormReturn = props => {
     return (
         <div>
             <div className="w-50 mx-auto">
-                <button id="button-to-copy" class="btn btn-dark" data-clipboard-text={html}>
+                <button id="button-to-copy" className="btn btn-dark" data-clipboard-text={html}>
                     Copy to Clipboard
                 </button>
                 <PrismCode

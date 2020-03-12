@@ -12,8 +12,12 @@ export const resetMenu = () => ({
   type: "RESET_MENU"
 })
 
-export const cancelAction = () => ({
-  type: "CANCEL_LAST_ACTION"
+export const undoAction = () => ({
+  type: "UNDO_ACTION"
+})
+
+export const redoAction = () => ({
+  type: "REDO_ACTION"
 })
 
 /* ===============================================

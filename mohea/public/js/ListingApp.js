@@ -43360,20 +43360,20 @@ var Listing = function Listing() {
             if (res.status === 200) {
               _crystallize_react_growl__WEBPACK_IMPORTED_MODULE_1___default()({
                 type: 'success',
-                message: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Your project has been deleted")
+                message: 'Your project has been deleted'
               });
               axios__WEBPACK_IMPORTED_MODULE_2___default()({
                 method: 'GET',
                 url: url + '/project/'
               }).then(function (res) {
-                if (res.status === 200) {
+                if (res.status === D200) {
                   setListing(res.data);
                 }
               });
               isDeleting = false;
             }
           });
-        }, 5000);
+        }, 3000);
       } else {
         clearTimeout(deleteTimeout);
         document.getElementById('button-' + idx).innerHTML = "Delete";
@@ -43400,6 +43400,64 @@ var Listing = function Listing() {
     }
 
     return;
+  };
+
+  var getItemUpdated = function getItemUpdated(updatedDate) {
+    var date = Date.parse(updatedDate);
+    var currentTime = Date.parse(new Date()) - 3600 * 1000;
+    var diff = (currentTime - date) / 1000;
+
+    if (!diff) {
+      return '';
+    }
+
+    if (diff < 60) {
+      return '• A few seconds ago';
+    } else if (diff < 3600) {
+      var time = parseInt(diff / 60);
+      var unit = time > 1 ? 'minutes' : 'minute';
+      return '• ' + time + ' ' + unit + ' ago';
+    } else if (diff < 3600 * 24) {
+      var _time = parseInt(diff / 3600);
+
+      var _unit = _time > 1 ? 'hours' : 'hour';
+
+      return '• ' + _time + ' ' + _unit + ' ago';
+    } else {
+      var _time2 = parseInt(diff / (24 * 3600));
+
+      var _unit2 = _time2 > 1 ? 'days' : 'day';
+
+      return '• ' + _time2 + ' ' + _unit2 + ' ago';
+    }
+  };
+
+  var handleDuplicate = function handleDuplicate(e, item) {
+    axios__WEBPACK_IMPORTED_MODULE_2___default()({
+      method: 'post',
+      url: url + '/project',
+      data: {
+        name: item.name + ' - copy',
+        caption: item.caption,
+        content: item.content,
+        type: item.type
+      }
+    }).then(function (res) {
+      if (res.status === 200) {
+        _crystallize_react_growl__WEBPACK_IMPORTED_MODULE_1___default()({
+          type: 'success',
+          message: item.name + ' has been duplicated'
+        });
+        axios__WEBPACK_IMPORTED_MODULE_2___default()({
+          method: 'GET',
+          url: url + '/project/'
+        }).then(function (res) {
+          if (res.status === 200) {
+            setListing(res.data);
+          }
+        });
+      }
+    });
   };
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_crystallize_react_growl__WEBPACK_IMPORTED_MODULE_1__["GrowlComponent"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -43441,14 +43499,25 @@ var Listing = function Listing() {
         return handleUpdate(item.id, item.type);
       },
       className: item.type + "-item"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, item.name ? item.name : 'New ' + item.type), item.caption && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, item.caption), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+      className: "mb-0"
+    }, item.name ? item.name : 'New ' + item.type), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "small mb-0 ml-2"
+    }, getItemUpdated(item.updated_at)), item.caption && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, item.caption), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: "button",
       id: 'button-' + idx,
       onClick: function onClick() {
         return handleDelete(item.id, idx);
       },
       tabIndex: "0"
-    }, "Delete"));
+    }, "Delete"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: "button",
+      id: 'copy-' + idx,
+      onClick: function onClick() {
+        return handleDuplicate(item);
+      },
+      tabIndex: "0"
+    }, "Duplicate")));
   }));
 };
 
@@ -43484,7 +43553,7 @@ react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render(react__WEBPACK_IMPORTED_
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\wamp64\www\mohea.bach.mmi-unistra.fr\mohea\resources\js\listing\ListingApp */"./resources/js/listing/ListingApp.js");
+module.exports = __webpack_require__(/*! C:\Users\coral\Desktop\IUT\LP_MI\mohea\mohea.bach.mmi-unistra.fr\mohea\resources\js\listing\ListingApp */"./resources/js/listing/ListingApp.js");
 
 
 /***/ })

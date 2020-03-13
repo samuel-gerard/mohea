@@ -49,8 +49,9 @@ class Thead extends Component {
         return (
         <tr key={'lineHead' + i}>
           <th>
-            <input type="button" onClick={this.handleDeleteRow} data-row={i} className="btn btn-danger" value="Head -" />
-            <input type="button" onClick={this.handleAddRow} data-row={i} className="btn btn-secondary" value="Head +" />
+            Head
+            <button type="button" title="Remove the head section" onClick={this.handleDeleteRow} data-row={i} className="button round"><i className="fas fa-minus"></i></button>
+            <button type="button" title="Add a head section" onClick={this.handleAddRow} data-row={i} className="button round"><i className="fas fa-plus"></i></button>
           </th>
           {Object.values(items).map((item, j) => {
             return (
@@ -62,14 +63,12 @@ class Thead extends Component {
                   value={item.value}
                   className="form-control"
                   style={item.style} />
-                  <p>
-                    {item.colspan > 1 &&
-                      <span onClick={() => this.handleUnMergeCells(i, j)}>Unmerge</span>
-                    }
-                    {j < Object.values(items).length - 1 &&
-                      <span onClick={() => this.handleMergeCells(item.colspan, i, j)}>Merge</span>
-                    }
-                  </p>
+                {item.colspan > 1 &&
+                  <button onClick={() => this.handleUnMergeCells(i, j)} title="Unmerge the cells" className="button round secondary left"><i className="fa fa-expand"></i></button>
+                }
+                {j < Object.values(items).length - 1 &&
+                  <button onClick={() => this.handleMergeCells(item.colspan, i, j)} title="Merge with the right cell" className="button round secondary"><i className="fa fa-compress"></i></button>
+                }
               </th>
             );
           })}
@@ -77,10 +76,11 @@ class Thead extends Component {
       )})) : (
         <tr>
           <th>
-            <input type="button" onClick={this.handleAddRow} data-row={0} className="btn btn-secondary" value="Head +" />
+            Head
+            <button type="button" title="Add a head section" onClick={this.handleAddRow} data-row={0} className="button round primary"><i className="fas fa-plus"></i></button>
           </th>
           <th colSpan={this.props.nbCol}>
-            Nothing
+            Empty
           </th>
         </tr>
       );
@@ -91,9 +91,9 @@ class Thead extends Component {
         groupHandler.push(
           <td key={'headHandler' + i}>
             {this.props.nbCol > 1 &&
-            <input type="button" onClick={this.handleDeleteCol} data-col={i} className="btn btn-danger" value="Col -" />
+            <button type="button" title="Remove the column" onClick={this.handleDeleteCol} data-col={i} className="button round"><i className="fas fa-minus"></i></button>
             }
-            <input type="button" onClick={this.handleAddCol} data-col={i} className="btn btn-primary" value="Col +" />
+            <button type="button" title="Add a column" onClick={this.handleAddCol} data-col={i} className="button round"><i className="fas fa-plus"></i></button>
           </td>
         )
       }

@@ -40,8 +40,9 @@ class Tfoot extends Component {
         return (
         <tr key={'linefoot' + i}>
           <td>
-            <input type="button" onClick={this.handleDeleteRow} data-row={i} className="btn btn-danger" value="Foot -" />
-            <input type="button" onClick={this.handleAddRow} data-row={i} className="btn btn-secondary" value="Foot +" />
+            Foot
+            <button type="button" title="Remove the foot section" onClick={this.handleDeleteRow} data-row={i} className="button round"><i className="fas fa-minus"></i></button>
+            <button type="button" title="Add a foot section" onClick={this.handleAddRow} data-row={i} className="button round"><i className="fas fa-plus"></i></button>
           </td>
           {Object.values(items).map((item, j) => {
             return (
@@ -60,10 +61,11 @@ class Tfoot extends Component {
       )})) : (
         <tr>
           <td>
-            <input type="button" onClick={this.handleAddRow} data-row={0} className="btn btn-secondary" value="Foot +" />
+            Foot
+            <button type="button" title="Add a foot section" onClick={this.handleAddRow} data-row={0} className="button round primary"><i className="fas fa-plus"></i></button>
           </td>
           <td colSpan={this.props.nbCol}>
-            Nothing
+            Empty
           </td>
         </tr>
       );

@@ -45,29 +45,29 @@ class MenuContent extends Component {
                       onFocus={this.handleInputSelected}
                       onChange={this.handleUpdateValue}
                       value={item.value}
-                      className="nav-link"
+                      className="form-control nav-link"
                       style={item.style} />
-                    <input type="button" onClick={() => this.handleDeleteItem(-1, idx)} className="button round" value="-" title="Remove the menu item" />
-                    <input type="button" onClick={() => this.handleAddItem(idx)} className="button round" value="+" title="Add a sub-menu" />
+                    <button type="button" onClick={() => this.handleDeleteItem(-1, idx)} className="button round" title="Remove the menu item"><i className="fas fa-minus"></i></button>
+                    <button type="button" onClick={() => this.handleAddItem(idx)} className="button round" title="Add a sub-menu"><i className="fas fa-plus"></i></button>
                   </li>
                 )
               }
 
               return (
                 <li key={'menu-0-' + idx}
-                  className="nav-item dropdown show">
+                  className="nav-item dropdown show d-flex align-items-center">
                   <input type="text"
                       data-idx={'-1/' + idx}
                       onFocus={this.handleInputSelected}
                       onChange={this.handleUpdateValue}
                       value={item.value}
-                      className="nav-link dropdown-toggle"
+                      className="form-control nav-link dropdown-toggle"
                       style={item.style}
                       data-toggle="dropdown"
                       aria-haspopup="false"
                       aria-expanded="true" />
-                    <input type="button" onClick={() => this.handleDeleteItem(-1, idx)} className="button round" value="-" title="Remove the menu item" />
-                    <input type="button" onClick={() => this.handleAddItem(idx)} className="button round" value="+" title="Add a sub-menu" />
+                    <button type="button" onClick={() => this.handleDeleteItem(-1, idx)} className="button round" title="Remove the menu item"><i className="fas fa-minus"></i></button>
+                    <button type="button" onClick={() => this.handleAddItem(idx)} className="button round" title="Add a sub-menu"><i className="fas fa-plus"></i></button>
 
                   <div className="dropdown-menu show" aria-labelledby={item.title + '-' + idx}>
                   {Object.values(item.children).map((child, child_idx) => {
@@ -79,8 +79,9 @@ class MenuContent extends Component {
                           onFocus={this.handleInputSelected}
                           onChange={this.handleUpdateValue}
                           value={child.value}
+                          className="form-control"
                           style={child.style} />
-                        <input type="button" onClick={() => this.handleDeleteItem(idx, child_idx)} className="button round" value="-" title="Remove the sub-menu" />
+                        <button type="button" onClick={() => this.handleDeleteItem(idx, child_idx)} className="button round" title="Remove the sub-menu"><i className="fas fa-minus"></i></button>
                       </div>
                     )
                   })}
@@ -88,7 +89,7 @@ class MenuContent extends Component {
                 </li>
               )
             })}
-            <input type="button" onClick={() => this.handleAddItem(-1) } className="button primary round big" value="+" title="Add a menu entry" />
+            <button type="button" onClick={() => this.handleAddItem(-1) } className="button primary round big" title="Add a menu entry"><i className="fas fa-plus"></i></button>
           </ul>
         </div>
       </nav>

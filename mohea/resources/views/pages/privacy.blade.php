@@ -20,11 +20,9 @@
     </ul>
 </nav>
 
-<main class="container">
-
-    <h1>Privacy Terms and Conditions</h1><br><br>
-
-    <h2>Définitions</h2>
+<main class="text-content">
+    <h1 class="bold ta-center">Terms of use</h1>
+    <h2 class="ta-center">Définitions</h2>
     <p><b>Client&nbsp;:</b>&nbsp;tout professionnel ou personne physique capable au sens des articles 1123 et suivants
         du Code civil, ou personne morale, qui visite le Site objet des présentes conditions générales.<br>
         <b>Prestations et Services&nbsp;:</b> <a
@@ -48,7 +46,7 @@
         traitant&nbsp;» et «&nbsp;données sensibles&nbsp;» ont le sens défini par le Règlement Général sur la Protection
         des Données (RGPD&nbsp;: n° 2016-679)</p>
 
-    <h2>1. Présentation du site internet.</h2>
+    <h2 class="ta-center">1. Présentation du site internet</h2>
     <p>En vertu de l'article 6 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique, il est
         précisé aux utilisateurs du site internet&nbsp;<a
             href="https://mohea.bach.mmi-unistra.fr">https://mohea.bach.mmi-unistra.fr</a>&nbsp;l'identité des
@@ -71,7 +69,7 @@
 
 
 
-    <h2>2. Conditions générales d’utilisation du site et des services proposés.</h2>
+    <h2 class="ta-center">2. Conditions générales d’utilisation du site et des services proposés</h2>
 
     <p>Le Site constitue une œuvre de l’esprit protégée par les dispositions du Code de la Propriété Intellectuelle et
         des Réglementations Internationales applicables.
@@ -95,7 +93,7 @@
         néanmoins à l’utilisateur qui est invité à s’y référer le plus souvent possible afin d’en prendre connaissance.
     </p>
 
-    <h2>3. Description des services fournis.</h2>
+    <h2 class="ta-center">3. Description des services fournis</h2>
 
     <p>Le site internet&nbsp;<a href="https://mohea.bach.mmi-unistra.fr">https://mohea.bach.mmi-unistra.fr</a>&nbsp;a
         pour objet de fournir une information concernant l’ensemble des activités de la société.
@@ -111,7 +109,7 @@
             href="https://mohea.bach.mmi-unistra.fr">https://mohea.bach.mmi-unistra.fr</a>&nbsp;ne sont pas exhaustifs.
         Ils sont donnés sous réserve de modifications ayant été apportées depuis leur mise en ligne.</p>
 
-    <h2>4. Limitations contractuelles sur les données techniques.</h2>
+    <h2 class="ta-center">4. Limitations contractuelles sur les données techniques</h2>
 
     <p>Le site utilise la technologie JavaScript.
 
@@ -132,7 +130,7 @@
         tenus responsables en cas de dysfonctionnement du réseau Internet, des lignes téléphoniques ou du matériel
         informatique et de téléphonie lié notamment à l’encombrement du réseau empêchant l’accès au serveur.</p>
 
-    <h2>5. Propriété intellectuelle et contrefaçons.</h2>
+    <h2 class="ta-center">5. Propriété intellectuelle et contrefaçons</h2>
 
     <p><a href="https://mohea.bach.mmi-unistra.fr">https://mohea.bach.mmi-unistra.fr</a> est propriétaire des droits de
         propriété intellectuelle et détient les droits d’usage sur tous les éléments accessibles sur le site internet,
@@ -145,7 +143,7 @@
         constitutive d’une contrefaçon et poursuivie conformément aux dispositions des articles L.335-2 et suivants du
         Code de Propriété Intellectuelle.</p>
 
-    <h2>6. Limitations de responsabilité.</h2>
+    <h2 class="ta-center">6. Limitations de responsabilité</h2>
 
     <p><a href="https://mohea.bach.mmi-unistra.fr">https://mohea.bach.mmi-unistra.fr</a> agit en tant qu’éditeur du
         site. <a href="https://mohea.bach.mmi-unistra.fr">https://mohea.bach.mmi-unistra.fr</a> &nbsp;est responsable de
@@ -169,7 +167,7 @@
         message à caractère raciste, injurieux, diffamant, ou pornographique, quel que soit le support utilisé (texte,
         photographie …).</p>
 
-    <h2>7. Gestion des données personnelles.</h2>
+    <h2 class="ta-center">7. Gestion des données personnelles</h2>
 
     <p>Le Client est informé des réglementations concernant la communication marketing, la loi du 21 Juin 2014 pour la
         confiance dans l’Economie Numérique, la Loi Informatique et Liberté du 06 Août 2004 ainsi que du Règlement
@@ -310,7 +308,7 @@
     <div ng-bind-html="rgpdHTML"></div>
 
 
-    <h2>8. Notification d’incident</h2>
+    <h2 class="ta-center">8. Notification d’incident</h2>
     <p>
         Quels que soient les efforts fournis, aucune méthode de transmission sur Internet et aucune méthode de stockage
         électronique n'est complètement sûre. Nous ne pouvons en conséquence pas garantir une sécurité absolue.
@@ -342,7 +340,7 @@
         raisonnables visant à les protéger contre toute perte, utilisation détournée, accès non autorisé, divulgation,
         altération ou destruction.</p>
     &nbsp;
-    <h2>9. Liens hypertextes « cookies » et balises (“tags”) internet</h2>
+    <h2 class="ta-center">9. Liens hypertextes « cookies » et balises (“tags”) internet</h2>
     <p>
         Le site&nbsp;<a href="https://mohea.bach.mmi-unistra.fr">https://mohea.bach.mmi-unistra.fr</a>&nbsp;contient un
         certain nombre de liens hypertextes vers d’autres sites, mis en place avec l’autorisation de <a
@@ -443,7 +441,7 @@
         relatifs à l’utilisation de celui-ci et d’Internet.</p>
     &nbsp;<p>
     </p>
-    <h2>10. Droit applicable et attribution de juridiction.</h2>
+    <h2 class="ta-center">10. Droit applicable et attribution de juridiction</h2>
     <p>
         Tout litige en relation avec l’utilisation du site&nbsp;<a
             href="https://mohea.bach.mmi-unistra.fr">https://mohea.bach.mmi-unistra.fr</a>&nbsp;est soumis au droit

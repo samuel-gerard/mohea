@@ -13,10 +13,10 @@ const BootstrapReturn = props => {
     html += '<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>\n'
 
     return (
-        <div>
+        <div className="mb-20">
             <div className="w-50 mx-auto">
-                <button id="button-to-copy" className="btn btn-dark" data-clipboard-text={html}>
-                    Copy Bootstrap Sources
+                <button id="button-to-copy" className="button secondary ml-auto mr-auto" data-clipboard-text={html}>
+                    Copy Bootstrap sources
                 </button>
                 <PrismCode
                     code={html}

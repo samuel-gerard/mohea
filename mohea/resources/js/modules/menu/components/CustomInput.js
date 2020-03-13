@@ -7,8 +7,8 @@ const CustomInput = (props) => {
   let cell = {}
   let item = {}
 
-  if ((details.parent_idx>= 0 && props.menu[details.parent_idx].children[details.idx]) || (details.idx && props.menu[details.idx])) {
-    item = details.parent_idx>= 0 ? props.menu[details.parent_idx].children[details.idx] : props.menu[details.idx]
+  if ((details.parent_idx >= 0 && props.menu[details.parent_idx].children[details.idx]) || (details.idx && props.menu[details.idx])) {
+    item = details.parent_idx >= 0 ? props.menu[details.parent_idx].children[details.idx] : props.menu[details.idx]
     let style = item.style
     if (style) {
       style = Object.assign({}, style);
@@ -39,41 +39,75 @@ const CustomInput = (props) => {
 
   if (details.idx) {
     return (<div id="context-menu">
-      <div class="row">
+      <div className="group-row">
         <div>
-          <h2>Style</h2>
-          <label htmlFor="color-text">Text color</label>
-          <input type="color"
-            id="color-text"
-            onChange={handleStyle}
-            value={cell.color ? cell.color : '#000000'}
-            data-key="color" />
-          <label htmlFor="color-background">Background color</label>
-          <input type="color"
-            id="color-background"
-            onChange={handleStyle}
-            value={cell.backgroundColor ? cell.backgroundColor : '#ffffff'}
-            data-key="backgroundColor" />
-          <label htmlFor="text-align">Alignment</label>
-          <select id="text-align"
-            onChange={handleStyle}
-            value={cell.textAlign ? cell.textAlign : 'left'}
-            data-key="textAlign">
-            <option value="left">Left</option>
-            <option value="center">Center</option>
-            <option value="right">Right</option>
-            <option value="justify">Justify</option>
-          </select>
-          <div className="from-group">
-            <label htmlFor="font-size">Font size (px)</label>
+          <h3>Item options</h3>
+          <div className="form-group">
+            <label htmlFor="option-link">Link</label>
+            <input type="text"
+              onChange={handleLink}
+              placeholder="https://www.example.com"
+              id="option-link"
+              className="form-control"
+              value={item.link} />
+          </div>
+          <div className="form-group">
+            <label htmlFor="option-title">Link title</label>
+            <input type="text"
+              onChange={handleTitle}
+              id="option-title"
+              className="form-control"
+              value={item.title} />
+          </div>
+          <div className="form-group">
+            <input type="checkbox"
+              onChange={handleTarget}
+              value='_blank'
+              id="option-target"
+              checked={item.target === '_blank' ? true : false} />
+            <label htmlFor="option-target">Open link in a new tab</label>
+          </div>
+        </div>
+        <div>
+          <div className="form-group">
+            <label htmlFor="color-text">Text color</label>
+            <input type="color"
+              id="color-text"
+              onChange={handleStyle}
+              value={cell.color ? cell.color : '#000000'}
+              data-key="color" />
+            <label htmlFor="color-background">Background color</label>
+            <input type="color"
+              id="color-background"
+              onChange={handleStyle}
+              value={cell.backgroundColor ? cell.backgroundColor : '#ffffff'}
+              data-key="backgroundColor" />
+          </div>
+          <div className="form-group">
+            <label htmlFor="text-align">Alignment</label>
+            <select id="text-align"
+              onChange={handleStyle}
+              value={cell.textAlign ? cell.textAlign : 'left'}
+              className="form-control"
+              data-key="textAlign">
+              <option value="left">Left</option>
+              <option value="center">Center</option>
+              <option value="right">Right</option>
+              <option value="justify">Justify</option>
+            </select>
+          </div>
+          <div className="form-group">
+            <label htmlFor="font-size">Font size</label>
             <input type="number"
               id="font-size"
               onChange={handleStyle}
               value={cell.fontSize ? cell.fontSize : '14'}
+              className="form-control"
               data-key="fontSize" />
+            <span>px</span>
           </div>
-          <div class="row">
-            <div className="from-group">
+          <div className="group-row">
+            <div className="form-group">
               <input type="checkbox"
                 id="text-decoration"
                 onChange={handleStyle}
@@ -82,7 +116,7 @@ const CustomInput = (props) => {
                 data-key="textDecoration" />
               <label htmlFor="text-decoration">Underlined</label>
             </div>
-            <div className="from-group">
+            <div className="form-group">
               <input type="checkbox"
                 id="font-style"
                 onChange={handleStyle}
@@ -91,7 +125,7 @@ const CustomInput = (props) => {
                 data-key="fontStyle" />
               <label htmlFor="font-style">Italic</label>
             </div>
-            <div className="from-group">
+            <div className="form-group">
               <input type="checkbox"
                 id="font-weight"
                 onChange={handleStyle}
@@ -102,39 +136,11 @@ const CustomInput = (props) => {
             </div>
           </div>
         </div>
-        <div>
-          <h2>Options</h2>
-          <div className="from-group">
-            <input type="checkbox"
-              onChange={handleTarget}
-              value='_blank'
-              id="option-target"
-              checked={item.target === '_blank' ? true : false} />
-            <label htmlFor="option-target">Open link in a new tab</label>
-          </div>
-          <div className="from-group">
-            <label htmlFor="option-link">Link (URL)</label>
-            <input type="text"
-              onChange={handleLink}
-              placeholder="http:// or https://"
-              id="option-link"
-              value={item.link} />
-          </div>
-          <div className="from-group">
-            <label htmlFor="option-title">Link title</label>
-            <input type="text"
-              onChange={handleTitle}
-              id="option-title"
-              value={item.title} />
-          </div>
-        </div>
       </div>
     </div>)
   }
   else {
-    return (<div>
-      <p>Select an item to customize.</p>
-    </div>)
+    return (<span></span>)
   }
 }
 

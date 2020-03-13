@@ -96676,13 +96676,15 @@ var BootstrapReturn = function BootstrapReturn(props) {
   var html = '<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">\n';
   html += '<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>\n';
   html += '<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>\n';
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "mb-20"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "w-50 mx-auto"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     id: "button-to-copy",
-    className: "btn btn-dark",
+    className: "button secondary ml-auto mr-auto",
     "data-clipboard-text": html
-  }, "Copy Bootstrap Sources"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PrismCode__WEBPACK_IMPORTED_MODULE_1__["PrismCode"], {
+  }, "Copy Bootstrap sources"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PrismCode__WEBPACK_IMPORTED_MODULE_1__["PrismCode"], {
     code: html,
     language: "html",
     plugins: ["line-numbers", "normalize-whitespace"]
@@ -96797,38 +96799,42 @@ var ImportFile = function ImportFile(props) {
     props.func();
   };
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "card-title"
   }, "Import a CSV or a JSON"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     onSubmit: handleFile
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-group"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "group-check"
+    className: "form-check form-check-inline"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    className: "form-check-input",
     type: "radio",
     name: "type-imported",
     id: "type-json",
     value: "JSON"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "form-check-label",
     htmlFor: "type-json"
   }, "JSON")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "group-check"
+    className: "form-check form-check-inline"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    className: "form-check-input",
     type: "radio",
     name: "type-imported",
     id: "type-csv",
     value: "CSV"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "form-check-label",
     htmlFor: "type-csv"
   }, "CSV"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "file",
     id: "import-file",
     accept: ".csv, .json"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     type: "submit",
-    value: "Import"
-  })));
+    className: "button secondary form-control-with-big-margin d-block"
+  }, "Import")));
 };
 
 /***/ }),
@@ -97147,7 +97153,13 @@ var CustomInput = function CustomInput(props) {
   };
 
   if (details.type) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      id: "context-menu"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "group-row"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Item options"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       htmlFor: "color-text"
     }, "Text color"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "color",
@@ -97163,12 +97175,15 @@ var CustomInput = function CustomInput(props) {
       onChange: handleStyle,
       value: cell.backgroundColor ? cell.backgroundColor : '#ffffff',
       "data-key": "backgroundColor"
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       htmlFor: "text-align"
     }, "Alignment"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
       id: "text-align",
       onChange: handleStyle,
       value: cell.textAlign ? cell.textAlign : 'left',
+      className: "form-control",
       "data-key": "textAlign"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
       value: "left"
@@ -97178,52 +97193,55 @@ var CustomInput = function CustomInput(props) {
       value: "right"
     }, "Right"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
       value: "justify"
-    }, "Justify")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "from-group"
+    }, "Justify"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       htmlFor: "font-size"
-    }, "Font size (px)"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }, "Font size"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "number",
       id: "font-size",
       onChange: handleStyle,
       value: cell.fontSize ? cell.fontSize : '14',
+      className: "form-control",
       "data-key": "fontSize"
-    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "from-group"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      htmlFor: "text-decoration"
-    }, "Underline"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "px")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "group-row"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "checkbox",
       id: "text-decoration",
       onChange: handleStyle,
       value: "underline",
       checked: cell.textDecoration ? true : false,
       "data-key": "textDecoration"
-    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "from-group"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      htmlFor: "font-style"
-    }, "Italic"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      htmlFor: "text-decoration"
+    }, "Underlined")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "checkbox",
       id: "font-style",
       onChange: handleStyle,
       value: "italic",
       checked: cell.fontStyle ? true : false,
       "data-key": "fontStyle"
-    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "from-group"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      htmlFor: "font-weight"
-    }, "Bold"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      htmlFor: "font-style"
+    }, "Italic")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "checkbox",
       id: "font-weight",
       onChange: handleStyle,
       value: "bold",
       checked: cell.fontWeight ? true : false,
       "data-key": "fontWeight"
-    })));
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      htmlFor: "font-weight"
+    }, "Bold"))))));
   } else {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Select a cell to customize."));
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null);
   }
 };
 
@@ -97467,66 +97485,54 @@ function (_Component) {
     =============================================== */
     value: function render() {
       var tableClasses = this.props.classes.join(' ');
-      return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("h1", null, this.props.name || 'New table'), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("p", {
-        className: "card bg-warning p-2"
-      }, "Be careful, merging cells is not advised in accessibility. Therefore, you will not be able to perform this action."), this.props.tableau.head.length === 0 && this.props.tableau.body.length === 0 && this.props.tableau.foot.length == 0 && react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
-        className: "card bg-dark text-white p-2"
-      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
-        className: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
-        className: "col-md-6"
-      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("h4", {
-        className: "card-title"
-      }, "Generate a table"), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("form", {
-        onSubmit: this.handleInitialize
-      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
-        className: "flex"
-      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input", {
-        type: "number",
-        onChange: this.updateWidthCol,
-        value: this.widthCol,
-        max: "16"
-      }), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("span", null, "x"), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input", {
-        type: "number",
-        onChange: this.updateHeightCol,
-        value: this.heightCol,
-        max: "16"
-      })), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input", {
-        type: "submit",
-        value: "Generate table"
-      }))), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_components_ImportFile__WEBPACK_IMPORTED_MODULE_10__["ImportFile"], {
-        func: this.importFile,
-        className: "col-md-6"
-      }))), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_components_SaveProject__WEBPACK_IMPORTED_MODULE_11__["SaveProject"], {
+      return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("nav", {
+        id: "header",
+        className: "header min show-logo"
+      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("ul", {
+        className: "d-flex jc-e ai-c"
+      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("li", {
+        className: "new"
+      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_components_SaveProject__WEBPACK_IMPORTED_MODULE_11__["SaveProject"], {
         content: this.props.tableau,
         classes: this.props.classes,
         caption: this.props.caption,
         nbCol: this.props.nbCol,
         name: this.props.name,
         type: "table"
-      }), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_CustomInput__WEBPACK_IMPORTED_MODULE_13__["default"], null), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_components_Canceller__WEBPACK_IMPORTED_MODULE_12__["Canceller"], {
+      })), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("li", {
+        className: "no-padding"
+      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_components_Canceller__WEBPACK_IMPORTED_MODULE_12__["Canceller"], {
         undoAction: this.props.undoAction,
         redoAction: this.props.redoAction
-      }), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
-        className: "row"
+      })), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("li", {
+        className: "logo ml-auto mr-auto"
+      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("a", {
+        href: "/"
+      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("img", {
+        src: "/images/logo_medium.png",
+        alt: "Logo of Mohea",
+        draggable: "false"
+      }))), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("a", {
+        className: "link primary",
+        href: "/dashboard"
+      }, "Your dashboard")))), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("main", {
+        className: "padding-bottom"
       }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
-        className: "col-md-3"
-      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
-        className: "form-group"
+        className: "form-group title"
       }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("label", {
         htmlFor: "table-name"
-      }, "Name for this table"), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input", {
+      }, "Name of the table"), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input", {
         type: "text",
-        className: "form-control",
+        className: "form-control form-control-lg h1 bold",
         name: "name",
         id: "table-name",
         onChange: this.handleName,
-        value: this.props.name
+        value: this.props.name || 'New table'
       })), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
-        className: "form-group"
+        className: "form-group title"
       }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("label", {
         htmlFor: "table-caption"
-      }, "Caption for this table"), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input", {
+      }, "Caption"), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input", {
         type: "text",
         className: "form-control",
         name: "caption",
@@ -97534,11 +97540,11 @@ function (_Component) {
         onChange: this.handleCaption,
         value: this.props.caption
       })), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
-        className: "form-group card p-2 bg-info text-white"
-      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("h4", null, "Table global style"), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
-        className: "form-check"
+        className: "form-group title ta-center"
+      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
+        className: "custom-control custom-switch form-control-with-margin"
       }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input", {
-        className: "form-check-input",
+        className: "custom-control-input",
         type: "checkbox",
         id: "class-style",
         onChange: this.handleClasses,
@@ -97547,10 +97553,10 @@ function (_Component) {
           return el === 'table';
         }) ? 'checked' : false
       }), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("label", {
-        className: "form-check-label",
+        className: "custom-control-label",
         htmlFor: "class-style"
-      }, "With bootstrap initial style")), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
-        className: "form-check"
+      }, "With Bootstrap initial style")), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
+        className: "form-check form-check-inline form-control-with-margin"
       }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input", {
         className: "form-check-input",
         type: "checkbox",
@@ -97564,7 +97570,7 @@ function (_Component) {
         className: "form-check-label",
         htmlFor: "class-striped"
       }, "Striped")), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
-        className: "form-check"
+        className: "form-check form-check-inline form-control-with-margin"
       }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input", {
         className: "form-check-input",
         type: "checkbox",
@@ -97578,7 +97584,7 @@ function (_Component) {
         className: "form-check-label",
         htmlFor: "class-dark"
       }, "Dark")), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
-        className: "form-check"
+        className: "form-check form-check-inline form-control-with-margin"
       }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input", {
         className: "form-check-input",
         type: "checkbox",
@@ -97592,7 +97598,7 @@ function (_Component) {
         className: "form-check-label",
         htmlFor: "class-bordered"
       }, "Bordered")), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
-        className: "form-check"
+        className: "form-check form-check-inline form-control-with-margin"
       }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input", {
         className: "form-check-input",
         type: "checkbox",
@@ -97606,7 +97612,7 @@ function (_Component) {
         className: "form-check-label",
         htmlFor: "class-hover"
       }, "Hover")), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
-        className: "form-check"
+        className: "form-check form-check-inline form-control-with-margin"
       }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input", {
         className: "form-check-input",
         type: "checkbox",
@@ -97619,24 +97625,44 @@ function (_Component) {
       }), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("label", {
         className: "form-check-label",
         htmlFor: "class-responsive"
-      }, "Responsive"))), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
-        className: "form-group d-flex justify-content-between"
-      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input", {
-        type: "button",
-        className: "w-25 btn btn-primary",
-        value: "Reset",
-        onClick: this.handleReset
-      }))), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
-        className: "col-md-9"
-      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("table", {
-        className: tableClasses
-      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_thead_jsx__WEBPACK_IMPORTED_MODULE_0__["default"], null), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_tbody_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_tfoot_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null)))), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
-        className: "col-md-12"
-      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_components_BootstrapReturn__WEBPACK_IMPORTED_MODULE_7__["default"], null)), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
-        className: "row"
+      }, "Responsive"))), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_CustomInput__WEBPACK_IMPORTED_MODULE_13__["default"], null), this.props.tableau.head.length === 0 && this.props.tableau.body.length === 0 && this.props.tableau.foot.length == 0 && react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
+        className: "card-content"
       }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
-        className: "col-md-12"
-      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_tableReturn_jsx__WEBPACK_IMPORTED_MODULE_6__["default"], null))));
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("h3", {
+        className: "card-title"
+      }, "Generate a table"), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("form", {
+        onSubmit: this.handleInitialize
+      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
+        className: "d-flex ai-c"
+      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input", {
+        type: "number",
+        className: "form-control",
+        onChange: this.updateWidthCol,
+        value: this.widthCol,
+        min: "1",
+        max: "16"
+      }), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("span", {
+        className: "ml-10 mr-10"
+      }, "\xD7"), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input", {
+        type: "number",
+        className: "form-control",
+        onChange: this.updateHeightCol,
+        value: this.heightCol,
+        min: "1",
+        max: "16"
+      })), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("button", {
+        type: "submit",
+        className: "button primary form-control-with-big-margin d-block"
+      }, "Generate table"))), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_components_ImportFile__WEBPACK_IMPORTED_MODULE_10__["ImportFile"], {
+        func: this.importFile
+      }))), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
+        className: "sandbox"
+      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("h2", {
+        className: "h1 bold ta-center"
+      }, "Sandbox"), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("table", {
+        className: tableClasses
+      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_thead_jsx__WEBPACK_IMPORTED_MODULE_0__["default"], null), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_tbody_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_tfoot_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null))), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_tableReturn_jsx__WEBPACK_IMPORTED_MODULE_6__["default"], null)));
     }
   }]);
 
@@ -97712,6 +97738,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _sass_input_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_sass_input_scss__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var clipboard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! clipboard */ "./node_modules/clipboard/dist/clipboard.js");
 /* harmony import */ var clipboard__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(clipboard__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _components_BootstrapReturn__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../components/BootstrapReturn */ "./resources/js/components/BootstrapReturn.jsx");
+
 
 
 
@@ -97824,16 +97852,21 @@ var TableReturn = function TableReturn(props) {
   handleBody();
   handleFooter();
   html += "</table>";
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Your HTML code"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "ta-center"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+    className: "h1 bold"
+  }, "Your HTML code"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_BootstrapReturn__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    id: "button-to-copy",
+    className: "button primary",
+    "data-clipboard-text": html
+  }, "Copy to clipboard"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "w-50 mx-auto"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PrismCode__WEBPACK_IMPORTED_MODULE_2__["PrismCode"], {
     code: html,
     language: "html",
     plugins: ["line-numbers", "normalize-whitespace"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    id: "button-to-copy",
-    "data-clipboard-text": html
-  }, "Copy to clipboard")));
+  })));
 };
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -97943,19 +97976,23 @@ function (_Component) {
       var groupList = group.length > 0 ? group.map(function (items, i) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
           key: 'lineBody' + i
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Body", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           type: "button",
+          title: "Remove the body section",
           onClick: _this2.handleDeleteRow,
           "data-row": i,
-          className: "btn btn-danger",
-          value: "Body -"
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          className: "button round"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fas fa-minus"
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           type: "button",
+          title: "Add a body section",
           onClick: _this2.handleAddRow,
           "data-row": i,
-          className: "btn btn-secondary",
-          value: "Body +"
-        })), Object.values(items).map(function (item, j) {
+          className: "button round"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fas fa-plus"
+        }))), Object.values(items).map(function (item, j) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
             key: 'body' + j
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -97968,15 +98005,17 @@ function (_Component) {
             style: item.style
           }));
         }));
-      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Body", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
+        title: "Add a body section",
         onClick: this.handleAddRow,
         "data-row": 0,
-        className: "btn btn-secondary",
-        value: "Body +"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        className: "button round primary"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-plus"
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
         colSpan: this.props.nbCol
-      }, "Nothing"));
+      }, "Empty"));
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, groupList);
     }
   }]);
@@ -98111,19 +98150,23 @@ function (_Component) {
       var groupList = group.length > 0 ? group.map(function (items, i) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
           key: 'linefoot' + i
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Foot", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           type: "button",
+          title: "Remove the foot section",
           onClick: _this2.handleDeleteRow,
           "data-row": i,
-          className: "btn btn-danger",
-          value: "Foot -"
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          className: "button round"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fas fa-minus"
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           type: "button",
+          title: "Add a foot section",
           onClick: _this2.handleAddRow,
           "data-row": i,
-          className: "btn btn-secondary",
-          value: "Foot +"
-        })), Object.values(items).map(function (item, j) {
+          className: "button round"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fas fa-plus"
+        }))), Object.values(items).map(function (item, j) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
             key: 'foot' + j
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -98136,15 +98179,17 @@ function (_Component) {
             style: item.style
           }));
         }));
-      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "Foot", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
+        title: "Add a foot section",
         onClick: this.handleAddRow,
         "data-row": 0,
-        className: "btn btn-secondary",
-        value: "Foot +"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        className: "button round primary"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-plus"
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
         colSpan: this.props.nbCol
-      }, "Nothing"));
+      }, "Empty"));
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tfoot", null, groupList);
     }
   }]);
@@ -98289,19 +98334,23 @@ function (_Component) {
       var groupList = group.length > 0 ? group.map(function (items, i) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
           key: 'lineHead' + i
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Head", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           type: "button",
+          title: "Remove the head section",
           onClick: _this2.handleDeleteRow,
           "data-row": i,
-          className: "btn btn-danger",
-          value: "Head -"
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          className: "button round"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fas fa-minus"
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           type: "button",
+          title: "Add a head section",
           onClick: _this2.handleAddRow,
           "data-row": i,
-          className: "btn btn-secondary",
-          value: "Head +"
-        })), Object.values(items).map(function (item, j) {
+          className: "button round"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fas fa-plus"
+        }))), Object.values(items).map(function (item, j) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
             key: 'head' + j,
             colSpan: item.colspan,
@@ -98314,44 +98363,58 @@ function (_Component) {
             value: item.value,
             className: "form-control",
             style: item.style
-          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, item.colspan > 1 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          }), item.colspan > 1 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
             onClick: function onClick() {
               return _this2.handleUnMergeCells(i, j);
-            }
-          }, "Unmerge"), j < Object.values(items).length - 1 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            },
+            title: "Unmerge the cells",
+            className: "button round secondary left"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            className: "fa fa-expand"
+          })), j < Object.values(items).length - 1 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
             onClick: function onClick() {
               return _this2.handleMergeCells(item.colspan, i, j);
-            }
-          }, "Merge")));
+            },
+            title: "Merge with the right cell",
+            className: "button round secondary"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            className: "fa fa-compress"
+          })));
         }));
-      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Head", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
+        title: "Add a head section",
         onClick: this.handleAddRow,
         "data-row": 0,
-        className: "btn btn-secondary",
-        value: "Head +"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+        className: "button round primary"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-plus"
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
         colSpan: this.props.nbCol
-      }, "Nothing"));
+      }, "Empty"));
       var groupHandler = [];
 
       if (this.props.nbCol > 0) {
         for (var i = 0; i < this.props.nbCol; i++) {
           groupHandler.push(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
             key: 'headHandler' + i
-          }, this.props.nbCol > 1 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          }, this.props.nbCol > 1 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
             type: "button",
+            title: "Remove the column",
             onClick: this.handleDeleteCol,
             "data-col": i,
-            className: "btn btn-danger",
-            value: "Col -"
-          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            className: "button round"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            className: "fas fa-minus"
+          })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
             type: "button",
+            title: "Add a column",
             onClick: this.handleAddCol,
             "data-col": i,
-            className: "btn btn-primary",
-            value: "Col +"
-          })));
+            className: "button round"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            className: "fas fa-plus"
+          }))));
         }
       }
 

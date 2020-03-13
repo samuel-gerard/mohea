@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import axios from 'axios';
 import { connect } from "react-redux";
 import FormContent from "./FormContent";
@@ -18,16 +18,16 @@ class Form extends React.Component {
     const href = window.location.href;
     const id = href.substring(href.lastIndexOf('/') + 1)
 
-    if( ! parseInt(id, 10) ) {
+    if (!parseInt(id, 10)) {
       return;
     }
-    
+
     axios({
-        method: 'GET',
-        url: window.location.origin + '/project/' + id,
-      })
+      method: 'GET',
+      url: window.location.origin + '/project/' + id,
+    })
       .then(res => {
-        if(res.status === 200) {
+        if (res.status === 200) {
           const data = res.data;
           const form = JSON.parse(data.content);
           this.props.loadForm(form.content, data.name);
@@ -43,49 +43,40 @@ class Form extends React.Component {
     this.props.updateName(e.target.value)
   }
 
-  handleResetForm = () =>
-  {
+  handleResetForm = () => {
     this.props.resetForm()
   }
 
   render() {
     return <section>
-        <div className="container-fluid">
-          <h1>{this.props.name || 'New Form'}</h1>
-          <div className="row">
-            <div className="col-md-3">
-              <div className="form-group">
-                <label htmlFor="menu-name">
-                  Name for this Form
-                </label>
-                <input type="text" className="form-control" name="name" onChange={this.handleUpdateName} id="menu-name" value={this.props.name} />
-                <SaveProject content={this.props.form} classes={null} name={this.props.name} type="form" />
-                <Canceller undoAction={this.props.undoAction} redoAction={this.props.redoAction} />
-              </div>
+      <nav id="header" className="header min show-logo">
+        <ul className="d-flex jc-e ai-c">
+          <li className="new"><SaveProject content={this.props.form} classes={null} name={this.props.name} type="form" /></li>
+          <li className="no-padding"><Canceller undoAction={this.props.undoAction} redoAction={this.props.redoAction} /></li>
+          <li className="logo ml-auto mr-auto"><a href="/"><img src="/images/logo_medium.png" alt="Logo of Mohea" draggable="false" /></a></li>
+          <li><a className="link primary" href="/dashboard">Your dashboard</a></li>
+        </ul>
+      </nav>
+      <main className="padding-bottom">
+        <div className="form-group title">
+          <label htmlFor="menu-name">Name of the form</label>
+          <input type="text" className="form-control form-control-lg h1 bold" name="name" id="menu-name" onChange={this.handleUpdateName} value={this.props.name || 'New form'} />
+        </div>
+        <FormEdit />
+        <div className="sandbox">
+          <h2 className="h1 bold ta-center">Sandbox</h2>
+          <div className="d-flex flexdir-r jc-c ai-s flex-wrap">
+            <div className="w-40">
               <FormChoices />
             </div>
-            <div className="col-md-6">
+            <div className="w-60">
               <FormContent />
             </div>
-            <div className="col-md-3">
-              <div className="form-group card p-2 bg-info text-white">
-                <div className="col-md-12">
-                  <FormEdit />
-                </div>
-              </div>
-              <div className="form-group d-flex justify-content-between">
-                <input type="button" className="w-25 btn btn-danger" value="Reset Form" onClick={() => this.handleResetForm()} />
-              </div>            
-            </div>
-          </div>
-          <div className="col-md-12">
-            <BootstrapReturn />
-          </div>
-          <div className="col-md-12">
-            <FormReturn />
           </div>
         </div>
-      </section>
+        <FormReturn />
+      </main>
+    </section>
   }
 
 

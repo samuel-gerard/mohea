@@ -6,14 +6,14 @@ const initState = {
         { name: "Title", tag: "h1", content: "My new title" },
         { name: "Text", tag: "p", content: "My new text" },
         { name: "Submit", tag: "input", className:"moheaSubmit", type: "submit", value: "Submit" },
-        { name: "Text input", tag: "input", className:"moheaTextInput", type: "text", label:"My new text input", required: "required", placeholder: "My placeholder" },
-        { name: "Text area", tag: "textarea", className:"moheaTextArea", label:"My new text area", rows: 3, col: 10, required: "required", placeholder: "My placeholder" },
+        { name: "Text Input", tag: "input", className:"moheaTextInput", type: "text", label:"My new text input", required: "required", placeholder: "My placeholder" },
+        { name: "Text Area", tag: "textarea", className:"moheaTextArea", label:"My new text area", rows: 3, col: 10, required: "required", placeholder: "My placeholder" },
         { name: "Select", tag: "select", className:"moheaSelect", label:"My new select", title: "Options", required: "required", options: [
         ]},
         { name: "Date", tag: "input", className:"moheaDate", label:"My new date", type: "date", required: "required", placeholder: "12/02/2020" },
-        { name: "Check box", tag: "div", className:"moheaCheckbox", label:"My new check box", required: "", options:[
+        { name: "Check Box", tag: "div", className:"moheaCheckbox", label:"My new check box", required: "", options:[
         ]},
-        { name: "Radio button", tag: "div", className:"moheaRadiobutton", label:"My new radio button", required: "required", options: [
+        { name: "Radio Button", tag: "div", className:"moheaRadiobutton", label:"My new radio button", required: "required", options: [
         ]},
         { name: "Email", tag: "input", className:"moheaEmail", label:"My email", type: "email", pattern: "", required: "required", placeholder: "My placeholder" },
         { name: "Link", tag: "input", className:"moheaLink", label:"My link", type: "url", required: "required", placeholder: "My placeholder" },

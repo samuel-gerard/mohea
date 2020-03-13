@@ -11479,6 +11479,20 @@ h2 {
   width: auto;
 }
 
+.modal-content {
+  position: fixed;
+  bottom: 100px;
+}
+
+.modal-backdrop.show {
+  display: none;
+}
+
+.modal-open {
+  overflow: auto;
+  padding: 0px !important;
+}
+
 footer {
   position: relative;
   background-color: #F2F2F2;

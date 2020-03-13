@@ -70538,7 +70538,7 @@ var initState = {
     type: "submit",
     value: "Submit"
   }, {
-    name: "Text input",
+    name: "Text Input",
     tag: "input",
     className: "moheaTextInput",
     type: "text",
@@ -70546,7 +70546,7 @@ var initState = {
     required: "required",
     placeholder: "My placeholder"
   }, {
-    name: "Text area",
+    name: "Text Area",
     tag: "textarea",
     className: "moheaTextArea",
     label: "My new text area",
@@ -70571,14 +70571,14 @@ var initState = {
     required: "required",
     placeholder: "12/02/2020"
   }, {
-    name: "Check box",
+    name: "Check Box",
     tag: "div",
     className: "moheaCheckbox",
     label: "My new check box",
     required: "",
     options: []
   }, {
-    name: "Radio button",
+    name: "Radio Button",
     tag: "div",
     className: "moheaRadiobutton",
     label: "My new radio button",

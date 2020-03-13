@@ -10823,6 +10823,17 @@ main.padding-bottom {
   padding-bottom: 150px;
 }
 
+.text-content {
+  padding: 50px;
+  background: url(/images/blotch1.svg?c729c86dd9b5ed3faffec9df60807b31) right 90px/auto 65% no-repeat, url(/images/blotch2.svg?c536553882cc1ea0d4997cb789712eb2) left bottom 40px/50% auto no-repeat;
+}
+
+@media (max-width: 600px) {
+  .text-content {
+    padding: 20px;
+  }
+}
+
 .home-screen {
   min-height: 100vh;
   padding-bottom: 100px;

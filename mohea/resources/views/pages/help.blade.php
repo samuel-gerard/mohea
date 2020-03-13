@@ -16,10 +16,9 @@
     </ul>
 </nav>
 
-<main class="">
-
-    <h1 style="text-align: justify;">Help Page</h1>
-    <h2>How to use Mohea?</h2>
+<main class="text-content">
+    <h1 class="bold ta-center">Help page</h1>
+    <h2 class="ta-center">How to use Mohea?</h2>
     <p>Mohea is a tool for creating fully accessible HTML menus, forms and tables.</p>
     <p>To create and export a project you must create an account. You can choose to connect via Google, Facebook,
         GitHub.</p>
@@ -32,7 +31,7 @@
     <p><strong>CTRL + Y</strong> to return to the last action</p>
     <p><strong>"Undo"</strong> and <strong>"Redo"</strong> buttons are also available on each module.</p>
     <p>A page also allows you to modify your account information (name, email, avatar).</p>
-    <h2>Create Form</h2>
+    <h2 class="ta-center">Create Form</h2>
     <p>The form creation module allows you to build an HTML form with all the elements of your choice and to generate
         the code in order to integrate it directly into your project.</p>
     <p>The forms are fully accessible since they use all the navigation and reading help properties such as
@@ -69,7 +68,7 @@
         in the <strong>" Edit Options "&nbsp;</strong>list.</p>
     <p>It is possible to delete an element from the form, using the <strong>" Delete "</strong> button, and to
         completely reset the form, using the<strong>&nbsp;" Reset "</strong> button.</p>
-    <h2>Create Menus</h2>
+    <h2 class="ta-center">Create Menus</h2>
     <p>The menu creation module allows you to build a fully accessible HTML menu. It will be directly possible to
         integrate it into your web page.</p>
     <p>It is possible to add or remove menu items in this way by using the<strong>&nbsp;"+"</strong> or
@@ -84,7 +83,7 @@
     <p>A global style is applied to the menu, with the possibility to choose or not the Bootstrap theme, and to choose a
         Dark or Light style.</p>
     <p>A <strong>" Reset "</strong> button is also used to reset the entire project.</p>
-    <h2>Create Tables</h2>
+    <h2 class="ta-center">Create Tables</h2>
     <p>The table creation module allows you to build and generate accessible HTML tables. It will be directly possible
         to integrate it into your web page.</p>
     <p>When creating a blank table it is possible to generate a table by entering the number of rows and columns, or by
@@ -108,7 +107,7 @@
     <p>- Bordered</p>
     <p>- Hover</p>
     <p>- Responsive</p>
-    <h2>Import the generated code</h2>
+    <h2 class="ta-center">Import the generated code</h2>
     <p>When the table is finished, the code that has been generated is copied by clicking on the<strong>&nbsp;"Copy to
             Clipboard"&nbsp;</strong>button in the lower part of the interface. Don't forget to import the Bootstrap
         library by clicking on <strong>"Copy Bootstrap Sources"</strong> if you haven't already done so.</p>

@@ -65,8 +65,14 @@ class Form extends React.Component {
         <FormEdit />
         <div className="sandbox">
           <h2 className="h1 bold ta-center">Sandbox</h2>
-            <FormContent />
-            <FormChoices />
+          <div className="d-flex flexdir-r jc-c ai-s flex-wrap">
+            <div className="w-40">
+              <FormChoices />
+            </div>
+            <div className="w-60">
+              <FormContent />
+            </div>
+          </div>
         </div>
         <FormReturn />
       </main>

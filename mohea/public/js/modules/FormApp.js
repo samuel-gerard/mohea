@@ -69099,55 +69099,52 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
-
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "container-fluid"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.props.name || 'New Form'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-3"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "menu-name"
-      }, "Name for this Form"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
-        className: "form-control",
-        name: "name",
-        onChange: this.handleUpdateName,
-        id: "menu-name",
-        value: this.props.name
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SaveProject__WEBPACK_IMPORTED_MODULE_8__["SaveProject"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
+        id: "header",
+        className: "header min show-logo"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "d-flex jc-e ai-c"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "new"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SaveProject__WEBPACK_IMPORTED_MODULE_8__["SaveProject"], {
         content: this.props.form,
         classes: null,
         name: this.props.name,
         type: "form"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Canceller__WEBPACK_IMPORTED_MODULE_9__["Canceller"], {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "no-padding"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Canceller__WEBPACK_IMPORTED_MODULE_9__["Canceller"], {
         undoAction: this.props.undoAction,
         redoAction: this.props.redoAction
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormChoices__WEBPACK_IMPORTED_MODULE_6__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-6"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormContent__WEBPACK_IMPORTED_MODULE_3__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-3"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "logo ml-auto mr-auto"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "/"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: "/images/logo_medium.png",
+        alt: "Logo of Mohea",
+        draggable: "false"
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "link primary",
+        href: "/dashboard"
+      }, "Your dashboard")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
+        className: "padding-bottom"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group card p-2 bg-info text-white"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-12"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormEdit__WEBPACK_IMPORTED_MODULE_7__["default"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group d-flex justify-content-between"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "button",
-        className: "w-25 btn btn-danger",
-        value: "Reset Form",
-        onClick: function onClick() {
-          return _this3.handleResetForm();
-        }
-      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-12"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_BootstrapReturn__WEBPACK_IMPORTED_MODULE_5__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-12"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormReturn__WEBPACK_IMPORTED_MODULE_4__["default"], null))));
+        className: "form-group title"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "menu-name"
+      }, "Name of the form"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        className: "form-control form-control-lg h1 bold",
+        name: "name",
+        id: "menu-name",
+        onChange: this.handleUpdateName,
+        value: this.props.name || 'New form'
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormEdit__WEBPACK_IMPORTED_MODULE_7__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sandbox"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        className: "h1 bold ta-center"
+      }, "Sandbox"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormContent__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormChoices__WEBPACK_IMPORTED_MODULE_6__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormReturn__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
     }
   }]);
 
@@ -69255,8 +69252,8 @@ function (_Component) {
       var _this2 = this;
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "section-form"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Add an Element"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "section-form ta-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Add an element"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "elements-choices"
       }, this.props.elements.map(function (element, i) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -69265,7 +69262,7 @@ function (_Component) {
           onClick: function onClick() {
             return _this2.handleAddItem(element);
           },
-          className: "btn btn-primary element-choice",
+          className: "button element-choice",
           value: element.name
         });
       })));
@@ -69795,7 +69792,8 @@ function (_Component) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "form-group"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-            htmlFor: textAreaId
+            htmlFor: textAreaId,
+            className: "d-block"
           }, "Content"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
             className: "form-control",
             name: "content",
@@ -69888,10 +69886,7 @@ function (_Component) {
             name: "placeholder",
             onChange: this.handleInputBasic,
             value: element.placeholder
-          })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "form-check"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-            className: "form-check-input",
+          })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             type: "checkbox",
             id: requiredId,
             onChange: this.handleInputBasic,
@@ -69941,10 +69936,7 @@ function (_Component) {
             name: "rows",
             onChange: this.handleUpdateTextArea,
             value: element.rows
-          })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "form-check"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-            className: "form-check-input",
+          })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             type: "checkbox",
             id: requiredId,
             onChange: this.handleUpdateTextArea,
@@ -69981,7 +69973,7 @@ function (_Component) {
             onClick: function onClick() {
               return _this2.handleAddOptionForSelect();
             }
-          }, _defineProperty(_React$createElement, "className", "btn btn-primary"), _defineProperty(_React$createElement, "value", "Add New Option"), _React$createElement))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          }, _defineProperty(_React$createElement, "className", "button"), _defineProperty(_React$createElement, "value", "Add a new option"), _React$createElement))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "form-group"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
             htmlFor: selectContentId
@@ -70008,10 +70000,7 @@ function (_Component) {
             type: "text",
             value: this.state.selectedOption.content,
             onChange: this.handleUpdateOption
-          })) : null : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "form-check"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-            className: "form-check-input",
+          })) : null : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             type: "checkbox",
             id: requiredId,
             onChange: this.handleUpdateSelect,
@@ -70048,7 +70037,7 @@ function (_Component) {
             onClick: function onClick() {
               return _this2.handleAddOptionCheckbox();
             }
-          }, _defineProperty(_React$createElement2, "className", "btn btn-primary"), _defineProperty(_React$createElement2, "value", "Add New Option"), _React$createElement2))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          }, _defineProperty(_React$createElement2, "className", "button"), _defineProperty(_React$createElement2, "value", "Add a new option"), _React$createElement2))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
             htmlFor: optionCheckId
           }, "Edit options"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "form-group"
@@ -70075,10 +70064,7 @@ function (_Component) {
             type: "text",
             value: this.state.selectedOption.label,
             onChange: this.handleUpdateOption
-          })) : null : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "form-check"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-            className: "form-check-input",
+          })) : null : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             type: "checkbox",
             id: requiredId,
             onChange: this.handleUpdateBoxAndRadio,
@@ -70115,7 +70101,7 @@ function (_Component) {
             onClick: function onClick() {
               return _this2.handleAddOptionRadio();
             }
-          }, _defineProperty(_React$createElement3, "className", "btn btn-primary"), _defineProperty(_React$createElement3, "value", "Add New Option"), _React$createElement3))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          }, _defineProperty(_React$createElement3, "className", "button"), _defineProperty(_React$createElement3, "value", "Add a new option"), _React$createElement3))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "form-group"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "form-group"
@@ -70144,10 +70130,7 @@ function (_Component) {
             type: "text",
             value: this.state.selectedOption.label,
             onChange: this.handleUpdateOption
-          })) : null : null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            className: "form-check"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-            className: "form-check-input",
+          })) : null : null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             type: "checkbox",
             id: requiredId,
             onChange: this.handleUpdateBoxAndRadio,
@@ -70175,37 +70158,47 @@ function (_Component) {
     value: function render() {
       var _this3 = this;
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: ""
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Edit an Element"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.focus.id > -1 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.focus.label !== undefined ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.props.focus.label) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.props.focus.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, this.renderSwitch(this.props.focus)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "button",
-        onClick: function onClick() {
-          return _this3.handleMoveUp(_this3.props.focus);
-        },
-        className: "btn btn-primary",
-        value: "Down"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, this.props.focus.id > -1 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "context-menu"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "group-row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Item options"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, this.renderSwitch(this.props.focus)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
         onClick: function onClick() {
           return _this3.handleMoveDown(_this3.props.focus);
         },
-        className: "btn btn-primary",
-        value: "Up"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "button round primary",
+        title: "Move up"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-arrow-up"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        onClick: function onClick() {
+          return _this3.handleMoveUp(_this3.props.focus);
+        },
+        className: "button round secondary",
+        title: "Move down"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-arrow-down"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
         onClick: function onClick() {
           return _this3.handleDuplicateItem(_this3.props.focus);
         },
-        className: "btn btn-primary",
-        value: "Duplicate"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "button round",
+        title: "Duplicate"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-clone"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
         onClick: function onClick() {
           return _this3.handleDeleteItem(_this3.props.focus);
         },
-        className: "btn btn-danger",
-        value: "Delete"
-      })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Click on an element to update it !")));
+        className: "button round",
+        title: "Delete"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-trash-alt"
+      }))))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null));
     }
   }]);
 
@@ -70266,6 +70259,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_PrismCode__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../components/PrismCode */ "./resources/js/components/PrismCode.js");
 /* harmony import */ var clipboard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! clipboard */ "./node_modules/clipboard/dist/clipboard.js");
 /* harmony import */ var clipboard__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(clipboard__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _components_BootstrapReturn__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../components/BootstrapReturn */ "./resources/js/components/BootstrapReturn.jsx");
+
 
 
 
@@ -70343,13 +70338,17 @@ var FormReturn = function FormReturn(props) {
     }
   });
   html += '</form>\n';
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "w-50 mx-auto"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "ta-center"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+    className: "h1 bold"
+  }, "Your HTML code"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_BootstrapReturn__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     id: "button-to-copy",
-    className: "btn btn-dark",
+    className: "button primary",
     "data-clipboard-text": html
-  }, "Copy to Clipboard"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PrismCode__WEBPACK_IMPORTED_MODULE_2__["PrismCode"], {
+  }, "Copy to clipboard"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "w-50 mx-auto"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PrismCode__WEBPACK_IMPORTED_MODULE_2__["PrismCode"], {
     code: html,
     language: "html",
     plugins: ["line-numbers", "normalize-whitespace"]
@@ -70519,32 +70518,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var initState = {
   name: '',
   elementsChoices: [{
-    name: "Text",
-    tag: "p",
-    content: "My New Text"
-  }, {
     name: "Title",
     tag: "h1",
-    content: "My New Title"
+    content: "My new title"
+  }, {
+    name: "Text",
+    tag: "p",
+    content: "My new text"
   }, {
     name: "Submit",
     tag: "input",
     className: "moheaSubmit",
     type: "submit",
-    value: "Send my new Form"
+    value: "Submit"
   }, {
-    name: "Text Input",
+    name: "Text input",
     tag: "input",
     className: "moheaTextInput",
     type: "text",
-    label: "My New Text Input",
+    label: "My new text input",
     required: "required",
     placeholder: "My placeholder"
   }, {
-    name: "Text Area",
+    name: "Text area",
     tag: "textarea",
     className: "moheaTextArea",
-    label: "My New Text Area",
+    label: "My new text area",
     rows: 3,
     col: 10,
     required: "required",
@@ -70553,7 +70552,7 @@ var initState = {
     name: "Select",
     tag: "select",
     className: "moheaSelect",
-    label: "My New Select",
+    label: "My new select",
     title: "Options",
     required: "required",
     options: []
@@ -70561,29 +70560,29 @@ var initState = {
     name: "Date",
     tag: "input",
     className: "moheaDate",
-    label: "My New Date",
+    label: "My new date",
     type: "date",
     required: "required",
     placeholder: "12/02/2020"
   }, {
-    name: "Check Box",
+    name: "Check box",
     tag: "div",
     className: "moheaCheckbox",
-    label: "My New Check Box",
+    label: "My new check box",
     required: "",
     options: []
   }, {
-    name: "Radio Button",
+    name: "Radio button",
     tag: "div",
     className: "moheaRadiobutton",
-    label: "My New Radio Button",
+    label: "My new radio button",
     required: "required",
     options: []
   }, {
     name: "Email",
     tag: "input",
     className: "moheaEmail",
-    label: "My Email",
+    label: "My email",
     type: "email",
     pattern: "",
     required: "required",
@@ -70592,7 +70591,7 @@ var initState = {
     name: "Link",
     tag: "input",
     className: "moheaLink",
-    label: "My Link",
+    label: "My link",
     type: "url",
     required: "required",
     placeholder: "My placeholder"
@@ -70600,7 +70599,7 @@ var initState = {
     name: "Password",
     tag: "input",
     className: "moheaPassword",
-    label: "My Password",
+    label: "My password",
     type: "password",
     required: "required",
     placeholder: "My placeholder"
@@ -70608,7 +70607,7 @@ var initState = {
     name: "Phone",
     tag: "input",
     className: "moheaPhone",
-    label: "My Phone Number",
+    label: "My phone number",
     type: "tel",
     pattern: "",
     required: "required",

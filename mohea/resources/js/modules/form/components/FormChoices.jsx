@@ -9,12 +9,12 @@ class FormChoices extends Component {
         this.props.addNewItem(element)
     }
 
-    render(){
-        return <div className="section-form">
-            <h2>Add an Element</h2>
+    render() {
+        return <div className="section-form ta-center">
+            <h2>Add an element</h2>
             <div className="elements-choices">
                 {this.props.elements.map((element, i) => (
-                    <input key={i} type="button" onClick={() => this.handleAddItem(element)} className="btn btn-primary element-choice" value={element.name} />
+                    <input key={i} type="button" onClick={() => this.handleAddItem(element)} className="button element-choice" value={element.name} />
                 ))}
             </div>
         </div>

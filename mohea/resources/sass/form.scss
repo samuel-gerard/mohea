@@ -6,7 +6,7 @@
 .App h1 {
   margin-bottom: 30px;
 }
-  
+
 .elements_box {
   width: 22%;
   height: 650px;
@@ -87,7 +87,7 @@
 .list_3 {
   margin-bottom: 10%;
 }
-  
+
 legend {
   background-color: black;
   color: #fff;
@@ -103,10 +103,10 @@ input {
 }
 
 fieldset {
-  border:2px solid black;
-  -moz-border-radius:8px;
-  -webkit-border-radius:8px;	
-  border-radius:8px;	
+  border: 2px solid black;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
 }
 
 
@@ -123,8 +123,4 @@ fieldset {
   border-radius: 5px;
   border: dashed black 1px;
   cursor: pointer;
-}
-
-.element-choice {
-  width: 40%;
 }

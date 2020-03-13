@@ -69144,7 +69144,13 @@ function (_React$Component) {
         className: "sandbox"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
         className: "h1 bold ta-center"
-      }, "Sandbox"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormContent__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormChoices__WEBPACK_IMPORTED_MODULE_6__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormReturn__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
+      }, "Sandbox"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "d-flex flexdir-r jc-c ai-s flex-wrap"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "w-40"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormChoices__WEBPACK_IMPORTED_MODULE_6__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "w-60"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormContent__WEBPACK_IMPORTED_MODULE_3__["default"], null)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormReturn__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
     }
   }]);
 
@@ -69252,7 +69258,7 @@ function (_Component) {
       var _this2 = this;
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "section-form ta-center"
+        className: "section-form ta-left"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Add an element"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "elements-choices"
       }, this.props.elements.map(function (element, i) {

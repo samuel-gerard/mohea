@@ -10,7 +10,7 @@ class FormChoices extends Component {
     }
 
     render() {
-        return <div className="section-form ta-center">
+        return <div className="section-form ta-left">
             <h2>Add an element</h2>
             <div className="elements-choices">
                 {this.props.elements.map((element, i) => (

@@ -11444,7 +11444,7 @@ h2 {
   bottom: 10px;
   right: 10px;
   min-width: 400px;
-  height: 180px;
+  max-width: 100%;
   padding: 15px;
   box-sizing: content-box;
   border-radius: 10px;
@@ -12235,6 +12235,10 @@ a:focus {
   text-align: center;
 }
 
+#axeptio_overlay {
+  z-index: 1;
+}
+
 .nav-item.dropdown,
 .dropdown-item {
   display: flex;
@@ -12326,6 +12330,10 @@ strong {
   display: inline;
 }
 
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
 .flexdir-r {
   flex-direction: row;
 }
@@ -12412,6 +12420,26 @@ strong {
 
 .mr-20 {
   margin-right: 20px;
+}
+
+.w-40 {
+  width: 40%;
+}
+
+.w-50 {
+  width: 50%;
+}
+
+.w-60 {
+  width: 60%;
+}
+
+@media (max-width: 960px) {
+  .w-40,
+  .w-50,
+  .w-60 {
+    width: 100% !important;
+  }
 }
 
 @-webkit-keyframes squeeze {

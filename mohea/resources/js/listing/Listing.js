@@ -10,7 +10,7 @@ const Listing = () => {
   let isDeleting = false;
   let isCanceling = false;
   let isError = false;
-  let currentIdx = "";
+  let currentIdx = -1;
   let deleteTimeout;
 
   useEffect(() => {
@@ -26,14 +26,15 @@ const Listing = () => {
   }, [])
 
   const handleDelete = (id, idx) => {
-    if (currentIdx == "") {
+    if (currentIdx === -1) {
       currentIdx = idx;
     }
     if (currentIdx === idx) {
       isDeleting = !isDeleting;
       document.getElementById('listing-' + idx).classList.toggle("deleting");
       if (isDeleting) {
-        document.getElementById('button-' + idx).innerHTML = "Cancel";
+        document.getElementById('button-' + idx).innerHTML = "<i class='fas fa-ban'></i>";
+        document.getElementById('button-' + idx).title = "Cancel";
         isCanceling = true;
         deleteTimeout = setTimeout(() => {
           axios({
@@ -51,19 +52,22 @@ const Listing = () => {
                   url: url + '/project/',
                 })
                   .then(res => {
-                    if (res.status === D200) {
+                    if (res.status === 200) {
                       setListing(res.data);
                     }
+                    isDeleting = false;
+                    isCanceling = false;
+                    currentIdx = -1;
                   })
-                isDeleting = false;
               }
             })
-        }, 3000);
+        }, 4000);
       }
       else {
         clearTimeout(deleteTimeout);
-        document.getElementById('button-' + idx).innerHTML = "Delete";
-        currentIdx = "";
+        document.getElementById('button-' + idx).innerHTML = "<i class='fas fa-trash-alt'></i>";
+        document.getElementById('button-' + idx).title = "Delete";
+        currentIdx = -1;
         setTimeout(() => {
           isCanceling = false;
         }, 200);
@@ -85,19 +89,18 @@ const Listing = () => {
     if (!isDeleting && !isCanceling && !isError) {
       window.location.href = url + '/project/' + type + '/' + id;
     }
-    return;
   }
 
   const getItemUpdated = updatedDate => {
     let date = Date.parse(updatedDate);
-    let currentTime = Date.parse(new Date()) - ( 3600 * 1000);
+    let currentTime = Date.parse(new Date()) - (3600 * 1000);
 
     const diff = (currentTime - date) / 1000;
 
-    if(!diff) {
-      return '';
+    if (!diff) {
+      return '• Just now';
     }
-    
+
     if (diff < 60) {
       return '• A few seconds ago';
     } else if (diff < 3600) {
@@ -115,34 +118,40 @@ const Listing = () => {
     }
   }
 
-  const handleDuplicate = (e, item) => {
-    axios({
-      method: 'post',
-      url: url + '/project',
-      data: {
-        name: item.name + ' - copy',
-        caption: item.caption,
-        content: item.content,
-        type: item.type
-      }
-    })
-    .then(res => {
-      if (res.status === 200) {
-        growl({
-          type: 'success',
-          message: item.name+' has been duplicated'
-        });
-        axios({
-          method: 'GET',
-          url: url + '/project/',
+  const handleDuplicate = (item) => {
+    if (!isDeleting && !isCanceling && !isError) {
+      isCanceling = true;
+      axios({
+        method: 'post',
+        url: url + '/project',
+        data: {
+          name: (item.name ? item.name : 'New ' + item.type) + ' - copy',
+          caption: item.caption,
+          content: item.content,
+          type: item.type
+        }
+      })
+        .then(res => {
+          if (res.status === 200) {
+            growl({
+              type: 'success',
+              message: item.name + ' has been duplicated'
+            });
+            axios({
+              method: 'GET',
+              url: url + '/project/',
+            })
+              .then(res => {
+                if (res.status === 200) {
+                  setListing(res.data);
+                }
+                setTimeout(() => {
+                  isCanceling = false;
+                }, 200);
+              })
+          }
         })
-          .then(res => {
-            if (res.status === 200) {
-              setListing(res.data);
-            }
-          })
-      }
-    })
+    }
   }
 
   return (
@@ -167,9 +176,9 @@ const Listing = () => {
             {item.caption &&
               <p>{item.caption}</p>
             }
-            <span>
-              <span className="button" id={'button-' + idx} onClick={() => handleDelete(item.id, idx)} tabIndex="0">Delete</span>
-              <span className="button" id={'copy-' + idx} onClick={() => handleDuplicate(item)} tabIndex="0">Duplicate</span>
+            <span id={'actions' + idx}>
+              <span className="button icon" id={'copy-' + idx} onClick={() => handleDuplicate(item)} title="Duplicate" tabIndex="0"><i className="fas fa-clone"></i></span>
+              <span className="button icon" id={'button-' + idx} onClick={() => handleDelete(item.id, idx)} title="Delete" tabIndex="0"><i className="fas fa-trash-alt"></i></span>
             </span>
           </button>
         )

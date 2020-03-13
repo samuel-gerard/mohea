@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { PrismCode } from "../../../components/PrismCode";
 import ClipboardJS from 'clipboard';
-
+import BootstrapReturn from "../../../components/BootstrapReturn";
 
 const MenuReturn = props => {
 
@@ -96,17 +96,18 @@ const MenuReturn = props => {
     html += `</nav>`;
 
     return (
-        <div>
-            <h1>Your HTML code</h1>
+        <div className="ta-center">
+            <h2 className="h1 bold">Your HTML code</h2>
+            <BootstrapReturn />
+            <button id="button-to-copy" className="button primary" data-clipboard-text={html}>
+                Copy to clipboard
+            </button>
             <div className="w-50 mx-auto">
                 <PrismCode
                     code={html}
                     language="html"
                     plugins={["line-numbers", "normalize-whitespace"]}
                 />
-                <button id="button-to-copy" data-clipboard-text={html}>
-                    Copy to clipboard
-                </button>
             </div>
         </div>
     )

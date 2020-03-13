@@ -43327,7 +43327,7 @@ var Listing = function Listing() {
   var isDeleting = false;
   var isCanceling = false;
   var isError = false;
-  var currentIdx = "";
+  var currentIdx = -1;
   var deleteTimeout;
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     axios__WEBPACK_IMPORTED_MODULE_2___default()({
@@ -43341,7 +43341,7 @@ var Listing = function Listing() {
   }, []);
 
   var handleDelete = function handleDelete(id, idx) {
-    if (currentIdx == "") {
+    if (currentIdx === -1) {
       currentIdx = idx;
     }
 
@@ -43350,7 +43350,8 @@ var Listing = function Listing() {
       document.getElementById('listing-' + idx).classList.toggle("deleting");
 
       if (isDeleting) {
-        document.getElementById('button-' + idx).innerHTML = "Cancel";
+        document.getElementById('button-' + idx).innerHTML = "<i class='fas fa-ban'></i>";
+        document.getElementById('button-' + idx).title = "Cancel";
         isCanceling = true;
         deleteTimeout = setTimeout(function () {
           axios__WEBPACK_IMPORTED_MODULE_2___default()({
@@ -43366,18 +43367,22 @@ var Listing = function Listing() {
                 method: 'GET',
                 url: url + '/project/'
               }).then(function (res) {
-                if (res.status === D200) {
+                if (res.status === 200) {
                   setListing(res.data);
                 }
+
+                isDeleting = false;
+                isCanceling = false;
+                currentIdx = -1;
               });
-              isDeleting = false;
             }
           });
-        }, 3000);
+        }, 4000);
       } else {
         clearTimeout(deleteTimeout);
-        document.getElementById('button-' + idx).innerHTML = "Delete";
-        currentIdx = "";
+        document.getElementById('button-' + idx).innerHTML = "<i class='fas fa-trash-alt'></i>";
+        document.getElementById('button-' + idx).title = "Delete";
+        currentIdx = -1;
         setTimeout(function () {
           isCanceling = false;
         }, 200);
@@ -43398,8 +43403,6 @@ var Listing = function Listing() {
     if (!isDeleting && !isCanceling && !isError) {
       window.location.href = url + '/project/' + type + '/' + id;
     }
-
-    return;
   };
 
   var getItemUpdated = function getItemUpdated(updatedDate) {
@@ -43408,7 +43411,7 @@ var Listing = function Listing() {
     var diff = (currentTime - date) / 1000;
 
     if (!diff) {
-      return '';
+      return '• Just now';
     }
 
     if (diff < 60) {
@@ -43432,32 +43435,39 @@ var Listing = function Listing() {
     }
   };
 
-  var handleDuplicate = function handleDuplicate(e, item) {
-    axios__WEBPACK_IMPORTED_MODULE_2___default()({
-      method: 'post',
-      url: url + '/project',
-      data: {
-        name: item.name + ' - copy',
-        caption: item.caption,
-        content: item.content,
-        type: item.type
-      }
-    }).then(function (res) {
-      if (res.status === 200) {
-        _crystallize_react_growl__WEBPACK_IMPORTED_MODULE_1___default()({
-          type: 'success',
-          message: item.name + ' has been duplicated'
-        });
-        axios__WEBPACK_IMPORTED_MODULE_2___default()({
-          method: 'GET',
-          url: url + '/project/'
-        }).then(function (res) {
-          if (res.status === 200) {
-            setListing(res.data);
-          }
-        });
-      }
-    });
+  var handleDuplicate = function handleDuplicate(item) {
+    if (!isDeleting && !isCanceling && !isError) {
+      isCanceling = true;
+      axios__WEBPACK_IMPORTED_MODULE_2___default()({
+        method: 'post',
+        url: url + '/project',
+        data: {
+          name: (item.name ? item.name : 'New ' + item.type) + ' - copy',
+          caption: item.caption,
+          content: item.content,
+          type: item.type
+        }
+      }).then(function (res) {
+        if (res.status === 200) {
+          _crystallize_react_growl__WEBPACK_IMPORTED_MODULE_1___default()({
+            type: 'success',
+            message: item.name + ' has been duplicated'
+          });
+          axios__WEBPACK_IMPORTED_MODULE_2___default()({
+            method: 'GET',
+            url: url + '/project/'
+          }).then(function (res) {
+            if (res.status === 200) {
+              setListing(res.data);
+            }
+
+            setTimeout(function () {
+              isCanceling = false;
+            }, 200);
+          });
+        }
+      });
+    }
   };
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_crystallize_react_growl__WEBPACK_IMPORTED_MODULE_1__["GrowlComponent"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -43503,21 +43513,29 @@ var Listing = function Listing() {
       className: "mb-0"
     }, item.name ? item.name : 'New ' + item.type), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "small mb-0 ml-2"
-    }, getItemUpdated(item.updated_at)), item.caption && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, item.caption), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-      className: "button",
-      id: 'button-' + idx,
-      onClick: function onClick() {
-        return handleDelete(item.id, idx);
-      },
-      tabIndex: "0"
-    }, "Delete"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-      className: "button",
+    }, getItemUpdated(item.updated_at)), item.caption && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, item.caption), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      id: 'actions' + idx
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: "button icon",
       id: 'copy-' + idx,
       onClick: function onClick() {
         return handleDuplicate(item);
       },
+      title: "Duplicate",
       tabIndex: "0"
-    }, "Duplicate")));
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      className: "fas fa-clone"
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: "button icon",
+      id: 'button-' + idx,
+      onClick: function onClick() {
+        return handleDelete(item.id, idx);
+      },
+      title: "Delete",
+      tabIndex: "0"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      className: "fas fa-trash-alt"
+    }))));
   }));
 };
 
@@ -43553,7 +43571,7 @@ react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render(react__WEBPACK_IMPORTED_
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\coral\Desktop\IUT\LP_MI\mohea\mohea.bach.mmi-unistra.fr\mohea\resources\js\listing\ListingApp */"./resources/js/listing/ListingApp.js");
+module.exports = __webpack_require__(/*! C:\wamp64\www\mohea.bach.mmi-unistra.fr\mohea\resources\js\listing\ListingApp */"./resources/js/listing/ListingApp.js");
 
 
 /***/ })

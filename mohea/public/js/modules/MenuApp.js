@@ -67371,13 +67371,15 @@ var BootstrapReturn = function BootstrapReturn(props) {
   var html = '<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">\n';
   html += '<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>\n';
   html += '<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>\n';
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "mb-20"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "w-50 mx-auto"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     id: "button-to-copy",
-    className: "btn btn-dark",
+    className: "button secondary ml-auto mr-auto",
     "data-clipboard-text": html
-  }, "Copy Bootstrap Sources"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PrismCode__WEBPACK_IMPORTED_MODULE_1__["PrismCode"], {
+  }, "Copy Bootstrap sources"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PrismCode__WEBPACK_IMPORTED_MODULE_1__["PrismCode"], {
     code: html,
     language: "html",
     plugins: ["line-numbers", "normalize-whitespace"]
@@ -67454,11 +67456,21 @@ var Canceller = function Canceller(props) {
     props.redoAction();
   };
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    onClick: undo
-  }, "Undo last action"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    onClick: redo
-  }, "Redo last action"));
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "merged-buttons"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "button",
+    onClick: undo,
+    title: "Undo"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fas fa-undo"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "button",
+    onClick: redo,
+    title: "Redo"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fas fa-redo"
+  })));
 };
 
 /***/ }),
@@ -67697,12 +67709,10 @@ var SaveProject = function SaveProject(props) {
     });
   };
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "button",
-    className: "btn btn-success",
-    onClick: save,
-    value: 'Save this ' + props.type
-  }));
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "button secondary",
+    onClick: save
+  }, "Save");
 };
 
 /***/ }),
@@ -67793,7 +67803,44 @@ var CustomInput = function CustomInput(props) {
   };
 
   if (details.idx) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Style"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      id: "context-menu"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "group-row"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Item options"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      htmlFor: "option-link"
+    }, "Link"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "text",
+      onChange: handleLink,
+      placeholder: "https://www.example.com",
+      id: "option-link",
+      className: "form-control",
+      value: item.link
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      htmlFor: "option-title"
+    }, "Link title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "text",
+      onChange: handleTitle,
+      id: "option-title",
+      className: "form-control",
+      value: item.title
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "checkbox",
+      onChange: handleTarget,
+      value: "_blank",
+      id: "option-target",
+      checked: item.target === '_blank' ? true : false
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      htmlFor: "option-target"
+    }, "Open link in a new tab"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       htmlFor: "color-text"
     }, "Text color"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "color",
@@ -67809,12 +67856,15 @@ var CustomInput = function CustomInput(props) {
       onChange: handleStyle,
       value: cell.backgroundColor ? cell.backgroundColor : '#ffffff',
       "data-key": "backgroundColor"
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       htmlFor: "text-align"
     }, "Alignment"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
       id: "text-align",
       onChange: handleStyle,
       value: cell.textAlign ? cell.textAlign : 'left',
+      className: "form-control",
       "data-key": "textAlign"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
       value: "left"
@@ -67824,81 +67874,55 @@ var CustomInput = function CustomInput(props) {
       value: "right"
     }, "Right"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
       value: "justify"
-    }, "Justify")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "from-group"
+    }, "Justify"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       htmlFor: "font-size"
-    }, "Font size (px)"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }, "Font size"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "number",
       id: "font-size",
       onChange: handleStyle,
       value: cell.fontSize ? cell.fontSize : '14',
+      className: "form-control",
       "data-key": "fontSize"
-    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "from-group"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      htmlFor: "text-decoration"
-    }, "Underline"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "px")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "group-row"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "checkbox",
       id: "text-decoration",
       onChange: handleStyle,
       value: "underline",
       checked: cell.textDecoration ? true : false,
       "data-key": "textDecoration"
-    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "from-group"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      htmlFor: "font-style"
-    }, "Italic"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      htmlFor: "text-decoration"
+    }, "Underlined")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "checkbox",
       id: "font-style",
       onChange: handleStyle,
       value: "italic",
       checked: cell.fontStyle ? true : false,
       "data-key": "fontStyle"
-    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "from-group"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      htmlFor: "font-weight"
-    }, "Bold"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      htmlFor: "font-style"
+    }, "Italic")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-group"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "checkbox",
       id: "font-weight",
       onChange: handleStyle,
       value: "bold",
       checked: cell.fontWeight ? true : false,
       "data-key": "fontWeight"
-    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Options"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "from-group"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      htmlFor: "option-target"
-    }, "Open in a new tab"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-      type: "checkbox",
-      onChange: handleTarget,
-      value: "_blank",
-      id: "option-target",
-      checked: item.target === '_blank' ? true : false
-    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "from-group"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      htmlFor: "option-link"
-    }, "URL"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-      type: "text",
-      onChange: handleLink,
-      placeholder: "http:// or https://",
-      id: "option-link",
-      value: item.link
-    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "from-group"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      htmlFor: "option-title"
-    }, "Link title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-      type: "text",
-      onChange: handleTitle,
-      id: "option-title",
-      value: item.title
-    })));
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      htmlFor: "font-weight"
+    }, "Bold"))))));
   } else {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Select an item to customize."));
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null);
   }
 };
 
@@ -68051,49 +68075,67 @@ function (_Component) {
     * DISPLAY COMPONENT
     =============================================== */
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.props.name || 'New Menu'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SaveProject__WEBPACK_IMPORTED_MODULE_9__["SaveProject"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
+        id: "header",
+        className: "header min show-logo"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "d-flex jc-e ai-c"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "new"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SaveProject__WEBPACK_IMPORTED_MODULE_9__["SaveProject"], {
         content: this.props.menu,
         classes: this.props.classes,
         name: this.props.name,
         type: "menu"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CustomInput__WEBPACK_IMPORTED_MODULE_7__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Canceller__WEBPACK_IMPORTED_MODULE_8__["Canceller"], {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "no-padding"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Canceller__WEBPACK_IMPORTED_MODULE_8__["Canceller"], {
         undoAction: this.props.undoAction,
         redoAction: this.props.redoAction
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "logo ml-auto mr-auto"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "/"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: "/images/logo_medium.png",
+        alt: "Logo of Mohea",
+        draggable: "false"
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "link primary",
+        href: "/dashboard"
+      }, "Your dashboard")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
+        className: "padding-bottom"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-3"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
+        className: "form-group title"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "menu-name"
-      }, "Name for this menu"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "Name of the menu"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
-        className: "form-control",
+        className: "form-control form-control-lg h1 bold",
         name: "name",
         id: "menu-name",
         onChange: this.handleName,
-        value: this.props.name
+        value: this.props.name || 'New menu'
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group card p-2 bg-info text-white"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Menu global style"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-check"
+        className: "form-group title ta-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "custom-control custom-switch form-control-with-margin"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        className: "form-check-input",
+        className: "custom-control-input",
         type: "checkbox",
         id: "class-style",
         onChange: this.handleClasses,
         value: "navbar",
         checked: this.props.classes.find(function (el) {
           return el === 'navbar';
-        }) ? 'checked' : 'false'
+        }) ? 'checked' : false
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "form-check-label",
+        className: "custom-control-label",
         htmlFor: "class-style"
-      }, "With bootstrap initial style")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-radio"
+      }, "With Bootstrap initial style")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-check form-check-inline form-control-with-margin"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        className: "form-radio-input",
+        className: "form-check-input",
         name: "bg-color",
         type: "radio",
         id: "class-light",
@@ -68103,12 +68145,12 @@ function (_Component) {
           return el === 'navbar-light bg-light';
         }) ? 'checked' : false
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "form-radio-label",
+        className: "form-check-label",
         htmlFor: "class-light"
-      }, "Light")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-radio"
+      }, "Light theme")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-check form-check-inline form-control-with-margin"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        className: "form-radio-input",
+        className: "form-check-input",
         name: "bg-color",
         type: "radio",
         id: "class-dark",
@@ -68118,24 +68160,13 @@ function (_Component) {
           return el === 'navbar-dark bg-dark';
         }) ? 'checked' : false
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "form-radio-label",
+        className: "form-check-label",
         htmlFor: "class-dark"
-      }, "Dark"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group d-flex justify-content-between"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "button",
-        className: "w-25 btn btn-primary",
-        value: "Reset",
-        onClick: this.handleReset
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-9"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MenuContent__WEBPACK_IMPORTED_MODULE_6__["default"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-12"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_BootstrapReturn__WEBPACK_IMPORTED_MODULE_4__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-12"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MenuReturn_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null))));
+      }, "Dark skin"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CustomInput__WEBPACK_IMPORTED_MODULE_7__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sandbox"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        className: "h1 bold ta-center"
+      }, "Sandbox"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MenuContent__WEBPACK_IMPORTED_MODULE_6__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MenuReturn_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null)));
     }
   }]);
 
@@ -68293,54 +68324,62 @@ function (_Component) {
             onFocus: _this2.handleInputSelected,
             onChange: _this2.handleUpdateValue,
             value: item.value,
-            className: "nav-link",
+            className: "form-control nav-link",
             style: item.style
-          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
             type: "button",
             onClick: function onClick() {
               return _this2.handleDeleteItem(-1, idx);
             },
-            className: "btn btn-secondary d-inline-block",
-            value: "-"
-          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+            className: "button round",
+            title: "Remove the menu item"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            className: "fas fa-minus"
+          })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
             type: "button",
             onClick: function onClick() {
               return _this2.handleAddItem(idx);
             },
-            className: "btn btn-primary",
-            value: "+"
-          }));
+            className: "button round",
+            title: "Add a sub-menu"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            className: "fas fa-plus"
+          })));
         }
 
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           key: 'menu-0-' + idx,
-          className: "nav-item dropdown show"
+          className: "nav-item dropdown show d-flex align-items-center"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "text",
           "data-idx": '-1/' + idx,
           onFocus: _this2.handleInputSelected,
           onChange: _this2.handleUpdateValue,
           value: item.value,
-          className: "nav-link dropdown-toggle",
+          className: "form-control nav-link dropdown-toggle",
           style: item.style,
           "data-toggle": "dropdown",
           "aria-haspopup": "false",
           "aria-expanded": "true"
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           type: "button",
           onClick: function onClick() {
             return _this2.handleDeleteItem(-1, idx);
           },
-          className: "btn btn-secondary d-inline-block",
-          value: "-"
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          className: "button round",
+          title: "Remove the menu item"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fas fa-minus"
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           type: "button",
           onClick: function onClick() {
             return _this2.handleAddItem(idx);
           },
-          className: "btn btn-primary",
-          value: "+"
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "button round",
+          title: "Add a sub-menu"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fas fa-plus"
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "dropdown-menu show",
           "aria-labelledby": item.title + '-' + idx
         }, Object.values(item.children).map(function (child, child_idx) {
@@ -68353,24 +68392,29 @@ function (_Component) {
             onFocus: _this2.handleInputSelected,
             onChange: _this2.handleUpdateValue,
             value: child.value,
+            className: "form-control",
             style: child.style
-          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
             type: "button",
             onClick: function onClick() {
               return _this2.handleDeleteItem(idx, child_idx);
             },
-            className: "btn btn-secondary d-inline-block",
-            value: "-"
-          }));
+            className: "button round",
+            title: "Remove the sub-menu"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            className: "fas fa-minus"
+          })));
         })));
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
         onClick: function onClick() {
           return _this2.handleAddItem(-1);
         },
-        className: "btn btn-primary",
-        value: "+"
-      }))));
+        className: "button primary round big",
+        title: "Add a menu entry"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-plus"
+      })))));
     }
   }]);
 
@@ -68420,6 +68464,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_PrismCode__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../components/PrismCode */ "./resources/js/components/PrismCode.js");
 /* harmony import */ var clipboard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! clipboard */ "./node_modules/clipboard/dist/clipboard.js");
 /* harmony import */ var clipboard__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(clipboard__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _components_BootstrapReturn__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../components/BootstrapReturn */ "./resources/js/components/BootstrapReturn.jsx");
+
 
 
 
@@ -68501,16 +68547,21 @@ var MenuReturn = function MenuReturn(props) {
   html += "       </ul>\n";
   html += "   </div>\n";
   html += "</nav>";
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Your HTML code"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "ta-center"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+    className: "h1 bold"
+  }, "Your HTML code"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_BootstrapReturn__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    id: "button-to-copy",
+    className: "button primary",
+    "data-clipboard-text": html
+  }, "Copy to clipboard"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "w-50 mx-auto"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PrismCode__WEBPACK_IMPORTED_MODULE_2__["PrismCode"], {
     code: html,
     language: "html",
     plugins: ["line-numbers", "normalize-whitespace"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    id: "button-to-copy",
-    "data-clipboard-text": html
-  }, "Copy to clipboard")));
+  })));
 };
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -68876,7 +68927,7 @@ function rootReducer() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\coral\Desktop\IUT\LP_MI\mohea\mohea.bach.mmi-unistra.fr\mohea\resources\js\modules\menu\MenuApp */"./resources/js/modules/menu/MenuApp.js");
+module.exports = __webpack_require__(/*! C:\wamp64\www\mohea.bach.mmi-unistra.fr\mohea\resources\js\modules\menu\MenuApp */"./resources/js/modules/menu/MenuApp.js");
 
 
 /***/ })

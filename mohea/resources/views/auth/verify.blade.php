@@ -1,5 +1,9 @@
 @extends('base')
 
+@section('title')
+    Verify your account | Mohea
+@endsection
+
 @section('main-content')
 <div class="container">
     <div class="row justify-content-center">

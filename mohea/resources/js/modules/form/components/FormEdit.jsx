@@ -6,112 +6,108 @@ import { lab } from "color-convert";
 
 class FormEdit extends Component {
 
-    state = {selectedOption: null}
+    state = { selectedOption: null }
 
-    handleDeleteItem(element)
-    {
+    handleDeleteItem(element) {
         this.props.deleteItem(element)
     }
 
-    handleDuplicateItem(element)
-    {
+    handleDuplicateItem(element) {
         this.props.duplicateItem(element)
     }
 
-    handleMoveDown(element)
-    {
+    handleMoveDown(element) {
         this.props.moveDown(element)
     }
 
-    handleMoveUp(element)
-    {
+    handleMoveUp(element) {
         this.props.moveUp(element)
     }
 
     handleUpdateText = (e) => {
         let newElement = this.props.focus
-        if(e.target.name == 'content'){
+        if (e.target.name == 'content') {
             newElement.content = e.target.value
         }
         this.props.updateElement(newElement, this.props.focus)
     }
-    
+
     handleUpdateTitle = (e) => {
         let newElement = this.props.focus
-        if(e.target.name == 'content'){
+        if (e.target.name == 'content') {
             newElement.content = e.target.value
-        }else if(e.target.name == 'tag'){
+        } else if (e.target.name == 'tag') {
             newElement.tag = e.target.value
         }
         this.props.updateElement(newElement, this.props.focus)
     }
-    
+
     handleUpdateSubmit = (e) => {
         let newElement = this.props.focus
-        if(e.target.name == 'value'){
+        if (e.target.name == 'value') {
             newElement.value = e.target.value
         }
         this.props.updateElement(newElement, this.props.focus)
     }
-    
+
     handleInputBasic = (e) => {
         let newElement = this.props.focus
-        if(e.target.name == 'label'){
+        if (e.target.name == 'label') {
             newElement.label = e.target.value
-        }else if(e.target.name == 'placeholder'){
+        } else if (e.target.name == 'placeholder') {
             newElement.placeholder = e.target.value
-        }else if(e.target.name == 'required'){
-            if(newElement.required == 'required'){
+        } else if (e.target.name == 'required') {
+            if (newElement.required == 'required') {
                 newElement.required = ''
-            }else{
+            } else {
                 newElement.required = 'required'
             }
         }
         this.props.updateElement(newElement, this.props.focus)
     }
-    
+
     handleUpdateTextArea = (e) => {
         let newElement = this.props.focus
-        if(e.target.name == 'label'){
+        if (e.target.name == 'label') {
             newElement.label = e.target.value
-        }else if(e.target.name == 'placeholder'){
+        } else if (e.target.name == 'placeholder') {
             newElement.placeholder = e.target.value
-        }else if(e.target.name == 'required'){
-            if(newElement.required == 'required'){
+        } else if (e.target.name == 'required') {
+            if (newElement.required == 'required') {
                 newElement.required = ''
-            }else{
+            } else {
                 newElement.required = 'required'
             }
-        }else if(e.target.name == 'rows'){
+        } else if (e.target.name == 'rows') {
             newElement.rows = e.target.value
-        }else if(e.target.name == 'col'){
+        } else if (e.target.name == 'col') {
             newElement.col = e.target.value
         }
         this.props.updateElement(newElement, this.props.focus)
     }
-    
+
     handleUpdateSelect = (e) => {
         let newElement = this.props.focus
-        if(e.target.name == 'label'){
+        if (e.target.name == 'label') {
             newElement.label = e.target.value
-        }else if(e.target.name == 'required'){
-            if(newElement.required == 'required'){
+        } else if (e.target.name == 'required') {
+            if (newElement.required == 'required') {
                 newElement.required = ''
-            }else{
+            } else {
                 newElement.required = 'required'
             }
         }
         this.props.updateElement(newElement, this.props.focus)
     }
-    
+
     handleUpdateBoxAndRadio = (e) => {
         let newElement = this.props.focus
-        if(e.target.name == 'label'){
+        if (e.target.name == 'label') {
             newElement.label = e.target.value
-        }else if(e.target.name == 'required'){
-            if(newElement.required == 'required'){
+        } else if (e.target.name == 'required') {
+            if (newElement.required == 'required') {
                 newElement.required = ''
-            }else{
+            } else {
                 newElement.required = 'required'
             }
         }
@@ -122,21 +118,21 @@ class FormEdit extends Component {
         this.setState({ selectedOption: option })
     }
 
-    handleAddOptionCheckbox(){
+    handleAddOptionCheckbox() {
         let id = this.props.focus.options.length
         var newOption = { id: id, tag: "input", type: "checkbox", label: "My New Option" }
         this.props.addOption(this.props.focus, newOption)
     }
 
-    handleAddOptionRadio(){
+    handleAddOptionRadio() {
         let id = this.props.focus.options.length
         var newOption = { id: id, tag: "input", type: "radio", label: "My New Option" }
         this.props.addOption(this.props.focus, newOption)
     }
-    
-    handleAddOptionForSelect(){
+
+    handleAddOptionForSelect() {
         let id = this.props.focus.options.length
-        var newOption = { id: id, tag: "option", type: "select", value: "My New Option", content: "My New Option"}
+        var newOption = { id: id, tag: "option", type: "select", value: "My New Option", content: "My New Option" }
         this.props.addOption(this.props.focus, newOption)
     }
 
@@ -145,45 +141,43 @@ class FormEdit extends Component {
 
         switch (e.target.name) {
             case "update_radio":
-                    newOptionEdit.label = e.target.value
+                newOptionEdit.label = e.target.value
                 break;
             case "update_checkbox":
-                    newOptionEdit.label = e.target.value
+                newOptionEdit.label = e.target.value
                 break;
             case "update_select":
-                    newOptionEdit.content = e.target.value
-                    newOptionEdit.value = e.target.value
+                newOptionEdit.content = e.target.value
+                newOptionEdit.value = e.target.value
                 break;
-        
+
             default:
                 break;
         }
 
-        this.setState({ selectedOption: newOptionEdit})
+        this.setState({ selectedOption: newOptionEdit })
         this.props.updateOption(this.props.focus, this.state.selectedOption, e.target.value)
     }
-    
 
 
-    renderSwitch(element)
-    {
 
-        var requiredId = "required_id_"+element.id
+    renderSwitch(element) {
 
-        switch(element.name)
-        {
+        var requiredId = "required_id_" + element.id
+
+        switch (element.name) {
             case 'Text':
-                var textAreaId = "textarea_"+element.id
+                var textAreaId = "textarea_" + element.id
                 return (
                     <div className="form-group">
-                        <label htmlFor={textAreaId} >Content</label>
+                        <label htmlFor={textAreaId} className="d-block">Content</label>
                         <textarea className="form-control" name="content" value={element.content} id={textAreaId} onChange={this.handleUpdateText} />
                     </div>
                 )
 
             case 'Title':
-                var contentId = "content_"+element.id
-                var selectId = "select_"+element.id
+                var contentId = "content_" + element.id
+                var selectId = "select_" + element.id
                 return (
                     <div className="form-group">
                         <div className="form-group">
@@ -201,9 +195,9 @@ class FormEdit extends Component {
                         </div>
                     </div>
                 )
-            
+
             case 'Submit':
-                var submitId= "submit_"+element.id
+                var submitId = "submit_" + element.id
                 return (
                     <div className="form-group">
                         <label htmlFor={submitId}>Value</label>
@@ -217,8 +211,8 @@ class FormEdit extends Component {
             case 'Phone':
             case 'Link':
             case 'Password':
-                var labelId = "label_"+element.id
-                var placeholderId = "placeholder_"+element.id
+                var labelId = "label_" + element.id
+                var placeholderId = "placeholder_" + element.id
                 return (
                     <div className="form-group">
                         <div className="form-group">
@@ -229,17 +223,17 @@ class FormEdit extends Component {
                             <label htmlFor={placeholderId}>Place Holder</label>
                             <input className="form-control" id={placeholderId} type="text" name="placeholder" onChange={this.handleInputBasic} value={element.placeholder} />
                         </div>
-                        <div className="form-check">
-                            <input className="form-check-input" type="checkbox" id={requiredId} onChange={this.handleInputBasic} name="required" checked={element.required} />
+                        <div>
+                            <input type="checkbox" id={requiredId} onChange={this.handleInputBasic} name="required" checked={element.required} />
                             <label className="form-check-label" htmlFor={requiredId}>Required</label>
                         </div>
                     </div>
                 )
 
             case 'Text Area':
-                var labelTextAreaId = "label_textarea_"+element.id
-                var placeholderTextareaId = "placeholder_textarea_"+element.id
-                var rowId = "row_"+element.id
+                var labelTextAreaId = "label_textarea_" + element.id
+                var placeholderTextareaId = "placeholder_textarea_" + element.id
+                var rowId = "row_" + element.id
                 return (
                     <div className="form-group">
                         <div className="form-group">
@@ -254,17 +248,17 @@ class FormEdit extends Component {
                             <label htmlFor={rowId}>Row</label>
                             <input className="form-control" id={rowId} type="number" name="rows" onChange={this.handleUpdateTextArea} value={element.rows} />
                         </div>
-                        <div className="form-check">
-                            <input className="form-check-input" type="checkbox" id={requiredId} onChange={this.handleUpdateTextArea} name="required" checked={element.required} />
+                        <div>
+                            <input type="checkbox" id={requiredId} onChange={this.handleUpdateTextArea} name="required" checked={element.required} />
                             <label className="form-check-label" htmlFor={requiredId}>Required</label>
                         </div>
                     </div>
                 )
 
             case 'Select':
-                var labelSelectId = "label_select_"+element.id
-                var selectContentId = "content_select_"+element.id
-                var updateOptionId = "update_option_"+element.id
+                var labelSelectId = "label_select_" + element.id
+                var selectContentId = "content_select_" + element.id
+                var updateOptionId = "update_option_" + element.id
                 return (
                     <div className="form-group">
                         <div className="form-group">
@@ -272,7 +266,7 @@ class FormEdit extends Component {
                             <input className="form-control" id={labelSelectId} type="text" name="label" onChange={this.handleUpdateSelect} value={element.label} />
                         </div>
                         <div className="form-group">
-                            <input className="form-control" type="button" name="newOption" onClick={() => this.handleAddOptionForSelect()} className="btn btn-primary" value="Add New Option" />
+                            <input className="form-control" type="button" name="newOption" onClick={() => this.handleAddOptionForSelect()} className="button" value="Add a new option" />
                         </div>
                         <div className="form-group">
                             <label htmlFor={selectContentId}>Edit options</label>
@@ -283,27 +277,27 @@ class FormEdit extends Component {
                             </select>
                         </div>
 
-                        {this.state.selectedOption !== null ? 
-                            this.state.selectedOption.type == 'select' ? 
-                            (
-                                <div className="form-group">
-                                    <label htmlFor={updateOptionId}>Update option</label>
-                                    <input className="form-control" id={updateOptionId} name="update_select" type="text" value={this.state.selectedOption.content} onChange={this.handleUpdateOption} />
-                                </div>
-                            ) : null
-                        : null}
+                        {this.state.selectedOption !== null ?
+                            this.state.selectedOption.type == 'select' ?
+                                (
+                                    <div className="form-group">
+                                        <label htmlFor={updateOptionId}>Update option</label>
+                                        <input className="form-control" id={updateOptionId} name="update_select" type="text" value={this.state.selectedOption.content} onChange={this.handleUpdateOption} />
+                                    </div>
+                                ) : null
+                            : null}
 
-                        <div className="form-check">
-                            <input className="form-check-input" type="checkbox" id={requiredId} onChange={this.handleUpdateSelect} name="required" checked={element.required} />
+                        <div>
+                            <input type="checkbox" id={requiredId} onChange={this.handleUpdateSelect} name="required" checked={element.required} />
                             <label className="form-check-label" htmlFor={requiredId}>Required</label>
                         </div>
                     </div>
                 )
 
             case 'Check Box':
-                var labelCheckId = "label_checkbox_"+element.id
-                var optionCheckId = "options_checkbox_"+element.id
-                var updateOptionId = "update_option_checkbox_"+element.id
+                var labelCheckId = "label_checkbox_" + element.id
+                var optionCheckId = "options_checkbox_" + element.id
+                var updateOptionId = "update_option_checkbox_" + element.id
                 return (
                     <div className="form-group">
                         <div className="form-group">
@@ -311,7 +305,7 @@ class FormEdit extends Component {
                             <input className="form-control" id={labelCheckId} type="text" name="label" onChange={this.handleUpdateBoxAndRadio} value={element.label} />
                         </div>
                         <div className="form-group">
-                            <input className="form-control" type="button" name="newOption" onClick={() => this.handleAddOptionCheckbox()} className="btn btn-primary" value="Add New Option" />
+                            <input className="form-control" type="button" name="newOption" onClick={() => this.handleAddOptionCheckbox()} className="button" value="Add a new option" />
                         </div>
                         <label htmlFor={optionCheckId}>Edit options</label>
                         <div className="form-group">
@@ -321,26 +315,26 @@ class FormEdit extends Component {
                                 })}
                             </select>
                         </div>
-                        {this.state.selectedOption !== null ? 
-                            this.state.selectedOption.type == 'checkbox' ? 
-                            (
-                                <div className="form-group">
-                                    <label htmlFor={updateOptionId}>Update option</label>
-                                    <input className="form-control" id={updateOptionId} name="update_checkbox" type="text" value={this.state.selectedOption.label} onChange={this.handleUpdateOption} />
-                                </div>
-                            ) : null
-                        : null}
-                        <div className="form-check">
-                            <input className="form-check-input" type="checkbox" id={requiredId} onChange={this.handleUpdateBoxAndRadio} name="required" checked={element.required} />
+                        {this.state.selectedOption !== null ?
+                            this.state.selectedOption.type == 'checkbox' ?
+                                (
+                                    <div className="form-group">
+                                        <label htmlFor={updateOptionId}>Update option</label>
+                                        <input className="form-control" id={updateOptionId} name="update_checkbox" type="text" value={this.state.selectedOption.label} onChange={this.handleUpdateOption} />
+                                    </div>
+                                ) : null
+                            : null}
+                        <div>
+                            <input type="checkbox" id={requiredId} onChange={this.handleUpdateBoxAndRadio} name="required" checked={element.required} />
                             <label className="form-check-label" htmlFor={requiredId}>Required</label>
                         </div>
                     </div>
                 )
 
             case 'Radio Button':
-                var labelRadioId = "label_radiobutton_"+element.id
-                var optionsId = "options_radiobutton_"+element.id
-                var updateOptionId = "udpate_option_radiobutton_"+element.id
+                var labelRadioId = "label_radiobutton_" + element.id
+                var optionsId = "options_radiobutton_" + element.id
+                var updateOptionId = "udpate_option_radiobutton_" + element.id
                 return (
                     <div className="form-group">
                         <div className="form-group">
@@ -348,7 +342,7 @@ class FormEdit extends Component {
                             <input className="form-control" id={labelRadioId} type="text" name="label" onChange={this.handleUpdateBoxAndRadio} value={element.label} />
                         </div>
                         <div className="form-group">
-                            <input className="form-control" type="button" name="newOption" onClick={() => this.handleAddOptionRadio()} className="btn btn-primary" value="Add New Option" />
+                            <input className="form-control" type="button" name="newOption" onClick={() => this.handleAddOptionRadio()} className="button" value="Add a new option" />
                         </div>
                         <div className="form-group">
                             <div className="form-group">
@@ -360,17 +354,17 @@ class FormEdit extends Component {
                                 </select>
                             </div>
                             {this.state.selectedOption !== null ?
-                                this.state.selectedOption.type == 'radio' ? 
-                                (
-                                <div className="form-group">
-                                    <label htmlFor={updateOptionId}>Edit option</label>
-                                    <input className="form-control" name="update_radio" id={updateOptionId} type="text" value={this.state.selectedOption.label} onChange={this.handleUpdateOption} />
-                                </div>
-                                ) : null
-                             : null}
+                                this.state.selectedOption.type == 'radio' ?
+                                    (
+                                        <div className="form-group">
+                                            <label htmlFor={updateOptionId}>Edit option</label>
+                                            <input className="form-control" name="update_radio" id={updateOptionId} type="text" value={this.state.selectedOption.label} onChange={this.handleUpdateOption} />
+                                        </div>
+                                    ) : null
+                                : null}
                         </div>
-                        <div className="form-check">
-                            <input className="form-check-input" type="checkbox" id={requiredId} onChange={this.handleUpdateBoxAndRadio} name="required" checked={element.required} />
+                        <div>
+                            <input type="checkbox" id={requiredId} onChange={this.handleUpdateBoxAndRadio} name="required" checked={element.required} />
                             <label className="form-check-label" htmlFor={requiredId}>Required</label>
                         </div>
                     </div>
@@ -379,12 +373,10 @@ class FormEdit extends Component {
 
     }
 
-    getFocusById(id)
-    {
+    getFocusById(id) {
         var focus = -1
         this.props.elementsUsed.map((element, i) => {
-            if(id == element.id)
-            {
+            if (id == element.id) {
                 focus = element.id
             }
         })
@@ -392,31 +384,27 @@ class FormEdit extends Component {
     }
 
 
-    render(){
-        return <div className="">
-            <h2>Edit an Element</h2>
-            <div>
-                {this.props.focus.id > -1 ? (
-                    <div>
-                        {this.props.focus.label !== undefined ? (
-                            <h3>{this.props.focus.label}</h3>
-                        ) : (
-                            <h3>{this.props.focus.name}</h3>
-                        )}
-                        <form>
-                            {this.renderSwitch(this.props.focus)}
-                        </form>
-                        <input type="button" onClick={() => this.handleMoveUp(this.props.focus)} className="btn btn-primary" value="Down" />
-                        <input type="button" onClick={() => this.handleMoveDown(this.props.focus)} className="btn btn-primary" value="Up" />
-                        <input type="button" onClick={() => this.handleDuplicateItem(this.props.focus)} className="btn btn-primary" value="Duplicate" />
-                        <input type="button" onClick={() => this.handleDeleteItem(this.props.focus)} className="btn btn-danger" value="Delete" />
+    render() {
+        return <span>
+            {this.props.focus.id > -1 ? (
+                <div id="context-menu">
+                    <div className="group-row">
+                        <div>
+                            <h3>Item options</h3>
+                            <form>
+                                {this.renderSwitch(this.props.focus)}
+                            </form>
+                            <button type="button" onClick={() => this.handleMoveDown(this.props.focus)} className="button round primary" title="Move up"><i className="fas fa-arrow-up"></i></button>
+                            <button type="button" onClick={() => this.handleMoveUp(this.props.focus)} className="button round secondary" title="Move down"><i className="fas fa-arrow-down"></i></button>
+                            <button type="button" onClick={() => this.handleDuplicateItem(this.props.focus)} className="button round" title="Duplicate"><i className="fas fa-clone"></i></button>
+                            <button type="button" onClick={() => this.handleDeleteItem(this.props.focus)} className="button round" title="Delete"><i className="fas fa-trash-alt"></i></button>
+                        </div>
                     </div>
-                    ) : (
-                    <p>Click on an element to update it !</p>
+                </div >
+            ) : (
+                    <span></span>
                 )}
-            </div>
-
-        </div>
+        </span>
     }
 
 }

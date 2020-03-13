@@ -1,5 +1,9 @@
 @extends('base')
 
+@section('title')
+    Register and start creating cool stuff | Mohea
+@endsection
+
 @section('main-content')
 <div class="main-container">
     <a href="/"><img class="main-logo" src="/images/logo_medium.png" alt="Logo of Mohea" draggable="false"></a>
@@ -47,7 +51,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Password (again, to prevent typing error)') }}</label>
                 <div class="col-md-6">
                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                 </div>
@@ -56,7 +60,7 @@
                 <div class="form-check">
                     <input required class="form-check-input" type="checkbox" name="privacy" id="privacy">
                     <label class="form-check-label" for="privacy">
-                        I have read and accepted the <a class="link secondary" href="/privacy">privacy policy</a>?
+                        I have read and accepted the <a class="link secondary" href="/privacy">privacy policy</a>.
                     </label>
                 </div>
             </div>

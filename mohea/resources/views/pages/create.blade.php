@@ -1,12 +1,12 @@
 @extends('base')
 
 @section('title')
-    Create a new project
+    Create a new project | Mohea
 @endsection
 
 @section('main-content')
 <div class="main-container">
-    <a href="/"><img class="main-logo" src="/images/logo_medium.png" alt="Logo of Mohea" draggable="false"></a>
+    <a href="{{ route('dashboard') }}"><img class="main-logo" src="/images/logo_medium.png" alt="Logo of Mohea" draggable="false"></a>
     <div class="create">
         <h1>What do you want to create today?</h1>
         <div class="select">

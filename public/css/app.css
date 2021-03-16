@@ -10825,7 +10825,7 @@ main.padding-bottom {
 
 .text-content {
   padding: 50px;
-  background: url(/images/blotch1.svg?c729c86dd9b5ed3faffec9df60807b31) right 90px/auto 65% no-repeat, url(/images/blotch2.svg?c536553882cc1ea0d4997cb789712eb2) left bottom 40px/50% auto no-repeat;
+  background: url(/images/blotch1.svg?85720abcfbfee4b038660879fc42e726) right 90px/auto 65% no-repeat, url(/images/blotch2.svg?e3118c6558b30c7806f644a9fc7466a0) left bottom 40px/50% auto no-repeat;
 }
 
 @media (max-width: 600px) {
@@ -10841,7 +10841,7 @@ main.padding-bottom {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: url(/images/blotch1.svg?c729c86dd9b5ed3faffec9df60807b31) right 90px/auto 65% no-repeat, url(/images/blotch2.svg?c536553882cc1ea0d4997cb789712eb2) left bottom/50% auto no-repeat;
+  background: url(/images/blotch1.svg?85720abcfbfee4b038660879fc42e726) right 90px/auto 65% no-repeat, url(/images/blotch2.svg?e3118c6558b30c7806f644a9fc7466a0) left bottom/50% auto no-repeat;
 }
 
 @media (max-width: 600px) {
@@ -10962,7 +10962,7 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url(/images/annotation.png?24e85ee1041dc112e57d6fd6382fe77e) center center/auto 100% no-repeat, url(/images/blotch3.svg?f313addde2cc22e0b8ae6258ec2d588c) right center/auto 90% no-repeat;
+  background: url(/images/annotation.png?91bcbc66181a39122be7c9357512a987) center center/auto 100% no-repeat, url(/images/blotch3.svg?08741dc7c3080341a2ef2637f1961ca9) right center/auto 90% no-repeat;
 }
 
 .home-presentation .attractive-button .button {
@@ -10982,7 +10982,7 @@ h2 {
 .home-presentation .text-blotch {
   margin: 20px 0px;
   padding: 40px 10px;
-  background: url(/images/blotch4.svg?61a2409e90dcdc5e62981fe0cb086a6e) center center/auto 100% no-repeat;
+  background: url(/images/blotch4.svg?679f2ea984fca30b2e83ab207a247549) center center/auto 100% no-repeat;
 }
 
 .home-presentation .text-blotch .content {
@@ -11046,7 +11046,7 @@ h2 {
 
 .home-presentation .circles {
   margin: 40px 0px;
-  background: url(/images/blotch5.svg?866090696078337086f73c73732550af) left bottom/auto 75% no-repeat;
+  background: url(/images/blotch5.svg?afe43cc4445b5bd2881899b485a7d49d) left bottom/auto 75% no-repeat;
 }
 
 .home-presentation .circles .content {
@@ -11122,7 +11122,7 @@ h2 {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  background: url(/images/blotch1.svg?c729c86dd9b5ed3faffec9df60807b31) right 90px/auto 65% no-repeat, url(/images/blotch2.svg?c536553882cc1ea0d4997cb789712eb2) left bottom 10px/50% auto no-repeat;
+  background: url(/images/blotch1.svg?85720abcfbfee4b038660879fc42e726) right 90px/auto 65% no-repeat, url(/images/blotch2.svg?e3118c6558b30c7806f644a9fc7466a0) left bottom 10px/50% auto no-repeat;
 }
 
 .dashboard h1,
@@ -11362,15 +11362,15 @@ h2 {
 }
 
 .dashboard .content .list button.table-item::before {
-  background-image: url(/images/table.svg?f61e9f0f2e1371998ba2be8e07c27131);
+  background-image: url(/images/table.svg?2838e97aacdf7c5ad4caf7092799295e);
 }
 
 .dashboard .content .list button.form-item::before {
-  background-image: url(/images/form.svg?845d3ddca1cbb9bc9f1078ecaf27244e);
+  background-image: url(/images/form.svg?2278cf2dedaea14bd25c2a9a26acc4c6);
 }
 
 .dashboard .content .list button.menu-item::before {
-  background-image: url(/images/menu.svg?c5bf97ce8b127b3bee1c2c5597371e3d);
+  background-image: url(/images/menu.svg?22db54af6ed92936fd3a19fcd7a86dfb);
 }
 
 .dashboard .content .list button span {
@@ -11576,7 +11576,7 @@ footer .footer-links span {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: url(/images/blotch1.svg?c729c86dd9b5ed3faffec9df60807b31) right 90px/auto 65% no-repeat, url(/images/blotch2.svg?c536553882cc1ea0d4997cb789712eb2) left bottom/50% auto no-repeat;
+  background: url(/images/blotch1.svg?85720abcfbfee4b038660879fc42e726) right 90px/auto 65% no-repeat, url(/images/blotch2.svg?e3118c6558b30c7806f644a9fc7466a0) left bottom/50% auto no-repeat;
 }
 
 .main-container .main-logo {
@@ -11771,7 +11771,7 @@ footer .footer-links span {
   display: inline-block;
   width: 24px;
   height: 24px;
-  background-image: url(/images/conv_mohea.png?4d9730cb3d410bd20073402558d56c9d);
+  background-image: url(/images/conv_mohea.png?6ab54e11f37c6808bfb19dda2389f9ef);
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -12032,7 +12032,7 @@ a:focus {
   padding: 3px 25px 8px;
   font-family: "Neue Plak Narrow Regular", sans-serif;
   font-size: 15pt;
-  background-image: url(/images/arrow.svg?7d9bc22f85e131c7be2112b6a76606b8);
+  background-image: url(/images/arrow.svg?69163d8e6cfb99c86b3298c8750774c9);
   background-size: 25px 25px;
   background-position: calc(100% - 20px) center;
   background-repeat: no-repeat;
@@ -12179,7 +12179,7 @@ a:focus {
   display: inline-block;
   width: 35px;
   height: 35px;
-  background-image: url(/images/conv_mohea.png?4d9730cb3d410bd20073402558d56c9d);
+  background-image: url(/images/conv_mohea.png?6ab54e11f37c6808bfb19dda2389f9ef);
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;

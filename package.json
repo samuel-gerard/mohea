@@ -15,7 +15,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.7.4",
     "@babel/preset-react": "^7.0.0",
-    "axios": "^0.19",
+    "axios": "^0.21",
     "babel-plugin-prismjs": "^1.1.1",
     "bootstrap": "^4.0.0",
     "cross-env": "^5.2.1",

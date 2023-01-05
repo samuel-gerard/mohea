@@ -42,7 +42,7 @@
     "ajv-keywords": "^3.4.1",
     "alphanum-sort": "^1.0.2",
     "ansi-colors": "^3.2.4",
-    "ansi-html": "^0.0.7",
+    "ansi-html": "^0.0.8",
     "ansi-regex": "^2.1.1",
     "ansi-styles": "^3.2.1",
     "aproba": "^1.2.0",
